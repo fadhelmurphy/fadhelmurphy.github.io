@@ -23,7 +23,6 @@
     "jquery": "^3.4.1",
     "netlify-cms": "^2.10.24",
     "netlify-cms-app": "^2.11.21",
-    "netlify-cms-widget-pathname": "^1.2.4",
     "node-sass": "^4.13.1",
     "popper": "^1.0.1",
     "prop-types": "^15.7.2",
