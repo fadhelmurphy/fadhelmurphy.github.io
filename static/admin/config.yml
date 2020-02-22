@@ -12,8 +12,8 @@ collections:
     create: true
     slug: "{{day}}-{{month}}-{{year}}-{{slug}}"
     editor:
-     preview: false
+      preview: false
     fields:
-      - name: pathname
-        label: Page pathname
-        widget: pathname
+        - name: pathname
+          label: Page pathname 
+          widget: pathname
