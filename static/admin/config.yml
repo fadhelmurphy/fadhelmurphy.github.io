@@ -5,11 +5,11 @@ backend:
 media_folder: 
   - folder: static/img
     create: true
-    slug: "{{day}}-{{month}}-{{year}}-{{slug}}"
+    slug: "{{collection}}__{{year}}-{{month}}_{{filename}}"
 public_folder:
   - folder: /img
     create: true
-    slug: "{{day}}-{{month}}-{{year}}-{{slug}}"
+    slug: "{{collection}}__{{year}}-{{month}}_{{filename}}"
 
 collections:
   - name: "post"
