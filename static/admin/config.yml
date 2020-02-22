@@ -16,5 +16,5 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Post Url", name: "path", widget: "string"}
+      - { label: "Post Url", name: "path", widget: "pathname"}
       - { label: "Body", name: "body", widget: "markdown" }
