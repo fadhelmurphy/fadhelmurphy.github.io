@@ -5,6 +5,8 @@ path: /mantap-bor
 ---
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse placerat nibh id tortor dictum consequat. Fusce accumsan commodo tempor. Proin tincidunt efficitur libero, bibendum sagittis orci aliquet vitae. Nunc augue nulla, eleifend ut porttitor a, aliquam ut ante. Pellentesque ac nulla scelerisque, scelerisque eros nec, cursus purus. Maecenas sit amet leo eu metus tincidunt fermentum sed eu augue. Praesent vestibulum condimentum ornare. Proin imperdiet lectus faucibus tristique viverra. Suspendisse posuere, sem vitae tincidunt finibus, libero dolor lacinia tellus, et condimentum sem magna vel odio. Donec ut eros porttitor lectus egestas mollis. Nunc sagittis nunc eget viverra lobortis. Morbi quis tincidunt orci. Nam turpis urna, ullamcorper sit amet posuere quis, posuere non leo. Morbi rutrum sapien vel tellus lacinia, quis scelerisque nisi interdum. Cras quis nibh quam. Duis euismod turpis at ex tempor ornare. <br/> In felis nibh, sodales in sagittis aliquam, vestibulum ac nisi. Sed a condimentum mauris. Donec volutpat nisi eu congue luctus. Fusce nisl felis, interdum ut ultricies at, vehicula sit amet magna. Curabitur suscipit mollis ultricies. Sed feugiat, dui in venenatis egestas, tellus urna tincidunt sapien, vel finibus quam dolor pharetra elit. Vestibulum nulla nisi, molestie ut condimentum quis, laoreet sit amet mauris. Curabitur ipsum tellus, varius eget nisl nec, vestibulum consequat metus. Suspendisse tristique massa at magna varius mattis. <br/>
 
+![](/img/48948190_2312027358872568_201800438561898496_n (2).jpg)
+
 `this is code block`
 
 > Morbi feugiat dictum sem, quis aliquet mi ullamcorper nec. In ipsum sem, tempus non magna quis, bibendum pharetra urna. 
