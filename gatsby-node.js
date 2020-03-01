@@ -31,6 +31,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           frontmatter {
             tags
             path
+            title
           }
         }
       }

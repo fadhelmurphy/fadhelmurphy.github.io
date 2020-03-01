@@ -28,7 +28,7 @@ export default function Template({ pageContext,data }) {
           {prev && (
             <Col md>
               <Link to={prev.node.frontmatter.path}>
-                    <h2>{"< Previous Article"} {prev.node.frontmatter.title}</h2>
+                    <h2>{"< "} {prev.node.frontmatter.title}</h2>
               </Link>
             </Col>
           )}
@@ -36,7 +36,7 @@ export default function Template({ pageContext,data }) {
           {next && (
             <Col md>
               <Link to={next.node.frontmatter.path}>
-                    <h2>{next.node.frontmatter.title} {"Next Article >"}</h2>
+                    <h2>{next.node.frontmatter.title} {" >"}</h2>
               </Link>
             </Col>
           )}
