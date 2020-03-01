@@ -8,9 +8,9 @@
 import React from "react"
 
 //import "./layout.css"
-import './core-ui/css/fontawesome-free/css/all.min.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import "./core-ui/css/clean-blog.min.css"
+// import './core-ui/css/fontawesome-free/css/all.min.css'
+// import 'bootstrap/dist/css/bootstrap.min.css'
+// import "./core-ui/css/clean-blog.min.css"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 

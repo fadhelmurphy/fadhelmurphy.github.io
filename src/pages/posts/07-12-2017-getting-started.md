@@ -2,6 +2,7 @@
 title: My First Post
 date: 2020-02-12T00:00:00.000Z
 path: /hello
+tags: ["animals", "Chicago", "zoos"]
 ---
 ![](/img/ford-ferrari-2_lead.jpg)
 

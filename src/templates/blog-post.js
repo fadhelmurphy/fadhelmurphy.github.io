@@ -1,15 +1,16 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { Link,graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
-import { Container } from "reactstrap"
+import { Col,Row,Container } from "reactstrap"
 
 // import '../css/blog-post.css';
 
-export default function Template({ data }) {
+export default function Template({ pageContext,data }) {
   const { markdownRemark: post} = data
+  const { prev, next } = pageContext
   return (
     <Layout postTitle={post.frontmatter.title} postDate={post.frontmatter.date}>
 <Container>
@@ -21,6 +22,25 @@ export default function Template({ data }) {
           dangerouslySetInnerHTML={{ __html: post.html }}
         />
       </div>
+    <Row style={{
+                display:'inline-flex',textAlign:'right'
+                }}>
+          {prev && (
+            <Col md>
+              <Link to={prev.node.frontmatter.path}>
+                    <h2>{"< Previous Article"} {prev.node.frontmatter.title}</h2>
+              </Link>
+            </Col>
+          )}
+
+          {next && (
+            <Col md>
+              <Link to={next.node.frontmatter.path}>
+                    <h2>{next.node.frontmatter.title} {"Next Article >"}</h2>
+              </Link>
+            </Col>
+          )}
+        </Row>
     </div>
     </Container>
     </Layout>
