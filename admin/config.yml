@@ -6,8 +6,8 @@ media_folder: static/img
 public_folder: /img
 
 collections:
-  - name: "blog"
-    label: "Blog"
+  - name: "post"
+    label: "post"
     folder: "src/pages/posts"
     create: true
     slug: "{{day}}-{{month}}-{{year}}-{{slug}}"
@@ -16,5 +16,5 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Description", name: "description", widget: "string" }
+      - { label: "Post Url", name: "path", widget: "string"}
       - { label: "Body", name: "body", widget: "markdown" }
