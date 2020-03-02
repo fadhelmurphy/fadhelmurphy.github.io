@@ -2,7 +2,6 @@ import React from "react"
 import { Link,graphql } from "gatsby"
 
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
 import { Col,Row,Container } from "reactstrap"
 
@@ -12,7 +11,10 @@ export default function Template({ pageContext,data }) {
   const { markdownRemark: post} = data
   const { prev, next } = pageContext
   return (
-    <Layout postTitle={post.frontmatter.title} postDate={post.frontmatter.date}>
+    <Layout postInfo={{
+      postTitle:post.frontmatter.title,
+      postDate:post.frontmatter.date
+      }}>
 <Container>
     <SEO title={post.frontmatter.title} />
     <div className="blog-post-container">

@@ -2,17 +2,14 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
-import ConcatWords from "../utils/ConcatWords"
-import { Col, Row } from "reactstrap"
+import List from "../components/blog-list"
 import {
   Container,
   Pagination,
   PaginationItem,
   PaginationLink,
 } from "reactstrap"
-const kebabCase = require(`lodash.kebabcase`)
 // import $ from 'jquery/dist/jquery.slim' // importing this worked like a charm
 // import 'popper.js' // importing this worked like a charm as well
 
@@ -39,36 +36,7 @@ const BlogPage = ({ data, pageContext }) => {
               const { excerpt, id } = post
               const { title, path, date, tags } = post.frontmatter
               return (
-                <div className="blog-post-preview" key={id}>
-                  <h1>
-                    <Link to={path}>{title}</Link>
-                  </h1>
-                  <h6>
-                    <Row>
-                      <Col md="auto">{date}</Col>
-                      <Col md="auto">
-                        <Row className="blog-post-category">
-                          {tags
-                            ? tags.map((tag, index, arr) => {
-                                return (
-                                  <ConcatWords
-                                    arrCount={arr.length}
-                                    index={index}
-                                    key={tag}
-                                  >
-                                    <Link to={`/tags/${kebabCase(tag)}`}>
-                                      {tag}
-                                    </Link>
-                                  </ConcatWords>
-                                )
-                              })
-                            : null}
-                        </Row>
-                      </Col>
-                    </Row>
-                  </h6>
-                  <p>{excerpt}</p>
-                </div>
+                <List data={{ title, path, date, tags, excerpt, id }}></List>
               )
             })}
         </div>

@@ -3,7 +3,6 @@ import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import About from "../components/aboutpage"
-import Image from "../components/image"
 import SEO from "../components/seo"
 // import $ from 'jquery/dist/jquery.slim' // importing this worked like a charm
 // import 'popper.js' // importing this worked like a charm as well

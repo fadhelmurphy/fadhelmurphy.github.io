@@ -1,14 +1,12 @@
 import React from "react"
-import PropTypes from "prop-types"
 
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import ConcatWords from "../utils/ConcatWords"
+import List from "../components/blog-list"
 // Components
 import { Link, graphql } from "gatsby"
-import { Container,Pagination, PaginationItem, PaginationLink,Col,Row } from "reactstrap"
-const kebabCase = require(`lodash.kebabcase`)
+import { Container,Pagination, PaginationItem, PaginationLink } from "reactstrap"
 
 const Tags = ({ pageContext, data }) => {
   const { currentPage, tag } = pageContext
@@ -34,36 +32,7 @@ const Tags = ({ pageContext, data }) => {
           const {excerpt,id} = node
           const { title,path,date,tags } = node.frontmatter
           return (
-            <div className="blog-post-preview" key={id}>
-              <h1>
-                <Link to={path}>{title}</Link>
-              </h1>
-              <h6>
-                <Row>
-                  <Col md="auto">{date}</Col>
-                  <Col md="auto">
-                    <Row className="blog-post-category">
-                      {tags
-                        ? tags.map((tag, index, arr) => {
-                            return (
-                                <ConcatWords
-                                  arrCount={arr.length}
-                                  index={index}
-                                  key={tag}
-                                >
-                                  <Link to={`/tags/${kebabCase(tag)}`}>
-                                    {tag}
-                                  </Link>
-                                </ConcatWords>
-                            )
-                          })
-                        : null}
-                    </Row>
-                  </Col>
-                </Row>
-              </h6>
-              <p>{excerpt}</p>
-            </div>
+            <List data={{ title, path, date, tags, excerpt, id }}></List>
           )
         })}
       </div>

@@ -1,11 +1,19 @@
 import React,{useState} from "react"
 import {Link }from 'gatsby'
+import SEO from "../components/seo"
+import {
+  Container,
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  Nav,
+  NavItem,
+} from "reactstrap"
+import List from "../components/blog-list"
 
-const SearchTemplate = ({ data,pageContext }) => {
+const SearchTemplate = ({ data }) => {
+  const [isOpen, setIsOpen] = useState(false),toggle = () => setIsOpen(!isOpen);
     let { edges: posts } = data.allMarkdownRemark
-  console.log(data.allMarkdownRemark.edges)
-  const { bookData } = pageContext
-  const { allBooks, options } = bookData
 
   const [value, setValue] = useState('');
 
@@ -16,46 +24,48 @@ const SearchTemplate = ({ data,pageContext }) => {
 
   if(searchValue.length > 0){
       var searchposts = posts.filter(l => {
-        return l.node.frontmatter.title.toLowerCase().match( searchValue );
+        return l.node.frontmatter.title.toLowerCase().match( searchValue ) || l.node.html.toLowerCase().match(searchValue);
       });
   }
   return (
-    <div>
-      <h1 style={{ marginTop: `3em`, textAlign: `center` }}>
-        Search data using JS Search using Gatsby Api
+    <>
+    <SEO title={value || "Search Page"} />
+    
+    <Navbar className="container navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <NavbarToggler onClick={toggle} />
+        <Collapse isOpen={isOpen} navbar>
+          <Nav className="ml-auto"navbar>
+            <NavItem>
+              <Link className="nav-link text-muted font-weight-bold" to="/">Home</Link>
+            </NavItem>
+            <NavItem>
+              <Link className="nav-link text-muted font-weight-bold" to="/blog">Blog</Link>
+            </NavItem>
+            <NavItem>
+              <Link className="nav-link text-muted font-weight-bold" to="/search">Search</Link>
+            </NavItem>
+          </Nav>
+        </Collapse>
+      </Navbar>
+      <Container>
+      <h1 className="display-1" style={{ marginTop: `2em`, border:'unset'}}>
+        <input type="text" value={value} onChange={handleAddValue} placeholder="Type here" autoFocus />
       </h1>
-      <div>
-      <input type="text" value={value} onChange={handleAddValue} placeholder="Type here" />
       <div className="blog-posts">
       {searchposts?
       (searchposts)
         .filter(post => post.node.frontmatter.title.length > 0)
         .map(({ node: post }) => {
-          const title = post.frontmatter.title || post.frontmatter.path
+          const { excerpt, id } = post
+          const { title, path, date, tags } = post.frontmatter
           return (
-            <div className="blog-post-preview" key={post.id}>
-              <h1>
-                <Link to={post.frontmatter.path}>{title}</Link>
-              </h1>
-              <h6>{post.frontmatter.date}</h6>
-              <p>{post.excerpt}</p>
-              {post.frontmatter.tags?
-              post.frontmatter.tags.map(tag=>
-                {
-                  return(<Link to={"/tags/"+tag.toLowerCase()}>
-                    <h6>{tag}</h6>
-                </Link>)
-                }
-              )
-              :null
-              }
-            </div>
+              <List data={{ title, path, date, tags, excerpt, id }}/>
           )
         }):null
     }
     </div>
-      </div>
-    </div>
+    </Container>
+    </>
   )
 }
 
@@ -68,10 +78,12 @@ export const searchListQuery = graphql`
         node {
           excerpt(pruneLength: 250)
           id
+          html
           frontmatter {
             title
             date(formatString: "MMMM DD, YYYY")
             path
+            tags
           }
         }
       }

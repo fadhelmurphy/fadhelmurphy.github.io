@@ -11,7 +11,11 @@ import {
   Nav,
   NavItem,
 } from 'reactstrap';
-const Header = ({ siteTitle,postDate }) => {
+const Header = ({ siteTitle,postInfo }) => {
+  if (postInfo){
+    var {postTitle,postDate} = postInfo
+    siteTitle = postTitle
+  }
   const [isOpen, setIsOpen] = useState(false),toggle = () => setIsOpen(!isOpen);
   var listmenu,subheading = useRef(null)
   
@@ -66,12 +70,15 @@ const Header = ({ siteTitle,postDate }) => {
             <NavItem>
               <Link className="nav-link" to="/blog">Blog</Link>
             </NavItem>
+            <NavItem>
+              <Link className="nav-link" to="/search">Search</Link>
+            </NavItem>
           </Nav>
         </Collapse>
       </Navbar></div>
 
       <header
-        class="masthead"
+        className="masthead"
         style={{
           backgroundImage: `url(${Image})`,
         }}
@@ -110,8 +117,8 @@ Header.propTypes = {
   siteTitle: PropTypes.string,
 }
 
-Header.defaultProps = {
-  siteTitle: ``,
-}
+// Header.defaultProps = {
+//   siteTitle: ``,
+// }
 
 export default Header

@@ -16,8 +16,11 @@ import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
 
-const Layout = ({ children,postTitle,postDate }) => {
-  // console.log(postTitle)
+const Layout = ({ children,postInfo }) => {
+  //console.log(postInfo)
+  if (postInfo){
+    var {postTitle,postDate} = postInfo
+  }
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -30,7 +33,7 @@ const Layout = ({ children,postTitle,postDate }) => {
   return (
     <>
     {postTitle && postDate ? (
-      <Header siteTitle={postTitle} postDate={postDate} />
+      <Header postInfo={{postTitle,postDate}} />
     ) : (
       <Header siteTitle={data.site.siteMetadata.title} />
     )}
