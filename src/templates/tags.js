@@ -40,7 +40,7 @@ const Tags = ({ pageContext, data }) => {
     {!isFirst && (
       <PaginationItem>
         <PaginationLink previous>
-        <Link to={`/tags/${tag}/`+prevPage} rel="prev">
+        <Link to={`/tags/${tag.toLowerCase()}/`+prevPage} rel="prev">
           ← Previous Page
         </Link>
         </PaginationLink>
@@ -49,7 +49,7 @@ const Tags = ({ pageContext, data }) => {
             {Array.from({ length: totalCount }, (_, i) => (
               <PaginationItem>
                   <PaginationLink>
-                      <Link key={`pagination-number${i + 1}`} to={`/tags/${tag}/${i === 0 ? "" : i + 1}`}>
+                      <Link key={`pagination-number${i + 1}`} to={`/tags/${tag.toLowerCase()}/${i === 0 ? "" : i + 1}`}>
                         {i + 1}
                       </Link>
                   </PaginationLink>
@@ -59,7 +59,7 @@ const Tags = ({ pageContext, data }) => {
 
         <PaginationItem>
             <PaginationLink next>
-            <Link to={`/tags/${tag}/`+nextPage} rel="next">
+            <Link to={`/tags/${tag.toLowerCase()}/`+nextPage} rel="next">
           Next Page →
         </Link>
             </PaginationLink>
