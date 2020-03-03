@@ -111,7 +111,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     const tags = result.data.tagsGroup.group
     const tagPages = Math.ceil(tags.length / postsPerPage)
     tags.forEach((tag, i) => {
-      const link = `/tags/${kebabCase(tag.fieldValue)}`
+      const link = `/tags/${kebabCase(tag.fieldValue.toLowerCase())}`
       Array.from({
         length: tagPages,
       }).forEach((_, i) => {
@@ -121,9 +121,10 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           context: {
             alltags: tags,
             tag: tag.fieldValue,
-            limit: 1,
-            skip: i * 1,
+            limit: postsPerPage,
+            skip: i * postsPerPage,
             currentPage: i + 1,
+            tagPages
           },
         })
       })

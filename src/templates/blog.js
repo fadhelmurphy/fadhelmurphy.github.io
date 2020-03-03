@@ -15,7 +15,6 @@ import {
 
 const BlogPage = ({ data, pageContext }) => {
   const { edges: posts } = data.allMarkdownRemark
-  console.log(data.allMarkdownRemark.edges)
   const { currentPage, numPages } = pageContext
   const isFirst = currentPage === 1
   const isLast = currentPage === numPages

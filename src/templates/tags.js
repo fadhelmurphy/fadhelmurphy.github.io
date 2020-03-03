@@ -9,11 +9,10 @@ import { Link, graphql } from "gatsby"
 import { Container,Pagination, PaginationItem, PaginationLink } from "reactstrap"
 
 const Tags = ({ pageContext, data }) => {
-  const { currentPage, tag } = pageContext
-  console.log(data)
+  const { currentPage, tag, tagPages } = pageContext
   const { edges, totalCount } = data.allMarkdownRemark
   const isFirst = currentPage === 1
-  const isLast = currentPage === totalCount
+  const isLast = currentPage === tagPages
   const prevPage = currentPage - 1 === 1 ? "/" : (currentPage - 1).toString()
   const nextPage = (currentPage + 1).toString()
   const tagHeader = `${totalCount} post${
@@ -46,7 +45,7 @@ const Tags = ({ pageContext, data }) => {
         </PaginationLink>
       </PaginationItem>
       )}
-            {Array.from({ length: totalCount }, (_, i) => (
+            {Array.from({ length: tagPages }, (_, i) => (
               <PaginationItem>
                   <PaginationLink>
                       <Link key={`pagination-number${i + 1}`} to={`/tags/${tag.toLowerCase()}/${i === 0 ? "" : i + 1}`}>
