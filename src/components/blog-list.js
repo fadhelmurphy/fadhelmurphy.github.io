@@ -15,7 +15,7 @@ return(
       <Row>
         <Col md="auto">{date}</Col>
         <Col md="auto">
-          <Row className="blog-post-category">
+          <div className="blog-post-category">
             {tags
               ? tags.map((tag, index, arr) => {
                   return (
@@ -31,7 +31,7 @@ return(
                   )
                 })
               : null}
-          </Row>
+          </div>
         </Col>
       </Row>
     </h6>

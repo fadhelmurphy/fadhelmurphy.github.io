@@ -31,8 +31,8 @@ const SearchTemplate = ({ data }) => {
     <>
     <SEO title={value || "Search Page"} />
     
-    <Navbar className="container navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-        <NavbarToggler onClick={toggle} />
+    <Navbar className="container navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <NavbarToggler className="text-muted" onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto"navbar>
             <NavItem>
