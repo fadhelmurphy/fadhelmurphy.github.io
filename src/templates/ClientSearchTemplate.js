@@ -1,70 +1,59 @@
-import React,{useState} from "react"
-import {graphql,Link }from 'gatsby'
+import React, { useState } from "react"
+import { graphql } from "gatsby"
 import SEO from "../components/seo"
 import {
   Container,
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  Nav,
-  NavItem,
 } from "reactstrap"
 import List from "../components/blog-list"
+import Menu from "../components/menu"
 
 const SearchTemplate = ({ data }) => {
-  const [isOpen, setIsOpen] = useState(false),toggle = () => setIsOpen(!isOpen);
-    let { edges: posts } = data.allMarkdownRemark
+  let { edges: posts } = data.allMarkdownRemark
 
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("")
 
-  const handleAddValue = (e) => {
-    setValue(e.target.value);
+  const handleAddValue = e => {
+    setValue(e.target.value)
   }
-  var searchValue = value.trim().toLowerCase();
+  var searchValue = value.trim().toLowerCase()
 
-  if(searchValue.length > 0){
-      var searchposts = posts.filter(l => {
-        return l.node.frontmatter.title.toLowerCase().match( searchValue ) || l.node.html.toLowerCase().match(searchValue);
-      });
+  if (searchValue.length > 0) {
+    var searchposts = posts.filter(l => {
+      return (
+        l.node.frontmatter.title.toLowerCase().match(searchValue) ||
+        l.node.html.toLowerCase().match(searchValue)
+      )
+    })
   }
+
   return (
     <>
-    <SEO title={value || "Search Page"} />
-    
-    <Navbar className="container navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-        <NavbarToggler className="text-muted" onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className="ml-auto"navbar>
-            <NavItem>
-              <Link className="nav-link text-muted font-weight-bold" to="/">Home</Link>
-            </NavItem>
-            <NavItem>
-              <Link className="nav-link text-muted font-weight-bold" to="/blog">Blog</Link>
-            </NavItem>
-            <NavItem>
-              <Link className="nav-link text-muted font-weight-bold" to="/search">Search</Link>
-            </NavItem>
-          </Nav>
-        </Collapse>
-      </Navbar>
+      <SEO title={value || "Search Page"} />
+      <Menu />
       <Container>
-      <h1 className="display-1" style={{ marginTop: `2em`, border:'unset'}}>
-        <input type="text" value={value} onChange={handleAddValue} placeholder="Type here" autoFocus />
-      </h1>
-      <div className="blog-posts">
-      {searchposts?
-      (searchposts)
-        .filter(post => post.node.frontmatter.title.length > 0)
-        .map(({ node: post }) => {
-          const { excerpt, id } = post
-          const { title, path, date, tags } = post.frontmatter
-          return (
-              <List data={{ title, path, date, tags, excerpt, id }}/>
-          )
-        }):null
-    }
-    </div>
-    </Container>
+        <h1 className="mt-0" style={{ border: "unset", fontSize: "6vw" }}>
+          <input
+            type="text"
+            value={value}
+            onChange={handleAddValue}
+            placeholder="Type here"
+            autoFocus
+          />
+        </h1>
+        <div className="blog-posts">
+          {searchposts
+            ? searchposts
+                .filter(post => post.node.frontmatter.title.length > 0)
+                .map(({ node: post }) => {
+                  const { excerpt, id } = post
+                  const { title, path, date, tags } = post.frontmatter
+                  return (
+                    <List data={{ title, path, date, tags, excerpt, id }} />
+                  )
+                })
+            : null}
+        </div>
+      </Container>
     </>
   )
 }
@@ -81,11 +70,12 @@ export const searchListQuery = graphql`
           html
           frontmatter {
             title
-            date(formatString: "MMMM DD, YYYY")
+            date(formatString: "MMM YYYY DD")
             path
             tags
           }
         }
       }
     }
-  }`
+  }
+`

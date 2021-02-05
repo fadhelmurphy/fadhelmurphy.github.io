@@ -8,13 +8,22 @@ const blogList = ({data}) => {
     const { title, path, date, tags, excerpt, id } = data
 return(
     <div className="blog-post-preview" key={id}>
-    <h1>
-      <Link to={path}>{title}</Link>
-    </h1>
-    <h6 className="font-weight-bold">
+    <h1 
+          data-aos="fade-up">
       <Row>
-        <Col md="auto">{date}</Col>
-        <Col md="auto">
+      <Col xs="1" className="d-none d-md-block date p-4 pr-lg-0 mw-100" style={{textAlign:'right'}}>
+        {
+        date.split(" ").map((tag,index)=>{
+         return index!==2?
+          <h6>{tag}</h6>
+          :<></>;
+        })}</Col>
+        <Col xs="1" className="d-none d-md-block date mw-100">{ date.split(" ")[2]}</Col>
+        <Col xs="8">
+      <Link to={path}>{title}</Link>
+      <h4 className="font-weight-bold">
+      <Row>
+        <Col xs="auto">
           <div className="blog-post-category">
             {tags
               ? tags.map((tag, index, arr) => {
@@ -34,8 +43,11 @@ return(
           </div>
         </Col>
       </Row>
-    </h6>
-    <p>{excerpt}</p>
+    </h4>
+      </Col>
+      </Row>
+    </h1>
+    {/* <p>{excerpt}</p> */}
   </div>
 )
 }

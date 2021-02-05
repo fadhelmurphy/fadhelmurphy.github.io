@@ -25,10 +25,23 @@ const BlogPage = ({ data, pageContext }) => {
     <Layout>
       <Container>
         <SEO title="Blog" />
-        {/* <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div> */}
-        <div className="blog-posts">
+        <div class="scroll-down text-uppercase position-fixed">
+          <p style={{ letterSpacing: "0.5em", fontSize: "12px" }}>
+            scroll down &gt;
+          </p>
+        </div>
+        <h1
+          className="blog"
+          data-aos="fade-up"
+          data-aos-duration="800"
+          data-aos-once="true"
+          style={{ color: "#132f3e80" }}
+        >
+          LATEST
+          <br />
+          POST
+        </h1>
+        <div className="blog-posts mt-5">
           {posts
             .filter(post => post.node.frontmatter.title.length > 0)
             .map(({ node: post }) => {
@@ -107,7 +120,7 @@ export const blogListQuery = graphql`
           id
           frontmatter {
             title
-            date(formatString: "MMMM DD, YYYY")
+            date(formatString: "MMM YYYY DD")
             path
             tags
           }

@@ -10,7 +10,6 @@ import SEO from "../components/seo"
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
-<About/>
   </Layout>
 )
 export default IndexPage
@@ -24,7 +23,7 @@ export const pageQuery = graphql`
           id
           frontmatter {
             title
-            date(formatString: "MMMM DD, YYYY")
+            date(formatString: "DD MM YYYY")
             path
           }
         }

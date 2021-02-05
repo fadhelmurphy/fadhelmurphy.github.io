@@ -1,12 +1,16 @@
 import React from "react"
 
-
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import List from "../components/blog-list"
 // Components
 import { Link, graphql } from "gatsby"
-import { Container,Pagination, PaginationItem, PaginationLink } from "reactstrap"
+import {
+  Container,
+  Pagination,
+  PaginationItem,
+  PaginationLink,
+} from "reactstrap"
 
 const Tags = ({ pageContext, data }) => {
   const { currentPage, tag, tagPages } = pageContext
@@ -21,51 +25,69 @@ const Tags = ({ pageContext, data }) => {
 
   return (
     <Layout>
-    <Container>
-<SEO title="Blog" />
-      <h3>{tagHeader}</h3>
-      <div className="blog-posts">
-        {edges
-        .filter(({ node }) => node.frontmatter.title.length > 0)
-        .map(({ node }) => {
-          const {excerpt,id} = node
-          const { title,path,date,tags } = node.frontmatter
-          return (
-            <List data={{ title, path, date, tags, excerpt, id }}></List>
-          )
-        })}
-      </div>
-      <Pagination aria-label="Page navigation example">
-    {!isFirst && (
-      <PaginationItem>
-        <PaginationLink previous>
-        <Link to={`/tags/${tag.toLowerCase()}/`+prevPage} rel="prev">
-          ← Previous Page
-        </Link>
-        </PaginationLink>
-      </PaginationItem>
-      )}
-            {Array.from({ length: tagPages }, (_, i) => (
-              <PaginationItem>
-                  <PaginationLink>
-                      <Link key={`pagination-number${i + 1}`} to={`/tags/${tag.toLowerCase()}/${i === 0 ? "" : i + 1}`}>
-                        {i + 1}
-                      </Link>
-                  </PaginationLink>
-              </PaginationItem>
-      ))}
-      {!isLast && (
-
-        <PaginationItem>
-            <PaginationLink next>
-            <Link to={`/tags/${tag.toLowerCase()}/`+nextPage} rel="next">
-          Next Page →
-        </Link>
-            </PaginationLink>
-        </PaginationItem>
-      )}
-      </Pagination>
-    </Container>
+      <Container>
+        <SEO title="Blog" />
+        <div class="scroll-down text-uppercase position-fixed">
+          <p style={{ letterSpacing: "0.5em", fontSize: "12px" }}>
+            scroll down &gt;
+          </p>
+        </div>
+        <h1
+          className="blog"
+          data-aos="fade-up"
+          data-aos-duration="800"
+          data-aos-once="true"
+          style={{ color: "#132f3e80" }}
+        >
+          LATEST
+          <br />
+          POST
+        </h1>
+        <h3>{tagHeader}</h3>
+        <div className="blog-posts mt-5">
+          {edges
+            .filter(({ node }) => node.frontmatter.title.length > 0)
+            .map(({ node }) => {
+              const { excerpt, id } = node
+              const { title, path, date, tags } = node.frontmatter
+              return (
+                <List data={{ title, path, date, tags, excerpt, id }}></List>
+              )
+            })}
+        </div>
+        <Pagination aria-label="Page navigation example">
+          {!isFirst && (
+            <PaginationItem>
+              <PaginationLink previous>
+                <Link to={`/tags/${tag.toLowerCase()}/` + prevPage} rel="prev">
+                  ← Previous Page
+                </Link>
+              </PaginationLink>
+            </PaginationItem>
+          )}
+          {Array.from({ length: tagPages }, (_, i) => (
+            <PaginationItem>
+              <PaginationLink>
+                <Link
+                  key={`pagination-number${i + 1}`}
+                  to={`/tags/${tag.toLowerCase()}/${i === 0 ? "" : i + 1}`}
+                >
+                  {i + 1}
+                </Link>
+              </PaginationLink>
+            </PaginationItem>
+          ))}
+          {!isLast && (
+            <PaginationItem>
+              <PaginationLink next>
+                <Link to={`/tags/${tag.toLowerCase()}/` + nextPage} rel="next">
+                  Next Page →
+                </Link>
+              </PaginationLink>
+            </PaginationItem>
+          )}
+        </Pagination>
+      </Container>
     </Layout>
   )
 }
@@ -87,7 +109,7 @@ export const pageQuery = graphql`
           id
           frontmatter {
             title
-            date(formatString: "MMMM DD, YYYY")
+            date(formatString: "MMM YYYY DD")
             path
             tags
           }

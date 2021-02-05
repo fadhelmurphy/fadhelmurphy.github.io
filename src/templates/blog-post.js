@@ -3,7 +3,7 @@ import { Link,graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { Col,Row,Container } from "reactstrap"
+import { Col,Row } from "reactstrap"
 
 // import '../css/blog-post.css';
 
@@ -15,36 +15,53 @@ export default function Template({ pageContext,data }) {
       postTitle:post.frontmatter.title,
       postDate:post.frontmatter.date
       }}>
-<Container>
+        <div class="scroll-down text-uppercase position-fixed">
+    <p 
+    style={{letterSpacing:'0.5em',
+    fontSize:'12px'
+  }}
+    >scroll down &gt;</p>
+    </div>
     <SEO title={post.frontmatter.title} />
-    <div className="blog-post-container">
-      <div className="blog-post">
-        <div
-          className="blog-post-content"
+    <div className="p-lg-5 w-75 mx-auto">
+    <div
+          className="blog-content"
           dangerouslySetInnerHTML={{ __html: post.html }}
         />
-      </div>
-    <Row style={{
-                display:'inline-flex',textAlign:'right'
-                }}>
-          {prev && (
-            <Col md>
-              <Link to={prev.node.frontmatter.path}>
-                    <h2>{"< "} {prev.node.frontmatter.title}</h2>
+        <Row>
+          {next && (
+            <Col className="text-uppercase font-weight-bold text-left">
+              <Link to={next.node.frontmatter.path}>
+                <Row>
+                  <Col md="auto" className="align-self-center">
+                  <h1>{"<"}</h1>
+                  </Col>
+                  <Col md="auto">
+                    <h2 style={{fontWeight:'800'}}>{next.node.frontmatter.title}</h2>
+                    <h6 style={{color:'#132f3e80'}}>PREVIOUS POST</h6>
+                  </Col>
+                </Row>
               </Link>
             </Col>
           )}
-
-          {next && (
-            <Col md>
-              <Link to={next.node.frontmatter.path}>
-                    <h2>{next.node.frontmatter.title} {" >"}</h2>
+          
+          {prev && (
+            <Col className="text-uppercase font-weight-bold text-right">
+              <Link to={prev.node.frontmatter.path}>
+              <Row>
+                  <Col md="auto">
+                    <h2 style={{fontWeight:'800'}}>{prev.node.frontmatter.title}</h2>
+                    <h6 style={{color:'#132f3e80'}}>NEXT POST</h6>
+                  </Col>
+                  <Col md="auto" className="align-self-center">
+                  <h1>{">"}</h1>
+                  </Col>
+                </Row>
               </Link>
             </Col>
           )}
         </Row>
     </div>
-    </Container>
     </Layout>
   )
 }
