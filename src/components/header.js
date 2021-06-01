@@ -70,7 +70,7 @@ const Header = ({ siteTitle, postInfo }) => {
                         data-aos-duration="800">
                     <div class="reveal-holder" data-aos="reveal-item">
               <div class="reveal-block left" data-aos="reveal-left"></div>
-                      My thoughts
+                      An
                       </div>
                       </h3>
                       <h3
@@ -79,7 +79,7 @@ const Header = ({ siteTitle, postInfo }) => {
                         data-aos-duration="1000">
                     <div class="reveal-holder" data-aos="reveal-item">
               <div class="reveal-block left" data-aos="reveal-left"></div>
-                      Task
+                      Ordinary
                       </div>
                       </h3>
                       <h3
@@ -88,7 +88,7 @@ const Header = ({ siteTitle, postInfo }) => {
                         data-aos-duration="1200">
                     <div class="reveal-holder" data-aos="reveal-item">
               <div class="reveal-block left" data-aos="reveal-left"></div>
-                      Tutorial
+                      Developer
                       </div>
                       </h3>
                     </div>

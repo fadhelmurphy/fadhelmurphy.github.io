@@ -9,38 +9,40 @@ import {
   Pagination,
   PaginationItem,
   PaginationLink,
+  Row,
+  Col,
 } from "reactstrap"
 // import $ from 'jquery/dist/jquery.slim' // importing this worked like a charm
 // import 'popper.js' // importing this worked like a charm as well
 
-const BlogPage = ({ data, pageContext }) => {
+const BlogPage = ({ data, pageContext, location }) => {
   const { edges: posts } = data.allMarkdownRemark
   const { currentPage, numPages } = pageContext
   const isFirst = currentPage === 1
   const isLast = currentPage === numPages
-  const prevPage = currentPage - 1 === 1 ? "/" : (currentPage - 1).toString()
+  const prevPage = currentPage - 1 === 1 ? "" : (currentPage - 1).toString()
   const nextPage = (currentPage + 1).toString()
-
+  // console.log(currentPage)
   return (
-    <Layout>
+    <Layout location={location}>
       <Container>
         <SEO title="Blog" />
         <div class="scroll-down text-uppercase position-fixed">
           <p style={{ letterSpacing: "0.5em", fontSize: "12px" }}>
-            scroll down &gt;
+            scroll down →
           </p>
         </div>
-        <h1
-          className="blog"
+        <h2
           data-aos="fade-up"
-          data-aos-duration="800"
+          data-aos-duration="600"
           data-aos-once="true"
-          style={{ color: "#132f3e80" }}
+          className="custom-border-bottom"
+          style={{ fontWeight: 600 }}
         >
-          LATEST
+          Latest
           <br />
-          POST
-        </h1>
+          Post
+        </h2>
         <div className="blog-posts mt-5">
           {posts
             .filter(post => post.node.frontmatter.title.length > 0)
@@ -52,39 +54,78 @@ const BlogPage = ({ data, pageContext }) => {
               )
             })}
         </div>
-        <Pagination aria-label="Page navigation example">
-          {!isFirst && (
-            <PaginationItem>
-              <PaginationLink previous>
-                <Link to={"/blog/" + prevPage} rel="prev">
-                  ← Previous Page
-                </Link>
-              </PaginationLink>
-            </PaginationItem>
-          )}
-          {Array.from({ length: numPages }, (_, i) => (
-            <PaginationItem>
-              <PaginationLink>
+      </Container>
+      
+      <Row>
+          <Col
+            xs="12"
+            md="6"
+            className="d-flex align-items-center font-weight-bold justify-content-center justify-content-md-start my-3"
+          >
+            {Array.from({ length: numPages }, (_, i) =>
+              i + 1 === currentPage ? (
+                <>
+                  <Link
+                    style={{
+                      margin: "0 10px",
+                    }}
+                    key={`pagination-number${i + 1}`}
+                    to={`/blog/${i === 0 ? "" : i + 1}`}
+                  >
+                    {i + 1}
+                  </Link>
+
+                  <span
+                    style={{
+                      width: "96px",
+                      borderBottom: "2px solid #354f52",
+                    }}
+                  ></span>
+                </>
+              ) : (
                 <Link
+                  style={{
+                    color: "#aaa",
+                    margin: "0 10px",
+                  }}
                   key={`pagination-number${i + 1}`}
                   to={`/blog/${i === 0 ? "" : i + 1}`}
                 >
                   {i + 1}
                 </Link>
-              </PaginationLink>
-            </PaginationItem>
-          ))}
-          {!isLast && (
-            <PaginationItem>
-              <PaginationLink next>
-                <Link to={"/blog/" + nextPage} rel="next">
-                  Next Page →
-                </Link>
-              </PaginationLink>
-            </PaginationItem>
-          )}
-        </Pagination>
-      </Container>
+              )
+            )}
+          </Col>
+          <Col
+            xs="12"
+            md="6"
+            className="align-items-center text-center text-md-right my-3"
+          >
+            {!isFirst && (
+              <Link
+                style={{
+                  margin: "0 10px",
+                }}
+                to={"/blog/" + prevPage}
+                rel="prev"
+              >
+                ← Previous
+              </Link>
+            )}
+            {!isLast && (
+              <Link
+                style={{
+                  margin: "0 10px",
+                }}
+                to={"/blog/" + nextPage}
+                rel="next"
+              >
+                Next →
+              </Link>
+            )}
+          </Col>
+        </Row>
+      
     </Layout>
   )
 }
@@ -120,7 +161,7 @@ export const blogListQuery = graphql`
           id
           frontmatter {
             title
-            date(formatString: "MMM YYYY DD")
+            date(formatString: "DD MMMM YYYY")
             path
             tags
           }

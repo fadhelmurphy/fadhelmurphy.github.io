@@ -1,13 +1,11 @@
 import React, { useState } from "react"
 import { graphql } from "gatsby"
 import SEO from "../components/seo"
-import {
-  Container,
-} from "reactstrap"
+import { Container } from "reactstrap"
 import List from "../components/blog-list"
 import Menu from "../components/menu"
 
-const SearchTemplate = ({ data }) => {
+const SearchTemplate = ({ data, location }) => {
   let { edges: posts } = data.allMarkdownRemark
 
   const [value, setValue] = useState("")
@@ -25,18 +23,27 @@ const SearchTemplate = ({ data }) => {
       )
     })
   }
-
   return (
     <>
       <SEO title={value || "Search Page"} />
-      <Menu />
-      <Container>
-        <h1 className="mt-0" style={{ border: "unset", fontSize: "6vw" }}>
-          <input
+      <Menu location={location} />
+      <Container className="overflow-hidden">
+        <h1 className="my-5 py-5 py-md-0 my-md-0">
+          <textarea
             type="text"
             value={value}
             onChange={handleAddValue}
             placeholder="Type here"
+            style={{
+              width: "100%",
+              border: "unset",
+              color: "#354f52",
+              borderBottom: "1px solid #354f52",
+              minHeight:'60px',
+              boxShadow:'none',
+              outline:'none',
+              borderRadius:0
+            }}
             autoFocus
           />
         </h1>

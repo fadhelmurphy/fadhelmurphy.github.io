@@ -37,15 +37,28 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      resolve: `gatsby-plugin-web-font-loader`,
       options: {
-        fonts: [
-          {
-            family: `Montserrat`,
-            variants: [`400`, `600`, `800`]
-          },
-        ],
+        google: {
+          families: ['Montserrat:400,600,700,800']
+        },
+        timeout: 2000 
       },
+      // resolve:`@el7cosmos/gatsby-plugin-prefetch-google-fonts`,
+      // options: {
+      //   // fonts: [
+      //   //   `Montserrat\:400, 400i, 600, 600i, 700, 700i`
+      //   // ],
+      //   fonts:{
+      //     google: [
+      //   {
+      //     family: `Montserrat`,
+      //     variants: [`400`, `600`, `700`, `800`],
+      //     //fontDisplay: 'swap',
+      //   },
+      // ]
+      // }
+      // },
     },
     'gatsby-plugin-sass',
     `gatsby-plugin-netlify-cms`,

@@ -29,21 +29,22 @@ const Tags = ({ pageContext, data }) => {
         <SEO title="Blog" />
         <div class="scroll-down text-uppercase position-fixed">
           <p style={{ letterSpacing: "0.5em", fontSize: "12px" }}>
-            scroll down &gt;
+            scroll down →
           </p>
         </div>
-        <h1
-          className="blog"
+        
+        <h2
           data-aos="fade-up"
-          data-aos-duration="800"
+          data-aos-duration="600"
           data-aos-once="true"
-          style={{ color: "#132f3e80" }}
+          className="custom-border-bottom"
+          style={{ fontWeight:600, }}
         >
-          LATEST
+          Latest
           <br />
-          POST
-        </h1>
-        <h3>{tagHeader}</h3>
+          Post
+        </h2>
+        <h4>{tagHeader}</h4>
         <div className="blog-posts mt-5">
           {edges
             .filter(({ node }) => node.frontmatter.title.length > 0)

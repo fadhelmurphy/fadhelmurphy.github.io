@@ -12,8 +12,8 @@ import { useStaticQuery, graphql } from "gatsby"
 import Menu from "./menu"
 import Header from "./header"
 
-const Layout = ({ children, postInfo }) => {
-  //console.log(postInfo)
+const Layout = ({ children, postInfo,location}) => {
+  console.log(location)
   if (postInfo) {
     var { postTitle, postDate } = postInfo
   }
@@ -29,7 +29,7 @@ const Layout = ({ children, postInfo }) => {
 
   return (
     <>
-    <Menu position="fixed-top"/>
+    <Menu position="fixed-top" location={location}/>
       {postTitle && postDate ? (
         <Header postInfo={{ postTitle, postDate }} />
       ) : (

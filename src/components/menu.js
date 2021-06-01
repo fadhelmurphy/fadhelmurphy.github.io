@@ -2,31 +2,41 @@ import React, { useEffect, useState } from "react"
 import { globalHistory } from "@reach/router"
 import { Link } from "gatsby"
 import { Navbar, Nav, NavItem, Container, Col,Row } from "reactstrap"
-const Menu = ({position}) => {
+const Menu = ({position,location}) => {
       // State of our Menu
   const [state, setState] = useState({
     clicked: false,
   })
 
   //menu list
-  const pathname = globalHistory.location.pathname
-  const navLinks = [
-    { label: "Home", to: "/" },
-    { label: "About", to: "/about" },
-    { label: "Blog", to: "/blog" },
-    { label: "Work", to: "/work" },
-    { label: "Search", to: "/search" },
+  // var pathname = globalHistory.location.pathname.split("/")
+  var pathname = null
+  if(location){
+    pathname = location.pathname.split("/"); 
+    pathname = "/"+pathname[1]
+  }
+  var navLinks = [
+    { label: "Home", to: "/"},
+    { label: "About", to: "/about"},
+    { label: "Blog", to: "/blog"},
+    { label: "Labs", to: "/labs" },
+    { label: "Search", to: "/search"},
   ]
+
+  navLinks.map(link=>{
+    if(pathname==link.to)
+    link.active = true;
+    else
+    link.active = false
+  })
 
   // Toggle menu
   const handleMenu = () => {
     if (state.clicked === true) {
-      console.log("clicked true")
       setState({
         clicked: !state.clicked,
       })
     } else if (state.clicked === false) {
-      console.log("clicked false")
       setState({
         clicked: !state.clicked,
       })
@@ -62,15 +72,19 @@ const Menu = ({position}) => {
                   <li
                     className="nav__list-item"
                     onClick={() => {
-                      if (pathname === link.to) {
+                      if (link.active) {
                         setState({ clicked: false })
                       }
                     }}
                   >
-                    <Link activeStyle={{
-                      color:'#e8b237'
+                    {link.active?
+                    <Link style={{
+                      // color:'#e8b237'
+                      color:'#8cf36fe3'
                     }} 
-                    to={link.to}>{link.label}</Link>
+                    to={link.to}>{link.label}</Link>:
+                    <Link 
+                    to={link.to}>{link.label}</Link>}
                   </li>
                 </div>
               ))}
@@ -89,7 +103,7 @@ const Menu = ({position}) => {
       </div>
 
       <Navbar
-        className={`navbar navbar-expand-lg navbar-light p-4 p-lg-5  ${position?position:""}`}
+        className={`navbar navbar-expand-lg navbar-light p-4 p-lg-5 ${position?position:""}`}
         style={{
           zIndex: "1030",
         }}
