@@ -60,8 +60,8 @@ const About = ({ location }) => {
               </h1>
             </Col>
             <Col>
-              <p
-                className="p-3"
+              <h4
+                className="py-3 my-5"
                 data-aos="fade-right"
                 data-aos-duration="1000"
                 style={{
@@ -71,28 +71,33 @@ const About = ({ location }) => {
                 }}
               >
                 A little
-              </p>
+              </h4>
               <h1
                 data-aos="fade-right"
                 data-aos-duration="1500"
                 style={{
                   alignItems: "center",
                   display: "flex",
-                  fontSize: "6vh",
-                  fontWeight: "700",
+                  fontSize: "10vw",
+                  fontWeight: "600",
                   lineHeight: "1rem",
                 }}
               >
-                About me
+                About Me
               </h1>
             </Col>
           </Row>
           <Row className="my-5 p-5">
             <Col>
+              <p style={{
+                fontSize: "24px",
+              }}>
+                Hi I’m Fadhel. I'm 22 years old, an Indonesian Front-end engineer with a bit of backend experienced.
+                Born, raised, and currently living in Tangerang, Indonesia. I am an Informatics Engineering graduate.
+                I spent my free time watching movies and learn about graphic design. 
+              </p>
               <p>
-                Hi I’m Fadhel. Your usual 21 year old Indonesian digital
-                designer & developer based in Jakarta. Known as Fadhel Murphy on
-                Internet.
+              Currently, I'm so excited to learn about Image Processing, Machine Learning, or Deep Learning with skimage, sklearn, and Tensorflow.
               </p>
             </Col>
           </Row>
@@ -229,11 +234,17 @@ const About = ({ location }) => {
         </Container>
 
         <Container>
-          <footer className="d-block w-100">
-            © {new Date().getFullYear()}, Built with
-            {` `}
-            <a href="https://www.gatsbyjs.org">Gatsby</a>
-          </footer>
+          
+        <footer>
+          <Row>
+            <Col xs="12" md="6" className="text-center text-md-left">
+              © {new Date().getFullYear()} Built with <a href="https://www.gatsbyjs.org">Gatsby</a>
+            </Col>
+            <Col xs="12" md="6" className="text-center text-md-right">
+              Designed and developed by me
+            </Col>
+          </Row>
+        </footer>
         </Container>
       </div>
     </>

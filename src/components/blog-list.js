@@ -12,7 +12,7 @@ const blogList = ({ data }) => {
           <h1>
             <Link to={path}>{title}</Link>
           </h1>
-          <h5>
+          <h6>
             <div
               className="blog-post-date text-uppercase"
               style={{
@@ -21,7 +21,7 @@ const blogList = ({ data }) => {
             >
               {date}
             </div>
-          </h5>
+          </h6>
           <p className="mt-3">
             <div className="blog-post-category text-uppercase" style={{ color: "#58a941" }}>
               {tags

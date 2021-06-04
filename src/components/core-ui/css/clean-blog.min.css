@@ -477,7 +477,7 @@ form .form-group:first-child .floating-label-form-group {
 
 footer {
     padding: 50px 0 65px;
-    text-align: center
+    text-align: left
 }
 
 footer .list-inline {
@@ -563,7 +563,7 @@ footer .copyright {
     content: '';
     display: block;
     width: 30px;
-    height: 2px;
+    height: 4px;
     background: #7bc678;
     margin: 15px 0 0 0;
 }
@@ -742,8 +742,8 @@ input:focus {
 	text-align: left;
 	color: #fff;
 	overflow: hidden; 
-	font-size: 8vh;
-	font-weight: 800;
+	font-size: 6vh;
+	font-weight: 600;
 	line-height: 1.15;
 	letter-spacing: 3px;
 	text-transform: capitalize;
@@ -762,8 +762,6 @@ input:focus {
 	color: rgba(255,255,255,0.6);
 	overflow: hidden; 
 	cursor: pointer;
-	padding-left: 5px;
-	padding-right: 5px;
 	z-index: 2;
 	display: inline-block;
     -webkit-transition: all 200ms linear;

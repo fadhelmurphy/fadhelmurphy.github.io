@@ -280,7 +280,7 @@ const Works = ({ location }) => {
         </Row>
       </Container>
       <Container className="my-5">
-        <p
+        {/* <p
           className="font-weight-bold my-5"
           style={{
             alignItems: "center",
@@ -295,7 +295,19 @@ const Works = ({ location }) => {
               borderBottom: "3px solid #354f52",
             }}
           ></div>
-        </p>
+        </p> */}
+
+        <h2
+          data-aos="fade-up"
+          data-aos-duration="600"
+          data-aos-once="true"
+          className="custom-border-bottom"
+          style={{ fontWeight: 600 }}
+        >
+          App
+          <br />
+          Development
+        </h2>
       </Container>
       <Container className="my-5">
         {assets.web.map(el => {
@@ -346,7 +358,7 @@ const Works = ({ location }) => {
           )
         })}
 
-        <p
+        {/* <p
           className="font-weight-bold my-5"
           style={{
             alignItems: "center",
@@ -361,7 +373,19 @@ const Works = ({ location }) => {
               borderBottom: "3px solid #354f52",
             }}
           ></div>
-        </p>
+        </p> */}
+
+        <h2
+          data-aos="fade-up"
+          data-aos-duration="600"
+          data-aos-once="true"
+          className="custom-border-bottom"
+          style={{ fontWeight: 600 }}
+        >
+          Logo
+          <br />
+          Design
+        </h2>
       </Container>
 
       <Container fluid={true}>
@@ -404,7 +428,7 @@ const Works = ({ location }) => {
           </Col>
         </Row>
       </Container>
-      <Container>
+      {/* <Container>
         <p
           className="font-weight-bold my-5"
           style={{
@@ -421,7 +445,7 @@ const Works = ({ location }) => {
             }}
           ></div>
         </p>
-      </Container>
+      </Container> */}
       <Container fluid={true}>
         <Row className="order-lg-1 justify-content-lg-center">
           <Container>
@@ -468,7 +492,7 @@ const Works = ({ location }) => {
         </Row>
       </Container>
       <Container>
-      <Row
+        <Row
           className="my-5 text-center p-5 justify-content-between"
           data-aos="fade-up"
         >
@@ -491,12 +515,18 @@ const Works = ({ location }) => {
         </Row>
       </Container>
       <Container>
-        <footer className="d-block w-100">
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
+        <footer>
+          <Row>
+            <Col xs="12" md="6" className="text-center text-md-left">
+              © {new Date().getFullYear()} Built with <a href="https://www.gatsbyjs.org">Gatsby</a>
+            </Col>
+            <Col xs="12" md="6" className="text-center text-md-right">
+              Designed and developed by me
+            </Col>
+          </Row>
         </footer>
       </Container>
+    
     </>
   )
 }

@@ -5,18 +5,23 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React, { useEffect, useState } from "react"
-import {Container} from 'reactstrap'
+import React from "react"
+import { Container,Col,Row } from 'reactstrap'
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import Menu from "./menu"
 import Header from "./header"
 
-const Layout = ({ children, postInfo,location}) => {
-  console.log(location)
+const Layout = ({ children, postInfo, location }) => {
   if (postInfo) {
     var { postTitle, postDate } = postInfo
   }
+  var pathname = ""
+  if(location)
+  {
+    pathname = location.pathname;
+  }
+  console.log(pathname)
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -29,7 +34,7 @@ const Layout = ({ children, postInfo,location}) => {
 
   return (
     <>
-    <Menu position="fixed-top" location={location}/>
+      <Menu position="fixed-top" location={location} />
       {postTitle && postDate ? (
         <Header postInfo={{ postTitle, postDate }} />
       ) : (
@@ -37,11 +42,19 @@ const Layout = ({ children, postInfo,location}) => {
       )}
       <main className="container">{children}</main>
       <Container>
-      <footer className="d-block w-100">
-        © {new Date().getFullYear()}, Built with
-        {` `}
-        <a href="https://www.gatsbyjs.org">Gatsby</a>
-      </footer>
+        {pathname!=="/"?
+          <footer>
+            <Row>
+              <Col xs="12" md="6" className="text-center text-md-left">
+                © {new Date().getFullYear()} Built with <a href="https://www.gatsbyjs.org">Gatsby</a>
+              </Col>
+              <Col xs="12" md="6" className="text-center text-md-right">
+                Designed and developed by me
+              </Col>
+            </Row>
+          </footer>
+        :
+        null}
       </Container>
     </>
   )

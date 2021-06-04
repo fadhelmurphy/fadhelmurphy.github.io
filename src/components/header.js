@@ -2,6 +2,7 @@
 import PropTypes from "prop-types"
 import React from "react"
 import { Helmet } from "react-helmet"
+import {Col} from "reactstrap"
 const Header = ({ siteTitle, postInfo }) => {
   if (postInfo) {
     var { postTitle, postDate } = postInfo
@@ -17,19 +18,30 @@ const Header = ({ siteTitle, postInfo }) => {
         // }}
       >
         <div class="container">
-          <div class="row justify-content-center px-5 pt-5">
-            <div class="mr-auto align-self-lg-center">
-              <div class="site-heading my-5 py-5">
+          <div class="row justify-content-center px-3" style={{minHeight:'50vw'}}>
+            <Col className="mr-auto align-self-lg-center">
+              <div class="site-heading align-self-lg-center py-5">
                 <h1 style={{
                   position:'absolute',
-                  left:'0%',
-                  top:'15%',
+                  left:'-15%',
+                  top:'-15%',
                   fontSize:'20vw',
                   WebkitTextFillColor:'white',
                   WebkitTextStroke:'2px #d7eee1b3'
                 }}>
                       {siteTitle}
                 </h1>
+                {!postDate?
+                <div className="line-wrap h-75">
+                <h4
+                data-aos="fade-up"
+                data-aos-duration="700"
+                data-aos-once="true"
+                className="mx-2 my-3">
+                  Hello, I'm 
+                </h4>
+                </div>
+              :null}
                 <h1>
                   <div className="line-wrap h-75">
                     <div
@@ -56,13 +68,6 @@ const Header = ({ siteTitle, postInfo }) => {
                   </div>
                 ) : (
                   <>
-                    <p
-                    data-aos="fade-up"
-                    data-aos-duration="700"
-                    data-aos-once="true"
-                    className="mt-0">
-                      Hello, I'm Fadhel. App developer from Jakarta.
-                    </p>
                     <div class="subheading">
                       <h3
                         data-aos="zoom-in"
@@ -95,7 +100,7 @@ const Header = ({ siteTitle, postInfo }) => {
                   </>
                 )}
               </div>
-            </div>
+            </Col>
           </div>
           
         </div>
