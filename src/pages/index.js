@@ -192,7 +192,7 @@ const IndexPage = ({location}) => (
           data-aos-duration="600"
           data-aos-once="true"
           className="custom-border-bottom"
-          style={{ fontWeight: 600,fontSize:'3.5rem' }}
+          style={{ fontWeight: 600,fontSize:'2.8rem' }}
         >
           App
           <br />
@@ -270,7 +270,7 @@ const IndexPage = ({location}) => (
           data-aos-duration="600"
           data-aos-once="true"
           className="custom-border-bottom"
-          style={{ fontWeight: 600,fontSize:'3.5rem' }}
+          style={{ fontWeight: 600,fontSize:'2.8rem' }}
         >
           Logo
           <br />

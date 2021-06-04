@@ -74,7 +74,7 @@ const Menu = ({ position, location }) => {
                 <ul class="nav__list p-4 p-lg-0">
                   <div className="overflow-hidden">
                     <li
-                    className="nav__list-item"
+                      className="nav__list-item"
                     >
                       <h6 className="text-uppercase text-left text-white mb-5" style={{ letterSpacing: '0.5em' }}>Sitemap</h6>
                     </li>
@@ -108,16 +108,16 @@ const Menu = ({ position, location }) => {
                 <ul class="nav__list p-4 p-lg-0">
                   <div className="overflow-hidden">
                     <li
-                    className="nav__list-item"
+                      className="nav__list-item"
                     >
                       <h6 className="text-uppercase text-left text-white mb-5" style={{ letterSpacing: '0.5em' }}>Living In</h6>
                     </li>
-                    </div>
-                    <div className="overflow-hidden">
+                  </div>
+                  <div className="overflow-hidden">
                     <li
-                    className="nav__list-item"
+                      className="nav__list-item"
                     >
-                      <p className="text-left m-0" style={{color:'#ffffff99' }}>Tangerang, Banten</p>
+                      <p className="text-left m-0" style={{ color: '#ffffff99' }}>Tangerang, Banten</p>
                     </li>
                   </div>
                 </ul>
@@ -126,20 +126,20 @@ const Menu = ({ position, location }) => {
                 <ul class="nav__list p-4 p-lg-0">
                   <div className="overflow-hidden">
                     <li
-                    className="nav__list-item"
+                      className="nav__list-item"
                     >
-                      <h6 className="text-uppercase text-left mb-5" style={{ letterSpacing: '0.5em'}}>Reach me on</h6>
-                    </li>
-                    </div>
-                {Social.map(link => (
-                    <div className="overflow-hidden">
-                    <li
-                    className="nav__list-item"
-                    >
-                      <a className="text-left" target="_blank" href={"https://www."+link.to}>{link.label}</a>
+                      <h6 className="text-uppercase text-left mb-5" style={{ letterSpacing: '0.5em' }}>Reach me on</h6>
                     </li>
                   </div>
-                    ))}
+                  {Social.map(link => (
+                    <div className="overflow-hidden">
+                      <li
+                        className="nav__list-item"
+                      >
+                        <a className="text-left" target="_blank" href={"https://www." + link.to}>{link.label}</a>
+                      </li>
+                    </div>
+                  ))}
                 </ul>
               </Col>
               {/* <Col md="6" className="align-self-center">
@@ -155,13 +155,19 @@ const Menu = ({ position, location }) => {
       </div>
 
       <Navbar
-        className={`navbar navbar-expand-lg navbar-light p-4 p-lg-5 ${position ? position : ""}`}
+        className={`navbar navbar-expand-lg navbar-light p-3 p-lg-5 ${position ? position : ""}`}
         style={{
           zIndex: "1030",
         }}
         id="mainNav"
       >
-        <Nav className="ml-auto" navbar>
+        <Nav className="ml-auto flex-row" navbar>
+          <NavItem className="mr-3">
+            <h4 style={{ lineHeight: '2.5rem' }}>
+              <Link
+              to="/">Fadhel</Link>
+              </h4>
+          </NavItem>
           <NavItem onClick={handleMenu}>
             <div class="nav-link menu-icon hover-target">
               <span class="menu-icon__line menu-icon__line-left"></span>
