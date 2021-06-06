@@ -16,7 +16,6 @@ const Menu = ({ position, location }) => {
     pathname = "/" + pathname[1]
   }
   var navLinks = [
-    { label: "Home", to: "/" },
     { label: "About", to: "/about" },
     { label: "Blog", to: "/blog" },
     // { label: "Labs", to: "/labs" },
@@ -162,8 +161,8 @@ const Menu = ({ position, location }) => {
         id="mainNav"
       >
         <Nav className="ml-auto flex-row" navbar>
-          <NavItem className="mr-3">
-            <h4 style={{ lineHeight: '2.5rem' }}>
+          <NavItem className="mr-4">
+            <h4 className="Home" style={{ lineHeight: '2.5rem' }}>
               <Link
               to="/">Fadhel</Link>
               </h4>

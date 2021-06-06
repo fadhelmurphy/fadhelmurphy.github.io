@@ -97,7 +97,7 @@ const About = ({ location }) => {
                 I spent my free time watching movies and learn about graphic design. 
               </p>
               <p>
-              I'm also excited to learn about Image Processing, Machine Learning, or Deep Learning with skimage, sklearn, and Tensorflow.
+              I'm so exciting to learn about Image Processing, Machine Learning, or Deep Learning with skimage, sklearn, and Tensorflow.
               </p>
             </Col>
           </Row>

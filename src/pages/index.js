@@ -217,13 +217,13 @@ const IndexPage = ({location}) => (
                 <a
                   href={el.link}
                   target="_blank"
-                  className="btn btn-secondary border-0"
+                  className="btn btn-outline-primary"
                   style={{
                     alignItems: "center",
                     display: "inline-flex",
                   }}
                 >
-                  {"Github →"}
+                  {"Detail →"}
                 </a>
               </Col>
               <Col lg="7" className={"mr-lg-0 mx-auto " + el.className[1]}>
@@ -348,7 +348,7 @@ const IndexPage = ({location}) => (
         <p className="text-center">
           For more project you can follow my{" "}
           <b>
-            <a href="https://www.instagram.com/miripfadhel">Instagram</a>
+            <a href="https://www.instagram.com/mattkosim">Instagram</a>
           </b>{" "}
           and{" "}
           <b>

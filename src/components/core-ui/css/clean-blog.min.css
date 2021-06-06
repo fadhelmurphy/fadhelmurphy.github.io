@@ -785,6 +785,9 @@ body.nav-active .menu-icon__line {
 	-webkit-transform: translate(0px, 0px) rotate(-45deg);
           transform: translate(0px, 0px) rotate(-45deg);
 }
+body.nav-active .Home a {
+    color: rgba(255,255,255);
+}
 body.nav-active .menu-icon__line-left {
 	width: 15px;
 	-webkit-transform: translate(2px, 4px) rotate(45deg);
