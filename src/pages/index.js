@@ -165,11 +165,11 @@ const assets = {
   ],
 }
 
-const IndexPage = ({location}) => (
+const IndexPage = ({ location }) => (
   <>
-  <Layout location={location}>
-    <SEO title="Home" />
-    <Container className="my-5">
+    <Layout location={location}>
+      <SEO title="Home" />
+      <Container className="my-5">
         {/* <p
           className="font-weight-bold my-5"
           style={{
@@ -192,7 +192,7 @@ const IndexPage = ({location}) => (
           data-aos-duration="600"
           data-aos-once="true"
           className="custom-border-bottom"
-          style={{ fontWeight: 600,fontSize:'2.8rem' }}
+          style={{ fontWeight: 600, fontSize: "2.8rem" }}
         >
           App
           <br />
@@ -210,9 +210,7 @@ const IndexPage = ({location}) => (
                 }
                 data-aos="fade-up"
               >
-                <h2 className="text-capitalize">
-                  {el.judul}
-                </h2>
+                <h2 className="text-capitalize">{el.judul}</h2>
                 <p className="mt-0 mb-5">{el.desc}</p>
                 <a
                   href={el.link}
@@ -270,56 +268,56 @@ const IndexPage = ({location}) => (
           data-aos-duration="600"
           data-aos-once="true"
           className="custom-border-bottom"
-          style={{ fontWeight: 600,fontSize:'2.8rem' }}
+          style={{ fontWeight: 600, fontSize: "2.8rem" }}
         >
           Logo
           <br />
           Design
         </h1>
       </Container>
-  </Layout>
-  
-  <Container fluid={true}>
-  <Row className="flex-column-reverse flex-lg-row">
-    <Col
-      lg="6"
-      className="order-lg-1 mb-5 logo-section"
-      style={{ minHeight: "35vh" }}
-    >
-      {assets.logo.map(el => {
-        return (
-          <div
-            class="position-absolute overflow-hidden rounded shadow-lg"
-            data-aos="fade-up"
-            style={el.style}
-          >
-            <div
-              className="h-100 w-100"
-              data-aos="image-reveal"
-              data-aos-duration="700"
-            >
-              <Image filename={el.file} />
-            </div>
-          </div>
-        )
-      })}
-    </Col>
-    <Col
-      lg="4"
-      className="order-lg-2 align-self-center p-5 mr-0 ml-lg-5 pr-lg-0"
-      data-aos="fade-up"
-    >
-      <h3 className="text-capitalize" style={{ color: "#58a941" }}>
-        Logo Design
-      </h3>
-      <h1>
-        I'm also experienced in creating vector arts, especially logos for
-        your business.
-      </h1>
-    </Col>
-  </Row>
-</Container>
-{/* <Container>
+    </Layout>
+
+    <Container fluid={true}>
+      <Row className="flex-column-reverse flex-lg-row">
+        <Col
+          lg="6"
+          className="order-lg-1 mb-5 logo-section"
+          style={{ minHeight: "35vh" }}
+        >
+          {assets.logo.map(el => {
+            return (
+              <div
+                class="position-absolute overflow-hidden rounded shadow-lg"
+                data-aos="fade-up"
+                style={el.style}
+              >
+                <div
+                  className="h-100 w-100"
+                  data-aos="image-reveal"
+                  data-aos-duration="700"
+                >
+                  <Image filename={el.file} />
+                </div>
+              </div>
+            )
+          })}
+        </Col>
+        <Col
+          lg="4"
+          className="order-lg-2 align-self-center p-5 mr-0 ml-lg-5 pr-lg-0"
+          data-aos="fade-up"
+        >
+          <h3 className="text-capitalize" style={{ color: "#58a941" }}>
+            Logo Design
+          </h3>
+          <h1>
+            I'm also experienced in creating vector arts, especially logos for
+            your business.
+          </h1>
+        </Col>
+      </Row>
+    </Container>
+    {/* <Container>
   <p
     className="font-weight-bold my-5"
     style={{
@@ -337,87 +335,88 @@ const IndexPage = ({location}) => (
     ></div>
   </p>
 </Container> */}
-<Container fluid={true}>
-  <Row className="order-lg-1 justify-content-lg-center">
-    <Container>
-      <Col xs="12" className="order-lg-1 my-5">
-        <h1 className="text-center" style={{ fontSize: "6vh" }}>
-          Another personal project that I learned from internet
-        </h1>
+    <Container fluid={true}>
+      <Row className="order-lg-1 justify-content-lg-center">
+        <Container>
+          <Col xs="12" className="order-lg-1 my-5">
+            <h1 className="text-center" style={{ fontSize: "6vh" }}>
+              Another personal project that I learned from internet
+            </h1>
 
-        <p className="text-center">
-          For more project you can follow my{" "}
-          <b>
-            <a href="https://www.instagram.com/mattkosim">Instagram</a>
-          </b>{" "}
-          and{" "}
-          <b>
-            <a href="https://www.github.com/fadhelmurphy">Github</a>
-          </b>
-        </p>
-      </Col>
-    </Container>
-    <Col
-      xs="12"
-      className="order-lg-2 mb-5 logo-section"
-      style={{ minHeight: "35vh" }}
-    >
-      {assets.another.map(el => {
-        return (
-          <div
-            class="position-absolute overflow-hidden rounded shadow"
-            data-aos="zoom-in"
-            style={el.style}
-          >
-            <div
-              className="h-100 w-100"
-              data-aos="image-reveal"
-              data-aos-duration="700"
-            >
-              <Image filename={el.file} />
-            </div>
-          </div>
-        )
-      })}
-    </Col>
-  </Row>
-</Container>
-<Container>
-  <Row
-    className="my-5 text-center p-5 justify-content-between"
-    data-aos="fade-up"
-  >
-    <Col md="12" className="text-center text-break align-self-center">
-      <p style={{ textTransform: "uppercase" }}>Let's work together</p>
-      <h2>fadhelijlalfalah@gmail.com</h2>
-    </Col>
-    <Col md="12" className="text-center text-break align-self-center">
-      <p>
-        <a
-          class="btn btn-outline-primary"
-          href="mailto:fadhelijlalfalah@gmail.com"
-          role="button"
-          style={{ borderRadius: "30px" }}
+            <p className="text-center">
+              For more project you can follow my{" "}
+              <b>
+                <a href="https://www.instagram.com/mattkosim">Instagram</a>
+              </b>{" "}
+              and{" "}
+              <b>
+                <a href="https://www.github.com/fadhelmurphy">Github</a>
+              </b>
+            </p>
+          </Col>
+        </Container>
+        <Col
+          xs="12"
+          className="order-lg-2 mb-5 logo-section"
+          style={{ minHeight: "35vh" }}
         >
-          Get in touch
-        </a>
-      </p>
-    </Col>
-  </Row>
-</Container>
-<Container>
-  <footer>
-    <Row>
-      <Col xs="12" md="6" className="text-center text-md-left">
-        © {new Date().getFullYear()} Built with <a href="https://www.gatsbyjs.org">Gatsby</a>
-      </Col>
-      <Col xs="12" md="6" className="text-center text-md-right">
-        Designed and developed by me
-      </Col>
-    </Row>
-  </footer>
-</Container>
-</>
+          {assets.another.map(el => {
+            return (
+              <div
+                class="position-absolute overflow-hidden rounded shadow"
+                data-aos="zoom-in"
+                style={el.style}
+              >
+                <div
+                  className="h-100 w-100"
+                  data-aos="image-reveal"
+                  data-aos-duration="700"
+                >
+                  <Image filename={el.file} />
+                </div>
+              </div>
+            )
+          })}
+        </Col>
+      </Row>
+    </Container>
+    <Container>
+      <Row
+        className="my-5 text-center p-5 justify-content-between"
+        data-aos="fade-up"
+      >
+        <Col md="12" className="text-center text-break align-self-center">
+          <p style={{ textTransform: "uppercase" }}>Let's work together</p>
+          <h2>fadhelijlalfalah@gmail.com</h2>
+        </Col>
+        <Col md="12" className="text-center text-break align-self-center">
+          <p>
+            <a
+              class="btn btn-outline-primary"
+              href="mailto:fadhelijlalfalah@gmail.com"
+              role="button"
+              style={{ borderRadius: "30px" }}
+            >
+              Get in touch
+            </a>
+          </p>
+        </Col>
+      </Row>
+    </Container>
+    <Container>
+      <footer>
+        <Row>
+          <Col xs="12" md="6" className="text-center text-md-left">
+            © {new Date().getFullYear()} Built with{" "}
+            <a href="https://www.gatsbyjs.org">Gatsby</a>
+          </Col>
+          <Col xs="12" md="6" className="text-center text-md-right">
+            Designed and developed by me
+          </Col>
+        </Row>
+      </footer>
+    </Container>
+  </>
 )
 export default IndexPage
 
@@ -436,4 +435,5 @@ export const pageQuery = graphql`
         }
       }
     }
-  }`
+  }
+`

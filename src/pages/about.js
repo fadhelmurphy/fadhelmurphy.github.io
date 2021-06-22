@@ -40,7 +40,7 @@ const About = ({ location }) => {
           </Row>
         </Container> */}
         <Container className="pt-5">
-          <Row className="my-5 p-5" data-aos="fade-up">
+          <Row className="my-5 p-3 p-md-5" data-aos="fade-up">
             <Col
               style={{
                 position: "absolute",
@@ -87,21 +87,26 @@ const About = ({ location }) => {
               </h1>
             </Col>
           </Row>
-          <Row className="my-5 p-5">
+          <Row className="my-5 p-3 p-md-5">
             <Col>
-              <p style={{
-                fontSize: "24px",
-              }}>
-                Hi I’m Fadhel. I'm 22 years old, an Indonesian Front-end engineer with a bit of backend experienced.
-                Born, raised, and currently living in Tangerang, Indonesia. I am an Informatics Engineering graduate.
-                I spent my free time watching movies and learn about graphic design. 
+              <p className="top-desc-about">
+                Hi I’m Fadhel. I'm 22 years old, an Indonesian Front-end
+                engineer with a bit of backend experienced. Born, raised, and
+                currently living in Tangerang, Indonesia. I am an Informatics
+                Engineering graduate. I spent my free time watching movies and
+                learn about graphic design.
               </p>
               <p>
-              I'm so exciting to learn about Image Processing, Machine Learning, or Deep Learning with skimage, sklearn, and Tensorflow.
+                I'm so exciting to learn about Image Processing, Machine
+                Learning, or Deep Learning with skimage, sklearn, and
+                Tensorflow.
               </p>
             </Col>
           </Row>
-          <Row className="p-5 justify-content-between" data-aos="fade-up">
+          <Row
+            className="p-3 p-md-5 justify-content-between"
+            data-aos="fade-up"
+          >
             <Col lg="3" className="my-5 text-center align-self-center">
               <h1>Almamater</h1>
             </Col>
@@ -122,7 +127,7 @@ const About = ({ location }) => {
                     </Row> */}
           </Row>
           <Row
-            className="text-center p-5 justify-content-between"
+            className="text-center p-3 p-md-5 justify-content-between"
             data-aos="fade-up"
           >
             <Col md="12">
@@ -130,7 +135,7 @@ const About = ({ location }) => {
             </Col>
           </Row>
           <Row
-            className="text-center p-5 justify-content-between"
+            className="text-center p-3 p-md-5 justify-content-between"
             data-aos="fade-up"
           >
             <Col md="3">
@@ -147,7 +152,7 @@ const About = ({ location }) => {
             </Col>
           </Row>
           <Row
-            className="text-center p-5 justify-content-between"
+            className="text-center p-3 p-md-5 justify-content-between"
             data-aos="fade-up"
           >
             <Col md="3">
@@ -164,7 +169,7 @@ const About = ({ location }) => {
             </Col>
           </Row>
           <Row
-            className="text-center p-5 justify-content-between"
+            className="text-center p-3 p-md-5 justify-content-between"
             data-aos="fade-up"
           >
             <Col md="3">
@@ -181,7 +186,7 @@ const About = ({ location }) => {
             </Col>
           </Row>
           <Row
-            className="text-center p-5 justify-content-between"
+            className="text-center p-3 p-md-5 justify-content-between"
             data-aos="fade-up"
           >
             <Col md="12">
@@ -189,7 +194,7 @@ const About = ({ location }) => {
             </Col>
           </Row>
           <Row
-            className="text-center p-5 justify-content-between"
+            className="text-center p-3 p-md-5 justify-content-between"
             data-aos="fade-up"
           >
             <Col md="4">
@@ -203,7 +208,7 @@ const About = ({ location }) => {
             </Col>
           </Row>
           <Row
-            className="text-center p-5 justify-content-between"
+            className="text-center p-3 p-md-5 justify-content-between"
             data-aos="fade-up"
           >
             <Col md="6">
@@ -213,7 +218,10 @@ const About = ({ location }) => {
               <h3>Blender 3D</h3>
             </Col>
           </Row>
-          <Row className="my-5 p-5 justify-content-between" data-aos="fade-up">
+          <Row
+            className="my-5 p-3 p-md-5 justify-content-between"
+            data-aos="fade-up"
+          >
             <Col lg="6" className="text-center text-break align-self-center">
               <p style={{ textTransform: "uppercase" }}>Let's work together</p>
               <h2>fadhelijlalfalah@gmail.com</h2>
@@ -234,17 +242,17 @@ const About = ({ location }) => {
         </Container>
 
         <Container>
-          
-        <footer>
-          <Row>
-            <Col xs="12" md="6" className="text-center text-md-left">
-              © {new Date().getFullYear()} Built with <a href="https://www.gatsbyjs.org">Gatsby</a>
-            </Col>
-            <Col xs="12" md="6" className="text-center text-md-right">
-              Designed and developed by me
-            </Col>
-          </Row>
-        </footer>
+          <footer>
+            <Row>
+              <Col xs="12" md="6" className="text-center text-md-left">
+                © {new Date().getFullYear()} Built with{" "}
+                <a href="https://www.gatsbyjs.org">Gatsby</a>
+              </Col>
+              <Col xs="12" md="6" className="text-center text-md-right">
+                Designed and developed by me
+              </Col>
+            </Row>
+          </footer>
         </Container>
       </div>
     </>

@@ -1,7 +1,7 @@
 import React from "react"
 import Img from "gatsby-image"
 // import { useStaticQuery, graphql } from "gatsby"
-import { StaticQuery, graphql } from 'gatsby';
+import { StaticQuery, graphql } from "gatsby"
 /*
  * This component is built using `gatsby-image` to automatically serve optimized
  * images with lazy loading and reduced file sizes. The image is loaded using a
@@ -12,7 +12,6 @@ import { StaticQuery, graphql } from 'gatsby';
  * - `gatsby-image`: https://gatsby.dev/gatsby-image
  * - `useStaticQuery`: https://www.gatsbyjs.org/docs/use-static-query/
  */
-
 
 // Note: You can change "images" to whatever you'd like.
 
@@ -37,23 +36,26 @@ const Image = props => (
     `}
     render={data => {
       const image = data.images.edges.find(n => {
-        return n.node.relativePath.includes(props.filename);
-      });
+        return n.node.relativePath.includes(props.filename)
+      })
       if (!image) {
-        return null;
+        return null
       }
 
       //const imageSizes = image.node.childImageSharp.sizes; sizes={imageSizes}
-      return <Img
-      style={{
-        height:'100%',
-        width:'100%',
-        objectFit:'cover',
-      }}
-      fluid={image.node.childImageSharp.fluid} />;
+      return (
+        <Img
+          style={{
+            height: "100%",
+            width: "100%",
+            objectFit: "cover",
+          }}
+          fluid={image.node.childImageSharp.fluid}
+        />
+      )
     }}
   />
-);
+)
 
 // const Image = (path) => {
 //   const data = useStaticQuery(graphql`

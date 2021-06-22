@@ -2,10 +2,10 @@ import React, { useState } from "react"
 import { graphql } from "gatsby"
 import SEO from "../components/seo"
 import { Container } from "reactstrap"
-import List from "../components/blog-list"
+import List from "../components/blog/blog-list"
 import Menu from "../components/menu"
 
-const SearchTemplate = ({ data, location }) => {
+const Search = ({ data, location }) => {
   let { edges: posts } = data.allMarkdownRemark
 
   const [value, setValue] = useState("")
@@ -39,10 +39,10 @@ const SearchTemplate = ({ data, location }) => {
               border: "unset",
               color: "#354f52",
               borderBottom: "1px solid #354f52",
-              minHeight:'60px',
-              boxShadow:'none',
-              outline:'none',
-              borderRadius:0
+              minHeight: "60px",
+              boxShadow: "none",
+              outline: "none",
+              borderRadius: 0,
             }}
             autoFocus
           />
@@ -65,10 +65,10 @@ const SearchTemplate = ({ data, location }) => {
   )
 }
 
-export default SearchTemplate
+export default Search
 
 export const searchListQuery = graphql`
-  query BlogQuery {
+  query {
     allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
       edges {
         node {

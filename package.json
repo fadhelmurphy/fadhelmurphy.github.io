@@ -17,8 +17,9 @@
     "gatsby-plugin-sass": "^2.1.28",
     "gatsby-plugin-sharp": "^2.6.37",
     "gatsby-plugin-web-font-loader": "^1.0.4",
+    "gatsby-remark-images": "^5.4.1",
     "gatsby-source-filesystem": "^2.1.48",
-    "gatsby-transformer-remark": "^2.6.52",
+    "gatsby-transformer-remark": "^2.16.1",
     "gatsby-transformer-sharp": "^2.3.14",
     "gh-pages": "^2.2.0",
     "jquery": "^3.5.1",
@@ -43,13 +44,16 @@
   "keywords": [
     "gatsby"
   ],
-  "license": "MIT",
+  "license": [
+    "MIT",
+    "Gunadarma"
+  ],
   "scripts": {
     "build": "gatsby build",
     "deploy": "gatsby build && gh-pages -d public -b master",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
-    "start": "npm run develop",
     "serve": "gatsby serve",
+    "dev": "gatsby develop",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },

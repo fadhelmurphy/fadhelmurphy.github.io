@@ -12,7 +12,7 @@ const Menu = ({ position, location }) => {
   // var pathname = globalHistory.location.pathname.split("/")
   var pathname = null
   if (location) {
-    pathname = location.pathname.split("/");
+    pathname = location.pathname.split("/")
     pathname = "/" + pathname[1]
   }
   var navLinks = [
@@ -28,10 +28,8 @@ const Menu = ({ position, location }) => {
   ]
 
   navLinks.map(link => {
-    if (pathname == link.to)
-      link.active = true;
-    else
-      link.active = false
+    if (pathname == link.to) link.active = true
+    else link.active = false
   })
 
   // Toggle menu
@@ -60,7 +58,26 @@ const Menu = ({ position, location }) => {
       // If menu is closed and we want to open it.
       body.classList.remove("nav-active")
     } else if (state.clicked === true) {
+      document.getElementsByClassName("navbar")[0].style.background =
+        "transparent"
       body.classList.add("nav-active")
+    }
+
+    function scrollFunction() {
+      if (
+        (document.body.scrollTop > 80 ||
+          document.documentElement.scrollTop > 80) &&
+        window.matchMedia("(max-width: 700px)").matches &&
+        !state.clicked
+      ) {
+        document.getElementsByClassName("navbar")[0].style.background = "white"
+      } else {
+        document.getElementsByClassName("navbar")[0].style.background =
+          "transparent"
+      }
+    }
+    window.onscroll = function() {
+      scrollFunction()
     }
   })
   return (
@@ -72,10 +89,13 @@ const Menu = ({ position, location }) => {
               <Col md="4">
                 <ul class="nav__list p-4 p-lg-0">
                   <div className="overflow-hidden">
-                    <li
-                      className="nav__list-item"
-                    >
-                      <h6 className="text-uppercase text-left text-white mb-5" style={{ letterSpacing: '0.5em' }}>Sitemap</h6>
+                    <li className="nav__list-item">
+                      <h6
+                        className="text-uppercase text-left text-white mb-5"
+                        style={{ letterSpacing: "0.5em" }}
+                      >
+                        Sitemap
+                      </h6>
                     </li>
                   </div>
                   {navLinks.map(link => (
@@ -89,14 +109,19 @@ const Menu = ({ position, location }) => {
                             }
                           }}
                         >
-                          {link.active ?
-                            <Link style={{
-                              // color:'#e8b237'
-                              color: '#8cf36fe3'
-                            }}
-                              to={link.to}>{link.label}</Link> :
+                          {link.active ? (
                             <Link
-                              to={link.to}>{link.label}</Link>}
+                              style={{
+                                // color:'#e8b237'
+                                color: "#8cf36fe3",
+                              }}
+                              to={link.to}
+                            >
+                              {link.label}
+                            </Link>
+                          ) : (
+                            <Link to={link.to}>{link.label}</Link>
+                          )}
                         </li>
                       </div>
                     </>
@@ -106,17 +131,23 @@ const Menu = ({ position, location }) => {
               <Col md="4" className="d-none d-md-block">
                 <ul class="nav__list p-4 p-lg-0">
                   <div className="overflow-hidden">
-                    <li
-                      className="nav__list-item"
-                    >
-                      <h6 className="text-uppercase text-left text-white mb-5" style={{ letterSpacing: '0.5em' }}>Living In</h6>
+                    <li className="nav__list-item">
+                      <h6
+                        className="text-uppercase text-left text-white mb-5"
+                        style={{ letterSpacing: "0.5em" }}
+                      >
+                        Living In
+                      </h6>
                     </li>
                   </div>
                   <div className="overflow-hidden">
-                    <li
-                      className="nav__list-item"
-                    >
-                      <p className="text-left m-0" style={{ color: '#ffffff99' }}>Tangerang, Banten</p>
+                    <li className="nav__list-item">
+                      <p
+                        className="text-left m-0"
+                        style={{ color: "#ffffff99" }}
+                      >
+                        Tangerang, Banten
+                      </p>
                     </li>
                   </div>
                 </ul>
@@ -124,18 +155,25 @@ const Menu = ({ position, location }) => {
               <Col md="4" className="d-none d-md-block">
                 <ul class="nav__list p-4 p-lg-0">
                   <div className="overflow-hidden">
-                    <li
-                      className="nav__list-item"
-                    >
-                      <h6 className="text-uppercase text-left mb-5" style={{ letterSpacing: '0.5em' }}>Reach me on</h6>
+                    <li className="nav__list-item">
+                      <h6
+                        className="text-uppercase text-left mb-5"
+                        style={{ letterSpacing: "0.5em" }}
+                      >
+                        Reach me on
+                      </h6>
                     </li>
                   </div>
                   {Social.map(link => (
                     <div className="overflow-hidden">
-                      <li
-                        className="nav__list-item"
-                      >
-                        <a className="text-left" target="_blank" href={"https://www." + link.to}>{link.label}</a>
+                      <li className="nav__list-item">
+                        <a
+                          className="text-left"
+                          target="_blank"
+                          href={"https://www." + link.to}
+                        >
+                          {link.label}
+                        </a>
                       </li>
                     </div>
                   ))}
@@ -147,25 +185,26 @@ const Menu = ({ position, location }) => {
                       data-aos-duration="1000" style={{color:'white'}}>Contact me on:</h4>
               </div>
             </Col> */}
-
             </Row>
           </Container>
         </div>
       </div>
 
       <Navbar
-        className={`navbar navbar-expand-lg navbar-light p-3 p-lg-5 ${position ? position : ""}`}
+        className={`navbar navbar-expand-lg navbar-light p-3 p-lg-5 ${
+          position ? position : ""
+        }`}
         style={{
           zIndex: "1030",
+          background: "transparent",
         }}
         id="mainNav"
       >
         <Nav className="ml-auto flex-row" navbar>
           <NavItem className="mr-4">
-            <h4 className="Home" style={{ lineHeight: '2.5rem' }}>
-              <Link
-              to="/">Fadhel</Link>
-              </h4>
+            <h4 className="Home" style={{ lineHeight: "2.5rem" }}>
+              <Link to="/">Fadhel</Link>
+            </h4>
           </NavItem>
           <NavItem onClick={handleMenu}>
             <div class="nav-link menu-icon hover-target">
@@ -179,4 +218,4 @@ const Menu = ({ position, location }) => {
     </>
   )
 }
-export default Menu;
+export default Menu

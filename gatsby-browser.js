@@ -10,8 +10,8 @@
 // import 'bootstrap/dist/js/bootstrap.min.js'
 // import './src/components/core-ui/js/clean-blog'
 // import './src/components/core-ui/css/fontawesome-free/css/all.min.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import "./src/components/core-ui/css/clean-blog.min.css"
-import AOS from 'aos';
-import 'aos/dist/aos.css'; 
-AOS.init();
+import "bootstrap/dist/css/bootstrap.min.css"
+import "./src/components/css/style.min.css"
+import AOS from "aos"
+import "aos/dist/aos.css"
+AOS.init()

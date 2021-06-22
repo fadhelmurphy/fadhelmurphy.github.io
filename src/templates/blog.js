@@ -3,7 +3,7 @@ import { Link, graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import List from "../components/blog-list"
+import List from "../components/blog/blog-list"
 import {
   Container,
   Pagination,
@@ -55,37 +55,18 @@ const BlogPage = ({ data, pageContext, location }) => {
             })}
         </div>
       </Container>
-      
-      <Row>
-          <Col
-            xs="12"
-            md="6"
-            className="d-flex align-items-center font-weight-bold justify-content-center justify-content-md-start my-3"
-          >
-            {Array.from({ length: numPages }, (_, i) =>
-              i + 1 === currentPage ? (
-                <>
-                  <Link
-                    style={{
-                      margin: "0 10px",
-                    }}
-                    key={`pagination-number${i + 1}`}
-                    to={`/blog/${i === 0 ? "" : i + 1}`}
-                  >
-                    {i + 1}
-                  </Link>
 
-                  <span
-                    style={{
-                      width: "96px",
-                      borderBottom: "2px solid #354f52",
-                    }}
-                  ></span>
-                </>
-              ) : (
+      <Row>
+        <Col
+          xs="12"
+          md="6"
+          className="d-flex align-items-center font-weight-bold justify-content-center justify-content-md-start my-3"
+        >
+          {Array.from({ length: numPages }, (_, i) =>
+            i + 1 === currentPage ? (
+              <>
                 <Link
                   style={{
-                    color: "#aaa",
                     margin: "0 10px",
                   }}
                   key={`pagination-number${i + 1}`}
@@ -93,39 +74,57 @@ const BlogPage = ({ data, pageContext, location }) => {
                 >
                   {i + 1}
                 </Link>
-              )
-            )}
-          </Col>
-          <Col
-            xs="12"
-            md="6"
-            className="align-items-center text-center text-md-right my-3"
-          >
-            {!isFirst && (
+
+                <span
+                  style={{
+                    width: "96px",
+                    borderBottom: "2px solid #354f52",
+                  }}
+                ></span>
+              </>
+            ) : (
               <Link
                 style={{
+                  color: "#aaa",
                   margin: "0 10px",
                 }}
-                to={"/blog/" + prevPage}
-                rel="prev"
+                key={`pagination-number${i + 1}`}
+                to={`/blog/${i === 0 ? "" : i + 1}`}
               >
-                ← Previous
+                {i + 1}
               </Link>
-            )}
-            {!isLast && (
-              <Link
-                style={{
-                  margin: "0 10px",
-                }}
-                to={"/blog/" + nextPage}
-                rel="next"
-              >
-                Next →
-              </Link>
-            )}
-          </Col>
-        </Row>
-      
+            )
+          )}
+        </Col>
+        <Col
+          xs="12"
+          md="6"
+          className="align-items-center text-center text-md-right my-3"
+        >
+          {!isFirst && (
+            <Link
+              style={{
+                margin: "0 10px",
+              }}
+              to={"/blog/" + prevPage}
+              rel="prev"
+            >
+              ← Previous
+            </Link>
+          )}
+          {!isLast && (
+            <Link
+              style={{
+                margin: "0 10px",
+              }}
+              to={"/blog/" + nextPage}
+              rel="next"
+            >
+              Next →
+            </Link>
+          )}
+        </Col>
+      </Row>
     </Layout>
   )
 }
@@ -149,11 +148,12 @@ export default BlogPage
 //   }`
 
 export const blogListQuery = graphql`
-  query blogListQuery($skip: Int!, $limit: Int!) {
+  query blogListQuery($skip: Int!, $limit: Int!, $filter:String!) {
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
       limit: $limit
       skip: $skip
+      filter:{fileAbsolutePath:{regex: $filter  }}
     ) {
       edges {
         node {

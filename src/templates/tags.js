@@ -2,7 +2,7 @@ import React from "react"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import List from "../components/blog-list"
+import List from "../components/blog/blog-list"
 // Components
 import { Link, graphql } from "gatsby"
 import {
@@ -32,13 +32,13 @@ const Tags = ({ pageContext, data }) => {
             scroll down →
           </p>
         </div>
-        
+
         <h2
           data-aos="fade-up"
           data-aos-duration="600"
           data-aos-once="true"
           className="custom-border-bottom"
-          style={{ fontWeight:600, }}
+          style={{ fontWeight: 600 }}
         >
           Latest
           <br />
@@ -60,7 +60,7 @@ const Tags = ({ pageContext, data }) => {
           {!isFirst && (
             <PaginationItem>
               <PaginationLink previous>
-                <Link to={`/tags/${tag.toLowerCase()}/` + prevPage} rel="prev">
+                <Link to={`/blog/tags/${tag.toLowerCase()}/` + prevPage} rel="prev">
                   ← Previous Page
                 </Link>
               </PaginationLink>
@@ -71,7 +71,7 @@ const Tags = ({ pageContext, data }) => {
               <PaginationLink>
                 <Link
                   key={`pagination-number${i + 1}`}
-                  to={`/tags/${tag.toLowerCase()}/${i === 0 ? "" : i + 1}`}
+                  to={`/blog/tags/${tag.toLowerCase()}/${i === 0 ? "" : i + 1}`}
                 >
                   {i + 1}
                 </Link>
@@ -81,7 +81,7 @@ const Tags = ({ pageContext, data }) => {
           {!isLast && (
             <PaginationItem>
               <PaginationLink next>
-                <Link to={`/tags/${tag.toLowerCase()}/` + nextPage} rel="next">
+                <Link to={`/blog/tags/${tag.toLowerCase()}/` + nextPage} rel="next">
                   Next Page →
                 </Link>
               </PaginationLink>
@@ -110,7 +110,7 @@ export const pageQuery = graphql`
           id
           frontmatter {
             title
-            date(formatString: "MMM YYYY DD")
+            date(formatString: "DD MMMM YYYY")
             path
             tags
           }

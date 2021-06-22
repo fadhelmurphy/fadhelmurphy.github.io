@@ -1,4 +1,4 @@
-import { mergeAll, map, prop, compose } from 'ramda';
+import { mergeAll, map, prop, compose } from "ramda"
 
 // [{ node: { slug: "entry-1", title: "entry one", ... } }] => { "entry-1": { title: "entry one", ... } }
 export default compose(
@@ -9,5 +9,5 @@ export default compose(
     [node.slug]: node,
   })),
   // [{ node: { ... } }, { node: { ... } }] => [{ ... }. { ... }]
-  map(prop('node'))
-);
+  map(prop("node"))
+)

@@ -18,10 +18,37 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `images`,
+        name: `post`,
         path: `${__dirname}/src/pages`,
       },
     },
+    
+{
+  resolve: `gatsby-transformer-remark`,
+  options: {
+    plugins: [
+      {
+        resolve: `gatsby-remark-images`,
+        options: {
+          
+        name: `post`,
+        path: `${__dirname}/src/pages/posts`,
+          maxWidth: 1500,
+          withWebp: true,
+          showCaptions: true,
+          quality: 100,
+        },
+      },
+    ],
+  },
+},
+  //   {
+  //     resolve: `gatsby-source-filesystem`,
+  //     options: {
+  //        path: `${__dirname}/pages/projects`,
+  //         name: `projects`,
+  //     },
+  // },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
@@ -40,9 +67,9 @@ module.exports = {
       resolve: `gatsby-plugin-web-font-loader`,
       options: {
         google: {
-          families: ['Montserrat:400,600,700,800']
+          families: ["Montserrat:400,600,700,800"],
         },
-        timeout: 2000 
+        timeout: 2000,
       },
       // resolve:`@el7cosmos/gatsby-plugin-prefetch-google-fonts`,
       // options: {
@@ -60,10 +87,11 @@ module.exports = {
       // }
       // },
     },
-    'gatsby-plugin-sass',
+    "gatsby-plugin-sass",
     `gatsby-plugin-netlify-cms`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
-  ],pathPrefix: "/",
+  ],
+  pathPrefix: "/",
 }

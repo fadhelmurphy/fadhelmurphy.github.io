@@ -2,9 +2,10 @@
 title: Membuat company profile yang menarik
 date: 2020-10-20T00:00:00.000Z
 path: /membuat-company-profile-yang-menarik
-tags: ["Pengantar bisnis informatika","Tugas"]
+tags: ["Pengantar bisnis informatika", "Tugas"]
 ---
-Suatu bisnis sebaiknya memiliki company profile yang terlihat profesional dan kredibel sehingga dapat menarik perhatian pelanggan. Anda dapat membuat sendiri, baik dalam bentuk digital maupun dalam bentuk cetak. 
+
+Suatu bisnis sebaiknya memiliki company profile yang terlihat profesional dan kredibel sehingga dapat menarik perhatian pelanggan. Anda dapat membuat sendiri, baik dalam bentuk digital maupun dalam bentuk cetak.
 
 <h3>1. Menjelaskan Kinerja Perusahan</h3>
 
@@ -38,7 +39,8 @@ Pilihlah elemen-elemen grafis dan chart yang sesuai dengan target pasar perusaha
 
 Pemilihan warna juga harus sangat hati-hati. Anda harus memperhatikan keserasian dalam membuat logo, elemen grafis, dan font yang digunakan. Hindari penggunaan warna yang terlalu ramai dan terlalu variatif karena membuat orang bosan untuk melihatnya.
 
-<i><small>Sumber : 
+<i><small>Sumber :
+
 - https://ayuprint.co.id/cara-membuat-company-profile-berkesan-profesional/
 - https://uprint.id/blog/contoh-company-profile/</small>
-</i>
+  </i>

@@ -2,8 +2,9 @@
 title: Review profil perusahaan Biznet
 date: 2020-09-28T00:00:00.000Z
 path: /tugas-review-profil-perusahaan
-tags: ["Pengantar bisnis informatika","Tugas"]
+tags: ["Pengantar bisnis informatika", "Tugas"]
 ---
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Biznet merupakan perusahaan infrastruktur digital terintegrasi di Indonesia, menyediakan layanan Internet, Data Center, Cloud Computing dan IPTV. Kami memiliki komitmen untuk membangun infrastruktur modern dengan tujuan mengurangi kesenjangan digital Indonesia dengan negara berkembang lainnya. Biznet memiliki dan mengoperasikan jaringan Fiber Optic tercanggih dan data center terbesar di Indonesia.
 
 <h4 data-aos="fade-up">Visi Perusahaan</h4>
@@ -19,7 +20,6 @@ tags: ["Pengantar bisnis informatika","Tugas"]
 
 <div data-aos="fade-up">
 <p class="text-center">Meningkatnya kebutuhan akan infrastruktur jaringan yang handal membuat kami paham bahwa banyak perusahaan tergantung pada kehandalan infrastruktur untuk bisnis mereka.</p>
-
 
 <p class="text-center">Biznet berdiri pada tahun 2000 sebagai Internet Service Provider yang menyediakan kebutuhan Internet untuk pelanggan bisnis. Pada tahun 2000, Biznet menggunakan teknologi Wireless dan In-Building Ethernet sebagai jalur distribusi layanan Internet kami. Pada tahun 2005, kami mulai beralih menggunakan jaringan Fiber Optic kami sendiri untuk mendistribusikan seluruh layanan Internet dan Network kami. Berkat dukungan dari tim Engineering terbaik dan penuh komitmen, Biznet mulai merintis jalan untuk menjadi salah satu perusahaan telekomunikasi dan multimedia terdepan di Indonesia.</p>
 </div>
@@ -340,22 +340,26 @@ tags: ["Pengantar bisnis informatika","Tugas"]
 
 <div data-aos="zoom-in" data-aos-duration="200">
 
-![Biznet1](/img/Biznet1.PNG)
+![](img/Biznet1.PNG)
+
 </div>
 
 <div data-aos="zoom-in" data-aos-duration="300">
 
-![Biznet2](/img/Biznet2.PNG)
+![](img/Biznet2.PNG)
+
 </div>
 
 <div data-aos="zoom-in" data-aos-duration="400">
 
-![Biznet3](/img/Biznet3.PNG)
+![](img/Biznet3.PNG)
+
 </div>
 
 <div data-aos="zoom-in" data-aos-duration="500">
 
-![Biznet4](/img/Biznet4.PNG)
+![](img/Biznet4.PNG)
+
 </div>
 
 </div>
@@ -365,7 +369,8 @@ tags: ["Pengantar bisnis informatika","Tugas"]
 
 <div class="text-center">
 
-![Logo biznet](/img/logo-biznet.png)
+![Logo](img/logo-biznet.png)
+
 </div>
 
 <h6>Sumber : </h6>
