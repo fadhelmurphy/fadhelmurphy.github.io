@@ -148,12 +148,12 @@ export default BlogPage
 //   }`
 
 export const blogListQuery = graphql`
-  query blogListQuery($skip: Int!, $limit: Int!, $filter:String!) {
+  query blogListQuery($skip: Int!, $limit: Int!, $filter: String!) {
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
       limit: $limit
       skip: $skip
-      filter:{fileAbsolutePath:{regex: $filter  }}
+      filter: { fileAbsolutePath: { regex: $filter } }
     ) {
       edges {
         node {

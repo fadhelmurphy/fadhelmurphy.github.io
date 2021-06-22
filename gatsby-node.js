@@ -43,9 +43,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
    }
  `
 
- //-Blog
-  var blogParams = {postpath:"/(post)/"}
-  const blogResult = await graphql(query,blogParams)
+  //-Blog
+  var blogParams = { postpath: "/(post)/" }
+  const blogResult = await graphql(query, blogParams)
   if (blogResult.errors) {
     reporter.panicOnBuild(`Error while running GraphQL query.`)
     return
@@ -53,38 +53,40 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   // ...
   // Create blog-list pages
-  const posts =await blogResult.data.allMarkdownRemark.edges
+  const posts = await blogResult.data.allMarkdownRemark.edges
   const postsPerPage = 3
   const numPages = Math.ceil(posts.length / postsPerPage)
 
   Array.from({ length: numPages }).forEach((post, i) => {
-      createPage({
-        path: i === 0 ? `/blog` : `/blog/${i + 1}`,
-        component: mainPostTemplate,
-        context: {
-          limit: postsPerPage,
-          skip: i * postsPerPage,
-          filter:blogParams.postpath,
-          numPages,
-          currentPage: i + 1,
-        },
-      })
-  })
-
-  await blogResult.data.allMarkdownRemark.edges.forEach(({ node }, index, arr) => {
-    const prev = arr[index - 1]
-    const next = arr[index + 1]
     createPage({
-      path: node.frontmatter.path,
-      component: blogPostTemplate,
+      path: i === 0 ? `/blog` : `/blog/${i + 1}`,
+      component: mainPostTemplate,
       context: {
-        prev: prev,
-        next: next,
-      }, // additional data can be passed via context
+        limit: postsPerPage,
+        skip: i * postsPerPage,
+        filter: blogParams.postpath,
+        numPages,
+        currentPage: i + 1,
+      },
     })
   })
+
+  await blogResult.data.allMarkdownRemark.edges.forEach(
+    ({ node }, index, arr) => {
+      const prev = arr[index - 1]
+      const next = arr[index + 1]
+      createPage({
+        path: node.frontmatter.path,
+        component: blogPostTemplate,
+        context: {
+          prev: prev,
+          next: next,
+        }, // additional data can be passed via context
+      })
+    }
+  )
   // Extract tag data from query
-  const tags =await blogResult.data.tagsGroup.group
+  const tags = await blogResult.data.tagsGroup.group
   const tagPages = Math.ceil(tags.length / postsPerPage)
   tags.forEach((tag, i) => {
     const link = `/blog/tags/${kebabCase(tag.fieldValue.toLowerCase())}`
@@ -108,8 +110,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   //-Project
 
-  var projectParams = {postpath:"/(projects)/"}
-  const projectResult = await graphql(query,projectParams)
+  var projectParams = { postpath: "/(projects)/" }
+  const projectResult = await graphql(query, projectParams)
   if (projectResult.errors) {
     reporter.panicOnBuild(`Error while running GraphQL query.`)
     return
@@ -117,39 +119,41 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   // ...
   // Create project-list pages
-  const projects =await projectResult.data.allMarkdownRemark.edges
+  const projects = await projectResult.data.allMarkdownRemark.edges
   const projectsPerPage = 3
   const numProjectPages = Math.ceil(projects.length / projectsPerPage)
 
   Array.from({ length: numPages }).forEach((post, i) => {
-      createPage({
-        path: i === 0 ? `/project` : `/project/${i + 1}`,
-        component: mainPostTemplate,
-        context: {
-          limit: projectsPerPage,
-          skip: i * projectsPerPage,
-          filter:projectParams.postpath,
-          numPages:numProjectPages,
-          currentPage: i + 1,
-        },
-      })
-  })
-
-  await projectResult.data.allMarkdownRemark.edges.forEach(({ node }, index, arr) => {
-    console.log(node.frontmatter.path," Project")
-    const prev = arr[index - 1]
-    const next = arr[index + 1]
     createPage({
-      path: node.frontmatter.path,
-      component: blogPostTemplate,
+      path: i === 0 ? `/project` : `/project/${i + 1}`,
+      component: mainPostTemplate,
       context: {
-        prev: prev,
-        next: next,
-      }, // additional data can be passed via context
+        limit: projectsPerPage,
+        skip: i * projectsPerPage,
+        filter: projectParams.postpath,
+        numPages: numProjectPages,
+        currentPage: i + 1,
+      },
     })
   })
+
+  await projectResult.data.allMarkdownRemark.edges.forEach(
+    ({ node }, index, arr) => {
+      console.log(node.frontmatter.path, " Project")
+      const prev = arr[index - 1]
+      const next = arr[index + 1]
+      createPage({
+        path: node.frontmatter.path,
+        component: blogPostTemplate,
+        context: {
+          prev: prev,
+          next: next,
+        }, // additional data can be passed via context
+      })
+    }
+  )
   // Extract tag data from query
-  const projectTags =await projectResult.data.tagsGroup.group
+  const projectTags = await projectResult.data.tagsGroup.group
   const projectTagPages = Math.ceil(projectTags.length / projectsPerPage)
   tags.forEach((tag, i) => {
     const link = `/project/tags/${kebabCase(tag.fieldValue.toLowerCase())}`
@@ -165,12 +169,11 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           limit: projectsPerPage,
           skip: i * projectsPerPage,
           currentPage: i + 1,
-          tagPages:projectTagPages,
+          tagPages: projectTagPages,
         },
       })
     })
   })
-
 
   createPage({
     path: "/search",

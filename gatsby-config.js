@@ -22,33 +22,32 @@ module.exports = {
         path: `${__dirname}/src/pages`,
       },
     },
-    
-{
-  resolve: `gatsby-transformer-remark`,
-  options: {
-    plugins: [
-      {
-        resolve: `gatsby-remark-images`,
-        options: {
-          
-        name: `post`,
-        path: `${__dirname}/src/pages/posts`,
-          maxWidth: 1500,
-          withWebp: true,
-          showCaptions: true,
-          quality: 100,
-        },
+
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              name: `post`,
+              path: `${__dirname}/src/pages/posts`,
+              maxWidth: 1500,
+              withWebp: true,
+              showCaptions: true,
+              quality: 100,
+            },
+          },
+        ],
       },
-    ],
-  },
-},
-  //   {
-  //     resolve: `gatsby-source-filesystem`,
-  //     options: {
-  //        path: `${__dirname}/pages/projects`,
-  //         name: `projects`,
-  //     },
-  // },
+    },
+    //   {
+    //     resolve: `gatsby-source-filesystem`,
+    //     options: {
+    //        path: `${__dirname}/pages/projects`,
+    //         name: `projects`,
+    //     },
+    // },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
