@@ -10,16 +10,19 @@ const About = ({ location }) => {
     for (var i = 0, l = elements.length; i < l; i++) {
       var str = elements[i].textContent
       elements[i].innerHTML = ""
+      let dur = 400
       for (var j = 0, ll = str.length; j < ll; j++) {
         var spn = document.createElement("span")
         elements[i].appendChild(spn)
         spn.textContent = str[j]
         console.log(spn.textContent)
-        if (spn.textContent !== " ")
-          j % 2
-            ? spn.setAttribute("data-aos", "titleup")
-            : spn.setAttribute("data-aos", "titledown")
-        spn.setAttribute("data-aos-duration", "3000")
+        // j % 2
+        //   ? spn.setAttribute("data-aos", "titleup")
+        //   : spn.setAttribute("data-aos", "titledown")
+        // if (spn.textContent !== " ")
+        dur = dur + 100
+        spn.setAttribute("data-aos", "titledown")
+        spn.setAttribute("data-aos-duration", dur)
         spn.setAttribute("data-aos-once", "true")
       }
     }
@@ -40,60 +43,57 @@ const About = ({ location }) => {
           </Row>
         </Container> */}
         <Container className="pt-5">
-          <Row className="my-5 p-3 p-md-5" data-aos="fade-up">
+          <Row className="p-3 p-md-5" >
             <Col
               style={{
                 position: "absolute",
-                top: "-10%",
-                right: "-30%",
+                top: "0",
+                right: "0",
               }}
             >
               <h1
                 style={{
-                  fontSize: "30vh",
+                  fontSize: "20vw",
                   fontWeight: "600",
                   color: "#d7eee1b3",
                   letterSpacing: "1rem",
+                  WebkitTextFillColor: "white",
+                  WebkitTextStroke: "2px #d7eee1b3",
                 }}
               >
                 Who?
               </h1>
             </Col>
             <Col>
-              <h4
-                className="py-3 my-5"
-                data-aos="fade-right"
-                data-aos-duration="1000"
-                style={{
-                  // alignItems: "center",
-                  // display: "flex",
-                  textTransform: "uppercase",
-                }}
+                  <div className="line-wrap h-25 overflow-hidden">
+                    <h4
+                      data-aos="fade-up"
+                      data-aos-duration="500"
+                      data-aos-once="true"
+                      className="little line-wrap-inner mx-2 my-3"
+                    >
+                      A little
+                    </h4>
+                  </div>
+                  <h1>
+                    
+              <div className="line-wrap h-25 overflow-hidden">
+              <div
+                className="word about line-wrap-inner"
               >
-                A little
-              </h4>
-              <h1
-                data-aos="fade-right"
-                data-aos-duration="1500"
-                style={{
-                  alignItems: "center",
-                  display: "flex",
-                  fontSize: "10vw",
-                  fontWeight: "600",
-                  lineHeight: "1rem",
-                }}
-              >
-                About Me
-              </h1>
+                About&nbsp;me
+              </div>
+                </div>
+                  </h1>
             </Col>
           </Row>
-          <Row className="my-5 p-3 p-md-5">
+          <Row className="mb-5 p-3 p-md-5">
             <Col>
               <p className="top-desc-about">
                 Hi I’m Fadhel. I'm 22 years old, an Indonesian Front-end
                 engineer with a bit of backend experienced. Born, raised, and
                 currently living in Tangerang, Indonesia. I am an Informatics
-                Engineering graduate. I spent my free time watching movies and
+                Engineering undergraduate. I spent my free time watching movies and
                 learn about graphic design.
               </p>
               <p>

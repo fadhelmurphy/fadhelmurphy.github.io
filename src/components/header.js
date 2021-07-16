@@ -35,12 +35,12 @@ const Header = ({ siteTitle, postInfo }) => {
                   {siteTitle}
                 </h1>
                 {!postDate ? (
-                  <div className="line-wrap h-75">
+                  <div className="line-wrap h-25 overflow-hidden">
                     <h4
                       data-aos="fade-up"
                       data-aos-duration="300"
                       data-aos-once="true"
-                      className="mx-2 my-3"
+                      className="line-wrap-inner mx-2 my-3"
                     >
                       Hello, I'm
                     </h4>
@@ -63,7 +63,7 @@ const Header = ({ siteTitle, postInfo }) => {
                     <h3
                       data-aos="zoom-in"
                       data-aos-easing="ease-in-back"
-                      data-aos-duration="500"
+                      data-aos-duration="300"
                       data-aos-once="true"
                     >
                       <div
@@ -86,7 +86,7 @@ const Header = ({ siteTitle, postInfo }) => {
                       <h3
                         data-aos="zoom-in"
                         data-aos-easing="ease-in-back"
-                        data-aos-duration="600"
+                        data-aos-duration="400"
                       >
                         <div class="reveal-holder" data-aos="reveal-item">
                           <div
@@ -99,7 +99,7 @@ const Header = ({ siteTitle, postInfo }) => {
                       <h3
                         data-aos="zoom-in"
                         data-aos-easing="ease-in-back"
-                        data-aos-duration="700"
+                        data-aos-duration="500"
                       >
                         <div class="reveal-holder" data-aos="reveal-item">
                           <div
@@ -112,7 +112,7 @@ const Header = ({ siteTitle, postInfo }) => {
                       <h3
                         data-aos="zoom-in"
                         data-aos-easing="ease-in-back"
-                        data-aos-duration="800"
+                        data-aos-duration="700"
                       >
                         <div class="reveal-holder" data-aos="reveal-item">
                           <div

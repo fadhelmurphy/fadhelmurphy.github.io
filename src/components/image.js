@@ -24,15 +24,17 @@ const Image = props => (
             node {
               relativePath
               name
+              prettySize
+              publicURL
               childImageSharp {
-                fluid(maxWidth: 600) {
+                fluid(maxWidth: 600, toFormat: WEBP, webpQuality: 40) {
                   ...GatsbyImageSharpFluid
                 }
               }
             }
           }
         }
-      }
+      }      
     `}
     render={data => {
       const image = data.images.edges.find(n => {
