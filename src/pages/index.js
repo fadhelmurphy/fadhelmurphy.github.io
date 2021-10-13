@@ -10,26 +10,50 @@ import Image from "../components/image"
 const assets = {
   web: [
     {
-      judul: "Vote App",
+      judul: "My personal web",
       desc:
-        "This is my first time I using MEAN (Mongo,Express,Angular 6,Node) Stack",
-      file: "web/vote-app.jpg",
+        "Build with Gatsby.js,bootstrap,and Aos.js",
+      file: "web/personal-web.png",
+      link: "https://fadhelmurphy.github.io",
+      className: ["order-lg-2", "order-lg-1"],
+    },
+    {
+      judul: "ISTIH (Indonesian Smart Textile Hub Industry) 2020",
+      desc:
+        "Helped my friend (rully/main developer) to build some feature using React.js, Redux, Redux-saga",
+      file: "web/istih.png",
+      link: "#",
+      className: ["order-lg-1", "order-lg-2"],
+    },
+    {
+      judul: "BisaCPNS 2020",
+      desc:
+        "Implementing design to code with bootstrap and aos.js",
+      file: "web/bisacpns-2020.png",
+      link: "https://bisacpns.com",
+      className: ["order-lg-2", "order-lg-1"],
+    },
+    {
+      judul: "Vote App-2",
+      desc:
+        "Build with React.js, antd, context state management and Laravel. Created by me and yazid",
+      file: "web/dashboard-desktop.png",
       link: "https://www.github.com/fadhelmurphy",
       className: ["order-lg-1", "order-lg-2"],
     },
     {
-      judul: "Warehouse App",
+      judul: "Inventory",
       desc:
-        "Warehouse App with C# for college task. build with me and my friend (yazid)",
+        "Inventory with C# for college task. Created by me and yazid",
       file: "web/warehouse.jpg",
-      link: "https://www.github.com/fadhelmurphy",
+      link: "https://github.com/fadhelmurphy/inventorycsharpasp",
       className: ["order-lg-2", "order-lg-1"],
     },
     {
       judul: "Indonesian news classification and Keyword extraction",
       desc: "build with python and naive bayes method",
       file: "web/classification.jpg",
-      link: "https://www.github.com/fadhelmurphy",
+      link: "https://github.com/fadhelmurphy/Penulisan-Ilmiah-2020",
       className: ["order-lg-1", "order-lg-2"],
     },
   ],
@@ -346,7 +370,7 @@ const IndexPage = ({ location }) => (
             <p className="text-center">
               For more project you can follow my{" "}
               <b>
-                <a href="https://www.instagram.com/mattkosim">Instagram</a>
+                <a href="https://www.instagram.com/ijlalfadhel">Instagram</a>
               </b>{" "}
               and{" "}
               <b>

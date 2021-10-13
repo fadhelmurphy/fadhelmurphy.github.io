@@ -23,8 +23,8 @@ const Menu = ({ position, location }) => {
   ]
   var Social = [
     { label: "Github", to: "github.com/fadhelmurphy" },
-    { label: "Instagram", to: "instagram.com/mattkosim" },
-    { label: "Facebook", to: "facebook.com/fadhelmurphy" },
+    { label: "Instagram", to: "instagram.com/ijlalfadhel" },
+    { label: "Linkedin", to: "linkedin.com/in/fadhelijlalfalah/" },
   ]
 
   navLinks.map(link => {

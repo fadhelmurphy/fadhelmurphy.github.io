@@ -20,7 +20,6 @@ const Layout = ({ children, postInfo, location }) => {
   if (location) {
     pathname = location.pathname
   }
-  console.log(pathname)
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {

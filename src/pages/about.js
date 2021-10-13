@@ -15,7 +15,6 @@ const About = ({ location }) => {
         var spn = document.createElement("span")
         elements[i].appendChild(spn)
         spn.textContent = str[j]
-        console.log(spn.textContent)
         // j % 2
         //   ? spn.setAttribute("data-aos", "titleup")
         //   : spn.setAttribute("data-aos", "titledown")
@@ -93,11 +92,11 @@ const About = ({ location }) => {
                 Hi I’m Fadhel. I'm 22 years old, an Indonesian Front-end
                 engineer with a bit of backend experienced. Born, raised, and
                 currently living in Tangerang, Indonesia. I am an Informatics
-                Engineering undergraduate. I spent my free time watching movies and
+                Engineering graduate. I spent my free time to watch movies and
                 learn about graphic design.
               </p>
               <p>
-                I'm so exciting to learn about Image Processing, Machine
+                I'm interested in Image Processing, Machine
                 Learning, or Deep Learning with skimage, sklearn, and
                 Tensorflow.
               </p>
