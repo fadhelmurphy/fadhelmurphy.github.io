@@ -11,7 +11,7 @@ tags: ["React","Laravel"]
 
 </div>
 <div class="container">
-<p class="p-lg-5">
+<p class="p-3 p-lg-5">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ini merupakan aplikasi hasil kegabutan saya selama liburan. Pada saat development saya memiliki kesulitan untuk membuat relasi antar data yang multiple dan dinamis sehingga saya meminta bantuan teman saya yaitu yazid dan rema untuk merancang ulang backend yang sebelumnya saya buat. Di sisi frontend saya menggunakan react.js dengan context state management. untuk UI nya saya menggunakan Antd dan bootstrap.
 </p>
 <div class="row mx-auto">
