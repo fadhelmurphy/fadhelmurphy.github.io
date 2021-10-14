@@ -16,7 +16,7 @@ import FooterTemplate from "./footer"
 const Layout = ({ children, postInfo, location, project }) => {
   if (postInfo) {
     var { postTitle, postDate } = postInfo
-    if(postDate.length>0){
+    if(project){
       postDate = postDate.join(", ")
     }
   }
