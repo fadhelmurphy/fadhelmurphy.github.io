@@ -56,6 +56,7 @@ const BlogPage = ({ data, pageContext, location }) => {
         </div>
       </Container>
 
+      <Container>
       <Row>
         <Col
           xs="12"
@@ -125,6 +126,7 @@ const BlogPage = ({ data, pageContext, location }) => {
           )}
         </Col>
       </Row>
+      </Container>
     </Layout>
   )
 }

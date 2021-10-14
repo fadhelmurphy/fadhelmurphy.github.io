@@ -1019,3 +1019,9 @@ body.nav-active .overflow-hidden:nth-child(10) .nav__list-item {
     align-items: center;
     transform-origin: right bottom;
 }
+
+
+.first-image .gatsby-resp-image-wrapper{
+    margin:0 !important;
+    max-width:100% !important
+}

@@ -2,7 +2,8 @@ import React, { useEffect } from "react"
 import SEO from "../components/seo"
 import { Container, Row, Col } from "reactstrap"
 import Menu from "../components/menu"
-import Image from "../components/image"
+import FooterTemplate from "../components/footer"
+// import Image from "../components/image"
 
 const About = ({ location }) => {
   useEffect(() => {
@@ -239,20 +240,7 @@ const About = ({ location }) => {
             </Col>
           </Row>
         </Container>
-
-        <Container>
-          <footer>
-            <Row>
-              <Col xs="12" md="6" className="text-center text-md-left">
-                © {new Date().getFullYear()} Built with{" "}
-                <a href="https://www.gatsbyjs.org">Gatsby</a>
-              </Col>
-              <Col xs="12" md="6" className="text-center text-md-right">
-                Designed and developed by me
-              </Col>
-            </Row>
-          </footer>
-        </Container>
+        <FooterTemplate />
       </div>
     </>
   )

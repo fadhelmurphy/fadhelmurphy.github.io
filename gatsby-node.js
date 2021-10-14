@@ -16,6 +16,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
 
   const blogPostTemplate = path.resolve(`src/templates/blog-detail.js`)
+  const projectPostTemplate = path.resolve(`src/templates/project-detail.js`)
   const tagTemplate = path.resolve("src/templates/tags.js")
   const mainPostTemplate = path.resolve(`src/templates/blog.js`)
   const query = `
@@ -144,7 +145,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       const next = arr[index + 1]
       createPage({
         path: node.frontmatter.path,
-        component: blogPostTemplate,
+        component: projectPostTemplate,
         context: {
           prev: prev,
           next: next,

@@ -14,8 +14,9 @@ export default function Template({ pageContext, data }) {
     <Layout
       postInfo={{
         postTitle: post.frontmatter.title,
-        postDate: post.frontmatter.date,
+        postDate: post.frontmatter.tags,
       }}
+      project={true}
     >
       <div class="scroll-down text-uppercase position-fixed">
         <p style={{ letterSpacing: "0.5em", fontSize: "12px" }}>
@@ -23,7 +24,6 @@ export default function Template({ pageContext, data }) {
         </p>
       </div>
       <SEO title={post.frontmatter.title} />
-      <div className="p-lg-5 w-75 mx-auto">
         <div
           className="blog-content"
           dangerouslySetInnerHTML={{ __html: post.html }}
@@ -59,19 +59,19 @@ export default function Template({ pageContext, data }) {
             </Col>
           )}
         </Row>
-      </div>
     </Layout>
   )
 }
 
 export const pageQuery = graphql`
-  query BlogPostByPath($path: String!) {
+  query ProjectPostByPath($path: String!) {
     markdownRemark(frontmatter: { path: { eq: $path } }) {
       html
       frontmatter {
         date(formatString: "MMMM DD, YYYY")
         path
         title
+        tags
       }
     }
   }
