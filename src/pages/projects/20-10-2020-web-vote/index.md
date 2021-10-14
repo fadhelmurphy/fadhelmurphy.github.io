@@ -25,14 +25,13 @@ Stack
 Backend
 </h4>
 <p>Laravel & Sanctum <br/> 
-<a href="https://github.com/fadhelmurphy/backend-vote-laravel" target="_blank" class="btn btn-primary" style="align-items:center;display:inline-flex;">Source Code</a>
-</p>
+<b><a target="_blank" href="https://github.com/fadhelmurphy/backend-vote-laravel">Source code →</a></b></p>
 <h4>
 Frontend
 </h4>
 <p>
 React.js, Axios, Context state management, Antd, dan Bootstrap <br/> 
-<a href="https://github.com/fadhelmurphy/frontend-vote-react" target="_blank" class="btn btn-primary" style="align-items:center;display:inline-flex;">Source Code</a></p>
+<b><a target="_blank" href="https://github.com/fadhelmurphy/frontend-vote-react">Source code →</a></b></p>
 </div>
 </div>
 </div>
