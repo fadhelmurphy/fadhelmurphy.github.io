@@ -15,12 +15,12 @@ tags: ["React","Laravel"]
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ini merupakan aplikasi hasil kegabutan saya selama liburan. Pada saat development saya memiliki kesulitan untuk membuat relasi antar data yang multiple dan dinamis sehingga saya meminta bantuan teman saya yaitu yazid dan rema untuk merancang ulang backend yang sebelumnya saya buat. Di sisi frontend saya menggunakan react.js dengan context state management. untuk UI nya saya menggunakan Antd dan bootstrap.
 </p>
 <div class="row mx-auto">
-<div class="p-lg-5 col-3 align-self-center">
+<div class="p-lg-5 col-12 col-md-3 align-self-center">
 <h1>
 Stack
 </h1>
 </div>
-<div class="p-lg-5 col-9">
+<div class="p-lg-5 col-12 col-md-9">
 <h4>
 Backend
 </h4>
