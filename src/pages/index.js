@@ -38,7 +38,7 @@ const assets = {
       desc:
         "Build with React.js, antd, context state management and Laravel. Created by me and yazid",
       file: "web/dashboard-desktop.png",
-      link: "https://fadhelmurphy.github.io/project/vote-app",
+      link: "/project/vote-app",
       className: ["order-lg-1", "order-lg-2"],
     },
     {
