@@ -1,5 +1,5 @@
 ---
-title: Vote App
+title: Vote app web-based 
 date: 2020-10-20T00:00:00.000Z
 path: /project/vote-app
 tags: ["React","Laravel"]
@@ -7,7 +7,7 @@ tags: ["React","Laravel"]
 
 <div class="first-image">
 
-![](img/dashboard-desktop-2.png)
+![](img/mockup-header.jpg)
 
 </div>
 
@@ -60,9 +60,9 @@ Aplikasi Vote ini dapat kamu akses melalui mobile ataupun desktop
 ![](img/vote-desktop.png)
 
 </div>
-<div class="first-image position-absolute" style="top: 0%; left: 25%; width: 20%;">
+<div class="first-image position-absolute" style="top: 0%; left: 20%; width: 25%;">
 
-![](img/dashboard-edit-desktop.png)
+![](img/dashboard-desktop-2.png)
 
 </div>
 
