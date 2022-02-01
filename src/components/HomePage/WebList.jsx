@@ -28,7 +28,7 @@ export const WebList = () => (
                   data-aos="fade-up"
                   data-aos-duration="600"
                   className="line-wrap-inner"
-                  style={{ fontWeight: 600, fontSize:"50px" }}
+                  style={{ fontWeight: 600}}
                 >
                   App
                 </h1>
@@ -38,7 +38,7 @@ export const WebList = () => (
                   data-aos="fade-up"
                   data-aos-duration="600"
                   className="line-wrap-inner custom-border-bottom"
-                  style={{ fontWeight: 600, fontSize:"50px" }}
+                  style={{ fontWeight: 600 }}
                 >
                   Development
                 </h1>

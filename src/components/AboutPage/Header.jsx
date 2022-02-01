@@ -54,10 +54,7 @@ export const AboutPageHeader = () => {
               
         <div className="line-wrap h-25 overflow-hidden">
         <div
-          className="word line-wrap-inner"
-          style={{
-            fontSize:"7vw"
-          }}
+          className="word about line-wrap-inner"
         >
          Fadhel&nbsp;Ijlal&nbsp;Falah
         </div>

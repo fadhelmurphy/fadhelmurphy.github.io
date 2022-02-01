@@ -15,7 +15,7 @@ return (
         style={{ minHeight: "50vw" }}
       >
         <Col className="mr-auto align-self-lg-center">
-          <div class="site-heading align-self-lg-center py-5">
+          <div class="blog-detail-heading align-self-lg-center py-5">
             <h1
               style={{
                 position: "absolute",
@@ -35,9 +35,6 @@ return (
                   data-aos="fade-up"
                   data-aos-duration="600"
                   data-aos-once="true"
-                  style={{
-                      fontSize:"8vw"
-                  }}
                 >
                   {postTitle}
                 </div>

@@ -192,8 +192,8 @@ header.masthead .site-heading {
 }
 
 header.masthead .page-heading h1,
-header.masthead .site-heading h1 {
-    font-size: 60px;
+header.masthead .site-heading h1,header.masthead .blog-detail-heading h1,header.masthead .blog-heading h1 {
+    font-size: 50px;
     margin-top: 0
 }
 
@@ -349,7 +349,7 @@ header.masthead .site-heading .subheading {
     font-size: 10vh;
 }
 .about {
-    font-size: 14vw;
+    font-size: 15vw;
 }
 .little {
     font-size: 8vw;
@@ -362,11 +362,14 @@ header.masthead .site-heading .subheading {
     header.masthead .site-heading h1{
         font-size: 5vw
     } 
-    .about{
-        font-size: 7vw
-    }
-    .little{
-        font-size: 2vw;
+    header.masthead .blog-heading h1{
+        font-size: 12vw
+    } 
+    header.masthead .blog-detail-heading h1{
+        font-size: 8vw
+    } 
+    .about {
+        font-size: 7vw;
     }
     .scroll-down {
         right: 100px !important;
