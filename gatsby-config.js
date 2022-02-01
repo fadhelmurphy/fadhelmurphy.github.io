@@ -68,7 +68,7 @@ module.exports = {
         google: {
           families: ["Montserrat:400,600,700,800"],
         },
-        timeout: 2000,
+        timeout: 1000,
       },
       // resolve:`@el7cosmos/gatsby-plugin-prefetch-google-fonts`,
       // options: {
@@ -86,7 +86,17 @@ module.exports = {
       // }
       // },
     },
-    "gatsby-plugin-sass",
+    {
+      resolve: `gatsby-plugin-sass`,
+      options: {
+        cssLoaderOptions: {
+          esModule: false,
+          modules: {
+            namedExport: false,
+          },
+        },
+      },
+    },
     `gatsby-plugin-netlify-cms`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline

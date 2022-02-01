@@ -193,7 +193,7 @@ header.masthead .site-heading {
 
 header.masthead .page-heading h1,
 header.masthead .site-heading h1 {
-    font-size: 50px;
+    font-size: 60px;
     margin-top: 0
 }
 
@@ -207,18 +207,26 @@ header.masthead .site-heading .subheading {
     margin: 10px 0 0;
 }
 
-.subheading h3 {
-    font-size: 14px;
+.subheading h5 {
     font-weight: 600;
     position: relative;
     overflow: hidden;
 }
 
-.subheading h3 .reveal-holder{
+.subheading h5 .reveal-holder{
     margin-right: 2em;
     padding: .4em
 
 }
+
+
+[data-aos="up-skew"] {
+    transform: skewY(15deg) translate3d(0,200px,0);
+  }
+  [data-aos="up-skew"].aos-animate {
+    transform: skewY(0deg);
+    /* transform-origin: 0% 100%; */
+  }
 
 .reveal-holder{
   position: relative;
@@ -306,9 +314,7 @@ header.masthead .site-heading .subheading {
 	rotate(0deg);
 	transition: all 0.5s ease-in-out;
 } */
-.word{
-    letter-spacing: 1.2rem;
-}
+
 /* [data-aos="titleup"].aos-animate{
 
 	transform: translate3d(0px, -0.5em, 0px) 
@@ -348,10 +354,16 @@ header.masthead .site-heading .subheading {
 .little {
     font-size: 8vw;
 }
+.webelement:nth-child(1){
+    margin-top: 12rem;
+}
 @media only screen and (min-width:768px) {
     header.masthead .page-heading h1,
-    header.masthead .site-heading h1, .about {
-        font-size: 8vw
+    header.masthead .site-heading h1{
+        font-size: 5vw
+    } 
+    .about{
+        font-size: 7vw
     }
     .little{
         font-size: 2vw;
@@ -371,8 +383,12 @@ header.masthead .site-heading .subheading {
     .word-d-p{
         font-size: 5vw;
     }
-    .word-project{
-        font-size: 30vh;
+    .w-md-75 {
+        width: 75% !important;
+    }
+    .appdevtext{
+        top:0;
+        left: 15%;
     }
 }
 

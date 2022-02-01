@@ -1,13 +1,10 @@
-import React from "react"
-import { Link } from "gatsby"
-import { Col, Row } from "reactstrap"
-import ConcatWords from "../../utils/ConcatWords"
-const kebabCase = require(`lodash.kebabcase`)
+import { Col, Row, Link,ConcatWords,React,kebabCase } from "./index"
 
-const blogList = ({ data }) => {
+export const BlogList = ({ data }) => {
   const { title, path, date, tags, excerpt, id } = data
   return (
-    <div className="blog-post-preview row" data-aos="fade-up" key={id}>
+    <div className="blog-post-preview row" data-aos="fade-up" 
+    data-aos-once="true" key={id}>
       <Col xs="12" className="text-break">
         <h1>
           <Link to={path}>{title}</Link>
@@ -53,4 +50,3 @@ const blogList = ({ data }) => {
     </div>
   )
 }
-export default blogList

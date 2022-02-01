@@ -1,10 +1,8 @@
-import React, { useState } from "react"
-import { graphql } from "gatsby"
-import SEO from "../components/seo"
-import { Container } from "reactstrap"
-import List from "../components/blog/blog-list"
-import Menu from "../components/menu"
 
+import { graphql } from "gatsby"
+
+import { Container,BlogList,SEO,Link,Menu,React } from "../components/Blog"
+const {useState} = React
 const Search = ({ data, location }) => {
   let { edges: posts } = data.allMarkdownRemark
 
@@ -55,7 +53,7 @@ const Search = ({ data, location }) => {
                   const { excerpt, id } = post
                   const { title, path, date, tags } = post.frontmatter
                   return (
-                    <List data={{ title, path, date, tags, excerpt, id }} />
+                    <BlogList data={{ title, path, date, tags, excerpt, id }} />
                   )
                 })
             : null}

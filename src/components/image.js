@@ -51,6 +51,7 @@ const Image = props => (
             height: "100%",
             width: "100%",
             objectFit: "cover",
+            ...props.style
           }}
           fluid={image.node.childImageSharp.fluid}
         />

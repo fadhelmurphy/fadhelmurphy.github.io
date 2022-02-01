@@ -1,0 +1,194 @@
+{
+    "web": [
+      {
+        "judul": "My personal web (Sept 2020)",
+        "desc": "Build with Gatsby.js,bootstrap,and Aos.js",
+        "file": "web/personal-web.png",
+        "link": "https://fadhelmurphy.github.io",
+        "className": [
+          "order-lg-2",
+          "order-lg-1"
+        ]
+      },
+      {
+        "judul": "ISTIH (Indonesian Smart Textile Hub Industry) (Dec 2020-Feb 2021)",
+        "desc": "Next.js, React.js, Redux, Redux-saga",
+        "file": "web/istih.png",
+        "link": "http://istih.id",
+        "className": [
+          "order-lg-1",
+          "order-lg-2"
+        ]
+      },
+      {
+        "judul": "Tour Travel Revolution (Nov 2021)",
+        "desc": "Build with Next.js, Redux, Redux-saga",
+        "file": "web/tour-travel.png",
+        "link": "http://167.172.62.14/api/admin/",
+        "className": [
+          "order-lg-2",
+          "order-lg-1"
+        ]
+      },
+      {
+        "judul": "Dashboard Keluarga Sehat (Nov 2021)",
+        "desc": "Build with Next.Js, Bootstrap 5, HighChart, and React Context",
+        "file": "web/kemenkes.png",
+        "link": "http://dashboard-keluargasehat.kemkes.go.id/",
+        "className": [
+          "order-lg-1",
+          "order-lg-2"
+        ]
+      },
+      {
+        "judul": "BisaCPNS (May 2020)",
+        "desc": "Implementing design to code with bootstrap and aos.js",
+        "file": "web/bisacpns-2020.png",
+        "link": "https://bisacpns.com",
+        "className": [
+          "order-lg-2",
+          "order-lg-1"
+        ]
+      },
+      {
+        "judul": "Vote App-2 (Sept 2021)",
+        "desc": "Build with React.js, antd, context state management and Laravel. Created by me and Yazid",
+        "file": "web/dashboard-desktop.png",
+        "link": "/project/vote-app",
+        "className": [
+          "order-lg-1",
+          "order-lg-2"
+        ]
+      }
+    ],
+    "logo": [
+      {
+        "file": "logo/logo-air-v2.jpg",
+        "style": {
+          "bottom": "0%",
+          "left": "0px",
+          "width": "30%",
+          "height": "50%"
+        }
+      },
+      {
+        "file": "logo/logo-aliansi-v2.jpg",
+        "style": {
+          "top": "10%",
+          "left": "0px",
+          "width": "30%",
+          "height": "35%"
+        }
+      },
+      {
+        "file": "logo/maju-karya.jpg",
+        "style": {
+          "top": "15%",
+          "left": "35%",
+          "width": "30%",
+          "height": "40%"
+        }
+      },
+      {
+        "file": "logo/logo f grid.jpg",
+        "style": {
+          "bottom": "10%",
+          "left": "35%",
+          "width": "30%",
+          "height": "30%"
+        }
+      },
+      {
+        "file": "logo/tetra-civic.jpg",
+        "style": {
+          "bottom": "10%",
+          "right": "0",
+          "width": "30%",
+          "height": "50%"
+        }
+      }
+    ],
+    "another": [
+      {
+        "file": "another/chelsea-islan.jpg",
+        "style": {
+          "bottom": "5%",
+          "left": "0px",
+          "width": "15%",
+          "height": "50%"
+        }
+      },
+      {
+        "file": "another/backdrop.jpg",
+        "style": {
+          "top": "5%",
+          "left": "0px",
+          "width": "25%",
+          "height": "35%"
+        }
+      },
+      {
+        "file": "another/matchday-1.jpg",
+        "style": {
+          "top": "10%",
+          "left": "28%",
+          "width": "15%",
+          "height": "30%"
+        }
+      },
+      {
+        "file": "another/carried-away-cover-rgb.jpg",
+        "style": {
+          "bottom": "10%",
+          "left": "17%",
+          "width": "26%",
+          "height": "45%"
+        }
+      },
+      {
+        "file": "another/Fadhel-AsianGames2018.jpg",
+        "style": {
+          "top": "15%",
+          "right": "35%",
+          "width": "20%",
+          "height": "45%"
+        }
+      },
+      {
+        "file": "another/not-now.jpg",
+        "style": {
+          "top": "10%",
+          "right": "17%",
+          "width": "16%",
+          "height": "25%"
+        }
+      },
+      {
+        "file": "another/poster.jpg",
+        "style": {
+          "top": "5%",
+          "right": "0",
+          "width": "15%",
+          "height": "54%"
+        }
+      },
+      {
+        "file": "another/matchday-2.jpg",
+        "style": {
+          "top": "39%",
+          "right": "17%",
+          "width": "10%",
+          "height": "20%"
+        }
+      },
+      {
+        "file": "another/tatjana-100.jpg",
+        "style": {
+          "bottom": "0%",
+          "right": "0%",
+          "width": "27%",
+          "height": "37%"
+        }
+      }
+    ]
+  }

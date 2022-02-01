@@ -1,0 +1,13 @@
+import FooterTemplate from "../footer"
+import Image from "../image"
+import Menu from "../menu"
+import SEO from "../seo"
+export {Image,Menu,FooterTemplate,SEO}
+export * as React from "react"
+export * from "reactstrap"
+export * from "./Header"
+export * from "./Desc"
+export * from "./Almamater"
+export * from "./Dev"
+export * from "./Design"
+export * from "./Footer"

@@ -40,9 +40,9 @@ const Layout = ({ children, postInfo, location, project }) => {
       {postTitle && postDate ? (
         <Header postInfo={{ postTitle, postDate }} />
       ) : (
-        <Header siteTitle={data.site.siteMetadata.title} />
+        <Header siteTitle={"Hi, I'm Fadhel. a frontend developer based in tangerang. "} />
       )}
-      <main className={!project?"container":null}>{children}</main>
+      <main className={!project?"w-100 w-md-75 mx-auto":null}>{children}</main>
       <FooterTemplate pathname={pathname} />
     </>
   )
