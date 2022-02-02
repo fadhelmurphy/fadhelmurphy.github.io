@@ -1,0 +1,69 @@
+{
+  "name": "gatsby-starter-default",
+  "private": true,
+  "description": "Blog Pribadi",
+  "version": "0.1.0",
+  "author": "Fadhel Ijlal Falah <fadhelijlalfalah@gmail.com>",
+  "dependencies": {
+    "aos": "^2.3.4",
+    "autoprefixer": "^10.4.2",
+    "bootstrap": "^4.4.1",
+    "gatsby": "^4.6.0",
+    "gatsby-image": "^2.2.41",
+    "gatsby-plugin-catch-links": "^2.1.25",
+    "gatsby-plugin-manifest": "^2.2.41",
+    "gatsby-plugin-netlify-cms": "^6.6.0",
+    "gatsby-plugin-offline": "^3.0.35",
+    "gatsby-plugin-react-helmet": "^3.1.22",
+    "gatsby-plugin-sass": "^5.6.0",
+    "gatsby-plugin-sharp": "^4.6.0",
+    "gatsby-plugin-web-font-loader": "^1.0.4",
+    "gatsby-remark-images": "^5.4.1",
+    "gatsby-source-filesystem": "^2.1.48",
+    "gatsby-transformer-remark": "^2.16.1",
+    "gatsby-transformer-sharp": "^2.3.14",
+    "gh-pages": "^2.2.0",
+    "jquery": "^3.5.1",
+    "lodash.kebabcase": "^4.1.1",
+    "netlify-cms": "^2.10.24",
+    "popper": "^1.0.1",
+    "postcss": "^8.4.5",
+    "prop-types": "^15.7.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-gsap": "^1.2.0",
+    "react-helmet": "^5.2.1",
+    "react-router-dom": "^5.2.0",
+    "react-scrollmagic": "^2.1.1",
+    "react-slick": "^0.28.1",
+    "reactstrap": "^8.4.1",
+    "slick-carousel": "^1.8.1",
+    "smooth-scrollbar": "^8.5.1"
+  },
+  "devDependencies": {
+    "prettier": "^1.19.1",
+    "sass": "^1.49.0"
+  },
+  "keywords": [
+    "gatsby",
+    "Fadhel Ijlal Falah",
+    "Gunadarma"
+  ],
+  "license": ["MIT","Gunadarma"],
+  "scripts": {
+    "build": "gatsby build",
+    "deploy": "gatsby build && gh-pages -d public -b master",
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
+    "serve": "gatsby serve",
+    "dev": "gatsby develop",
+    "clean": "gatsby clean",
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+  },
+  "bugs": {
+    "url": "https://github.com/gatsbyjs/gatsby/issues"
+  }
+}
