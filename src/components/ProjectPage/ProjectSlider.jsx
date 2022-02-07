@@ -67,40 +67,40 @@ export const ProjectSlider = () => {
     <>
       <div
         className="kategori mr-5 h-100 text-left position-relative row align-items-stretch overflow-hidden"
-        style={{
-          maxHeight: "33rem"
-        }}
       >
-      <h1 className="position-absolute font-weight-bold" 
-          style={{
-            right: "0%",
-            bottom: "0",
-            fontSize: "15vw",
-            color:"#d7eee1",
-            zIndex:0
-          }}>{idx}.</h1>
         <div className="col-12 col-md-6 align-self-center"
         style={{
           background,
+          zIndex:4
         }}>
         <Link href={link} key={idx}>
           <Image style={{
           borderRadius: "10px",
     transform: "scale(0.8)",
     transformOrigin:"center",
-    maxHeight: "40vh",
+    // maxHeight: "40vh",
     width:"100%",
-    height:"100%",
+    height:"50vh",
     objectFit:"cover",
     boxShadow:"0 1rem 3rem rgba(0,0,0,.175)"
           }} filename={objImg} />
           </Link>
         </div>
         <div className="col-12 col-md-6 px-4 px-md-5 py-5 justify-content-center align-self-center">
-          <span className="mb-0 d-flex font-weight-bold" style={{
-            zIndex:4
-          }}><h1>{title}</h1></span>
-          <h5 className="my-0 font-weight-normal">{desc}</h5>
+      <h1 className="position-absolute font-weight-bold" 
+          style={{
+            left: "-25%",
+            top: "-15%",
+            fontSize: "8vw",
+            color:background,
+            opacity:"0.2",
+            zIndex:0
+          }}>{title}</h1>
+          <h1 className="mb-0 d-flex font-weight-bold" style={{
+            zIndex:4,
+            fontSize: "8vh",
+          }}>{title}</h1>
+          <h4 className="my-0 font-weight-normal">{desc}</h4>
         <Link href={link} key={idx}>
           <h4 className="my-3">
           view ↗
@@ -122,7 +122,7 @@ export const ProjectSlider = () => {
     {
       objImg:
       "web/kemenkes.png",
-        title: "Dashboard Keluarga Sehat",
+        title: "Keluarga Sehat",
         desc: "Build with Next.Js, Bootstrap 5, HighChart, and React Context",
         background: "#34a870",
         link:"http://dashboard-keluargasehat.kemkes.go.id/login"
