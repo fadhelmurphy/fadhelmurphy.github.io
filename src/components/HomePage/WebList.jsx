@@ -82,8 +82,7 @@ export const WebList = () => (
                             }}
                           >
                             <Image style={{
-                              transform:"scale(0.8)",
-                              borderRadius:"15px",
+                              transform:"scale(0.95) rotate(-10deg) translate(7%, 20%)",
                               alignSelf:"center"
                             }} filename={el.file} />
                           </div>
@@ -94,7 +93,7 @@ export const WebList = () => (
                       </div>
                       <div
                         className={
-                          "flex-row align-self-center ml-lg-0 py-4 mb-3 mx-auto " + el.className[0]
+                          "flex-row align-self-center ml-lg-0 py-5 mb-3 mx-auto " + el.className[0]
                         }
                       >
                         <div className="line-wrap h-25 overflow-hidden">
