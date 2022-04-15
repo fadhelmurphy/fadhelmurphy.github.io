@@ -12,7 +12,7 @@ export const Almamater = ()=>(
     <Col lg="3" className="my-5 text-center align-self-center">
       <h6>Gunadarma University</h6>
       <h2>Informatics</h2>
-      <p>2017 - Present</p>
+      <p>2017 - 2021</p>
     </Col>
     <Col lg="3" className="my-5 text-center align-self-center">
       <h6>SMAN 4 Tangerang</h6>

@@ -5,7 +5,7 @@ export const Desc = ()=>(
     <Row className="mb-5 p-3 p-md-5">
     <Col>
       <p className="top-desc-about">
-        I'm 22 years old, an Indonesian Front-end
+        I'm {new Date().getFullYear() - 1999} years old, an Indonesian Front-end
         Developer with a bit of backend experienced. Born, raised, and
         currently living in Tangerang, Indonesia. I am an Informatics
         Engineering graduate. I spent my free time to watch some movies and
