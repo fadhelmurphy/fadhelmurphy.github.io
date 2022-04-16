@@ -6,16 +6,13 @@ export const BlogDetailContent = ({post,prev,next}) => (
           scroll down →
         </p>
       </div>
-    <main className="w-100 w-md-75 mx-auto">
-
-    <div className="p-3 p-md-5 w-100 w-md-75 mx-auto">
-        <div
-          className="blog-content"
+    <main
+     className="p-3 w-100 w-md-50 mx-auto blog-content"
           dangerouslySetInnerHTML={{ __html: post.html }}
         />
-        <Row className="mt-5">
+        <Row className="w-100 w-md-50 mx-auto mt-5">
           {next && (
-            <Col className="text-uppercase font-weight-bold text-left">
+            <Col className="p-md-0 text-uppercase font-weight-bold text-left">
               <Link to={next.node.frontmatter.path}>
                 <Row>
                   <Col>
@@ -30,7 +27,7 @@ export const BlogDetailContent = ({post,prev,next}) => (
           )}
 
           {prev && (
-            <Col className="text-uppercase font-weight-bold text-right">
+            <Col className="p-md-0 text-uppercase font-weight-bold text-right">
               <Link to={prev.node.frontmatter.path}>
                 <Row>
                   <Col>
@@ -44,7 +41,5 @@ export const BlogDetailContent = ({post,prev,next}) => (
             </Col>
           )}
         </Row>
-      </div>
-    </main>
     </>
 )

@@ -358,6 +358,10 @@ header.masthead .site-heading .subheading {
     margin-top: 12rem;
 }
 @media only screen and (min-width:768px) {
+    .w-md-50 {
+        width: 50% !important;
+    }
+
     header.masthead .page-heading h1,
     header.masthead .site-heading h1{
         font-size: 5vw
