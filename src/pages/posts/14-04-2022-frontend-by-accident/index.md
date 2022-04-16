@@ -13,10 +13,10 @@ tags: ["story"]
 kok sekarang jadi frontend? gua jelasin timeline belajarnya gua dulu. Walaupun beberapa ada yg ga gua dalemin banget ya.
 
 <div class="row mx-auto my-3">
-<div class="py-lg-3 pr-lg-3 pl-lg-0 pl-0 col-12 col-md-3 align-self-center text-left">
+<div class="p-0 py-lg-3 pr-lg-3 col-12 col-md-3 align-self-center text-left">
 <h1>2015-2017</h1>
 </div>
-<div class="py-lg-3 pr-lg-3 pl-lg-0 pl-0 col-12 col-md-9 align-self-center text-left">
+<div class="p-0 py-lg-3 pr-lg-3 col-12 col-md-9 align-self-center text-left">
 <h3>PHP Native</h3>
 </div>
 </div>
@@ -26,10 +26,10 @@ gua mulai main php tapi gua ga mendalami karena bingung antara jadi desainer apa
 </p>
 
 <div class="row mx-auto my-3">
-<div class="py-lg-3 pr-lg-3 pl-lg-0 pl-0 col-12 col-md-2 align-self-center text-left">
+<div class="p-0 py-lg-3 pr-lg-3 col-12 col-md-2 align-self-center text-left">
 <h1>2017</h1>
 </div>
-<div class="py-lg-3 pr-lg-3 pl-lg-0 pl-0 col-12 col-md-10 align-self-center text-left">
+<div class="p-0 py-lg-3 pr-lg-3 col-12 col-md-10 align-self-center text-left">
 <h3>Express.js</h3>
 </div>
 </div>
@@ -39,11 +39,11 @@ mulai main nodejs karena saat itu kayaknya “wah” dan mulai mendalami express
 </p>
 
 <div class="row mx-auto my-3">
-<div class="py-lg-3 pr-lg-3 pl-lg-0 col-12 col-md-2 align-self-center text-left">
+<div class="p-0 py-lg-3 pr-lg-3 col-12 col-md-2 align-self-center text-left">
 <h1>2018</h1>
 <h6>(pertengahan tahun)</h6>
 </div>
-<div class="py-lg-3 pr-lg-3 pl-lg-0 col-12 col-md-10 align-self-center text-left">
+<div class="p-0 py-lg-3 pr-lg-3 col-12 col-md-10 align-self-center text-left">
 <h3>
 Angular
 </h2>
@@ -56,10 +56,10 @@ semenjak itu gua ga mau lagi pake angular karena struktur foldernya dan upgrade 
 6 bulan ga ngoding karena mulai “fokus” kuliah + ngebucin lah yaa karena dunia ini ga cuma kodingan wkwk.
 
 <div class="row mx-auto my-3">
-<div class="py-lg-3 pr-lg-3 pl-lg-0 col-12 col-md-2 align-self-center text-left">
+<div class="p-0 py-lg-3 pr-lg-3 col-12 col-md-2 align-self-center text-left">
 <h1>2019</h1>
 </div>
-<div class="py-lg-3 pr-lg-3 pl-lg-0 col-12 col-md-10 align-self-center text-left">
+<div class="p-0 py-lg-3 pr-lg-3 col-12 col-md-10 align-self-center text-left">
 <h3>React</h3>
 </div>
 </div>
@@ -72,15 +72,15 @@ pertengahan semester mulai bikin aplikasi website pake c# karena emang tugas dis
 </p>
 
 <div class="row mx-auto my-3">
-<div class="p-lg-3 col-12 col-md-4 align-self-center text-center">
+<div class="p-lg-3 col-6 col-md-4 align-self-center text-center">
 <h1>2019</h1>
 <h6>akhir</h6>
 </div>
-<div class="p-lg-3 col-12 col-md-4 align-self-center text-center">
+<div class="p-lg-3 col-6 col-md-4 align-self-center text-center">
 <h1>2020</h1>
 <h6>awal</h6>
 </div>
-<div class="p-lg-3 col-12 col-md-4 align-self-center text-center">
+<div class="p-3 p-lg-3 col-12 col-md-4 align-self-center text-center">
 <h3>Tensorflow</h3>
 </div>
 </div>
@@ -88,11 +88,11 @@ pertengahan semester mulai bikin aplikasi website pake c# karena emang tugas dis
 Mulai main Tensorflow dan Scikit-learn untuk riset topik penulisan ilmiah gue di kampus. Gue memutuskan menggunakan scikit-learn untuk klasifikasi teks di penulisan ilmiah dengan stacknya yaitu sklearn, sastrawi, flask, dan metode naive bayes. Disini gue mulai belajar untuk menghitung akurasi menggunakan confusion matrix, preprocessing teks, feature engineering, dll.
 
 <div class="row mx-auto my-3">
-<div class="py-lg-3 pr-lg-3 pl-lg-0 col-12 col-md-2 align-self-center text-left">
+<div class="p-0 py-lg-3 pr-lg-3 col-12 col-md-2 align-self-center text-left">
 <h6>Pertengahan</h6>
 <h1>2020</h1>
 </div>
-<div class="p-lg-3 pl-0 col-12 col-md-10 align-self-center text-left">
+<div class="p-0 py-lg-3 pr-lg-3 col-12 col-md-10 align-self-center text-left">
 <h3>
 Blender 3D
 </h3>
@@ -104,11 +104,11 @@ karena ada tugas grafkom yg menggunakan Blender 3D jadinya gue sempet nyemplung 
 </p>
 
 <div class="row mx-auto my-3">
-<div class="py-lg-3 pr-lg-3 pl-lg-0 col-12 col-md-2 align-self-center text-left">
+<div class="p-0 py-lg-3 pr-lg-3 col-12 col-md-2 align-self-center text-left">
 <h6>September</h6>
 <h1>2020</h1>
 </div>
-<div class="p-lg-3 pl-0 col-12 col-md-10 align-self-center text-left">
+<div class="p-0 py-lg-3 pr-lg-3 col-12 col-md-10 align-self-center text-left">
 <h3>
 Gatsby.js
 </h3>
@@ -119,11 +119,11 @@ Gatsby.js
 </p>
 
 <div class="row mx-auto my-3">
-<div class="py-lg-3 pr-lg-3 pl-lg-0 col-12 col-md-2 align-self-center text-left">
+<div class="p-0 py-lg-3 pr-lg-3 col-12 col-md-2 align-self-center text-left">
 <h6>Desember</h6>
 <h1>2020</h1>
 </div>
-<div class="p-lg-3 pl-0 col-12 col-md-10 align-self-center text-left">
+<div class="p-0 py-lg-3 pr-lg-3 col-12 col-md-10 align-self-center text-left">
 <h3>
 Next.js
 </h3>
@@ -134,10 +134,10 @@ Next.js
 </p>
 
 <div class="row mx-auto my-3">
-<div class="py-lg-3 pr-lg-3 pl-lg-0 col-12 col-md-2 align-self-center text-left">
+<div class="p-0 py-lg-3 pr-lg-3 col-12 col-md-2 align-self-center text-left">
 <h1>2021</h1>
 </div>
-<div class="p-lg-3 pl-0 col-12 col-md-10 align-self-center text-left">
+<div class="p-0 py-lg-3 pr-lg-3 col-12 col-md-10 align-self-center text-left">
 <h3>
 Skripsi
 </h3>
@@ -148,11 +148,11 @@ Skripsi
 </p>
 
 <div class="row mx-auto my-3">
-<div class="py-lg-3 pr-lg-3 pl-lg-0 col-12 col-md-2 align-self-center text-left">
+<div class="p-0 py-lg-3 pr-lg-3 col-12 col-md-2 align-self-center text-left">
 <h6>September</h6>
 <h1>2021</h1>
 </div>
-<div class="p-lg-3 pl-0 col-12 col-md-10 align-self-center text-left">
+<div class="p-0 py-lg-3 pr-lg-3 col-12 col-md-10 align-self-center text-left">
 <h3>
 Internship Frontend
 </h3>
@@ -172,11 +172,11 @@ dan Bootstrap. Karena sebelumnya gue udah mempelajari stack ini jadinya gue bisa
 
 
 <div class="row mx-auto my-3">
-<div class="py-lg-3 pr-lg-3 pl-lg-0 col-12 col-md-2 align-self-center text-left">
+<div class="p-0 py-lg-3 pr-lg-3 col-12 col-md-2 align-self-center text-left">
 <h6>November</h6>
 <h1>2021</h1>
 </div>
-<div class="p-lg-3 pl-0 col-12 col-md-10 align-self-center text-left">
+<div class="p-0 py-lg-3 pr-lg-3 col-12 col-md-10 align-self-center text-left">
 <h3>
 Fullstack Developer (Desktop)
 </h3>
@@ -188,10 +188,10 @@ gue apply beberapa perusahaan dari berbagai role yaitu backend, frontend, data s
 </p>
 
 <div class="row mx-auto my-3">
-<div class="py-lg-3 pr-lg-3 pl-lg-0 col-12 col-md-2 align-self-center text-left">
+<div class="p-0 py-lg-3 pr-lg-3 col-12 col-md-2 align-self-center text-left">
 <h1>2022</h1>
 </div>
-<div class="p-lg-3 pl-0 col-12 col-md-10 align-self-center text-left">
+<div class="p-0 py-lg-3 pr-lg-3 col-12 col-md-10 align-self-center text-left">
 <h3>
 Frontend
 </h3>
