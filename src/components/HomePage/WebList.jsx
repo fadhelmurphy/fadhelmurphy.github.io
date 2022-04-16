@@ -61,7 +61,7 @@ export const WebList = () => (
                         >
                           <div
                             className="h-100 w-100"
-                            data-aos="image-reveal"
+                            // data-aos="image-reveal"
                             data-aos-duration="700"
                           >
                       <div className={"flex-row mr-lg-0 mx-auto " + el.className[1]}>
@@ -75,7 +75,7 @@ export const WebList = () => (
                         >
                           <div
                             className="h-100 w-100"
-                            data-aos="image-reveal"
+                            // data-aos="image-reveal"
                             data-aos-duration="700"
                             style={{
                               background:"#7bc678"
