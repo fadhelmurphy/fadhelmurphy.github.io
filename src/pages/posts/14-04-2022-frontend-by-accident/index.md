@@ -4,6 +4,11 @@ date: 2022-04-14T00:00:00.000Z
 path: /frontend-by-accident
 tags: ["story"]
 ---
+<hr>
+<center><h3>Artikel ini masih gue ketik...</h3>
+<h6> masih belum bahas desain & hasil belajarnya</h6>
+</center>
+<hr>
 
 kok sekarang jadi frontend? gua jelasin timeline belajarnya gua dulu. Walaupun beberapa ada yg ga gua dalemin banget ya.
 
@@ -140,8 +145,46 @@ Skripsi
 </div>
 
 <p>gue sibuk skripsi karena topiknya ditentuin dosen gue. mau gamau gue harus belajar penerapan image processing pada citra fundus retina. intinya gimana caranya pembuluh darah retina bisa jadi id yg unik untuk setiap orang. 
+</p>
 
-setelah lulus gue apply beberapa perusahaan dari berbagai role yaitu backend, frontend, data science, dan ML Engineer. gue mendapatkan pekerjaan pertama gue (full time) sebagai Fullstack Developer dengan stacknya menggunakan bahasa C++, VB, dan MySQL. disini gue harus juga belajar mengenai saham karena gue bekerja di industri keuangan. karena fullstack disini dibagi-bagi cuy jadi ga semuanya dipegang tapi cukup sekedar tau mengenai salah satu bahasa tersebut. sebagai gambaran 50% knowledge saham dan 50% ngoding VB. Karena gue orangnya lebih suka urus technical (ngoding) jadinya gue memutuskan untuk resign.
+<div class="row mx-auto my-3">
+<div class="py-lg-3 pr-lg-3 pl-lg-0 col-12 col-md-2 align-self-center text-left">
+<h6>September</h6>
+<h1>2021</h1>
+</div>
+<div class="p-lg-3 pl-0 col-12 col-md-10 align-self-center text-left">
+<h3>
+Internship Frontend
+</h3>
+</div>
+</div>
+
+<p>gue mengikuti program internship dari kampus gue yang memiliki persyaratan dengan 
+<b>minimal sudah sidang Penulisan Ilmiah (PI) (minimal semester 7).</b> Gue yg baru lulus (udah Sidang PI dan Sidang Skripsi) saat itu mencoba apply dan keterima.</p>
+<p>
+<b>*FYI</b><br/>
+Di kampus gue ada 2x sidang. Sidang PI dilaksanakan di Semester 6 dan sidang Skripsi dilaksanakan di Semester 8.
+</br>
+<p>
+di internship ini mengajarkan tentang React, Next.js, Redux,
+dan Bootstrap. Karena sebelumnya gue udah mempelajari stack ini jadinya gue bisa <i>leha-leha</i> untuk ngikutin internshipnya. Bahkan di bulan November-Januari gue Kerja (WFO) sambil mengikuti Internship (WFH).
+</p>
+
+
+<div class="row mx-auto my-3">
+<div class="py-lg-3 pr-lg-3 pl-lg-0 col-12 col-md-2 align-self-center text-left">
+<h6>November</h6>
+<h1>2021</h1>
+</div>
+<div class="p-lg-3 pl-0 col-12 col-md-10 align-self-center text-left">
+<h3>
+Fullstack Developer (Desktop)
+</h3>
+</div>
+</div>
+
+<p>
+gue apply beberapa perusahaan dari berbagai role yaitu backend, frontend, data science, dan ML Engineer. gue mendapatkan pekerjaan pertama gue (full time) sebagai Fullstack Developer dengan stacknya menggunakan bahasa C++, VB, dan MySQL. disini gue harus juga belajar mengenai saham karena gue bekerja di industri keuangan. karena fullstack disini dibagi-bagi cuy jadi ga semuanya dipegang tapi cukup sekedar tau mengenai salah satu bahasa tersebut. sebagai gambaran 50% knowledge saham dan 50% ngoding VB. Karena gue orangnya lebih suka urus technical (ngoding) jadinya gue memutuskan untuk resign.
 </p>
 
 <div class="row mx-auto my-3">
