@@ -62,7 +62,7 @@ Di tahun ini gua pake software AI buat bikin karya ilustrasi kayak logo, vector,
 <h5>...</h5>
 </center>
 
-<div class="w-100 w-md-50 mx-auto">
+<div class="w-100 mx-auto">
 
 ![](img/2014/blog.png)
 
