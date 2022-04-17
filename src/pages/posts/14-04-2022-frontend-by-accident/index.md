@@ -18,10 +18,68 @@ kok sekarang jadi frontend? gua jelasin timeline belajarnya gua dulu. Walaupun b
 </p>
 
 <div class="row w-100 w-md-50 mx-auto my-3">
-<div class="p-0 py-lg-3 pr-lg-3 col-12 col-md-3 align-self-center text-left">
-<h1>2015-2017</h1>
+<div class="p-0 py-lg-3 pr-lg-3 col-12 col-md-2 align-self-center text-left">
+<h1>2014</h1>
 </div>
-<div class="p-0 py-lg-3 pr-lg-3 col-12 col-md-9 align-self-center text-left">
+<div class="p-0 py-lg-3 pr-lg-3 col-12 col-md-10 align-self-center text-left">
+<h3>Adobe Illustrator & Blogspot</h3>
+</div>
+</div>
+
+<p class="mx-auto w-100 w-md-50">
+Di tahun ini gua pake software AI buat bikin karya ilustrasi kayak logo, vector, karakter, poster, dll. Dibawah ini merupakan karya-karya yang udah pernah gua buat. Selain itu gue juga mainan html + css buat ngerubah tampilan blogspot gue.
+</p>
+
+<div class="position-relative" style="height:50vw">
+
+<div class="first-image position-absolute" style="top: 0%; left: 25%; width: 16%;">
+
+![](img/2014/game.jpg)
+
+</div>
+
+<div class="first-image position-absolute" style="top: 0%; left: 42%; width: 14%;">
+
+![](img/2014/karakter-sma.jpg)
+
+</div>
+
+<div class="first-image position-absolute" style="top: 0%; right: 23%; width: 20%;">
+
+![](img/2014/fifa-world-cup.jpg)
+
+</div>
+
+<div class="first-image position-absolute" style="top: 42%; left: 25%; width: 52%;">
+
+![](img/2014/robot.jpg)
+
+</div>
+
+</div>
+
+<center class="my-5">
+<h5>...</h5>
+</center>
+
+<div class="w-100 w-md-50 mx-auto">
+
+![](img/2014/blog.png)
+
+</div>
+
+<center class="my-5">
+<h5>...</h5>
+</center>
+
+<div class="row w-100 w-md-50 mx-auto my-3">
+<div class="p-lg-3 col-6 col-md-4 align-self-center text-center">
+<h1>2016</h1>
+</div>
+<div class="p-lg-3 col-6 col-md-4 align-self-center text-center">
+<h1>2017</h1>
+</div>
+<div class="p-3 p-lg-3 col-12 col-md-4 align-self-center text-center">
 <h3>PHP Native</h3>
 </div>
 </div>
@@ -73,8 +131,8 @@ mulai main nodejs karena saat itu kayaknya “wah” dan mulai mendalami express
 
 <div class="row w-100 w-md-50 mx-auto my-3">
 <div class="p-0 py-lg-3 pr-lg-3 col-12 col-md-2 align-self-center text-left">
+<h6>Pertengahan</h6>
 <h1>2018</h1>
-<h6>(pertengahan tahun)</h6>
 </div>
 <div class="p-0 py-lg-3 pr-lg-3 col-12 col-md-10 align-self-center text-left">
 <h3>
