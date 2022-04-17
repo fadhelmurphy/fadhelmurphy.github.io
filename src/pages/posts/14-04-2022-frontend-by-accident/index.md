@@ -30,35 +30,37 @@ kok sekarang jadi frontend? gua jelasin timeline belajarnya gua dulu. Walaupun b
 Di tahun ini gua pake software AI buat bikin karya ilustrasi kayak logo, vector, karakter, poster, dll. Dibawah ini merupakan karya-karya yang udah pernah gua buat. Selain itu gue juga mainan html + css buat ngerubah tampilan blogspot gue.
 </p>
 
-<div class="position-relative" style="height:50vw">
+<div class="position-relative d-flex w-100 w-md-50 mx-auto" style="grid-gap: 24px">
 
-<div class="first-image position-absolute" style="top: 0%; left: 25%; width: 16%;">
+<div class="first-image" style="width: 33%;">
 
 ![](img/2014/game.jpg)
 
 </div>
 
-<div class="first-image position-absolute" style="top: 0%; left: 42%; width: 14%;">
+<div class="first-image" style="width: 33%;">
 
 ![](img/2014/karakter-sma.jpg)
 
 </div>
 
-<div class="first-image position-absolute" style="top: 0%; right: 23%; width: 20%;">
+<div class="first-image" style="width: 33%;">
 
 ![](img/2014/fifa-world-cup.jpg)
 
 </div>
 
-<div class="first-image position-absolute" style="top: 42%; left: 25%; width: 52%;">
+</div>
+
+<div class="position-relative d-flex w-100 w-md-50 mx-auto" style="grid-gap: 24px;">
+<div class="first-image" style="top: 42%; left: 25%; width: 100%;">
 
 ![](img/2014/robot.jpg)
 
 </div>
-
 </div>
 
-<center class="my-5">
+<center class="my-3 my-md-5">
 <h5>...</h5>
 </center>
 
@@ -68,7 +70,7 @@ Di tahun ini gua pake software AI buat bikin karya ilustrasi kayak logo, vector,
 
 </div>
 
-<center class="my-5">
+<center class="my-3 my-md-5">
 <h5>...</h5>
 </center>
 
@@ -312,5 +314,8 @@ gue masih mencoba mendalami frontend tapi masih belom tau bakalan tetep jadi fro
 <style>
     .blog-content {
         width: 100% !important;
+    }
+    .first-image p {
+        margin: 24px 0;
     }
 </style>
