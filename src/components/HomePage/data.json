@@ -21,10 +21,9 @@
         ]
       },
       {
-        "judul": "Tour Travel Revolution (Nov 2021)",
-        "desc": "Build with Next.js, Redux, Redux-saga",
-        "file": "web/tour-travel.png",
-        "link": "http://167.172.62.14/api/admin/",
+        "judul": "ENO | Venture Mind Labs X Tujju",
+        "desc": "Build with React, SWR, Chakra UI and Zustand",
+        "file": "web/eno.png",
         "className": [
           "order-lg-2",
           "order-lg-1"

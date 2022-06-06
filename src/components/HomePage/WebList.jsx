@@ -1,5 +1,16 @@
 import { Container,Col, Row, Image, assets, React } from "./index"
 
+// {
+//   "judul": "Tour Travel Revolution (Nov 2021)",
+//   "desc": "Build with Next.js, Redux, Redux-saga",
+//   "file": "web/tour-travel.png",
+//   "link": "http://167.172.62.14/api/admin/",
+//   "className": [
+//     "order-lg-2",
+//     "order-lg-1"
+//   ]
+// },
+
 export const WebList = () => (
         <>
         <div className="web-section py-3 position-relative" style={{
