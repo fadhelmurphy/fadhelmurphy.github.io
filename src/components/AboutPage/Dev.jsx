@@ -39,7 +39,7 @@ export const Dev = ()=>(
         <h3>Gatsby.js</h3>
       </Col>
       <Col md="3">
-        <h3>Flutter</h3>
+        <h3>Next.js</h3>
       </Col>
       <Col md="3">
         <h3>Express.js</h3>
@@ -60,6 +60,23 @@ export const Dev = ()=>(
       </Col>
       <Col md="3">
         <h3>Sklearn</h3>
+      </Col>
+    </Row>
+    <Row
+      className="text-center p-3 p-md-5 justify-content-between"
+      data-aos="fade-up"
+    >
+      <Col md="3">
+        <h3>Laravel</h3>
+      </Col>
+      <Col md="3">
+        <h3>Redux</h3>
+      </Col>
+      <Col md="3">
+        <h3>Zustand</h3>
+      </Col>
+      <Col md="3">
+        <h3>MySQL</h3>
       </Col>
     </Row>
   </>

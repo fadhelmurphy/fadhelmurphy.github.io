@@ -1,6 +1,6 @@
 import React from "react"
 import SEO from "../components/seo"
-import { Container, Row, Col } from "reactstrap"
+import { Container } from "reactstrap"
 import { AboutPageHeader,Menu,Desc,Almamater,Dev,Design,AboutPageFooter,FooterTemplate } from "../components/AboutPage"
 // import Image from "../components/image"
 
