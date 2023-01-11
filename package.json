@@ -20,7 +20,7 @@
     "gatsby-plugin-web-font-loader": "^1.0.4",
     "gatsby-remark-images": "^3.11.1",
     "gatsby-source-filesystem": "^2.1.48",
-    "gatsby-transformer-remark": "^2.16.1",
+    "gatsby-transformer-remark": "^5.25.1",
     "gatsby-transformer-sharp": "^4.12.1",
     "gh-pages": "^2.2.0",
     "jquery": "^3.5.1",
