@@ -31,10 +31,10 @@ content.title = content?.title || titlePage;
 		/>
 	</head>
 	<body>
-		{Header && <Header />}
+		{Header}
 		<div class="container mx-auto">
 			<slot />
 		</div>
-		{Footer && <Footer />}
+		{Footer}
 	</body>
 </html>

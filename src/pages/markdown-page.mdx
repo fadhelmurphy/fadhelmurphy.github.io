@@ -1,15 +1,20 @@
 ---
 title: 'Markdown + Tailwind'
-layout: Containers/main.astro
+# layout: Containers/article.astro
 ---
 
 import Button from 'Components/Button.astro';
+import Header from 'Components/header';
+import Layout from "Containers/layout";
 
 {/* # {frontmatter.title} */}
 
+<Layout>
+	<Header slot="Header" />
 <div class="grid place-items-center h-screen content-center">
 	<Button>Tailwind Button in Markdown!</Button>
 	<a href="/" class="p-4 underline">
 		Go home...
 	</a>
 </div>
+</Layout>
