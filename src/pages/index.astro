@@ -1,0 +1,32 @@
+---
+// Component Imports
+import Button from 'Components/Button.astro';
+import Header from 'Components/header';
+import Layout from "Containers/main.astro";
+
+
+// Full Astro Component Syntax:
+// https://docs.astro.build/core-concepts/astro-components/
+---
+
+
+<Layout {...{ Header }}>
+	<div class="grid place-items-center h-screen content-center">
+		<Button>Tailwind Button in Astro!</Button>
+		<a href="/markdown-page" class="p-4 underline">Markdown is also supported...</a>
+	</div>
+	
+	{import.meta.env.NODE_ENV === "production" ?
+	<style is:global>
+        body {
+          background-image: var(--bg-url-header-home);
+        }
+	</style>
+	
+	:
+	<style is:global>
+        body {
+          background-image: var(--bg-url-header-local-home);
+        }
+	</style>}
+	</Layout>

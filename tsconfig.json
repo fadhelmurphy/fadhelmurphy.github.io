@@ -1,0 +1,39 @@
+{
+  "extends": "astro/tsconfigs/base",
+  "target": "es5",
+  "lib": ["dom", "dom.iterable", "esnext"],
+  "allowJs": true,
+  "skipLibCheck": true,
+  "strict": true,
+  "forceConsistentCasingInFileNames": true,
+  "noEmit": true,
+  "esModuleInterop": true,
+  "module": "esnext",
+  "moduleResolution": "node",
+  "resolveJsonModule": true,
+  "isolatedModules": false,
+  "jsx": "preserve",
+  "incremental": true,
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/Store/*": [
+        "./store/*"
+      ],
+      "Helpers/*": [
+        "./helpers/*"
+      ],
+      "Lib/*": [
+        "./lib/*"
+      ],
+      "Containers/*": [
+        "./containers/*"
+      ],
+      "Components/*": [
+        "./components/*"
+      ]
+    },
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
+  }
+}

@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-url-header-local-home: url("/home/bg.png");
+  --bg-url-header-home: url("/revamp/home/bg.png");
+}
+
+@layer base {
+    html, body {
+    padding: 0;
+    margin: 0;
+    font-family: Poppins, system-ui, sans-serif;
+    @apply text-base;
+    }
+    body {
+    @apply bg-no-repeat;
+    @apply bg-top;
+    }
+    ::selection {
+      background: #f9d2af;
+      color: #fff;
+      text-shadow: none;
+  }
+
+    * {
+      box-sizing: border-box;
+    }
+  }
