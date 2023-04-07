@@ -1,4 +1,4 @@
-import { prefix } from "utils/const";
+import { prefix } from "Consts/config";
 import React from "react";
 
 type SliderDataType = {

@@ -32,6 +32,9 @@
       ],
       "Components/*": [
         "./components/*"
+      ],
+      "Consts/*": [
+        "./consts/*"
       ]
     },
     "jsx": "react-jsx",

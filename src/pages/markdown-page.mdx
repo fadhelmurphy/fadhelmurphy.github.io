@@ -6,6 +6,7 @@ title: 'Markdown + Tailwind'
 import Button from 'Components/Button.astro';
 import Header from 'Components/header';
 import Layout from "Containers/layout";
+import { prefix } from 'Consts/config';
 
 {/* # {frontmatter.title} */}
 
@@ -13,7 +14,7 @@ import Layout from "Containers/layout";
 	<Header slot="Header" />
 <div class="grid place-items-center h-screen content-center">
 	<Button>Tailwind Button in Markdown!</Button>
-	<a href="/" class="p-4 underline">
+	<a href={`${prefix}/`} class="p-4 underline">
 		Go home...
 	</a>
 </div>

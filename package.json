@@ -3,9 +3,9 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "cp .env.local .env && astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "rm -rf ./dist && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
