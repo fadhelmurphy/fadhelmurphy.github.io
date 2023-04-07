@@ -8,10 +8,10 @@ const TimeLine = () => {
       {timelineData.map((item: TimelineDataType) => {
         return (
           <li className="mb-10 ml-10">
-            <span className="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-blue-400 ring-8 ring-white ring-blue-100">
+            <span className="absolute -left-4 mt-3 flex h-8 w-8 items-center justify-center rounded-full bg-blue-400 ring-8 ring-white ring-blue-100">
               <svg
                 aria-hidden="true"
-                className="h-3 w-3 text-white"
+                className="h-5 w-5 text-white"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
@@ -23,7 +23,7 @@ const TimeLine = () => {
                 ></path>
               </svg>
             </span>
-            <h3 className="mb-1 mb-6 flex items-center text-4xl font-semibold">
+            <h3 className="mb-1 mb-6 flex items-center text-6xl font-semibold">
               {item.company}
               {item.isLatest ? (
                 <span className="mr-2 ml-3 rounded bg-sky-100 px-3.5 py-1.5 text-sm font-medium text-blue-500">

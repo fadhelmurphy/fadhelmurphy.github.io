@@ -60,19 +60,19 @@ export const timelineData: TimelineDataType[] = [
       ],
       isLatest: true,
     },
-    {
-      company: "Astra International.",
-      data: [
-        {
-          jobtitle: "Frontend Engineer - Freelance",
-          time: "Sep 2022 - Nov 2022",
-          description: `
-          Develop web app for Human Capital Information System (HCIS) using React.js and SAP <br/>
-  Slicing UI from Figma to Web using Ant Design <br/>
-  Integrate API using Fetch API and state management with MobX <br/>
-          `,
-        },
-      ],
-      isLatest: false,
-    },
+//     {
+//       company: "Astra International.",
+//       data: [
+//         {
+//           jobtitle: "Frontend Engineer - Freelance",
+//           time: "Oct 2022 - Nov 2022",
+//           description: `
+//           Develop web app for Human Capital Information System (HCIS) using React.js and SAP <br/>
+//   Slicing UI from Figma to Web using Ant Design <br/>
+//   Integrate API using Fetch API and state management with MobX <br/>
+//           `,
+//         },
+//       ],
+//       isLatest: false,
+//     },
   ];
