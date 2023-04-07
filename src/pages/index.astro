@@ -1,15 +1,15 @@
 ---
 // Component Imports
-import Button from 'Components/Button.astro';
-import Header from 'Components/header';
-import { prefix } from 'Consts/config';
+import Button from "Components/Button.astro";
+import Header from "Components/header";
+import { prefix } from "Consts/config";
 import Layout from "Containers/layout";
+import TimelineSections from "Containers/sections/timelineSections";
 // const condBg = import.meta.env.NODE_ENV === "production" ? "url(/revamp/home/bg.png)" : "url(/home/bg.png)";
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/core-concepts/astro-components/
 ---
-
 
 <!-- <style is:global define:vars={{ condBg }}>
 	body {
@@ -17,15 +17,21 @@ import Layout from "Containers/layout";
 	}
 </style> -->
 <Layout>
-	<Header slot="Header" />
-	<div class="grid place-items-center h-screen content-center">
-		<Button>Tailwind Button in Astro!</Button>
-		<a href={`${prefix}/markdown-page`} class="p-4 underline">Markdown is also supported...</a>
-	</div>
-	
-	<style is:global>
-        body {
-          background-image: var(--bg-url-header-home);
-        }
-	</style>
-	</Layout>
+  <Header slot="Header" client:idle/>
+  <TimelineSections title="Work Experiences">
+	<p slot="desc">I have previously worked for a few companies <br/>as a freelance and full-time front end developer.</p>
+    <p>[This is children]</p>
+  </TimelineSections>
+  <div class="grid h-screen place-items-center content-center">
+    <Button>Tailwind Button in Astro!</Button>
+    <a href={`${prefix}/markdown-page`} class="p-4 underline"
+      >Markdown is also supported...</a
+    >
+  </div>
+
+  <style is:global>
+    body {
+      background-image: var(--bg-url-header-home);
+    }
+  </style>
+</Layout>
