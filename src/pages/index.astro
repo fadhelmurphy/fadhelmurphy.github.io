@@ -3,13 +3,18 @@
 import Button from 'Components/Button.astro';
 import Header from 'Components/header';
 import Layout from "Containers/layout";
-
+// const condBg = import.meta.env.NODE_ENV === "production" ? "url(/revamp/home/bg.png)" : "url(/home/bg.png)";
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/core-concepts/astro-components/
 ---
 
 
+<!-- <style is:global define:vars={{ condBg }}>
+	body {
+	  background-image: var(--condBg);
+	}
+</style> -->
 <Layout>
 	<Header slot="Header" />
 	<div class="grid place-items-center h-screen content-center">

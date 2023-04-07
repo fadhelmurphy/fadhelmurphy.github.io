@@ -16,6 +16,7 @@
   "incremental": true,
   "compilerOptions": {
     "baseUrl": ".",
+    "types": ["@astrojs/image/client"],
     "paths": {
       "@/Store/*": [
         "./store/*"

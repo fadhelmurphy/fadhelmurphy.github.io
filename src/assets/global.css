@@ -17,6 +17,7 @@
     body {
     @apply bg-no-repeat;
     @apply bg-top;
+    @apply bg-contain;
     }
     ::selection {
       background: #f9d2af;

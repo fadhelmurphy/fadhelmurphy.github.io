@@ -5,15 +5,14 @@ interface Props {
     yourRole?: JSX.Element;
   }
 
+const emoji = "%F0%9F%91%8B"; // encode emoji manually
 const Header = ({yourname, yourRole}: Props) => {
     
     return (
   <>
     <div className="h-72 md:h-[55vh] mb-6 md:mb-24 px-8 md:px-0 flex flex-col justify-end">
       <div className="inner container md:mx-auto text-left md:text-center">
-      <p className="text-2xl md:text-6xl text-base-2 font-semibold font-header">
-        {yourname}
-      </p>
+      <p className="text-2xl md:text-6xl text-base-2 font-semibold font-header flex justify-center" dangerouslySetInnerHTML={{ __html: yourname }} />
       <h1 className="title text-4xl md:leading-none md:text-[7rem] font-semibold font-header mt-4">
         {yourRole}
       </h1>
@@ -24,7 +23,7 @@ const Header = ({yourname, yourRole}: Props) => {
 )};
 
 Header.defaultProps = {
-  yourname: "Hi, I'm Fadhel. 👋",
+  yourname: `Hi, I'm Fadhel. <span style="margin-left: 1rem"><img src="https://emojicdn.elk.sh/${emoji}?style=apple" width="60" height="60" /></span>`,
   yourRole: <>
   <span className="relative stabilo after:h-[1vh] after:md:h-[4vh]">Software</span> Engineer <br/>Based in Tangerang
   <style>
