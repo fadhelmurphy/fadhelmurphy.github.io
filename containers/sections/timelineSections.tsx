@@ -17,7 +17,7 @@ const TimelineSections = ({
                 {desc}
                 </div>
             </div>
-            <div className="content">
+            <div className="content my-24">
                 {children}
             </div>
         </div>

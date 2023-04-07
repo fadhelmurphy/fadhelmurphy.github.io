@@ -2,6 +2,7 @@
 // Component Imports
 import Button from "Components/Button.astro";
 import Header from "Components/header";
+import Timeline from "Components/timeline";
 import { prefix } from "Consts/config";
 import Layout from "Containers/layout";
 import TimelineSections from "Containers/sections/timelineSections";
@@ -20,7 +21,7 @@ import TimelineSections from "Containers/sections/timelineSections";
   <Header slot="Header" client:idle/>
   <TimelineSections title="Work Experiences">
 	<p slot="desc">I have previously worked for a few companies <br/>as a freelance and full-time front end developer.</p>
-    <p>[This is children]</p>
+  <Timeline client:visible/>
   </TimelineSections>
   <div class="grid h-screen place-items-center content-center">
     <Button>Tailwind Button in Astro!</Button>
