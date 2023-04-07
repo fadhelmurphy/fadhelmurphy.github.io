@@ -1,8 +1,5 @@
 import { prefix } from "./config";
-
-export type SliderDataType = {
-    [key:string]: string | boolean;
-}
+import {SliderDataType} from "Consts/types/logo.type"
 
 export const SliderData: SliderDataType[] = [
   {

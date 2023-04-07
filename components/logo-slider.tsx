@@ -1,4 +1,5 @@
-import { SliderData, SliderDataType } from "Consts/logo";
+import { SliderData } from "Consts/logo";
+import {SliderDataType} from "Consts/types/logo.type"
 import React from "react";
 
 const LogoSlider = ({ data = SliderData }) => {
