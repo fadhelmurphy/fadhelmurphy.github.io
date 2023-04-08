@@ -10,7 +10,7 @@ export const timelineData: TimelineDataType[] = [
           description: `
           Develop Payment for cross-platform (iOS and Android) with Micro-frontend method <br />
           Research latest tech-stack <br />
-          Setup deployment with Pm2 + AWS Server and Docker + Kubernetes <br />
+          Deployment with Pm2 + AWS Server and Docker + Kubernetes <br />
           Develop and Maintain web application <br />
           Trace error with Sentry and New Relic <br />
           Create guidelines for other frontend engineers <br />
