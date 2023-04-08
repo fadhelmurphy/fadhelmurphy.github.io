@@ -14,7 +14,6 @@ const TimelineSections = ({ title, desc, children }: TimelineSectionsType) => {
         }
         `}
     </style>
-    
     <div className="timeline-sections py-24">
       <div className="container mx-auto">
         <div className="head">

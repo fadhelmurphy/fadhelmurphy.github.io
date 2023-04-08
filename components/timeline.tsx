@@ -2,10 +2,10 @@ import React from "react";
 import {timelineData} from "Consts/timeline"
 import {TimelineDataArrayType, TimelineDataType} from "Consts/types/timeline.type"
 
-const TimeLine = () => {
+const TimeLine = ({data = timelineData}) => {
   return (
     <ol className="relative my-12 mx-5 border-l border-blue-400">
-      {timelineData.map((item: TimelineDataType) => {
+      {data.map((item: TimelineDataType) => {
         return (
           <li className="mb-10 ml-10">
             <span className="absolute -left-4 mt-3 flex h-8 w-8 items-center justify-center rounded-full bg-blue-400 ring-8 ring-white ring-blue-100">

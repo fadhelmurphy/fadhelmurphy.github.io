@@ -4,8 +4,9 @@ import Button from "Components/Button.astro";
 import Header from "Components/header";
 import Timeline from "Components/timeline";
 import { prefix } from "Consts/config";
+import { eduTimelineData } from "Consts/timeline";
 import Layout from "Containers/layout";
-import TimelineSections from "Containers/sections/timelineSections";
+import TimelineSections from "Containers/sections";
 // const condBg = import.meta.env.NODE_ENV === "production" ? "url(/revamp/home/bg.png)" : "url(/home/bg.png)";
 
 // Full Astro Component Syntax:
@@ -22,6 +23,9 @@ import TimelineSections from "Containers/sections/timelineSections";
   <TimelineSections title="Work Experiences">
 	<p slot="desc">I have previously worked for a few companies <br/>as a freelance and full-time front end developer.</p>
   <Timeline client:visible/>
+  </TimelineSections>
+  <TimelineSections type="education" title="Education">
+  <Timeline data={eduTimelineData} client:visible/>
   </TimelineSections>
   <div class="grid h-screen place-items-center content-center">
     <Button>Tailwind Button in Astro!</Button>
