@@ -31,9 +31,7 @@ const Layout = ({
 		/>
 	</head>
       {Header}
-      <div className="container mx-auto">
       {children}
-      </div>
       {Footer}
     </>
   );
