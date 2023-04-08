@@ -2,7 +2,7 @@ import React from "react";
 import {timelineData} from "Consts/timeline"
 import {TimelineDataArrayType, TimelineDataType} from "Consts/types/timeline.type"
 
-const TimeLine = ({data = timelineData}) => {
+const DefaultTimeline = ({data = timelineData}: {data:TimelineDataType[]}): JSX.Element => {
   return (
     <ol className="relative my-12 mx-5 border-l border-blue-400">
       {data.map((item: TimelineDataType) => {
@@ -55,4 +55,4 @@ const TimeLine = ({data = timelineData}) => {
     </ol>
   );
 };
-export default React.memo(TimeLine);
+export default React.memo(DefaultTimeline);
