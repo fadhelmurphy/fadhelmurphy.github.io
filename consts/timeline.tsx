@@ -8,7 +8,7 @@ export const timelineData: TimelineDataType[] = [
         jobtitle: "Frontend Developer - Full-time",
         time: "Oct 2022 - Present",
         description: `
-          Develop Payment for cross-platform (iOS and Android) with Micro-frontend method <br />
+          Develop Payment for cross-platform (iOS and Android) with Micro-frontend method (Webpack 5) <br />
           Research latest tech-stack <br />
           Deployment with Pm2 + AWS Server and Docker + Kubernetes <br />
           Develop and Maintain web application <br />
@@ -80,7 +80,7 @@ export const timelineData: TimelineDataType[] = [
         jobtitle: "Frontend Developer - Internship",
         time: "Sep 2021 - Jan 2022",
         description: `
-        Development using Next.js (React.js) + React Context  <br/>
+        Web Development with Next.js (React.js) + React Context  <br/>
 Implementing UI Design from Figma to Bootstrap, HighChart, Antd (Slicing)  <br/>
 <br/>
 Project: <br/>
