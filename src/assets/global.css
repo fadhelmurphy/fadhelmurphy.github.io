@@ -19,8 +19,8 @@
     @apply bg-contain;
     }
     ::selection {
-      background: #f9d2af;
-      color: #fff;
+      background: rgb(224 242 254);
+      color: rgb(59 130 246);
       text-shadow: none;
   }
 

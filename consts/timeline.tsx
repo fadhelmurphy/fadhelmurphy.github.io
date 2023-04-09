@@ -60,21 +60,51 @@ export const timelineData: TimelineDataType[] = [
     ],
     isLatest: true,
   },
-  //     {
-  //       company: "Astra International.",
-  //       data: [
-  //         {
-  //           jobtitle: "Frontend Engineer - Freelance",
-  //           time: "Oct 2022 - Nov 2022",
-  //           description: `
-  //           Develop web app for Human Capital Information System (HCIS) using React.js and SAP <br/>
-  //   Slicing UI from Figma to Web using Ant Design <br/>
-  //   Integrate API using Fetch API and state management with MobX <br/>
-  //           `,
-  //         },
-  //       ],
-  //       isLatest: false,
-  //     },
+  {
+    company: "ENO | Venture Mind Labs.",
+    data: [
+      {
+        jobtitle: "Frontend Developer - Freelance",
+        time: "Mar 2022 - May 2022",
+        description: `
+        Web Development with React, SWR, Chakra UI and Zustand
+        `,
+      },
+    ],
+    isLatest: false,
+  },
+  {
+    company: "Incubator Business Center Gunadarma.",
+    data: [
+      {
+        jobtitle: "Frontend Developer - Internship",
+        time: "Sep 2021 - Jan 2022",
+        description: `
+        Development using Next.js (React.js) + React Context  <br/>
+Implementing UI Design from Figma to Bootstrap, HighChart, Antd (Slicing)  <br/>
+<br/>
+Project: <br/>
+SIASN Instansi BKN  <br/>
+Dashboard Keluarga Sehat Kemenkes  <br/>
+        `,
+      },
+    ],
+    isLatest: false,
+  },
+      {
+        company: "BisaCPNS.",
+        data: [
+          {
+            jobtitle: "Frontend Developer - Freelance",
+            time: "May 2020",
+            description: `
+            Web development with native stack (HTML & CSS) + Bootstrap  <br/>
+            Develop custom on scroll animation with AOS.js <br/>
+            `,
+          },
+        ],
+        isLatest: false,
+      },
 ];
 
 export const eduTimelineData: TimelineDataType[] = [
