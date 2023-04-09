@@ -33,7 +33,7 @@ module.exports = {
       addComponents({
         ".radial-white-gradient-bg": {
           background:
-            "radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,1) 100%)",
+            "radial-gradient(45% 45% at center,rgba(255,255,255,0.6) 0%,rgba(255,255,255,1) 100%)",
           width: "100%",
           height: "100%",
           position: "absolute",
