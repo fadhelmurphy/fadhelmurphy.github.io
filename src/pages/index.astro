@@ -27,6 +27,12 @@ import TimelineSections from "Containers/sections";
   <TimelineSections type="education" title="Education">
   <Timeline type="education" data={eduTimelineData} client:visible/>
   </TimelineSections>
+  
+  <TimelineSections type="portfolio" title="App Development">
+    <p slot="desc">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean luctus semper elit quis imperdiet. Mauris congue ultrices dui, vel imperdiet mauris lacinia eu. Aenean placerat sit amet nisl elementum tincidunt. Maecenas quis magna consectetur arcu tristique vulputate ac sit amet lacus. 
+    </p>
+    </TimelineSections>
   <div class="grid h-screen place-items-center content-center">
     <Button>Tailwind Button in Astro!</Button>
     <a href={`${prefix}/markdown-page`} class="p-4 underline"

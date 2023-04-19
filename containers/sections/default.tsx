@@ -1,4 +1,3 @@
-import React from "react";
 import { TimelineSectionsType } from "Containers/types/sections.type";
 
 const TimelineSections = ({ title, desc, children }: TimelineSectionsType) => {

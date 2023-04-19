@@ -1,11 +1,10 @@
-import React from "react";
 import { TimelineSectionsType } from "Containers/types/sections.type";
 
 const Education = ({ title, children }: TimelineSectionsType) => {
   return (
     <>
     
-    <div className="education-timeline-sections bg-edu-section">
+    <div className="education-timeline-sections bg-edu-section pb-48">
       <div className="mx-auto grid grid-cols-2">
         <div className="head flex justify-center items-center relative">
           <div className="radial-white-gradient-bg" />
