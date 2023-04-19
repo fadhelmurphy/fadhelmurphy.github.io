@@ -8,6 +8,7 @@ import React from "react";
 import { TemplateType } from "Consts/types/template.type";
 const Default = React.lazy(() => import('./default'));
 const Education = React.lazy(() => import('./education'));
+const Portfolio = React.lazy(() => import('./portfolio'));
 
 const Template: TemplateType[] = [
   {
@@ -17,6 +18,10 @@ const Template: TemplateType[] = [
   {
     id: "education",
     component: Education,
+  },
+  {
+    id: "portfolio",
+    component: Portfolio,
   },
 ];
 
