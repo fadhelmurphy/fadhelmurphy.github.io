@@ -27,10 +27,10 @@ jobs:
       
 
     - name: Installing my packages
-      run: npm install
+      run: yarn install
 
     - name: Build my App  
-      run: npm run build
+      run: yarn build
       env:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
         # NEXT_PUBLIC_BASE_PATH: /revamp
