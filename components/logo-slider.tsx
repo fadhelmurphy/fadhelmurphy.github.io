@@ -27,6 +27,7 @@ const LogoSlider = ({ data = SliderData }) => {
                     className="slide w-48 h-24 md:w-80 md:h-36 relative backdrop-blur-sm bg-white/50 drop-shadow-2xl rounded-lg"
                   >
                     <img
+                      loading="lazy"
                       className="p-6 md:p-[3.2rem]"
                       src={item.url}
                       alt={item.alt}

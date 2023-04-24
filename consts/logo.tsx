@@ -1,5 +1,11 @@
-import { prefix } from "./config";
-import {SliderDataType} from "Consts/types/logo.type"
+import {SliderDataType} from "Consts/types/logo.type";
+import webpackImgpng from "../public/home/stack-slider/webpack.png";
+import nextjsImgpng from "../public/home/stack-slider/nextjs-icon.png";
+import gatsbyImgpng from "../public/home/stack-slider/gatsby-icon.png";
+import flutterImgpng from "../public/home/stack-slider/flutter.png";
+import tensorflowImgpng from "../public/home/stack-slider/tensorflow-logo.png";
+import mysqlImgpng from "../public/home/stack-slider/mysql.png";
+import laravelImgpng from "../public/home/stack-slider/laravel.png";
 
 export const SliderData: SliderDataType[] = [
   {
@@ -8,22 +14,22 @@ export const SliderData: SliderDataType[] = [
   },
   {
     type: "image",
-    url: `${prefix}/home/stack-slider/webpack.png`,
+    url: webpackImgpng.src,
     alt: "webpack fadhel",
   },
   {
     type: "image",
-    url: `${prefix}/home/stack-slider/nextjs-icon.png`,
+    url: nextjsImgpng.src,
     alt: "nextjs fadhel",
   },
   {
     type: "image",
-    url: `${prefix}/home/stack-slider/gatsby-icon.png`,
+    url: gatsbyImgpng.src,
     alt: "gatsby fadhel",
   },
   {
     type: "image",
-    url: `${prefix}/home/stack-slider/flutter.png`,
+    url: flutterImgpng.src,
     alt: "flutter fadhel",
   },
   {
@@ -40,7 +46,7 @@ export const SliderData: SliderDataType[] = [
   },
   {
     type: "image",
-    url: `${prefix}/home/stack-slider/tensorflow-logo.png`,
+    url: tensorflowImgpng.src,
     alt: "tensorflow fadhel",
   },
   {
@@ -53,12 +59,12 @@ export const SliderData: SliderDataType[] = [
   },
   {
     type: "image",
-    url: `${prefix}/home/stack-slider/mysql.png`,
+    url: mysqlImgpng.src,
     alt: "mysql fadhel",
   },
   {
     type: "image",
-    url: `${prefix}/home/stack-slider/laravel.png`,
+    url: laravelImgpng.src,
     alt: "laravel fadhel",
   },
   {
