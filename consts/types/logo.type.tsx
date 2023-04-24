@@ -1,4 +1,4 @@
 
 export type SliderDataType = {
-    [key:string]: string | boolean;
+    [key:string]: any;
 }

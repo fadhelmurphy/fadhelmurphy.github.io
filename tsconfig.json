@@ -16,7 +16,8 @@
   "incremental": true,
   "compilerOptions": {
     "baseUrl": ".",
-    "types": ["@astrojs/image/client"],
+    "types": ["node"],
+    "typeRoots": [ "./node_modules/@types" ],
     "paths": {
       "@/Store/*": [
         "./store/*"
