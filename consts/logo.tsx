@@ -1,11 +1,11 @@
 import {SliderDataType} from "Consts/types/logo.type";
-import webpackImgpng from "../public/home/stack-slider/webpack.png";
-import nextjsImgpng from "../public/home/stack-slider/nextjs-icon.png";
-import gatsbyImgpng from "../public/home/stack-slider/gatsby-icon.png";
-import flutterImgpng from "../public/home/stack-slider/flutter.png";
-import tensorflowImgpng from "../public/home/stack-slider/tensorflow-logo.png";
-import mysqlImgpng from "../public/home/stack-slider/mysql.png";
-import laravelImgpng from "../public/home/stack-slider/laravel.png";
+import webpackImgpng from "@PubAssets/home/stack-slider/webpack.png";
+import nextjsImgpng from "@PubAssets/home/stack-slider/nextjs-icon.png";
+import gatsbyImgpng from "@PubAssets/home/stack-slider/gatsby-icon.png";
+import flutterImgpng from "@PubAssets/home/stack-slider/flutter.png";
+import tensorflowImgpng from "@PubAssets/home/stack-slider/tensorflow-logo.png";
+import mysqlImgpng from "@PubAssets/home/stack-slider/mysql.png";
+import laravelImgpng from "@PubAssets/home/stack-slider/laravel.png";
 
 export const SliderData: SliderDataType[] = [
   {

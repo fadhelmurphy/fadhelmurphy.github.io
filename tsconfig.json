@@ -36,7 +36,10 @@
       ],
       "Consts/*": [
         "./consts/*"
-      ]
+      ],
+      "@PubAssets/*": [
+        "./public/*"
+      ],
     },
     "jsx": "react-jsx",
     "jsxImportSource": "react"
