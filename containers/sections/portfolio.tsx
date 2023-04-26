@@ -1,24 +1,45 @@
 import { TimelineSectionsType } from "Containers/types/sections.type";
+import { useState, useEffect } from "react";
 
 const Portfolio = ({ title, desc, children }: TimelineSectionsType) => {
+  const [DynHeight, setDynHeight] = useState("170vh");
+  useEffect(() => {
+    typeof children !== "undefined" &&
+      setDynHeight(
+        `${
+          document.querySelector<HTMLElement>(
+            ".portfolio-timeline-sections-child"
+          )?.offsetHeight
+        }px`
+      );
+  }, [children, setDynHeight]);
+
   return (
     <>
-    
-    <div className="portfolio-timeline-sections flex justify-center items-center relative h-[150vh] w-100 porto-clip">
-    <div className="w-full h-full bg-white-vertical-gradient absolute z-[2]" />
-    <div className="w-full h-full bg-edu-orange absolute z-[1]" />
-      <div className="container mx-auto h-full absolute z-[3] py-[30rem]">
-        <div className="head h-4/6">
-          <div className="title font-header text-center text-2xl font-semibold md:text-8xl text-white">
-            <h2>{title}</h2>
+      <style>
+        {`
+      .portfolio-timeline-sections {
+        height: ${DynHeight};
+      }
+      `}
+      </style>
+      <div
+        className={`portfolio-timeline-sections w-100 porto-clip relative flex items-center justify-center`}
+      >
+        <div className="absolute z-[2] h-full w-full bg-white-vertical-gradient" />
+        <div className="absolute z-[1] h-full w-full bg-edu-orange" />
+        <div className="portfolio-timeline-sections-child container absolute z-[3] mx-auto h-full py-[24rem]">
+          <div className="head h-4/6 text-left">
+            <div className="title font-header text-2xl font-semibold text-white md:text-8xl">
+              <h2>{title}</h2>
+            </div>
+            <div className="desc my-6 font-header text-4xl font-semibold text-white/75">
+              {desc}
+            </div>
           </div>
-          <div className="desc text-center my-6 font-header text-4xl font-semibold text-white/75">
-            {desc}
-          </div>
+          <div className="content grid grid-cols-2 gap-20">{children}</div>
         </div>
-        <div className="content my-24 grid grid-cols-2">{children}</div>
       </div>
-    </div>
     </>
   );
 };

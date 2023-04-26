@@ -4,8 +4,10 @@ import Button from "Components/Button.astro";
 import Header from "Components/header";
 import Timeline from "Components/timeline";
 import { prefix } from "Consts/config";
+import { portoList } from "Consts/portolist";
 import { eduTimelineData } from "Consts/timeline";
 import Layout from "Containers/layout";
+import PortoList from "Containers/portoList";
 import Sections from "Containers/sections";
 // const condBg = import.meta.env.NODE_ENV === "production" ? "url(/revamp/home/bg.png)" : "url(/home/bg.png)";
 
@@ -28,10 +30,11 @@ import Sections from "Containers/sections";
   <Timeline type="education" data={eduTimelineData} client:visible/>
   </Sections>
   
-  <Sections type="portfolio" title="App Development" client:visible>
+  <Sections type="portfolio" title="App Development" client:only>
     <p slot="desc">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean luctus semper elit quis imperdiet. Mauris congue ultrices dui, vel imperdiet mauris lacinia eu. Aenean placerat sit amet nisl elementum tincidunt. Maecenas quis magna consectetur arcu tristique vulputate ac sit amet lacus. 
     </p>
+    <PortoList data={portoList} client:only/>
     </Sections>
   <div class="grid h-screen place-items-center content-center">
     <Button>Tailwind Button in Astro!</Button>
