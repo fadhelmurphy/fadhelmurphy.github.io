@@ -48,6 +48,12 @@ module.exports = {
   plugins: [
     function ({ addComponents }) {
       addComponents({
+        // ".porto-card": {
+        //   borderRadius: "20px",
+        //   background: "#fff",
+        //   mask: "linear-gradient(345deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 35%)",
+        //   transition: "all 0.5s ease 0s"
+        // },
         ".radial-white-gradient-bg": {
           background:
             "radial-gradient(45% 45% at center,rgba(255,255,255,0.6) 0%,rgba(255,255,255,1) 100%)",

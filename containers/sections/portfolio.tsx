@@ -9,7 +9,7 @@ const Portfolio = ({ title, desc, children }: TimelineSectionsType) => {
         `${
           document.querySelector<HTMLElement>(
             ".portfolio-timeline-sections-child"
-          )?.offsetHeight
+          )?.offsetHeight + (384 * 2)
         }px`
       );
   }, [children, setDynHeight]);
@@ -29,7 +29,7 @@ const Portfolio = ({ title, desc, children }: TimelineSectionsType) => {
         <div className="absolute z-[2] h-full w-full bg-white-vertical-gradient" />
         <div className="absolute z-[1] h-full w-full bg-edu-orange" />
         <div className="portfolio-timeline-sections-child container absolute z-[3] mx-auto h-full py-[24rem]">
-          <div className="head h-4/6 text-left">
+          <div className="head h-2/6 text-left">
             <div className="title font-header text-2xl font-semibold text-white md:text-8xl">
               <h2>{title}</h2>
             </div>
