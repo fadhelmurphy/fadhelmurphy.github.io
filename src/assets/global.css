@@ -15,11 +15,30 @@
 @layer components {
 
   .porto-card {
-    border-radius: 20px;
-    background: #fff;
+    @apply rounded-[20px] bg-white flex flex-col justify-between;
     mask: linear-gradient(345deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 35%);
     transition: all 0.5s ease 0s;
   }
+  .porto-card .head {
+    @apply p-[2.5rem] pb-[0];
+  }
+  .porto-card .head .title {
+    @apply mb-2 block text-[2rem] font-semibold leading-9;
+  }
+  .porto-card .head .desc {
+    @apply my-6 text-xl font-normal text-base-2;
+  }
+  .porto-card .content img {
+    position: relative;
+    overflow: hidden;
+    @apply h-full w-full bg-white rounded-[20px] drop-shadow-[0_55px_55px_rgba(255,187,0,1)];
+    object-fit: contain;
+}
+
+.porto-card .content {
+  max-height: 20em;
+  @apply rounded-[0_0_20px_20px] p-[2.5rem] pt-[0];
+}
 }
 
 @layer base {
@@ -30,9 +49,7 @@
     @apply text-base;
     }
     body {
-    @apply bg-no-repeat;
-    @apply bg-top;
-    @apply bg-contain;
+    @apply bg-no-repeat bg-top bg-contain;
     }
     ::selection {
       background: rgb(224 242 254);
