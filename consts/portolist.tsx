@@ -2,6 +2,8 @@ import personalWebImgpng from "@PubAssets/home/project/personal-web.png";
 import istihImgpng from "@PubAssets/home/project/istih.png";
 import enoImgpng from "@PubAssets/home/project/eno.png";
 import kemenkesImgpng from "@PubAssets/home/project/kemenkes.png";
+import bisacpnsImgpng from "@PubAssets/home/project/bisacpns-2020.png";
+import votingImgpng from "@PubAssets/home/project/dashboard-desktop.png";
 import { SliderDataType } from "./types/logo.type";
 
 export const portoList: SliderDataType[] = [
@@ -11,7 +13,7 @@ export const portoList: SliderDataType[] = [
     image: personalWebImgpng.src, 
     linkObj: {
       link: "/",
-      text: "DETAIL"
+      text: "Case Study"
     }
   },
   {
@@ -20,7 +22,7 @@ export const portoList: SliderDataType[] = [
     image: istihImgpng.src, 
     linkObj: {
       link: "/",
-      text: "DETAIL"
+      text: "Case Study"
     }
   },
   {
@@ -29,7 +31,7 @@ export const portoList: SliderDataType[] = [
     image: enoImgpng.src, 
     linkObj: {
       link: "/",
-      text: "DETAIL"
+      text: "Case Study"
     }
   },
   {
@@ -38,7 +40,25 @@ export const portoList: SliderDataType[] = [
     image: kemenkesImgpng.src, 
     linkObj: {
       link: "/",
-      text: "DETAIL"
+      text: "Case Study"
+    }
+  },
+  {
+    title: "BisaCPNS (May 2020)", 
+    desc: "Implementing design to code with bootstrap and aos.js", 
+    image: bisacpnsImgpng.src, 
+    linkObj: {
+      link: "/",
+      text: "Case Study"
+    }
+  },
+  {
+    title: "Vote App-2 (Sept 2021)", 
+    desc: "Build with React.js, antd, context state management and Laravel. Created by me and Yazid", 
+    image: votingImgpng.src, 
+    linkObj: {
+      link: "/",
+      text: "Case Study"
     }
   },
 ] 
