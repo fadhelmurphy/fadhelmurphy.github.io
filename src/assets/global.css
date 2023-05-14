@@ -15,8 +15,7 @@
 @layer components {
 
   .porto-card {
-    @apply rounded-[10px] md:rounded-[20px] bg-white flex flex-col justify-between mx-8 md:m-0;
-    mask: linear-gradient(345deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 35%);
+    @apply rounded-[10px] md:rounded-[20px] flex flex-col justify-between mx-8 md:m-0 bg-[linear-gradient(345deg,rgba(255,255,255,0)_0%,rgba(255,255,255,1)_60%)];
     transition: all 0.5s ease 0s;
   }
   .porto-card .head {
@@ -29,9 +28,8 @@
     @apply my-6 text-base md:text-xl font-normal text-base-2;
   }
   .porto-card .content img {
-    position: relative;
     overflow: hidden;
-    @apply h-full w-full bg-white rounded-[10px] md:rounded-[20px] drop-shadow-[0_55px_55px_rgba(255,187,0,1)];
+    @apply relative h-full w-full bg-white rounded-[10px] md:rounded-[20px] drop-shadow-[0_55px_55px_rgba(255,187,0,1)];
     object-fit: contain;
 }
 
