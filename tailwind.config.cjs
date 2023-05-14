@@ -29,7 +29,6 @@ module.exports = {
       },
       colors: {
         base: "#2e3e6a",
-        "base-2": "#617fad",
       },
       backgroundImage: {
         "edu-orange":
@@ -60,10 +59,26 @@ module.exports = {
         },
         {
           values: flattenColorPalette(Object.assign(theme("backgroundImage", {}), {
-            "edu": "radial-gradient(75% 65% at 96% 25%, #ff47bd -20%, rgba(253, 119, 2, 0.15) 15%, rgba(255,255,255,0) 26%)",
+            "edu": "radial-gradient(150% 50% at 0% 75%, #ff47bd -20%, rgba(253, 119, 2, 0.15) 15%, rgba(255,255,255,0) 26%)",
+            "edu-md": "radial-gradient(75% 65% at 96% 25%, #ff47bd -20%, rgba(253, 119, 2, 0.15) 15%, rgba(255,255,255,0) 26%)",
             "edu-lg": "radial-gradient(188% 222% at 116% 50%, #ff47bd 0%, rgba(253, 119, 2, 0.2) 13%, rgba(255,255,255,0) 19%)",
-            "timeline": "radial-gradient(circle at 100% 55%, rgba(96,165,250,1) 0%, rgba(165,243,252,0.5) 9%, rgba(255,255,255,0) 18%)",
+            "timeline": "radial-gradient(circle at 100% 96%, rgba(96,165,250,1) 0%, rgba(165,243,252,0.5) 2%, rgba(255,255,255,0) 4%)",
+            "timeline-md": "radial-gradient(circle at 100% 55%, rgba(96,165,250,1) 0%, rgba(165,243,252,0.5) 9%, rgba(255,255,255,0) 18%)",
             "timeline-lg": "radial-gradient(ellipse at -10% 75%, rgba(96,165,250,1) 0%, rgba(165,243,252,0.5) 12%, rgba(255,255,255,0) 15%)",
+          })),
+        }
+      ),
+      matchUtilities(
+        {
+          "text-base": (value) => {
+            return {
+              color: value,
+            };
+          },
+        },
+        {
+          values: flattenColorPalette(Object.assign(theme("colors", {}), {
+            2: "#617fad",
           })),
         }
       ),

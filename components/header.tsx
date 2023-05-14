@@ -12,8 +12,8 @@ const Header = ({yourname, yourRole}: Props) => {
   <>
     <div className="h-72 md:h-[55vh] mb-6 md:mb-24 px-8 md:px-0 flex flex-col justify-end">
       <div className="inner container md:mx-auto text-left md:text-center">
-      <p className="text-2xl md:text-6xl text-base-2 font-semibold font-header flex justify-center" dangerouslySetInnerHTML={{ __html: yourname }} />
-      <h1 className="title text-4xl md:leading-none md:text-[7rem] font-semibold font-header mt-4">
+      <p className="text-2xl md:text-4xl 2xl:text-6xl text-base-2 font-semibold font-header flex md:justify-center" dangerouslySetInnerHTML={{ __html: yourname }} />
+      <h1 className="title text-4xl md:text-7xl 2xl:text-[7rem] md:leading-none font-semibold font-header mt-4">
         {yourRole}
       </h1>
       </div>
@@ -23,7 +23,7 @@ const Header = ({yourname, yourRole}: Props) => {
 )};
 
 Header.defaultProps = {
-  yourname: `Hi, I'm Fadhel. <span style="margin-left: 1rem"><img src="https://emojicdn.elk.sh/${emoji}?style=apple" class="animate-waving-hand inline-block origin-[70%_70%]" alt="dada-dada" width="60" height="60" /></span>`,
+  yourname: `Hi, I'm Fadhel. <span style="margin-left: 1rem"><img src="https://emojicdn.elk.sh/${emoji}?style=apple" class="animate-waving-hand inline-block origin-[70%_70%] h-8 w-8 md:h-[40px] md:w-[40px] 2xl:h-[60px] 2xl:w-[60px]" alt="dada-dada" /></span>`,
   yourRole: <>
   <span className="relative stabilo after:h-[1vh] after:md:h-[4vh]">Software</span> Engineer <br/>Based in Tangerang
   <style>

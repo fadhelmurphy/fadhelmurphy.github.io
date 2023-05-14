@@ -29,15 +29,15 @@ const Portfolio = ({ title, desc, children }: TimelineSectionsType) => {
         <div className="absolute z-[2] h-full w-full bg-white-vertical-gradient" />
         <div className="absolute z-[1] h-full w-full bg-edu-orange" />
         <div className="portfolio-timeline-sections-child container absolute z-[3] mx-auto h-full py-[24rem]">
-          <div className="head h-1/6 text-left">
-            <div className="title font-header text-4xl font-semibold text-white">
+          <div className="head h-1/6 text-left p-8 md:p-0">
+            <div className="title font-header text-2xl md:text-3xl 2xl:text-4xl font-semibold text-white">
               <h2>{title}</h2>
             </div>
-            <div className="desc my-6 font-header text-2xl font-semibold text-white/75 md:text-8xl">
+            <div className="desc my-6 font-header text-4xl md:text-7xl 2xl:text-8xl font-semibold text-white/75">
               {desc}
             </div>
           </div>
-          <div className="content grid grid-cols-2 gap-20">{children}</div>
+          <div className="content grid grid-cols-1 md:grid-cols-2 gap-20">{children}</div>
         </div>
       </div>
     </>

@@ -23,7 +23,7 @@ const DefaultTimeline = ({data = timelineData}: {data:TimelineDataType[]}): JSX.
                 ></path>
               </svg>
             </span>
-            <h3 className="mb-1 mb-6 flex items-center text-6xl font-semibold">
+            <h3 className="mb-1 mb-6 flex items-center text-2xl md:text-4xl 2xl:text-6xl font-semibold">
               {item.company}
               {item.isLatest ? (
                 <span className="mr-2 ml-3 rounded bg-sky-100 px-3.5 py-1.5 text-sm font-medium text-blue-500">
