@@ -26,7 +26,6 @@ export const timelineData: TimelineDataType[] = [
           Product detail page <br />
           Implement Server Side Rendering (SSR) and Client Side Rendering (CSR)
           on several pages <br />
-          Create payment widget for cross platform with Webpack 5 <br />
           Create RSS Feed for data analytics in Next.js <br />
           Create reusable components with Monorepo using Lerna <br />
           Integrate API and Create API Proxy using Fetch API, API routes

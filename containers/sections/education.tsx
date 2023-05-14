@@ -4,7 +4,7 @@ const Education = ({ title, children }: TimelineSectionsType) => {
   return (
     <>
     
-    <div className="education-timeline-sections bg-edu-section pb-48">
+    <div className="education-timeline-sections bg-section-edu 2xl:bg-section-edu-lg pb-48">
       <div className="mx-auto grid grid-cols-2">
         <div className="head flex justify-center items-center relative">
           <div className="radial-white-gradient-bg" />

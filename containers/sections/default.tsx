@@ -3,17 +3,7 @@ import { TimelineSectionsType } from "Containers/types/sections.type";
 const TimelineSections = ({ title, desc, children }: TimelineSectionsType) => {
   return (
     <>
-    
-    <style>
-        {`
-        .timeline-sections {
-            background: radial-gradient(ellipse at -10% 75%, rgba(96,165,250,1) 0%, rgba(165,243,252,0.5) 12%, rgba(255,255,255,0) 15%)
-
-            ;
-        }
-        `}
-    </style>
-    <div className="timeline-sections py-24">
+    <div className="bg-section-timeline 2xl:bg-section-timeline-lg py-24">
       <div className="container mx-auto">
         <div className="head">
           <div className="title font-header text-2xl font-semibold text-teal-500 md:text-3xl">
