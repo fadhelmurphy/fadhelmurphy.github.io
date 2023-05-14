@@ -4,12 +4,13 @@ import { useState, useEffect } from "react";
 const Portfolio = ({ title, desc, children }: TimelineSectionsType) => {
   const [DynHeight, setDynHeight] = useState("170vh");
   useEffect(() => {
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     typeof children !== "undefined" &&
       setDynHeight(
         `${
           document.querySelector<HTMLElement>(
             ".portfolio-timeline-sections-child"
-          )?.offsetHeight + (384 * 3)
+          )?.offsetHeight + (384 * 3) + (isMobile ? 192 * 3.5 : 0)
         }px`
       );
   }, [children, setDynHeight]);
@@ -24,12 +25,12 @@ const Portfolio = ({ title, desc, children }: TimelineSectionsType) => {
       `}
       </style>
       <div
-        className={`portfolio-timeline-sections w-100 porto-clip relative flex items-center justify-center`}
+        className={`min-h-screen portfolio-timeline-sections w-100 porto-clip relative flex items-center justify-center`}
       >
         <div className="absolute z-[2] h-full w-full bg-white-vertical-gradient" />
         <div className="absolute z-[1] h-full w-full bg-edu-orange" />
-        <div className="portfolio-timeline-sections-child container absolute z-[3] mx-auto h-full py-[24rem]">
-          <div className="head h-1/6 text-left p-8 md:p-0">
+        <div className="portfolio-timeline-sections-child container absolute z-[3] mx-auto h-full py-[12rem] md:py-[24rem]">
+          <div className="head h-52 md:h-1/6 text-left p-8 pb-0 md:p-0">
             <div className="title font-header text-2xl md:text-3xl 2xl:text-4xl font-semibold text-white">
               <h2>{title}</h2>
             </div>
@@ -37,7 +38,7 @@ const Portfolio = ({ title, desc, children }: TimelineSectionsType) => {
               {desc}
             </div>
           </div>
-          <div className="content grid grid-cols-1 md:grid-cols-2 gap-20">{children}</div>
+          <div className="content grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20">{children}</div>
         </div>
       </div>
     </>

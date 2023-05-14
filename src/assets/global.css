@@ -15,29 +15,29 @@
 @layer components {
 
   .porto-card {
-    @apply rounded-[20px] bg-white flex flex-col justify-between;
+    @apply rounded-[10px] md:rounded-[20px] bg-white flex flex-col justify-between mx-8 md:m-0;
     mask: linear-gradient(345deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 35%);
     transition: all 0.5s ease 0s;
   }
   .porto-card .head {
-    @apply p-[2.5rem] pb-[0];
+    @apply p-[1.5rem] pb-[0] md:p-[2.5rem];
   }
   .porto-card .head .title {
-    @apply mb-2 block text-[2rem] font-semibold leading-9;
+    @apply mb-2 block text-[1.5rem] md:text-[2rem] font-bold md:font-semibold leading-9;
   }
   .porto-card .head .desc {
-    @apply my-6 text-xl font-normal text-base-2;
+    @apply my-6 text-base md:text-xl font-normal text-base-2;
   }
   .porto-card .content img {
     position: relative;
     overflow: hidden;
-    @apply h-full w-full bg-white rounded-[20px] drop-shadow-[0_55px_55px_rgba(255,187,0,1)];
+    @apply h-full w-full bg-white rounded-[10px] md:rounded-[20px] drop-shadow-[0_55px_55px_rgba(255,187,0,1)];
     object-fit: contain;
 }
 
 .porto-card .content {
   max-height: 20em;
-  @apply rounded-[0_0_20px_20px] p-[2.5rem] pt-[0];
+  @apply rounded-[0_0_20px_20px] p-[1.2rem] md:p-[2.5rem] pt-[0];
 }
 }
 
