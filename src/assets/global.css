@@ -15,7 +15,7 @@
 @layer components {
 
   .porto-card {
-    @apply rounded-[10px] md:rounded-[20px] flex flex-col justify-between mx-8 md:m-0 bg-[linear-gradient(345deg,rgba(255,255,255,0)_0%,rgba(255,255,255,1)_45%)] md:bg-[linear-gradient(345deg,rgba(255,255,255,0)_0%,rgba(255,255,255,1)_60%)];
+    @apply rounded-[10px] md:rounded-[20px] flex flex-col justify-between mx-6 md:mx-8 md:m-0 bg-[linear-gradient(345deg,rgba(255,255,255,0)_0%,rgba(255,255,255,1)_45%)] md:bg-[linear-gradient(345deg,rgba(255,255,255,0)_0%,rgba(255,255,255,1)_60%)];
     transition: all 0.5s ease 0s;
   }
   .porto-card .head {
