@@ -29,7 +29,7 @@
   }
   .porto-card .content img {
     overflow: hidden;
-    @apply relative h-full w-full bg-white rounded-[10px] md:rounded-[20px] drop-shadow-[0_55px_55px_rgba(255,187,0,1)];
+    @apply relative h-full w-full bg-white rounded-[10px] md:rounded-[20px] md:drop-shadow-[0_55px_55px_rgba(255,187,0,1)];
     object-fit: contain;
 }
 
