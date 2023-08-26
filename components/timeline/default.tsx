@@ -35,16 +35,16 @@ const DefaultTimeline = ({data = timelineData}: {data:TimelineDataType[]}): JSX.
             {item.data.map((job: TimelineDataArrayType) => {
               return (
                 <>
-                  <time className="mb-2 block font-normal leading-6">
+                  {job.jobtitle && (<time className="mb-2 block font-normal leading-6">
                     {job.jobtitle}
-                  </time>
-                  <time className="mb-2 block font-normal leading-6 text-base-2">
+                  </time>)}
+                  {job.time && (<time className="mb-2 block font-normal leading-6 text-base-2">
                     {job.time}
-                  </time>
-                  <p
+                  </time>)}
+                  {job.description && (<p
                     className="font-normal text-base-2 py-5"
                     dangerouslySetInnerHTML={{ __html: job.description }}
-                  />
+                  />)}
                   <br />
                 </>
               );

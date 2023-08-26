@@ -1,6 +1,6 @@
 export type TimelineDataArrayType = {
     [key:string]: string | boolean;
-    description: string;
+    description?: string;
 }
 
 export type TimelineDataType = { 

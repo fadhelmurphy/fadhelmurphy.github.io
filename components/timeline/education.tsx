@@ -8,7 +8,7 @@ const DefaultTimeline = ({data = timelineData}: {data:TimelineDataType[]}): JSX.
       {data.map((item: TimelineDataType) => {
         return (
           <li>
-            <h3 className="mb-1 mb-6 flex items-center text-2xl md:text-4xl 2xl:text-6xl font-semibold">
+            <h3 className="mb-1 mb-6 flex items-center text-2xl md:text-4xl 2xl:text-6xl font-semibold md:w-[75%]">
               {item.company}
               {item.isLatest ? (
                 <span className="mr-2 ml-3 rounded bg-sky-100 px-3.5 py-1.5 text-sm font-medium text-blue-500">
@@ -20,16 +20,16 @@ const DefaultTimeline = ({data = timelineData}: {data:TimelineDataType[]}): JSX.
             {item.data.map((job: TimelineDataArrayType) => {
               return (
                 <>
-                  <time className="mb-2 block font-semibold leading-6 text-2xl">
+                  {job.jobtitle && (<time className="mb-2 block font-semibold leading-6 text-2xl">
                     {job.jobtitle}
-                  </time>
-                  <time className="mb-2 block font-normal leading-6 text-base-2">
+                  </time>)}
+                  {job.time && (<time className="mb-2 block font-normal leading-6 text-base-2">
                     {job.time}
-                  </time>
-                  <p
+                  </time>)}
+                  {job.description && (<p
                     className="font-normal text-base-2 py-5"
                     dangerouslySetInnerHTML={{ __html: job.description }}
-                  />
+                  />)}
                   <br />
                 </>
               );

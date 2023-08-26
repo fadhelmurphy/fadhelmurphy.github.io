@@ -2,11 +2,21 @@ import { TimelineDataType } from "Consts/types/timeline.type";
 
 export const timelineData: TimelineDataType[] = [
   {
+    company: "Good Doctor Technology.",
+    data: [
+      {
+        jobtitle: "Frontend Developer - Part-time",
+        time: "Aug 2023",
+      },
+    ],
+    isLatest: true,
+  },
+  {
     company: "Female Daily Network.",
     data: [
       {
         jobtitle: "Frontend Developer - Full-time",
-        time: "Oct 2022 - Present",
+        time: "Oct 2022 - Sept 2023",
         description: `
           Develop Payment for cross-platform (iOS and Android) with Micro-frontend method (Webpack 5) <br />
           Research latest tech-stack <br />
@@ -33,14 +43,14 @@ export const timelineData: TimelineDataType[] = [
           `,
       },
     ],
-    isLatest: true,
+    isLatest: false,
   },
   {
     company: "ISTIH & SPIN | Kemenperin.",
     data: [
       {
         jobtitle: "Frontend Developer - Freelance",
-        time: "Dec 2022 - Present",
+        time: "Dec 2022 - Mar 2023",
         description: `
           Setup and develop Map with realtime data using Next.js <br/>
   Slicing UI from Figma to Web using Ant Design <br/>
@@ -57,7 +67,7 @@ export const timelineData: TimelineDataType[] = [
           `,
       },
     ],
-    isLatest: true,
+    isLatest: false,
   },
   {
     company: "ENO | Venture Mind Labs.",
@@ -107,6 +117,16 @@ Dashboard Keluarga Sehat Kemenkes  <br/>
 ];
 
 export const eduTimelineData: TimelineDataType[] = [
+  {
+    company: "Purwadhika Digital Technology School.",
+    data: [
+      {
+        jobtitle: "Data Science",
+        time: "2023",
+      },
+    ],
+    isLatest: true,
+  },
   {
     company: "Gunadarma University.",
     data: [
