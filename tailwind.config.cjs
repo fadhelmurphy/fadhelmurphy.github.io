@@ -34,7 +34,7 @@ module.exports = {
         "edu-orange":
           "linear-gradient(289deg, rgba(253, 119, 2, 1) 0%, rgba(255, 187, 0, 1) 100%)",
         "white-vertical-gradient":
-          "linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 75%, rgba(255,255,255,1) 100%)",
+          "linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 85%, rgba(255,255,255,1) 100%)",
       },
     },
     fontFamily: {

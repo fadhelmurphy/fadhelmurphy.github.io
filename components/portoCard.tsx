@@ -1,7 +1,7 @@
-const PortoCard = ({ title, desc, image, linkObj }) => {
+const PortoCard = ({ title, desc, image, linkObj, customClassName }) => {
   return (
     <>
-      <a href={linkObj.link} className="porto-card">
+      <a href={linkObj.link} className={`porto-card${customClassName ? ` ${customClassName}` : ""}`}>
           <div className="head">
             <div className="title">
               <h2>{title}</h2>
