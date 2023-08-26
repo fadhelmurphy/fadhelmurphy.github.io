@@ -50,7 +50,7 @@ export const timelineData: TimelineDataType[] = [
           `,
       },
     ],
-    isLatest: false,
+    isLatest: true,
   },
   {
     company: "ISTIH & SPIN | Kemenperin.",
