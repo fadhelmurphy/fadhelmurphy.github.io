@@ -7,6 +7,11 @@ export const timelineData: TimelineDataType[] = [
       {
         jobtitle: "Frontend Developer - Part-time",
         time: "Aug 2023",
+        description: `
+        A company that is riding the coattails of this rise is Good Doctor Technology, <br />
+        a joint venture health-tech company between Ping An Healthcare and Technology, <br />
+        Grab and ソフトバンク（SoftBank)
+        `
       },
     ],
     isLatest: true,
@@ -16,8 +21,11 @@ export const timelineData: TimelineDataType[] = [
     data: [
       {
         jobtitle: "Frontend Developer - Full-time",
-        time: "Oct 2022 - Sept 2023",
+        time: "Oct 2022 - Present",
         description: `
+          Create Package/UI Library Component with Lerna, Rollup, React.js (Monorepo) <br />
+          Setup deployment for Storybook using GitLab-CI & PM2 to EC2 AWS Server <br />
+          Setup deployment with pm2, nginx, and aws <br />
           Develop Payment for cross-platform (iOS and Android) with Micro-frontend method (Webpack 5) <br />
           Research latest tech-stack <br />
           Deployment with Pm2 + AWS Server and Docker + Kubernetes <br />
@@ -30,8 +38,7 @@ export const timelineData: TimelineDataType[] = [
         jobtitle: "Jr. Frontend Developer - Full-time",
         time: "Feb 2022 - Oct 2022",
         description: `
-          Improve homepage and brand list page performance score from 60 to
-          80-90 <br />
+          Improve SEO & Accessibility score from 70 to 100 in Lighthouse <br />
           Implement Incremental Static Regeneration (ISR) on Homepage and
           Product detail page <br />
           Implement Server Side Rendering (SSR) and Client Side Rendering (CSR)
