@@ -6,7 +6,7 @@ const LogoSlider = ({ data = SliderData }) => {
   const duplicatedData: SliderDataType[] = [...data, ...data];
   return (
     <>
-      <div className="mx-auto mb-0 md:mb-24 py-12 md:p-0">
+      <div className="mx-auto mb-0 md:mb-24 py-12 md:p-0 relative">
         <div className="slider h-[16vh] md:h-[30vh] flex items-start md:items-stretch">
           <div className="slide-track">
             {duplicatedData &&

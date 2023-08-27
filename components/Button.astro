@@ -3,15 +3,20 @@
 // Styled by Tailwind :)
 ---
 
-<button
-	class="appearance-none rounded bg-blue-500 px-[2em] py-[1em] text-xl font-medium text-sky-100 my-[4em]"
->
+<button class="contact-btn appearance-none rounded bg-blue-500 px-[2em] py-[1em] text-xl font-medium text-sky-100 my-[4em]">
 	<slot />
 </button>
 
 <script>
 	import confetti from 'canvas-confetti';
 	const button = document.body.querySelector('button');
+	const currentBtn = document.getElementsByClassName("contact-btn")
+
+	if(currentBtn.length > 0){
+		currentBtn[0].addEventListener('click', () => {
+			window.location.href = "mailto:fadhelijlalfalah@gmail.com";
+		});
+	}
 
 	if (button) {
 		button.addEventListener('click', () => confetti());
