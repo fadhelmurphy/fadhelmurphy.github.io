@@ -70,6 +70,7 @@
   }
 
   body {
+    background-color: #fff;
     @apply bg-no-repeat bg-top bg-contain;
   }
 
