@@ -7,8 +7,8 @@ const PortoList = ({ data }: { data: SliderDataType[] }) =>
   data.map((item: SliderDataType, idx: number) => {
     const isOdd = (idx + 1) % 2 === 0;
     const customClassName = isOdd
-      ? `transform-gpu rotate-[2deg]`
-      : `transform-gpu rotate-[-2deg]`;
+      ? `md:rotate-[2deg]`
+      : `md:rotate-[-2deg]`;
     return (
       <PortoCard
         title={item.title}
@@ -16,7 +16,7 @@ const PortoList = ({ data }: { data: SliderDataType[] }) =>
         image={item.image}
         linkObj={item.linkObj}
         customClassName={
-            customClassName
+            `md:transform-gpu ${customClassName}`
         }
       />
     );
