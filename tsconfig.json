@@ -17,29 +17,15 @@
   "compilerOptions": {
     "baseUrl": ".",
     "types": ["node"],
-    "typeRoots": [ "./node_modules/@types" ],
+    "typeRoots": ["./node_modules/@types"],
     "paths": {
-      "@/Store/*": [
-        "./store/*"
-      ],
-      "Helpers/*": [
-        "./helpers/*"
-      ],
-      "Lib/*": [
-        "./lib/*"
-      ],
-      "Containers/*": [
-        "./containers/*"
-      ],
-      "Components/*": [
-        "./components/*"
-      ],
-      "Consts/*": [
-        "./consts/*"
-      ],
-      "@PubAssets/*": [
-        "./public/*"
-      ],
+      "@/Store/*": ["./store/*"],
+      "Helpers/*": ["./helpers/*"],
+      "Lib/*": ["./lib/*"],
+      "Containers/*": ["./containers/*"],
+      "Components/*": ["./components/*"],
+      "Consts/*": ["./consts/*"],
+      "@PubAssets/*": ["./public/*"]
     },
     "jsx": "react-jsx",
     "jsxImportSource": "react"

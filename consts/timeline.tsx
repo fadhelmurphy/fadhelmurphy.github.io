@@ -11,7 +11,7 @@ export const timelineData: TimelineDataType[] = [
         A company that is riding the coattails of this rise is Good Doctor Technology, <br />
         a joint venture health-tech company between Ping An Healthcare and Technology, <br />
         Grab and ソフトバンク（SoftBank)
-        `
+        `,
       },
     ],
     isLatest: true,
@@ -107,20 +107,20 @@ Dashboard Keluarga Sehat Kemenkes  <br/>
     ],
     isLatest: false,
   },
+  {
+    company: "BisaCPNS.",
+    data: [
       {
-        company: "BisaCPNS.",
-        data: [
-          {
-            jobtitle: "Frontend Developer - Freelance",
-            time: "May 2020",
-            description: `
+        jobtitle: "Frontend Developer - Freelance",
+        time: "May 2020",
+        description: `
             Web development with native stack (HTML & CSS) + Bootstrap  <br/>
             Develop custom on scroll animation with AOS.js <br/>
             `,
-          },
-        ],
-        isLatest: false,
       },
+    ],
+    isLatest: false,
+  },
 ];
 
 export const eduTimelineData: TimelineDataType[] = [

@@ -1,5 +1,5 @@
 import { SliderData } from "Consts/logo";
-import {SliderDataType} from "Consts/types/logo.type"
+import { SliderDataType } from "Consts/types/logo.type";
 import React from "react";
 
 const LogoSlider = ({ data = SliderData }) => {
@@ -33,7 +33,7 @@ const LogoSlider = ({ data = SliderData }) => {
                       alt={item.alt}
                     />
                   </div>
-                )
+                ),
               )}
           </div>
         </div>

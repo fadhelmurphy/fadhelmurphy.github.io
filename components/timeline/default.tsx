@@ -1,8 +1,15 @@
 import React from "react";
-import {timelineData} from "Consts/timeline"
-import {TimelineDataArrayType, TimelineDataType} from "Consts/types/timeline.type"
+import { timelineData } from "Consts/timeline";
+import {
+  TimelineDataArrayType,
+  TimelineDataType,
+} from "Consts/types/timeline.type";
 
-const DefaultTimeline = ({data = timelineData}: {data:TimelineDataType[]}): JSX.Element => {
+const DefaultTimeline = ({
+  data = timelineData,
+}: {
+  data: TimelineDataType[];
+}): JSX.Element => {
   return (
     <ol className="relative my-12 mx-5 border-l border-blue-400">
       {data.map((item: TimelineDataType) => {
@@ -35,16 +42,22 @@ const DefaultTimeline = ({data = timelineData}: {data:TimelineDataType[]}): JSX.
             {item.data.map((job: TimelineDataArrayType) => {
               return (
                 <>
-                  {job.jobtitle && (<time className="mb-2 block font-normal leading-6">
-                    {job.jobtitle}
-                  </time>)}
-                  {job.time && (<time className="mb-2 block font-normal leading-6 text-base-2">
-                    {job.time}
-                  </time>)}
-                  {job.description && (<p
-                    className="font-normal text-base-2 py-5"
-                    dangerouslySetInnerHTML={{ __html: job.description }}
-                  />)}
+                  {job.jobtitle && (
+                    <time className="mb-2 block font-normal leading-6">
+                      {job.jobtitle}
+                    </time>
+                  )}
+                  {job.time && (
+                    <time className="mb-2 block font-normal leading-6 text-base-2">
+                      {job.time}
+                    </time>
+                  )}
+                  {job.description && (
+                    <p
+                      className="font-normal text-base-2 py-5"
+                      dangerouslySetInnerHTML={{ __html: job.description }}
+                    />
+                  )}
                   <br />
                 </>
               );

@@ -1,10 +1,10 @@
-import { defineConfig } from 'astro/config';
-import mdx from '@astrojs/mdx';
-import tailwind from '@astrojs/tailwind';
+import { defineConfig } from "astro/config";
+import mdx from "@astrojs/mdx";
+import tailwind from "@astrojs/tailwind";
 import react from "@astrojs/react";
 
 import image from "@astrojs/image";
-import {prefix} from "./consts/config"
+import { prefix } from "./consts/config";
 
 // https://astro.build/config
 export default defineConfig({

@@ -1,4 +1,4 @@
 export type TemplateType = {
-    id: string;
-    component: React.FC<any>;
-  };
+  id: string;
+  component: React.FC<any>;
+};

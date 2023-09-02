@@ -1,10 +1,10 @@
 export type TimelineDataArrayType = {
-    [key:string]: string | boolean;
-    description?: string;
-}
+  [key: string]: string | boolean;
+  description?: string;
+};
 
-export type TimelineDataType = { 
-    company: string; 
-    data: TimelineDataArrayType[]; 
-    isLatest: boolean; 
-}
+export type TimelineDataType = {
+  company: string;
+  data: TimelineDataArrayType[];
+  isLatest: boolean;
+};

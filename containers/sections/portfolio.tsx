@@ -1,7 +1,6 @@
 import { TimelineSectionsType } from "Containers/types/sections.type";
 
 const Portfolio = ({ title, desc, children }: TimelineSectionsType) => {
-
   //  (384 * 2.5) + (isMobile ? 192 * 3.5 : 0)
   return (
     <>
@@ -19,7 +18,9 @@ const Portfolio = ({ title, desc, children }: TimelineSectionsType) => {
               {desc}
             </div>
           </div>
-          <div className="content grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20">{children}</div>
+          <div className="content grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20">
+            {children}
+          </div>
         </div>
       </div>
     </>

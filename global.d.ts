@@ -1,4 +1,4 @@
-declare var require: any
+declare var require: any;
 
 declare module "*.png" {
   const value: any;

@@ -1,7 +1,6 @@
-
 export type SliderDataType = {
-    [key:string]: any;
-}
+  [key: string]: any;
+};
 export type SliderDataType = {
-    [key:string]: any;
-}
+  [key: string]: any;
+};

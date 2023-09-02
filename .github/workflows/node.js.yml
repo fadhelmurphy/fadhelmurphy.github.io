@@ -5,13 +5,12 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -19,32 +18,31 @@ jobs:
         node-version: [16.12.0]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-      
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - name: Installing my packages
-      run: yarn install
+      - name: Installing my packages
+        run: yarn install
 
-    - name: Build my App  
-      run: yarn build
-      env:
-        ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
-        # NEXT_PUBLIC_BASE_PATH: /revamp
-    # - run: npm run export
-    #   env:
-    #     ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
-        # NEXT_PUBLIC_BASE_PATH: /revamp
-    - run: touch ./dist/.nojekyll
-    
-    - name: Deploy 🚀
-      uses: JamesIves/github-pages-deploy-action@3.5.9
-      env:
-        ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
-      with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        BRANCH: gh-pages # The branch the action should deploy to.
-        FOLDER: dist # The folder the action should deploy.
+      - name: Build my App
+        run: yarn build
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
+          # NEXT_PUBLIC_BASE_PATH: /revamp
+      # - run: npm run export
+      #   env:
+      #     ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+      # NEXT_PUBLIC_BASE_PATH: /revamp
+      - run: touch ./dist/.nojekyll
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@3.5.9
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: dist # The folder the action should deploy.

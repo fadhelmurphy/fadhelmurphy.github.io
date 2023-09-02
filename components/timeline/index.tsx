@@ -6,8 +6,8 @@
 /* eslint-disable react/no-array-index-key */
 import React from "react";
 import { TemplateType } from "Consts/types/template.type";
-const Default = React.lazy(() => import('./default'));
-const Education = React.lazy(() => import('./education'));
+const Default = React.lazy(() => import("./default"));
+const Education = React.lazy(() => import("./education"));
 
 const Template: TemplateType[] = [
   {
@@ -20,11 +20,16 @@ const Template: TemplateType[] = [
   },
 ];
 
-const Sections = ({ type, ...props }: { [key:string]: any }): React.ReactNode[] =>
+const Sections = ({
+  type,
+  ...props
+}: {
+  [key: string]: any;
+}): React.ReactNode[] =>
   Template.filter((item) => item.id === type).map(
     (style: TemplateType, idx: number) => (
       <style.component key={`${String(idx + 1)}`} {...props} />
-    )
+    ),
   );
 
 Sections.defaultProps = {

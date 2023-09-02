@@ -16,7 +16,6 @@
 }
 
 @layer components {
-
   .porto-card {
     @apply hover:rotate-[0deg] rounded-[10px] md:rounded-[20px] flex flex-col justify-between mx-6 md:mx-0 md:m-0 bg-[linear-gradient(345deg,rgba(255,255,255,0)_0%,rgba(255,255,255,1)_45%)] md:bg-[linear-gradient(345deg,rgba(255,255,255,0)_0%,rgba(255,255,255,1)_60%)];
     transition: all 0.5s ease 0s;
@@ -34,31 +33,32 @@
     overflow: hidden;
     @apply relative h-full w-full bg-white rounded-[10px] md:rounded-[20px] md:drop-shadow-[0_55px_55px_rgba(255,187,0,1)];
     object-fit: contain;
-}
+  }
 
-.porto-card .content {
-  max-height: 20em;
-  @apply rounded-[0_0_20px_20px] p-[1.2rem] md:p-[2.5rem] pt-[0];
-}
+  .porto-card .content {
+    max-height: 20em;
+    @apply rounded-[0_0_20px_20px] p-[1.2rem] md:p-[2.5rem] pt-[0];
+  }
 }
 
 @layer base {
-    html, body {
+  html,
+  body {
     padding: 0;
     margin: 0;
     font-family: Poppins, system-ui, sans-serif;
     @apply text-base;
-    }
-    body {
+  }
+  body {
     @apply bg-no-repeat bg-top bg-contain;
-    }
-    ::selection {
-      background: rgb(224 242 254);
-      color: rgb(59 130 246);
-      text-shadow: none;
+  }
+  ::selection {
+    background: rgb(224 242 254);
+    color: rgb(59 130 246);
+    text-shadow: none;
   }
 
-    * {
-      box-sizing: border-box;
-    }
+  * {
+    box-sizing: border-box;
   }
+}
