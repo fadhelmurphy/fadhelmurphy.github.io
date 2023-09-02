@@ -7,7 +7,9 @@
     "start": "astro dev",
     "build": "rm -rf ./dist && astro build",
     "preview": "astro preview",
-    "prettier": "eslint --max-warnings 0 && stylelint ./src/**/*.{css,scss,sass} --fix --cache --cache-location && prettier --write .",
+    "lint:css": "stylelint ./src/**/*.{css,scss,sass} --fix --cache --cache-location",
+    "prettier": "prettier --write .",
+    "eslint": "eslint --max-warnings 0",
     "astro": "astro",
     "prepare": "husky install"
   },
