@@ -7,7 +7,6 @@
     "start": "astro dev",
     "build": "rm -rf ./dist && astro build",
     "preview": "astro preview",
-    "lint:scss": "stylelint src/**/*.scss --fix",
     "prettier": "prettier --write . && eslint --max-warnings 0",
     "astro": "astro",
     "prepare": "husky install"
