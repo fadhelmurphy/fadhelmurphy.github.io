@@ -4,7 +4,7 @@
 
 :root {
   --bg-url-header-home: url("/revamp/home/bg.png");
-  --bg-url-timeline-1: url(/revamp/home/timeline-section-1.jpg);
+  --bg-url-timeline-1: url("/revamp/home/timeline-section-1.jpg");
 }
 
 @layer utilities {
@@ -21,9 +21,11 @@
   .section-timeline {
     @apply bg-section-timeline md:bg-section-timeline-md 2xl:bg-section-timeline-lg py-24 bg-no-repeat bg-[140%_30%] bg-[length:100%,45%];
   }
+
   .contact-btn {
     @apply appearance-none rounded px-5 py-3 md:px-[2em] md:py-[1em] text-sm md:text-xl font-medium my-[4em];
   }
+
   .porto-card {
     @apply hover:rotate-[0deg] rounded-[10px] md:rounded-[20px] flex flex-col justify-between mx-6 md:mx-0 md:m-0 bg-[linear-gradient(345deg,rgba(255,255,255,0)_0%,rgba(255,255,255,1)_45%)] md:bg-[linear-gradient(345deg,rgba(255,255,255,0)_0%,rgba(255,255,255,1)_60%)];
 
