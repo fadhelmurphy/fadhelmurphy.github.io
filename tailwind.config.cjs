@@ -51,13 +51,13 @@ module.exports = {
   plugins: [
     function ({ matchUtilities, addComponents, theme }) {
       theme["backgroundImage"] = {
-        edu: "radial-gradient(230% 70% at 10% 80%,#ff47bd -75%,rgba(253,119,2,0.1) 10%,rgba(255,255,255,0) 0%), radial-gradient(circle at 80% 71%,#ff47bd -75%,rgba(253,119,2,0.1) 3%,rgba(255,255,255,0) 0%)",
+        edu: "radial-gradient(230% 70% at 10% 80%,#ff47bd -75%,rgba(253,119,2,0.1) 10%,rgba(255,255,255,0) 11%), radial-gradient(circle at 80% 71%,#ff47bd -75%,rgba(253,119,2,0.1) 3%,rgba(255,255,255,0) 4%)",
         "edu-md":
           "radial-gradient(65% 110% at 87% 65%, #ff47bd -30%, rgba(253, 119, 2, 0.15) 15%, rgba(255,255,255,0) 25%)",
         "edu-lg":
           "radial-gradient(188% 222% at 116% 50%, #ff47bd 0%, rgba(253, 119, 2, 0.2) 13%, rgba(255,255,255,0) 19%)",
         timeline:
-          "radial-gradient(circle at 75% 8%,rgba(96,165,250,.7) -3%,rgba(165,243,252,.2) 2%,rgba(255,255,255,0) 0%)",
+          "radial-gradient(circle at 75% 8%,rgba(96,165,250,.7) -3%,rgba(165,243,252,.2) 2%,rgba(255,255,255,0) 3%)",
         "timeline-md":
           "radial-gradient(circle at 100% 55%, rgba(96,165,250,1) 0%, rgba(165,243,252,0.5) 9%, rgba(255,255,255,0) 18%), var(--bg-url-timeline-1)",
         "timeline-lg":
