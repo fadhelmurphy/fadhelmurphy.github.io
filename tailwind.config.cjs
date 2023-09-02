@@ -50,6 +50,20 @@ module.exports = {
   },
   plugins: [
     function ({ matchUtilities, addComponents, theme }) {
+      
+  theme["backgroundImage"] = {
+    edu: "radial-gradient(230% 70% at 10% 80%, #ff47bd -20%, rgba(253, 119, 2, 0.15) 15%, rgba(255,255,255,0) 26%)",
+    "edu-md":
+      "radial-gradient(65% 110% at 87% 65%, #ff47bd -30%, rgba(253, 119, 2, 0.15) 15%, rgba(255,255,255,0) 25%)",
+    "edu-lg":
+      "radial-gradient(188% 222% at 116% 50%, #ff47bd 0%, rgba(253, 119, 2, 0.2) 13%, rgba(255,255,255,0) 19%)",
+    timeline:
+      "radial-gradient(circle at 100% 11%, rgba(96,165,250,0.7) 0%, rgba(165,243,252,0.5) 2%, rgba(255,255,255,0) 4%)",
+    "timeline-md":
+      "radial-gradient(circle at 100% 55%, rgba(96,165,250,1) 0%, rgba(165,243,252,0.5) 9%, rgba(255,255,255,0) 18%), var(--bg-url-timeline-1)",
+    "timeline-lg":
+      "radial-gradient(ellipse at -10% 75%, rgba(96,165,250,1) 0%, rgba(165,243,252,0.5) 12%, rgba(255,255,255,0) 15%), var(--bg-url-timeline-1)",
+  }
       matchUtilities(
         {
           "bg-section": (value) => {
@@ -59,21 +73,7 @@ module.exports = {
           },
         },
         {
-          values: flattenColorPalette(
-            Object.assign(theme("backgroundImage", {}), {
-              edu: "radial-gradient(230% 70% at 10% 80%, #ff47bd -20%, rgba(253, 119, 2, 0.15) 15%, rgba(255,255,255,0) 26%)",
-              "edu-md":
-                "radial-gradient(65% 110% at 87% 65%, #ff47bd -30%, rgba(253, 119, 2, 0.15) 15%, rgba(255,255,255,0) 25%)",
-              "edu-lg":
-                "radial-gradient(188% 222% at 116% 50%, #ff47bd 0%, rgba(253, 119, 2, 0.2) 13%, rgba(255,255,255,0) 19%)",
-              timeline:
-                "radial-gradient(circle at 100% 11%, rgba(96,165,250,0.7) 0%, rgba(165,243,252,0.5) 2%, rgba(255,255,255,0) 4%)",
-              "timeline-md":
-                "radial-gradient(circle at 100% 55%, rgba(96,165,250,1) 0%, rgba(165,243,252,0.5) 9%, rgba(255,255,255,0) 18%)",
-              "timeline-lg":
-                "radial-gradient(ellipse at -10% 75%, rgba(96,165,250,1) 0%, rgba(165,243,252,0.5) 12%, rgba(255,255,255,0) 15%)",
-            }),
-          ),
+          values: theme["backgroundImage"],
         },
       ),
         matchUtilities(

@@ -1,9 +1,10 @@
 ---
 // Click button, get confetti!
 // Styled by Tailwind :)
+const { className, style = null } = Astro.props;
 ---
 
-<button class="contact-btn appearance-none rounded bg-blue-500 px-[2em] py-[1em] text-xl font-medium text-sky-100 my-[4em]">
+<button class={`contact-btn${className ? ` ${className}` : ""}`} style={style}>
 	<slot />
 </button>
 

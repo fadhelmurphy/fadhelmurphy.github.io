@@ -4,11 +4,13 @@ import Button from "Components/Button.astro";
 import Header from "Components/header";
 import Timeline from "Components/timeline";
 import { prefix } from "Consts/config";
+import { TopHeaderMenuConst } from "Consts/logo";
 import { portoList } from "Consts/portolist";
 import { eduTimelineData } from "Consts/timeline";
 import Layout from "Containers/layout";
 import PortoList from "Containers/portoList";
 import Sections from "Containers/sections";
+import { SliderDataType } from "Consts/types/logo.type";
 // const condBg = import.meta.env.NODE_ENV === "production" ? "url(/revamp/home/bg.png)" : "url(/home/bg.png)";
 
 // Full Astro Component Syntax:
@@ -41,7 +43,22 @@ import Sections from "Containers/sections";
     <br/>
     <h2 class="text-5xl md:text-7xl font-semibold">Let's <span class="bg-gradient-to-r from-teal-500 to-[rgba(96,165,250,1)] text-transparent bg-clip-text">work together!</span></h2>
     <p class="text-2xl md:text-4xl font-normal my-5 text-base-2">fadhelijlalfalah@gmail.com</p>
-    <Button>Get in touch</Button>
+    <div class="flex gap-4 md:gap-8">
+      
+    <Button className="text-white bg-cyan-500">Get in touch</Button>
+  {TopHeaderMenuConst.reverse().map((item: SliderDataType) => (
+    
+      <a
+      href={item.href}
+      target="_blank"
+      >
+    <Button className={`md:p-6`} style={`background-color:${item.background};color:${item.color};`}>
+      <span
+        set:html={item.icon}
+      ></span>
+  </Button></a>
+  ))}
+    </div>
   </div>
 
   <style is:global>
