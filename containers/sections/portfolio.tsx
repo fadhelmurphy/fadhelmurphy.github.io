@@ -5,7 +5,7 @@ const Portfolio = ({ title, desc, children }: TimelineSectionsType) => {
   return (
     <>
       <div
-        className={`h-[calc(100vmax+350vmax)] md:h-[calc(100vmax+40vmax)] portfolio-timeline-sections w-100 porto-clip-mweb md:porto-clip relative flex items-center justify-center`}
+        className="portfolio-timeline-sections h-[calc(100vmax+350vmax)] md:h-[190vmax] lg:h-[calc(100vmax+40vmax)] portfolio-timeline-sections w-100 porto-clip-mweb md:porto-clip relative flex items-center justify-center"
       >
         <div className="absolute z-[2] h-full w-full bg-white-vertical-gradient" />
         <div className="absolute z-[1] h-full w-full bg-edu-orange" />
