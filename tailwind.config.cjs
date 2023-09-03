@@ -53,15 +53,15 @@ module.exports = {
       theme["backgroundImage"] = {
         edu: "radial-gradient(230% 70% at 10% 80%,#ff47bd -75%,rgba(253,119,2,0.1) 10%,rgba(255,255,255,0) 11%), radial-gradient(circle at 80% 71%,#ff47bd -75%,rgba(253,119,2,0.1) 3%,rgba(255,255,255,0) 4%)",
         "edu-md":
-          "radial-gradient(65% 110% at 87% 65%, #ff47bd -30%, rgba(253, 119, 2, 0.15) 15%, rgba(255,255,255,0) 25%)",
+          "radial-gradient(circle at 75% 75%,#ff47bd -75%,rgba(253,119,2,.1) 8%,rgba(255,255,255,0) 9%),radial-gradient(circle at 90% 45%,#ff47bd -75%,rgba(253,119,2,.1) 3%,rgba(255,255,255,0) 4%)",
         "edu-lg":
-          "radial-gradient(188% 222% at 116% 50%, #ff47bd 0%, rgba(253, 119, 2, 0.2) 13%, rgba(255,255,255,0) 19%)",
+          "radial-gradient(circle at 75% 75%,#ff47bd -75%,rgba(253,119,2,.1) 8%,rgba(255,255,255,0) 9%),radial-gradient(circle at 90% 45%,#ff47bd -75%,rgba(253,119,2,.1) 3%,rgba(255,255,255,0) 4%)",
         timeline:
           "radial-gradient(circle at 75% 8%,rgba(96,165,250,.7) -3%,rgba(165,243,252,.2) 2%,rgba(255,255,255,0) 3%)",
         "timeline-md":
-          "radial-gradient(circle at 100% 55%, rgba(96,165,250,1) 0%, rgba(165,243,252,0.5) 9%, rgba(255,255,255,0) 18%), var(--bg-url-timeline-1)",
+          "radial-gradient(ellipse at -10% 75%,rgba(96,165,250,1) 0%,rgba(165,243,252,.5) 12%,rgba(255,255,255,0) 15%), radial-gradient(circle at 88% 40%,rgba(96,165,250,.7) -10%,rgba(165,243,252,.2) 8%,rgba(255,255,255,0) 9%),radial-gradient(circle at 70% 50%,rgba(96,165,250,.5) -10%,rgba(165,243,252,.2) 5%,rgba(255,255,255,0) 6%), radial-gradient(circle at 90% 55%,rgba(96,165,250,.3) -10%,rgba(165,243,252,.2) 2%,rgba(255,255,255,0) 3%)",
         "timeline-lg":
-          "radial-gradient(ellipse at -10% 75%, rgba(96,165,250,1) 0%, rgba(165,243,252,0.5) 12%, rgba(255,255,255,0) 15%), var(--bg-url-timeline-1)",
+          "radial-gradient(ellipse at -10% 75%,rgba(96,165,250,1) 0%,rgba(165,243,252,.5) 12%,rgba(255,255,255,0) 15%), radial-gradient(circle at 88% 40%,rgba(96,165,250,.7) -10%,rgba(165,243,252,.2) 8%,rgba(255,255,255,0) 9%),radial-gradient(circle at 70% 50%,rgba(96,165,250,.5) -10%,rgba(165,243,252,.2) 5%,rgba(255,255,255,0) 6%), radial-gradient(circle at 90% 55%,rgba(96,165,250,.3) -10%,rgba(165,243,252,.2) 2%,rgba(255,255,255,0) 3%)",
       };
       matchUtilities(
         {

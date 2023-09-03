@@ -4,7 +4,6 @@
 
 :root {
   --bg-url-header-home: url("/revamp/home/bg.png");
-  --bg-url-timeline-1: url("/revamp/home/timeline-section-1.jpg");
 }
 
 @layer utilities {
@@ -19,7 +18,7 @@
 
 @layer components {
   .section-timeline {
-    @apply bg-section-timeline md:bg-section-timeline-md 2xl:bg-section-timeline-lg py-24 bg-no-repeat bg-[140%_30%] bg-[length:100%,45%];
+    @apply bg-section-timeline md:bg-section-timeline-md 2xl:bg-section-timeline-lg py-24 bg-no-repeat bg-[140%_30%] bg-[length:100%,100%,100%,100%];
   }
 
   .contact-btn {
