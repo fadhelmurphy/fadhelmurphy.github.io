@@ -56,7 +56,7 @@ jobs:
       - name: Installing my packages
         run: yarn install
 
-      - name: Build my App
+      - name: Build Astro
         run: yarn build
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
@@ -72,6 +72,6 @@ jobs:
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
         with:
-          GITHUB_TOKEN: ${{ secrets.DEPLOY_PERSONAL_SITE }}
+          GITHUB_TOKEN: ${{ secrets.DEPLOY_ASTRO }}
           BRANCH: gh-pages # The branch the action should deploy to.
           FOLDER: dist # The folder the action should deploy.
