@@ -34,21 +34,9 @@ jobs:
         run: yarn build
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
-          # NEXT_PUBLIC_BASE_PATH: /revamp
-      # - run: npm run export
-      #   env:
-      #     ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
-      # NEXT_PUBLIC_BASE_PATH: /revamp
       - run: touch ./public/.nojekyll
-
-      - name: Deploy Gatsby 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
-        env:
-          ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
-        with:
-          GITHUB_TOKEN: ${{ secrets.DEPLOY_PERSONAL_SITE }}
-          BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: public # The folder the action should deploy.
+      - run: mkdir ../hasil-build
+      - run: cp ./public/* ../hasil-build/
 
       - name: Checkout astro
         run: git fetch && git checkout dev-astro
@@ -60,18 +48,13 @@ jobs:
         run: yarn build
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
-          # NEXT_PUBLIC_BASE_PATH: /revamp
-      # - run: npm run export
-      #   env:
-      #     ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
-      # NEXT_PUBLIC_BASE_PATH: /revamp
       - run: touch ./dist/.nojekyll
+      - run: cp ./dist/* ../hasil-build/
 
-      - name: Deploy Astro 🚀
-        uses: JamesIves/github-pages-deploy-action@3.5.9
-        env:
-          ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
-        with:
-          GITHUB_TOKEN: ${{ secrets.DEPLOY_ASTRO }}
-          BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: dist # The folder the action should deploy.
+      - name: Install gh-pages
+        run: npm install -g gh-pages
+
+      - name: Deploooy
+        run: gh-pages -d ../hasil-build/ -b gh-pages
+
+
