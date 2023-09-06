@@ -1,1 +1,1 @@
-export const prefix: string = "/revamp";
+export const prefix: string = "/";
