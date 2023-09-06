@@ -1,13 +1,13 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Node.js CI
+name: Deploy Gatsby with astro
 
 on:
   push:
-    branches: [dev-astro]
+    branches: [dev]
   pull_request:
-    branches: [dev-astro]
+    branches: [dev]
 
 jobs:
   build:
@@ -24,6 +24,35 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Checkout gatsby
+        run: git fetch && git checkout dev
+
+      - name: Installing my packages
+        run: yarn install
+
+      - name: Build Gatsby
+        run: yarn build
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
+          # NEXT_PUBLIC_BASE_PATH: /revamp
+      # - run: npm run export
+      #   env:
+      #     ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+      # NEXT_PUBLIC_BASE_PATH: /revamp
+      - run: touch ./public/.nojekyll
+
+      - name: Deploy Gatsby 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
+        with:
+          GITHUB_TOKEN: ${{ secrets.DEPLOY_PERSONAL_SITE }}
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: public # The folder the action should deploy.
+
+      - name: Checkout astro
+        run: git fetch && git checkout dev-astro
+
       - name: Installing my packages
         run: yarn install
 
@@ -38,11 +67,11 @@ jobs:
       # NEXT_PUBLIC_BASE_PATH: /revamp
       - run: touch ./dist/.nojekyll
 
-      - name: Deploy 🚀
+      - name: Deploy Astro 🚀
         uses: JamesIves/github-pages-deploy-action@3.5.9
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.DEPLOY_PERSONAL_SITE }}
           BRANCH: gh-pages # The branch the action should deploy to.
           FOLDER: dist # The folder the action should deploy.
