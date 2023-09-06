@@ -36,7 +36,7 @@ jobs:
       #   env:
       #     ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
       # NEXT_PUBLIC_BASE_PATH: /revamp
-      - run: touch ./dist/.nojekyll
+      - run: touch ./public/.nojekyll
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
