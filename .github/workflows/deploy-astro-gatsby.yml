@@ -5,9 +5,9 @@ name: Deploy Gatsby with astro
 
 on:
   push:
-    branches: [dev]
+    branches: [dev-astro]
   pull_request:
-    branches: [dev]
+    branches: [dev-astro]
 
 jobs:
   build:
