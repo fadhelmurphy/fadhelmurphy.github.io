@@ -2,7 +2,7 @@ import { Container, Row, Col, Image, React } from "./index"
 
 export const BlogPageHeader = () => 
 {
-    const siteTitle = "Blog"
+    const siteTitle = "Article"
 return (
     <>
     <header

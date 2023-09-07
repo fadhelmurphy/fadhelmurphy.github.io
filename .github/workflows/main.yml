@@ -1,7 +1,7 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Deploy astro
+name: Deploy Gatsby with astro
 
 on:
   push:
@@ -23,23 +23,33 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      
-      - name: checkout astro
+
+      - name: Checkout gatsby
+        run: git fetch && git checkout dev
+
+      - name: Installing my packages
+        run: yarn install
+
+      - name: Build Gatsby
+        run: yarn build
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
+      - run: touch ./public/.nojekyll
+      - run: mkdir ../hasil-build
+      - run: sudo cp -r ./public/* ../hasil-build/
+
+      - name: Checkout astro
         run: git fetch && git checkout dev-astro
 
       - name: Installing my packages
         run: yarn install
 
-      - name: Build my App
+      - name: Build Astro
         run: yarn build
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
-          # NEXT_PUBLIC_BASE_PATH: /revamp
-      # - run: npm run export
-      #   env:
-      #     ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
-      # NEXT_PUBLIC_BASE_PATH: /revamp
       - run: touch ./dist/.nojekyll
+      - run: sudo cp -r ./dist/* ../hasil-build/
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.5.9
@@ -48,4 +58,4 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: dist # The folder the action should deploy.
+          FOLDER: ../hasil-build/ # The folder the action should deploy.

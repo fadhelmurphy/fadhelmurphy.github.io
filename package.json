@@ -56,6 +56,7 @@
   "scripts": {
     "build": "gatsby build",
     "deploy": "gatsby build && gh-pages -d public -b gh-pages",
+    "deploy:static": "gh-pages -d public -b gh-pages",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "serve": "gatsby serve",
     "dev": "gatsby develop",
