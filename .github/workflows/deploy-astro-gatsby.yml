@@ -18,7 +18,7 @@ jobs:
         node-version: [16.15.0]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -50,12 +50,19 @@ jobs:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
       - run: touch ./dist/.nojekyll
       - run: sudo cp -r ./dist/* ../hasil-build/
-
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@3.5.9
-        env:
-          ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v2
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: ../hasil-build/ # The folder the action should deploy.
+          # upload entire directory
+          path: '../hasil-build/'
+    # Deployment job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{steps.deployment.outputs.page_url}}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
