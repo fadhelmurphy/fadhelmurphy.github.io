@@ -60,11 +60,11 @@ export const SliderData: SliderDataType[] = [
   },
   {
     type: "text",
-    text: "OpenCV"
+    text: "OpenCV",
   },
   {
     type: "text",
-    text: "Matplotlib"
+    text: "Matplotlib",
   },
   {
     type: "image",
