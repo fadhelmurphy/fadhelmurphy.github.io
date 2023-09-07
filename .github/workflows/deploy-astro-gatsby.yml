@@ -36,7 +36,7 @@ jobs:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
       - run: touch ./public/.nojekyll
       - run: mkdir ../hasil-build
-      - run: cp ./public/* ../hasil-build/
+      - run: sudo cp ./public/* ../hasil-build/
 
       - name: Checkout astro
         run: git fetch && git checkout dev-astro
@@ -49,12 +49,10 @@ jobs:
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
       - run: touch ./dist/.nojekyll
-      - run: cp ./dist/* ../hasil-build/
+      - run: sudo cp ./dist/* ../hasil-build/
 
       - name: Install gh-pages
         run: npm install -g gh-pages
 
       - name: Deploooy
         run: gh-pages -d ../hasil-build/ -b gh-pages
-
-
