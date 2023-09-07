@@ -59,14 +59,12 @@ export const SliderData: SliderDataType[] = [
     alt: "tensorflow fadhel",
   },
   {
-    type: "image",
-    url: opencvImgpng.src,
-    alt: "opencv fadhel",
+    type: "text",
+    text: "OpenCV"
   },
   {
-    type: "image",
-    url: matplotlibImgpng.src,
-    alt: "matplotlib fadhel",
+    type: "text",
+    text: "Matplotlib"
   },
   {
     type: "image",

@@ -63,7 +63,15 @@ import { SliderDataType } from "Consts/types/logo.type";
 
   <style is:global>
     body {
-      background-image: var(--bg-url-header-home);
+      background-image: 
+      radial-gradient(circle at -20% -1%,rgba(96,165,250,.7) 1%,rgba(165,243,252,.2) 2%,rgba(255,255,255,0) 3%), radial-gradient(circle at 90% 5%,#ff47bd -2%,rgba(253,119,2,.2) 1.5%,rgba(255,255,255,0) 2%);
+    backdrop-filter: blur(100px);
     }
+    @media only screen and (min-width: 768px) {
+    body {
+      background-image: var(--bg-url-header-home);
+      backdrop-filter: unset;
+    }
+  }
   </style>
 </Layout>
