@@ -5,9 +5,6 @@ import gatsbyImgpng from "@PubAssets/home/stack-slider/gatsby-icon.png";
 import nginxImgpng from "@PubAssets/home/stack-slider/nginx.png";
 import dockerImgpng from "@PubAssets/home/stack-slider/docker.png";
 import tensorflowImgpng from "@PubAssets/home/stack-slider/tensorflow-logo.png";
-import matplotlibImgpng from "@PubAssets/home/stack-slider/matplotlib.svg";
-import kerasImgpng from "@PubAssets/home/stack-slider/keras.png";
-import opencvImgpng from "@PubAssets/home/stack-slider/opencv.png";
 import mysqlImgpng from "@PubAssets/home/stack-slider/mysql.png";
 import laravelImgpng from "@PubAssets/home/stack-slider/laravel.png";
 
@@ -22,14 +19,16 @@ export const SliderData: SliderDataType[] = [
     alt: "webpack fadhel",
   },
   {
-    type: "image",
-    url: nginxImgpng.src,
-    alt: "nginx fadhel",
+    type: "text",
+    text: "AWS"
   },
   {
-    type: "image",
-    url: dockerImgpng.src,
-    alt: "docker fadhel",
+    type: "text",
+    text: "NGINX"
+  },
+  {
+    type: "text",
+    text: "Docker"
   },
   {
     type: "image",
@@ -67,9 +66,8 @@ export const SliderData: SliderDataType[] = [
     text: "Matplotlib",
   },
   {
-    type: "image",
-    url: kerasImgpng.src,
-    alt: "Keras fadhel",
+    type: "text",
+    text: "Keras",
   },
   {
     type: "text",
