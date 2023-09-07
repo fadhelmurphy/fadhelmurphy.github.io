@@ -20,15 +20,15 @@ export const SliderData: SliderDataType[] = [
   },
   {
     type: "text",
-    text: "AWS"
+    text: "AWS",
   },
   {
     type: "text",
-    text: "NGINX"
+    text: "NGINX",
   },
   {
     type: "text",
-    text: "Docker"
+    text: "Docker",
   },
   {
     type: "image",

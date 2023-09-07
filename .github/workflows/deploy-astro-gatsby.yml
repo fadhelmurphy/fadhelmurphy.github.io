@@ -54,7 +54,7 @@ jobs:
         uses: actions/upload-pages-artifact@v2
         with:
           # upload entire directory
-          path: '../hasil-build/'
+          path: "../hasil-build/"
     # Deployment job
   deploy:
     environment:
