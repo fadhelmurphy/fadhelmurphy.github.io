@@ -10,8 +10,8 @@ import image from "@astrojs/image";
 export default defineConfig({
   integrations: [mdx(), tailwind(), react(), image()],
   // site: `http://localhost:3000${prefix}`,
-  // base: prefix, # base prefix
-  // assetsPrefix: prefix, # asset prefix
+  base: prefix, // base prefix
+  assetsPrefix: prefix, // asset prefix
   // publicDir: prefix,
   // build: {
   //   assetsPrefix: prefix
