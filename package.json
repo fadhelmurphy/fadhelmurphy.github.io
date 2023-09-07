@@ -1,6 +1,5 @@
 {
   "name": "astro-tw",
-  "type": "module",
   "version": "0.0.1",
   "scripts": {
     "dev": "cp .env.local .env && astro dev",
