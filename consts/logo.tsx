@@ -2,8 +2,12 @@ import { SliderDataType } from "Consts/types/logo.type";
 import webpackImgpng from "@PubAssets/home/stack-slider/webpack.png";
 import nextjsImgpng from "@PubAssets/home/stack-slider/nextjs-icon.png";
 import gatsbyImgpng from "@PubAssets/home/stack-slider/gatsby-icon.png";
-import flutterImgpng from "@PubAssets/home/stack-slider/flutter.png";
+import nginxImgpng from "@PubAssets/home/stack-slider/nginx.png";
+import dockerImgpng from "@PubAssets/home/stack-slider/docker.png";
 import tensorflowImgpng from "@PubAssets/home/stack-slider/tensorflow-logo.png";
+import matplotlibImgpng from "@PubAssets/home/stack-slider/matplotlib.svg";
+import kerasImgpng from "@PubAssets/home/stack-slider/keras.png";
+import opencvImgpng from "@PubAssets/home/stack-slider/opencv.png";
 import mysqlImgpng from "@PubAssets/home/stack-slider/mysql.png";
 import laravelImgpng from "@PubAssets/home/stack-slider/laravel.png";
 
@@ -19,6 +23,16 @@ export const SliderData: SliderDataType[] = [
   },
   {
     type: "image",
+    url: nginxImgpng.src,
+    alt: "nginx fadhel",
+  },
+  {
+    type: "image",
+    url: dockerImgpng.src,
+    alt: "docker fadhel",
+  },
+  {
+    type: "image",
     url: nextjsImgpng.src,
     alt: "nextjs fadhel",
   },
@@ -26,11 +40,6 @@ export const SliderData: SliderDataType[] = [
     type: "image",
     url: gatsbyImgpng.src,
     alt: "gatsby fadhel",
-  },
-  {
-    type: "image",
-    url: flutterImgpng.src,
-    alt: "flutter fadhel",
   },
   {
     type: "text",
@@ -48,6 +57,21 @@ export const SliderData: SliderDataType[] = [
     type: "image",
     url: tensorflowImgpng.src,
     alt: "tensorflow fadhel",
+  },
+  {
+    type: "image",
+    url: opencvImgpng.src,
+    alt: "opencv fadhel",
+  },
+  {
+    type: "image",
+    url: matplotlibImgpng.src,
+    alt: "matplotlib fadhel",
+  },
+  {
+    type: "image",
+    url: kerasImgpng.src,
+    alt: "Keras fadhel",
   },
   {
     type: "text",
