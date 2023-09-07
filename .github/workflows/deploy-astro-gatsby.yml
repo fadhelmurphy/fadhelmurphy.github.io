@@ -51,8 +51,11 @@ jobs:
       - run: touch ./dist/.nojekyll
       - run: sudo cp -r ./dist/* ../hasil-build/
 
-      - name: Install gh-pages
-        run: npm install -g gh-pages
-
-      - name: Deploooy
-        run: gh-pages -d ../hasil-build/ -b gh-pages
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@3.5.9
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: ../hasil-build/ # The folder the action should deploy.
