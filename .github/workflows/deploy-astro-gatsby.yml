@@ -81,7 +81,10 @@ jobs:
     # Add a dependency to the build job
     needs: deploy
     if:  |
-      github.ref == 'refs/heads/staging-astro' || github.ref == 'refs/heads/production-astro'
+      contains('
+        refs/heads/staging-astro
+        refs/heads/production-astro
+      ', github.ref)
     runs-on: ubuntu-latest
     steps:
     - name: Extract branch name
