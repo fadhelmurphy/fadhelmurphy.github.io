@@ -6,10 +6,10 @@ name: Deploy Gatsby X astro
 on:
   push:
     tags: 
-    - v*-release
+    - '*v*-release'
   pull_request:
     tags: 
-    - v*-release
+    - '*v*-release'
 
 jobs:
   build:
