@@ -1,5 +1,5 @@
 module.exports = {
-  '*.{js,jsx,ts,tsx}': ['eslint --fix', 'eslint'],
+  '!(lint-staged.config)*.{js,jsx,ts,tsx}': ['eslint --fix', 'eslint'],
   '**/*.ts?(x)': () => 'tsc --noEmit --pretty',
   '*.json': ['prettier --write']
 }
