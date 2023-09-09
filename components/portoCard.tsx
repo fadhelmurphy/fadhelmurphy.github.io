@@ -3,7 +3,7 @@ interface IPortoCard {
   desc: string
   image: string
   linkObj: Record<string, string>
-  customClassName: 0 | '' | false | null | undefined | string | boolean
+  customClassName: false | string
 }
 
 const PortoCard = ({ title, desc, image, linkObj, customClassName }: IPortoCard): JSX.Element => {
