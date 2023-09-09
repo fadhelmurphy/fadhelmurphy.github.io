@@ -1,16 +1,25 @@
-const PortoCard = ({ title, desc, image, linkObj, customClassName }) => {
+interface IPortoCard {
+  title: string
+  desc: string
+  image: string
+  linkObj: Record<string, string>
+  customClassName: 0 | '' | false | null | undefined | string | boolean
+}
+
+const PortoCard = ({ title, desc, image, linkObj, customClassName }: IPortoCard): JSX.Element => {
+  const className = `porto-card${customClassName ? ` ${customClassName}` : ''}`
   return (
     <>
       <a
         href={linkObj.link}
-        className={`porto-card${customClassName ? ` ${customClassName}` : ""}`}
+        className={className}
       >
         <div className="head">
           <div className="title">
             <h2>{title}</h2>
           </div>
           <div className="desc">
-            <h3>{desc}</h3>
+            <p>{desc}</p>
             {/* <a href={linkObj.link}>{linkObj.text}</a> */}
           </div>
         </div>
@@ -19,6 +28,6 @@ const PortoCard = ({ title, desc, image, linkObj, customClassName }) => {
         </div>
       </a>
     </>
-  );
-};
-export default PortoCard;
+  )
+}
+export default PortoCard

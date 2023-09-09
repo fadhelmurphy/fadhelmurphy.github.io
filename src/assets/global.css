@@ -31,12 +31,12 @@
 
   .porto-card {
     @apply hover:rotate-[0deg] rounded-[10px] md:rounded-[20px] flex flex-col justify-between mx-6 md:mx-0 md:m-0 bg-[linear-gradient(345deg,rgba(255,255,255,0)_0%,rgba(255,255,255,1)_45%)] md:bg-[linear-gradient(345deg,rgba(255,255,255,0)_0%,rgba(255,255,255,1)_60%)];
-
+    height: 100%;
     transition: all 0.5s ease 0s;
   }
 
   .porto-card .head {
-    @apply p-[1.5rem] pb-[0] md:p-[2.5rem];
+    @apply p-[1.5rem] pb-[0] md:p-[2.5rem] md:pb-[0];
   }
 
   .porto-card .head .title {
@@ -52,11 +52,11 @@
 
     @apply relative h-full w-full bg-white rounded-[10px] md:rounded-[20px] md:drop-shadow-[0_55px_55px_rgba(255,187,0,1)];
 
-    object-fit: contain;
+    object-fit: cover;
   }
 
   .porto-card .content {
-    max-height: 20em;
+    @apply h-max md:h-[20em];
 
     @apply rounded-[0_0_20px_20px] p-[1.2rem] md:p-[2.5rem] pt-[0];
   }
