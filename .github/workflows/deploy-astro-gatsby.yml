@@ -97,6 +97,14 @@ jobs:
       shell: bash
       run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
       id: extract_branch
+    - name: Download site content
+      uses: actions/download-artifact@v2
+      with:
+        name: hasil-build-web
+    - name: Archive site content
+      uses: thedoctor0/zip-release@master
+      with:
+        filename: downloaded-artifact.zip
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
@@ -107,21 +115,12 @@ jobs:
         release_name: ${{ steps.extract_branch.outputs.branch }}-${{ github.run_number }}
         draft: false
         prerelease: false
-    - uses: actions/checkout@v3
-    - name: Download site content
-      uses: actions/download-artifact@v2
-      with:
-        name: hasil-build-web
-    - name: Archive site content
-      uses: thedoctor0/zip-release@master
-      with:
-        filename: hasil-build-web.zip
     - name: Upload release assets
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }} # This token is provided by Actions, you do not need to create your own token
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./hasil-build-web.zip
+        asset_path: ./downloaded-artifact.zip
         asset_name: hasil-build-web-${{ steps.extract_branch.outputs.branch }}-${{ github.run_number }}.zip
         asset_content_type: application/zip
