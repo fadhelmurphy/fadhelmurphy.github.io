@@ -1,13 +1,15 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Deploy Gatsby with astro
+name: Deploy Gatsby X astro
 
 on:
   push:
-    branches: [dev]
+    tags: 
+    - v*-release
   pull_request:
-    branches: [dev]
+    tags: 
+    - v*-release
 
 jobs:
   build:
@@ -51,9 +53,11 @@ jobs:
       - run: touch ./dist/.nojekyll
       - run: sudo cp -r ./dist/* ../hasil-build/
       - name: Upload Artifact
+        id: upload_artifact
         uses: actions/upload-pages-artifact@v2
         with:
           # upload entire directory
+          name: hasil-build-web
           path: "../hasil-build/"
   # Deploy job
   deploy:
@@ -67,7 +71,7 @@ jobs:
 
     # Deploy to the github-pages environment
     environment:
-      name: github-pages
+      name: github-pages # kalo ini env yg di repository github
       url: ${{ steps.deployment.outputs.page_url }}
 
     # Specify runner + deployment step
@@ -76,3 +80,49 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2 # or the latest "vX.X.X" version tag for this action
+        with:
+          artifact_name: hasil-build-web
+
+  versioning:
+    # Add a dependency to the build job
+    needs: deploy
+    # if:  |
+    #   contains('
+    #     refs/heads/staging-astro
+    #     refs/heads/production-astro
+    #     refs/heads/staging-gatsby
+    #     refs/heads/production-gatsby
+    #   ', github.ref)
+    runs-on: ubuntu-latest
+    steps:
+    - name: Extract tag name
+      shell: bash
+      run: echo "tag=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/tags/}}" >> $GITHUB_OUTPUT
+      id: extract_tag
+    - name: Download site content
+      uses: actions/download-artifact@v2
+      with:
+        name: hasil-build-web
+    - name: Archive site content
+      uses: thedoctor0/zip-release@master # buat kompres
+      with:
+        filename: downloaded-artifact.zip
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }} # This token is provided by Actions, you do not need to create your own token
+      with:
+        tag_name: ${{ steps.extract_tag.outputs.tag }}
+        release_name: ${{ steps.extract_tag.outputs.tag }}
+        draft: false
+        prerelease: false
+    - name: Upload release assets
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }} # This token is provided by Actions, you do not need to create your own token
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./downloaded-artifact.zip
+        asset_name: combine-build-astro-x-gatsby-${{ steps.extract_tag.outputs.tag }}.zip
+        asset_content_type: application/zip
