@@ -93,20 +93,6 @@ jobs:
       shell: bash
       run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
       id: extract_branch
-    - name: Checkout Astro
-      if:  |
-        contains('
-          refs/heads/staging-astro
-          refs/heads/production-astro
-        ', github.ref)
-      run: git fetch && git checkout dev-astro
-    - name: Checkout Gatsby
-      if:  |
-        contains('
-          refs/heads/staging-gatsby
-          refs/heads/production-gatsby
-        ', github.ref)
-      run: git fetch && git checkout dev
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
