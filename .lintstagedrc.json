@@ -1,5 +1,0 @@
-{
-  "*.{js,jsx,ts,tsx}": ["eslint --fix", "eslint"],
-  "**/*.ts": "tsc --noEmit --pretty",
-  "!(./.lintstagedrc)*.json": ["prettier --write"]
-}
