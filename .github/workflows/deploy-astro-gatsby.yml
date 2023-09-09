@@ -68,7 +68,7 @@ jobs:
     # Deploy to the github-pages environment
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      # url: ${{ steps.deployment.outputs.page_url }}
 
     # Specify runner + deployment step
     runs-on: ubuntu-latest
@@ -76,3 +76,34 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2 # or the latest "vX.X.X" version tag for this action
+
+  versioning:
+    # Add a dependency to the build job
+    needs: deploy
+    if:  |
+      github.ref == 'refs/heads/staging-astro' || github.ref == 'refs/heads/production-astro'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Extract branch name
+      shell: bash
+      run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+      id: extract_branch
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.DEPLOY_PERSONAL_SITE }} # This token is provided by Actions, you do not need to create your own token
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: ${{ steps.extract_branch.outputs.branch }}-${{ github.ref }}
+        draft: false
+        prerelease: false
+    - name: Upload release assets
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.DEPLOY_PERSONAL_SITE }} # This token is provided by Actions, you do not need to create your own token
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        assets_path: .
+        assets_name: webgue-v${{ github.run_number }}.zip
+        asset_content_type: application/zip
