@@ -80,11 +80,11 @@ jobs:
   versioning:
     # Add a dependency to the build job
     needs: deploy
-    # if:  |
-    #   contains('
-    #     refs/heads/staging-astro
-    #     refs/heads/production-astro
-    #   ', github.ref)
+    if:  |
+      contains('
+        refs/heads/staging-astro
+        refs/heads/production-astro
+      ', github.ref)
     runs-on: ubuntu-latest
     steps:
     - name: Extract branch name
@@ -97,8 +97,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }} # This token is provided by Actions, you do not need to create your own token
       with:
-        tag_name: ${{ github.ref }}
-        release_name: ${{ steps.extract_branch.outputs.branch }}-${{ github.ref }}
+        tag_name: ${{ steps.extract_branch.outputs.branch }}-${{ github.run_number }}
+        release_name: ${{ steps.extract_branch.outputs.branch }}-${{ github.run_number }}
         draft: false
         prerelease: false
     - name: Upload release assets
