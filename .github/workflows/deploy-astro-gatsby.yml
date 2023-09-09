@@ -79,7 +79,7 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v2 # or the latest "vX.X.X" version tag for this action
         with:
-          name: hasil-build-web
+          artifact_name: hasil-build-web
 
   versioning:
     # Add a dependency to the build job
