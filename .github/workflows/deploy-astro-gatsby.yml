@@ -84,6 +84,8 @@ jobs:
       contains('
         refs/heads/staging-astro
         refs/heads/production-astro
+        refs/heads/staging-gatsby
+        refs/heads/production-gatsby
       ', github.ref)
     runs-on: ubuntu-latest
     steps:
@@ -91,6 +93,20 @@ jobs:
       shell: bash
       run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
       id: extract_branch
+    - name: Checkout Astro
+      if:  |
+        contains('
+          refs/heads/staging-astro
+          refs/heads/production-astro
+        ', github.ref)
+      run: git fetch && git checkout dev-astro
+    - name: Checkout Gatsby
+      if:  |
+        contains('
+          refs/heads/staging-gatsby
+          refs/heads/production-gatsby
+        ', github.ref)
+      run: git fetch && git checkout dev
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
@@ -107,6 +123,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }} # This token is provided by Actions, you do not need to create your own token
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        assets_path: "*"
-        assets_name: webgue-v${{ github.run_number }}.zip
+        asset_path: .
+        asset_name: webgue-${{ steps.extract_branch.outputs.branch }}-v${{ github.run_number }}.zip
         asset_content_type: application/zip
