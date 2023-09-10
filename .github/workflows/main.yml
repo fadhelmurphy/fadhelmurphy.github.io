@@ -5,9 +5,13 @@ name: Deploy Gatsby X astro
 
 on:
   push:
+    branches:
+      - "*-article"
     tags: 
     - '*v*-release'
   pull_request:
+    branches:
+      - "*-article"
     tags: 
     - '*v*-release'
 
@@ -86,6 +90,10 @@ jobs:
   versioning:
     # Add a dependency to the build job
     needs: deploy
+    if:  |
+      contains('
+        refs/tags
+      ', github.ref)
     # if:  |
     #   contains('
     #     refs/heads/staging-astro
