@@ -1,6 +1,6 @@
 ---
 title: Membuat UI Component Library
-date: 2020-10-20T00:00:00.000Z
+date: 2023-09-09T00:00:00.000Z
 path: /membuat-ui-component-library
 tags: ["Frontend", "Javascript-library"]
 ---
