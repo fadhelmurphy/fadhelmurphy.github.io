@@ -5,9 +5,13 @@ name: Deploy Gatsby X astro
 
 on:
   push:
+    branches:
+      - "*-article"
     tags: 
     - '*v*-release'
   pull_request:
+    branches:
+      - "*-article"
     tags: 
     - '*v*-release'
 
@@ -33,11 +37,9 @@ jobs:
         run: yarn install
 
       - name: Build Gatsby
-        run: yarn build
+        run: yarn build && touch ./public/.nojekyll && mkdir ../hasil-build && sudo cp -r ./public/* ../hasil-build/
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
-      - run: touch ./public/.nojekyll
-      - run: mkdir ../hasil-build && sudo cp -r ./public/* ../hasil-build/
       - name: Update Gatsby Article
         if: github.ref == 'refs/heads/gatsby-article'
         run: yarn build && sudo cp -r ./public/* ../hasil-build/
