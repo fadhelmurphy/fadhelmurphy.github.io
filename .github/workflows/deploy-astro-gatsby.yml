@@ -37,8 +37,13 @@ jobs:
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
       - run: touch ./public/.nojekyll
-      - run: mkdir ../hasil-build
-      - run: sudo cp -r ./public/* ../hasil-build/
+      - run: mkdir ../hasil-build && sudo cp -r ./public/* ../hasil-build/
+      - name: Update Gatsby Article
+        if: github.ref == 'refs/heads/gatsby-article'
+        run: yarn build && sudo cp -r ./public/* ../hasil-build/
+      - name: Update Astro Article
+        if: github.ref == 'refs/heads/astro-article'
+        run: yarn build && sudo cp -r ./dist/* ../hasil-build/
 
       - name: Checkout astro
         run: git fetch && git checkout dev-astro
@@ -47,11 +52,9 @@ jobs:
         run: yarn install
 
       - name: Build Astro
-        run: yarn build
+        run: yarn build && touch ./dist/.nojekyll && sudo cp -r ./dist/* ../hasil-build/
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
-      - run: touch ./dist/.nojekyll
-      - run: sudo cp -r ./dist/* ../hasil-build/
       - name: Upload Artifact
         id: upload_artifact
         uses: actions/upload-pages-artifact@v2
