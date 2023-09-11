@@ -45,18 +45,21 @@ jobs:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
       - name: Update Gatsby Article
         if: github.ref == 'refs/heads/gatsby-article'
-        run: git fetch && git checkout gatsby-article && yarn build && sudo cp -r ./public/* ../hasil-build/
+        run: git fetch && git checkout gatsby-article && yarn install && yarn build && sudo cp -r ./public/* ../hasil-build/
       - name: Update Astro Article
         if: github.ref == 'refs/heads/astro-article'
-        run: git fetch && git checkout astro-article && yarn build && sudo cp -r ./dist/* ../hasil-build/
+        run: git fetch && git checkout astro-article && yarn install && yarn build && sudo cp -r ./dist/* ../hasil-build/
 
       - name: Checkout astro
+        if: github.ref != 'refs/heads/astro-article'
         run: git fetch && git checkout dev-astro
 
       - name: Installing my packages
+        if: github.ref != 'refs/heads/astro-article'
         run: yarn install
 
       - name: Build Astro
+        if: github.ref != 'refs/heads/astro-article'
         run: yarn build && touch ./dist/.nojekyll && sudo cp -r ./dist/* ../hasil-build/
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
