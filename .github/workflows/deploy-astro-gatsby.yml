@@ -30,6 +30,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Bikin directory hasil build
+        run: mkdir ../hasil-build
+
       - name: Checkout gatsby
         if: github.ref != 'refs/heads/gatsby-article'
         run: git fetch && git checkout dev
@@ -40,7 +43,7 @@ jobs:
 
       - name: Build Gatsby
         if: github.ref != 'refs/heads/gatsby-article'
-        run: yarn build && touch ./public/.nojekyll && mkdir ../hasil-build && sudo cp -r ./public/* ../hasil-build/
+        run: yarn build && touch ./public/.nojekyll && sudo cp -r ./public/* ../hasil-build/
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
       - name: Update Gatsby Article
