@@ -51,7 +51,7 @@ module.exports = {
   plugins: [
     function ({ matchUtilities, addComponents, theme }) {
       theme.backgroundImage = {
-        edu: 'radial-gradient(230% 70% at 10% 80%,#ff47bd -75%,rgba(253,119,2,0.1) 10%,rgba(255,255,255,0) 11%), radial-gradient(circle at 80% 71%,#ff47bd -75%,rgba(253,119,2,0.1) 3%,rgba(255,255,255,0) 4%)',
+        edu: 'url(/home/circle-yellow-m-blur.png),url(/home/circle-yellow.png)',
         'edu-md':
           'url(/home/circle-yellow-m-blur.png),url(/home/circle-yellow.png)',
         'edu-lg':
