@@ -13,5 +13,8 @@
 }
 
 .Section_portofolio {
-    background-image: url(/home/bg-porto.png), linear-gradient(289deg, rgba(253, 119, 2, 1) 0%, rgba(255, 187, 0, 1) 100%);
+    background-image: url(/home/bg-porto.png), radial-gradient(109.42% 248.28% at 0% 0%, #FFC85D 33.33%, #FFB571 60.94%, #FFA2AD 100%);
+}
+.Section_portofolio_mobile {
+    background-position: 90% 110%, 100%;
 }

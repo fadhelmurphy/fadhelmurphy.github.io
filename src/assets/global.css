@@ -12,7 +12,7 @@
   }
 
   .porto-clip-mweb {
-    clip-path: polygon(30% 3%, 100% 0, 100% 95%, 75% 97%, 0 95%, 0 0);
+    clip-path: polygon(30% 2%, 100% 0, 100% 95%, 75% 97%, 0 95%, 0 0);
   }
 }
 
@@ -50,7 +50,7 @@
   .porto-card .content img {
     overflow: hidden;
 
-    @apply relative h-full w-full bg-white rounded-[10px] md:rounded-[20px] md:drop-shadow-[0_55px_55px_rgba(255,187,0,1)];
+    @apply relative h-full w-full bg-white rounded-[10px] md:rounded-[20px] md:drop-shadow-[0_55px_55px_#ffc85d];
 
     object-fit: cover;
   }
