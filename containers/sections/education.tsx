@@ -1,9 +1,10 @@
-import { TimelineSectionsType } from "Containers/types/sections.type";
+import { type TimelineSectionsType } from 'Containers/types/sections.type'
+import styles from './section.module.scss'
 
-const Education = ({ title, children }: TimelineSectionsType) => {
+const Education = ({ title, children }: TimelineSectionsType): JSX.Element => {
   return (
     <>
-      <div className="education-timeline-sections bg-section-edu md:bg-section-edu-md 2xl:bg-section-edu-lg pb-48">
+      <div className={`education-timeline-sections bg-section-edu md:bg-section-edu-md 2xl:bg-section-edu-lg pb-48 ${styles.Section_education}`}>
         <div className="mx-auto grid grid-cols-1 md:grid-cols-2">
           <div className="head flex justify-center items-center relative">
             <div className="radial-white-gradient-bg" />
@@ -16,7 +17,7 @@ const Education = ({ title, children }: TimelineSectionsType) => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Education;
+export default Education
