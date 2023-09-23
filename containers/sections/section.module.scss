@@ -1,8 +1,12 @@
 .Section_default { 
-    background-position: 100% 100%,95% 45%,75% 55%;
+    background-position: 100% 100%,95% 45%,75% 55%,90% 55%;
 }
 .Section_education {
     background-repeat: no-repeat;
-    background-size: 20%, 100%;
-    background-position: 80% 85%, 100%;
+    background-size: 20%, 10%;
+    background-position: 80% 85%, 90% 45%;
+}
+
+.Section_portofolio {
+    background-image: url(/home/bg-porto.png), linear-gradient(289deg, rgba(253, 119, 2, 1) 0%, rgba(255, 187, 0, 1) 100%);
 }

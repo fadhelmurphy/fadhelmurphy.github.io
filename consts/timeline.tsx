@@ -1,27 +1,27 @@
-import { TimelineDataType } from "Consts/types/timeline.type";
+import { type TimelineDataType } from 'Consts/types/timeline.type'
 
 export const timelineData: TimelineDataType[] = [
   {
-    company: "Good Doctor Technology.",
+    company: 'Good Doctor Technology.',
     data: [
       {
-        jobtitle: "Frontend Developer - Part-time",
-        time: "Aug 2023",
+        jobtitle: 'Frontend Developer - Part-time',
+        time: 'Aug 2023',
         description: `
         A company that is riding the coattails of this rise is Good Doctor Technology, <br />
         a joint venture health-tech company between Ping An Healthcare and Technology, <br />
         Grab and ソフトバンク（SoftBank)
-        `,
-      },
+        `
+      }
     ],
-    isLatest: true,
+    isLatest: true
   },
   {
-    company: "Female Daily Network.",
+    company: 'Female Daily Network.',
     data: [
       {
-        jobtitle: "Frontend Developer - Full-time",
-        time: "Oct 2022 - Present",
+        jobtitle: 'Frontend Developer - Full-time',
+        time: 'Oct 2022 - Sep 2023',
         description: `
           Create Package/UI Library Component with Lerna, Rollup, React.js (Monorepo) <br />
           Setup deployment for Storybook using GitLab-CI & PM2 to EC2 AWS Server <br />
@@ -32,11 +32,11 @@ export const timelineData: TimelineDataType[] = [
           Develop and Maintain web application <br />
           Trace error with Sentry and New Relic <br />
           Create guidelines for other frontend engineers <br />
-          `,
+          `
       },
       {
-        jobtitle: "Jr. Frontend Developer - Full-time",
-        time: "Feb 2022 - Oct 2022",
+        jobtitle: 'Jr. Frontend Developer - Full-time',
+        time: 'Feb 2022 - Oct 2022',
         description: `
           Improve SEO & Accessibility score from 70 to 100 in Lighthouse <br />
           Implement Incremental Static Regeneration (ISR) on Homepage and
@@ -47,54 +47,54 @@ export const timelineData: TimelineDataType[] = [
           Create reusable components with Monorepo using Lerna <br />
           Integrate API and Create API Proxy using Fetch API, API routes
           Next.js, and Redux-saga <br />
-          `,
-      },
+          `
+      }
     ],
-    isLatest: true,
+    isLatest: false
   },
   {
-    company: "ISTIH & SPIN | Kemenperin.",
+    company: 'ISTIH & SPIN | Kemenperin.',
     data: [
       {
-        jobtitle: "Frontend Developer - Freelance",
-        time: "Dec 2022 - Mar 2023",
+        jobtitle: 'Frontend Developer - Freelance',
+        time: 'Dec 2022 - Mar 2023',
         description: `
           Setup and develop Map with realtime data using Next.js <br/>
   Slicing UI from Figma to Web using Ant Design <br/>
   Integrate API using Fetch API and state management with React Context <br/>
-          `,
+          `
       },
       {
-        jobtitle: "Frontend Developer - Freelance",
-        time: "Dec 2020 - Feb 2021",
+        jobtitle: 'Frontend Developer - Freelance',
+        time: 'Dec 2020 - Feb 2021',
         description: `
           Develop Marketplace using Next.js <br/>
   Slicing UI from Figma to Web using Ant Design <br/>
   Integrate API using Fetch API and state management with Redux-saga <br/>
-          `,
-      },
+          `
+      }
     ],
-    isLatest: false,
+    isLatest: false
   },
   {
-    company: "ENO | Venture Mind Labs.",
+    company: 'ENO | Venture Mind Labs.',
     data: [
       {
-        jobtitle: "Frontend Developer - Freelance",
-        time: "Mar 2022 - May 2022",
+        jobtitle: 'Frontend Developer - Freelance',
+        time: 'Mar 2022 - May 2022',
         description: `
         Web Development with React, SWR, Chakra UI and Zustand
-        `,
-      },
+        `
+      }
     ],
-    isLatest: false,
+    isLatest: false
   },
   {
-    company: "Incubator Business Center Gunadarma.",
+    company: 'Incubator Business Center Gunadarma.',
     data: [
       {
-        jobtitle: "Frontend Developer - Internship",
-        time: "Sep 2021 - Jan 2022",
+        jobtitle: 'Frontend Developer - Internship',
+        time: 'Sep 2021 - Jan 2022',
         description: `
         Web Development with Next.js (React.js) + React Context  <br/>
 Implementing UI Design from Figma to Bootstrap, HighChart, Antd (Slicing)  <br/>
@@ -102,58 +102,58 @@ Implementing UI Design from Figma to Bootstrap, HighChart, Antd (Slicing)  <br/>
 Project: <br/>
 SIASN Instansi BKN  <br/>
 Dashboard Keluarga Sehat Kemenkes  <br/>
-        `,
-      },
+        `
+      }
     ],
-    isLatest: false,
+    isLatest: false
   },
   {
-    company: "BisaCPNS.",
+    company: 'BisaCPNS.',
     data: [
       {
-        jobtitle: "Frontend Developer - Freelance",
-        time: "May 2020",
+        jobtitle: 'Frontend Developer - Freelance',
+        time: 'May 2020',
         description: `
             Web development with native stack (HTML & CSS) + Bootstrap  <br/>
             Develop custom on scroll animation with AOS.js <br/>
-            `,
-      },
+            `
+      }
     ],
-    isLatest: false,
-  },
-];
+    isLatest: false
+  }
+]
 
 export const eduTimelineData: TimelineDataType[] = [
   {
-    company: "Purwadhika Digital Technology School.",
+    company: 'Purwadhika Digital Technology School.',
     data: [
       {
-        jobtitle: "Data Science",
-        time: "2023",
-      },
+        jobtitle: 'Data Science',
+        time: '2023'
+      }
     ],
-    isLatest: true,
+    isLatest: true
   },
   {
-    company: "Gunadarma University.",
+    company: 'Gunadarma University.',
     data: [
       {
-        jobtitle: "Informatics Engineering",
-        time: "Sep 2017 - Sep 2021",
-        description: `Cum Laude Honour - GPA 3.75/4.0`,
-      },
+        jobtitle: 'Informatics Engineering',
+        time: 'Sep 2017 - Sep 2021',
+        description: 'Cum Laude Honour - GPA 3.75/4.0'
+      }
     ],
-    isLatest: false,
+    isLatest: false
   },
   {
-    company: "SMAN 4 Tangerang.",
+    company: 'SMAN 4 Tangerang.',
     data: [
       {
-        jobtitle: "Natural Science",
-        time: "Sep 2014 - Sep 2017",
-        description: `I'm not good enough in school`,
-      },
+        jobtitle: 'Natural Science',
+        time: 'Sep 2014 - Sep 2017',
+        description: 'I\'m not good enough in school'
+      }
     ],
-    isLatest: false,
-  },
-];
+    isLatest: false
+  }
+]
