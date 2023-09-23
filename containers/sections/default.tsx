@@ -1,9 +1,10 @@
-import { TimelineSectionsType } from "Containers/types/sections.type";
+import { type TimelineSectionsType } from 'Containers/types/sections.type'
+import styles from './section.module.scss'
 
-const TimelineSections = ({ title, desc, children }: TimelineSectionsType) => {
+const TimelineSections = ({ title, desc, children }: TimelineSectionsType): JSX.Element => {
   return (
     <>
-      <div className="section-timeline">
+      <div className={`section-timeline ${styles.Section_default}`}>
         <div className="container mx-auto">
           <div className="head p-8 md:p-0">
             <div className="title font-header text-2xl font-semibold text-teal-500 md:text-3xl">
@@ -17,7 +18,7 @@ const TimelineSections = ({ title, desc, children }: TimelineSectionsType) => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default TimelineSections;
+export default TimelineSections

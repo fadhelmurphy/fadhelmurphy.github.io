@@ -1,10 +1,10 @@
-import { TimelineSectionsType } from "Containers/types/sections.type";
+import { type TimelineSectionsType } from 'Containers/types/sections.type'
 
-const Portfolio = ({ title, desc, children }: TimelineSectionsType) => {
+const Portfolio = ({ title, desc, children }: TimelineSectionsType): JSX.Element => {
   //  (384 * 2.5) + (isMobile ? 192 * 3.5 : 0)
   return (
     <>
-      <div className="portfolio-timeline-sections h-[calc(100vmax+350vmax)] md:h-[300vmax] lg:h-[255vmax] xl:h-[190vmax] 2xl:h-[calc(100vmax+40vmax)] portfolio-timeline-sections w-100 porto-clip-mweb md:porto-clip relative flex items-center justify-center">
+      <div className="portfolio-timeline-sections h-[calc(100vmax+360vmax)] md:h-[300vmax] lg:h-[255vmax] xl:h-[190vmax] 2xl:h-[calc(100vmax+40vmax)] portfolio-timeline-sections w-100 porto-clip-mweb md:porto-clip relative flex items-center justify-center">
         <div className="absolute z-[2] h-full w-full bg-white-vertical-gradient" />
         <div className="absolute z-[1] h-full w-full bg-edu-orange" />
         <div className="portfolio-timeline-sections-child container absolute z-[3] mx-auto h-full py-[12rem] md:py-[24rem]">
@@ -22,7 +22,7 @@ const Portfolio = ({ title, desc, children }: TimelineSectionsType) => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Portfolio;
+export default Portfolio

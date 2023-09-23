@@ -18,7 +18,7 @@
 
 @layer components {
   .section-timeline {
-    @apply bg-section-timeline md:bg-section-timeline-md 2xl:bg-section-timeline-lg py-24 bg-no-repeat bg-[140%_30%] bg-[length:100%,100%,100%,100%];
+    @apply bg-section-timeline md:bg-section-timeline-md 2xl:bg-section-timeline-lg py-24 bg-no-repeat bg-[length:100%,20%,25%,100%];
   }
 
   .education-timeline-sections {

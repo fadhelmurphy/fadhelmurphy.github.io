@@ -61,7 +61,7 @@ module.exports = {
         "timeline-md":
           "radial-gradient(ellipse at -10% 75%,rgba(96,165,250,1) 0%,rgba(165,243,252,.5) 12%,rgba(255,255,255,0) 15%), radial-gradient(circle at 88% 40%,rgba(96,165,250,.7) -10%,rgba(165,243,252,.2) 8%,rgba(255,255,255,0) 9%),radial-gradient(circle at 70% 50%,rgba(96,165,250,.5) -10%,rgba(165,243,252,.2) 5%,rgba(255,255,255,0) 6%), radial-gradient(circle at 90% 55%,rgba(96,165,250,.3) -10%,rgba(165,243,252,.2) 2%,rgba(255,255,255,0) 3%)",
         "timeline-lg":
-          "radial-gradient(ellipse at -10% 75%,rgba(96,165,250,1) 0%,rgba(165,243,252,.5) 12%,rgba(255,255,255,0) 15%), radial-gradient(circle at 88% 40%,rgba(96,165,250,.7) -10%,rgba(165,243,252,.2) 8%,rgba(255,255,255,0) 9%),radial-gradient(circle at 70% 50%,rgba(96,165,250,.5) -10%,rgba(165,243,252,.2) 5%,rgba(255,255,255,0) 6%), radial-gradient(circle at 90% 55%,rgba(96,165,250,.3) -10%,rgba(165,243,252,.2) 2%,rgba(255,255,255,0) 3%)",
+          "radial-gradient(ellipse at -10% 75%,rgba(96,165,250,1) 0%,rgba(165,243,252,.5) 12%,rgba(255,255,255,0) 15%), url(/home/circle.png),url(/home/donut.png), radial-gradient(circle at 90% 55%,rgba(96,165,250,.3) -10%,rgba(165,243,252,.2) 2%,rgba(255,255,255,0) 3%)",
       };
       matchUtilities(
         {
