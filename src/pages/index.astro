@@ -28,8 +28,8 @@ import { SliderDataType } from "Consts/types/logo.type";
 	<p slot="desc">I have previously worked for a few companies <br/>as a freelance and full-time front end developer.</p>
   <Timeline client:visible/>
   </Sections>
-  <Sections type="education" title="Education" client:only>
-  <Timeline type="education" data={eduTimelineData} client:only/>
+  <Sections type="education" title="Education">
+  <Timeline type="education" data={eduTimelineData} client:visible/>
   </Sections>
   
   <Sections type="portfolio" title="App Development" client:only>

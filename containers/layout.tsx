@@ -28,15 +28,15 @@ const Layout = ({
           rel="stylesheet"
         />
         <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-      <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
       </head>
       <body>
-      <script>
-        AOS.init();
-      </script>
+      <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
       {Header}
       {children}
       {Footer}
+      <script>
+        AOS.init();
+      </script>
       </body>
     </>
   )
