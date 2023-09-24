@@ -128,7 +128,7 @@ export const eduTimelineData: TimelineDataType[] = [
     company: 'Purwadhika Digital Technology School.',
     data: [
       {
-        jobtitle: 'Data Science',
+        jobtitle: 'Data Science & Machine Learning',
         time: '2023'
       }
     ],
