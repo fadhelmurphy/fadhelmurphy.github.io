@@ -13,6 +13,7 @@ const PortoCard = ({ title, desc, image, linkObj, customClassName }: IPortoCard)
       <a
         href={linkObj.link}
         className={className}
+        data-aos="fade-up" data-aos-duration="300"
       >
         <div className="head">
           <div className="title">

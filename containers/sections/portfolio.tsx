@@ -23,9 +23,9 @@ const Portfolio = ({ title, desc, children }: TimelineSectionsType): JSX.Element
         <div className="portfolio-timeline-sections-child container absolute z-[3] mx-auto h-full py-[12rem] md:py-[24rem]">
           <div className="head h-72 md:h-[15%] text-left p-8 pb-0 md:p-0">
             <div className="title font-header text-2xl md:text-3xl 2xl:text-4xl font-bold text-white">
-              <h2>{title}</h2>
+              <h2 data-aos="fade-up" data-aos-duration="700">{title}</h2>
             </div>
-            <div className="desc my-6 font-header text-6xl md:text-7xl 2xl:text-8xl font-semibold text-white">
+            <div data-aos="animation-scale-y" data-aos-duration="900" className="desc my-6 font-header text-6xl md:text-7xl 2xl:text-8xl font-semibold text-white">
               {desc}
             </div>
           </div>

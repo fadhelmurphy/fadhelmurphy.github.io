@@ -39,10 +39,10 @@ import { SliderDataType } from "Consts/types/logo.type";
     <PortoList data={portoList} client:only/>
     </Sections>
   <div class="container mx-5 md:mx-auto grid h-screen place-items-start content-center">
-    <h2 class="text-5xl md:text-7xl font-semibold">Do you have something great?</h2>
+    <h2 data-aos="animation-scale-y" data-aos-duration="900" class="text-5xl md:text-7xl font-semibold">Do you have something great?</h2>
     <br/>
-    <h2 class="text-5xl md:text-7xl font-semibold">Let's <span class="bg-gradient-to-r from-teal-500 to-[rgba(96,165,250,1)] text-transparent bg-clip-text">work together!</span></h2>
-    <p class="text-2xl md:text-4xl font-normal my-5 text-base-2">fadhelijlalfalah@gmail.com</p>
+    <h2 data-aos="animation-scale-y" data-aos-duration="900" class="text-5xl md:text-7xl font-semibold">Let's <span class="bg-gradient-to-r from-teal-500 to-[rgba(96,165,250,1)] text-transparent bg-clip-text">work together!</span></h2>
+    <p data-aos="fade-up" data-aos-duration="700" class="text-2xl md:text-4xl font-normal my-5 text-base-2">fadhelijlalfalah@gmail.com</p>
     <div class="flex gap-4 md:gap-8">
       
     <Button className="text-white bg-cyan-500">Get in touch</Button>
@@ -51,6 +51,7 @@ import { SliderDataType } from "Consts/types/logo.type";
       <a
       href={item.href}
       target="_blank"
+      data-aos="zoom-in" data-aos-duration="400"
       >
     <Button className={`md:p-6`} style={`background-color:${item.background};color:${item.color};`}>
       <span

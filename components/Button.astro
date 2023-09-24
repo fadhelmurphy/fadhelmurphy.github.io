@@ -4,7 +4,8 @@
 const { className, style = null } = Astro.props;
 ---
 
-<button class={`contact-btn${className ? ` ${className}` : ""}`} style={style}>
+<button
+data-aos="zoom-in" data-aos-duration="400" class={`contact-btn${className ? ` ${className}` : ""}`} style={style}>
 	<slot />
 </button>
 

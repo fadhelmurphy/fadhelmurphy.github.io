@@ -6,6 +6,19 @@
   --bg-url-header-home: url("/home/bg.png");
 }
 
+[data-aos="animation-scale-y"] {
+  transform: translateY(40px) scaleY(1.4);
+  opacity: 0;
+  -webkit-transition-timing-function: ease;
+  -o-transition-timing-function: ease;
+  transition-timing-function: ease;
+}
+[data-aos="animation-scale-y"].aos-animate {
+  transform: translateY(0) scaleY(1);
+  opacity: 1;
+  /* transform-origin: 0% 100%; */
+}
+
 @layer utilities {
   .porto-clip {
     clip-path: polygon(30% 5%, 100% 0, 100% 95%, 75% 100%, 0 95%, 0 0);
