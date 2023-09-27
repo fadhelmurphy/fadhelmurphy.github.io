@@ -1,9 +1,9 @@
-import { SliderData } from "Consts/logo";
-import { SliderDataType } from "Consts/types/logo.type";
-import React from "react";
+import { SliderData } from 'Consts/logo'
+import { type SliderDataType } from 'Consts/types/logo.type'
+import React from 'react'
 
-const LogoSlider = ({ data = SliderData }) => {
-  const duplicatedData: SliderDataType[] = [...data, ...data];
+const LogoSlider = ({ data = SliderData }): JSX.Element => {
+  const duplicatedData: SliderDataType[] = [...data, ...data]
   return (
     <>
       <div className="mx-auto mb-0 md:mb-24 py-12 md:p-0 relative">
@@ -12,7 +12,8 @@ const LogoSlider = ({ data = SliderData }) => {
             {duplicatedData &&
               duplicatedData.length > 0 &&
               duplicatedData.map((item: any, idx: number) =>
-                item.type === "text" ? (
+                item.type === 'text'
+                  ? (
                   <div
                     key={String(idx + 1)}
                     className="slide w-48 h-24 md:w-80 md:h-36 relative backdrop-blur-sm bg-white/50 drop-shadow-2xl rounded-lg"
@@ -21,7 +22,8 @@ const LogoSlider = ({ data = SliderData }) => {
                       {item.text}
                     </h2>
                   </div>
-                ) : (
+                    )
+                  : (
                   <div
                     key={String(idx + 1)}
                     className="slide w-48 h-24 md:w-80 md:h-36 relative backdrop-blur-sm bg-white/50 drop-shadow-2xl rounded-lg"
@@ -33,7 +35,7 @@ const LogoSlider = ({ data = SliderData }) => {
                       alt={item.alt}
                     />
                   </div>
-                ),
+                    )
               )}
           </div>
         </div>
@@ -83,6 +85,6 @@ const LogoSlider = ({ data = SliderData }) => {
         `}
       </style>
     </>
-  );
-};
-export default React.memo(LogoSlider);
+  )
+}
+export default React.memo(LogoSlider)

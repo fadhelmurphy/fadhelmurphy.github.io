@@ -1,13 +1,10 @@
 import TopHeaderMenu from 'Containers/top-header-menu'
-import LogoSlider from './logo-slider'
-
-interface Props {
-  yourname?: string
-  yourRole?: JSX.Element
-}
+import LogoSlider from '../logo-slider'
+import { type HeaderProps } from './types'
 
 const emoji = '%F0%9F%91%8B%F0%9F%8F%BC' // encode emoji manually
-const Header = ({ yourname, yourRole }: Props): JSX.Element => {
+const HomepageHeader = ({ yourname, yourRole }: HeaderProps): JSX.Element => {
+  const formattedHtml = { __html: yourname }
   return (
     <>
       <TopHeaderMenu />
@@ -15,7 +12,7 @@ const Header = ({ yourname, yourRole }: Props): JSX.Element => {
         <div className="inner container md:mx-auto text-left md:text-center">
           <p data-aos="fade-up" data-aos-duration="300"
             className="text-3xl md:text-4xl 2xl:text-6xl text-base-2 font-semibold font-header flex md:justify-center"
-            dangerouslySetInnerHTML={{ __html: yourname }}
+            dangerouslySetInnerHTML={formattedHtml as { __html: string }}
           />
           <h1 data-aos="animation-scale-y" data-aos-duration="500" className="title text-5xl md:text-7xl 2xl:text-[7rem] md:leading-none font-semibold font-header mt-4">
             {yourRole}
@@ -27,7 +24,7 @@ const Header = ({ yourname, yourRole }: Props): JSX.Element => {
   )
 }
 
-Header.defaultProps = {
+HomepageHeader.defaultProps = {
   yourname: `Hi, I'm Fadhel. <span style="margin-left: 1rem"><img src="https://emojicdn.elk.sh/${emoji}?style=apple" class="animate-waving-hand inline-block origin-[70%_70%] h-8 w-8 md:h-[40px] md:w-[40px] 2xl:h-[60px] 2xl:w-[60px]" alt="dada-dada" /></span>`,
   yourRole: (
     <>
@@ -51,10 +48,19 @@ Header.defaultProps = {
             right: 0;
             bottom: 18%;
             z-index: -1;
-        }
+        }   
+    body {
+      background-image: var(--bg-url-header-home-m);
+    }
+
+    @media (min-width: 768px) {
+      body {
+        background-image: var(--bg-url-header-home);
+      }
+    }
         `}
       </style>
     </>
   )
 }
-export default Header
+export default HomepageHeader

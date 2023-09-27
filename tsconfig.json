@@ -36,7 +36,7 @@
       "Helpers/*": ["./helpers/*"],
       "Lib/*": ["./lib/*"],
       "Containers/*": ["./containers/*"],
-      "Components/*": ["./components/*"],
+      "@/Components/*": ["./components/*"],
       "Consts/*": ["./consts/*"],
       "@PubAssets/*": ["./public/*"]
     },

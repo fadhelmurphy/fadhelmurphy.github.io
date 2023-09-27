@@ -4,6 +4,7 @@
 
 :root {
   --bg-url-header-home: url("/home/bg.png");
+  --bg-url-header-home-m: url("/home/bg-m.png");
 }
 
 [data-aos="animation-scale-y"] {

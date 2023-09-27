@@ -1,0 +1,30 @@
+---
+postTitle: "Kenapa harus baperan kalo bisa bercanda?"
+date: "23 Oct 2023"
+label: ["tongkrongan", "blog"]
+# layout: Containers/article.astro
+---
+
+import Button from "@/Components/Button.astro";
+import Header from "@/Components/header";
+import Layout from "Containers/layout";
+import { prefix } from "Consts/config";
+
+{/* # {frontmatter.title} */}
+
+<Layout>
+  {/* <Header slot="Header" /> */}
+  <Header variant="blog" {...frontmatter} />
+  <div class="px-8 pb-8 md:pt-8 md:container mx-auto md:w-[50%] place-items-center h-screen content-start">
+  <h1>Sebuah Heading 1</h1>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dictum dignissim consectetur. Vestibulum at quam in turpis ultrices congue. Pellentesque vel orci quis mi elementum sagittis. Cras arcu enim, vehicula vel nisi et, tincidunt rhoncus augue. Donec non varius enim. Donec tempus odio ut mi interdum, nec tristique enim tincidunt. In venenatis nisl mauris, vel finibus tellus sollicitudin sit amet. Fusce pellentesque nibh sit amet risus mollis porttitor. Nunc rutrum est ex, ac suscipit quam tincidunt vitae. Donec diam risus, vulputate ac odio quis, faucibus semper mi. Phasellus venenatis eros ac quam fringilla, non luctus lorem dictum. Curabitur nulla odio, convallis maximus sodales eu, auctor vel velit.
+
+Duis interdum pharetra metus in scelerisque. Morbi hendrerit justo vestibulum orci porta ultrices. Sed massa ante, mattis quis massa eu, tristique dignissim tellus. Vestibulum justo neque, congue sit amet nunc at, ornare ultrices dui. Nam sed ultricies felis. Nullam a posuere sem. Nullam nulla nisl, posuere in aliquet in, pretium nec urna. Aliquam ligula massa, congue non orci vel, viverra fringilla dui. Nulla facilisi. Vestibulum non semper nibh. Vivamus vel facilisis metus.
+
+In tristique orci velit, eget consectetur velit ullamcorper ut. Integer sagittis fringilla urna, nec eleifend enim facilisis a. In fringilla turpis eros, nec posuere massa accumsan ac. Suspendisse quis lobortis libero. Maecenas enim ipsum, cursus non commodo eget, laoreet rhoncus leo. Mauris mollis risus dui, eleifend rhoncus ante faucibus convallis. Integer vulputate consectetur ante a lobortis. Sed ullamcorper, nibh vitae tincidunt ultricies, eros justo pharetra sapien, vel viverra est erat quis libero. Cras ut magna eget ante aliquet vulputate a eget nisl. Donec vehicula felis nisl. In hendrerit nisi molestie, euismod elit nec, maximus diam. Nam ornare nisl leo, convallis accumsan odio pharetra vitae. Sed molestie, turpis id commodo venenatis, lacus lorem consequat enim, hendrerit pretium enim lacus ut velit.
+
+Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas quam leo, porta sed ullamcorper ut, commodo non orci. Nulla blandit id lorem sit amet viverra. Suspendisse cursus eleifend felis. Proin eu sodales justo. Nullam efficitur diam suscipit lacus malesuada pretium. Nam vel finibus tortor. Vivamus vel leo suscipit, condimentum risus eu, imperdiet velit. Proin volutpat, diam quis aliquam maximus, eros sapien faucibus sem, et ornare quam massa eget velit. Ut eu felis erat. Praesent ac posuere velit. Duis id est in erat semper accumsan nec ac erat.
+
+Maecenas pretium mi quis placerat facilisis. Aenean varius scelerisque quam, et aliquam est placerat at. Etiam gravida augue nec finibus varius. Curabitur metus augue, pretium dapibus risus sit amet, aliquet semper ante. Cras ante dui, faucibus non massa eu, mollis lacinia ex. Phasellus id nulla id nibh viverra scelerisque. Aenean magna lacus, malesuada nec ullamcorper a, molestie gravida mi.
+  </div>
+</Layout>
