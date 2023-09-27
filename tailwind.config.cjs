@@ -9,6 +9,34 @@ module.exports = {
   ],
   theme: {
     extend: {
+      typography: {
+        DEFAULT: {
+          css: {
+            color: '#2e3e6a!important',
+            h1: {
+              color: '#2e3e6a'
+            },
+            h2: {
+              color: '#2e3e6a'
+            },
+            h3: {
+              color: '#2e3e6a'
+            },
+            h4: {
+              color: '#2e3e6a'
+            },
+            h5: {
+              color: '#2e3e6a'
+            },
+            h6: {
+              color: '#2e3e6a'
+            },
+            p: {
+              color: '#2e3e6a'
+            },
+          }
+        }
+      },
       keyframes: {
         wave: {
           '0%': { transform: 'rotate( 0.0deg)' },
@@ -49,6 +77,7 @@ module.exports = {
     container: false
   },
   plugins: [
+    require('@tailwindcss/typography'),
     function ({ matchUtilities, addComponents, theme }) {
       theme.backgroundImage = {
         edu: 'url(/home/circle-yellow-m-blur.png),url(/home/circle-yellow.png)',
