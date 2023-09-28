@@ -1,20 +1,28 @@
-.Section_default { 
-    background-position: 100% 100%,95% 45%,75% 55%,90% 55%;
+.Section_default {
+    background-position: 100% 100%, 95% 45%, 75% 55%, 90% 55%;
 }
+
 .Section_education {
-    background-repeat: no-repeat;
-    background-size: 20%, 10%;
-    background-position: 80% 85%, 90% 45%;
-}
-.Section_education_mobile {
     background-repeat: no-repeat;
     background-size: 50%, 20%;
     background-position: 0% 85%, 80% 75%;
 }
 
+@media (min-width: 768px) {
+    .Section_education {
+        background-repeat: no-repeat;
+        background-size: 20%, 10%;
+        background-position: 80% 85%, 90% 45%;
+    }
+}
+
 .Section_portofolio {
     background-image: url(/home/bg-porto.png), radial-gradient(109.42% 248.28% at 0% 0%, #FFC85D 33.33%, #FFB571 60.94%, #FFA2AD 100%);
-}
-.Section_portofolio_mobile {
     background-position: 90% 100%, 100%;
+}
+
+@media (min-width: 768px) {
+    .Section_portofolio {
+        background-image: url(/home/bg-porto.png), radial-gradient(109.42% 248.28% at 0% 0%, #FFC85D 33.33%, #FFB571 60.94%, #FFA2AD 100%);
+    }
 }
