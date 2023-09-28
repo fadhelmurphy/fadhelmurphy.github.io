@@ -100,7 +100,7 @@ jobs:
   versioning:
     # Add a dependency to the build job
     needs: deploy
-    if: contains(github.ref, 'refs/tags')
+    if: contains(github.ref, 'refs/tags/*v*-release')
     runs-on: ubuntu-latest
     steps:
     - name: Extract tag name
