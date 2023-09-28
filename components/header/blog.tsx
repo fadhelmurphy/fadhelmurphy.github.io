@@ -1,4 +1,6 @@
 import { type HeaderProps } from './types'
+import BlogImg from '@/Assets/img/blog/blog-bg.png'
+import BlogImgM from '@/Assets/img/blog/blog-bg-m.png'
 
 const BlogHeader = ({ label = [], postTitle, date }: HeaderProps): JSX.Element => {
   return (
@@ -21,12 +23,12 @@ const BlogHeader = ({ label = [], postTitle, date }: HeaderProps): JSX.Element =
         {`
     
     body {
-      background-image: url(/blog/blog-bg-m.png);
+      background-image: url(${BlogImgM.src});
     }
 
     @media (min-width: 768px) {
       body {
-        background-image: url(/blog/blog-bg.png);
+        background-image: url(${BlogImg.src});
       }
     }
         `}

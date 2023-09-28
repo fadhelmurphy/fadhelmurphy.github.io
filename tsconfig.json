@@ -37,6 +37,8 @@
       "Lib/*": ["./lib/*"],
       "Containers/*": ["./containers/*"],
       "@/Components/*": ["./components/*"],
+      "@/Pages/*": ["./src/pages/*"],
+      "@/Assets/*": ["./src/assets/*"],
       "Consts/*": ["./consts/*"],
       "@PubAssets/*": ["./public/*"]
     },

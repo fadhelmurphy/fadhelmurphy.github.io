@@ -1,6 +1,8 @@
 import TopHeaderMenu from 'Containers/top-header-menu'
 import LogoSlider from '../logo-slider'
 import { type HeaderProps } from './types'
+import Bg from '@/Assets/img/home/bg.png'
+import BgM from '@/Assets/img/home/bg-m.png'
 
 const emoji = '%F0%9F%91%8B%F0%9F%8F%BC' // encode emoji manually
 const HomepageHeader = ({ yourname, yourRole }: HeaderProps): JSX.Element => {
@@ -50,12 +52,12 @@ HomepageHeader.defaultProps = {
             z-index: -1;
         }   
     body {
-      background-image: var(--bg-url-header-home-m);
+      background-image: url(${BgM.src});
     }
 
     @media (min-width: 768px) {
       body {
-        background-image: var(--bg-url-header-home);
+        background-image: url(${Bg.src});
       }
     }
         `}
