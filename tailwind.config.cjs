@@ -33,7 +33,7 @@ module.exports = {
             },
             p: {
               color: '#2e3e6a'
-            },
+            }
           }
         }
       },

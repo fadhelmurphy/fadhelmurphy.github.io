@@ -31,6 +31,9 @@
 }
 
 @layer components {
+  .container {
+    @apply md:max-w-screen-sm lg:max-w-screen-md xl:max-w-screen-lg 2xl:max-w-screen-xl;
+  }
   .section-timeline {
     @apply bg-section-timeline md:bg-section-timeline-md 2xl:bg-section-timeline-lg py-24 bg-no-repeat bg-[length:100%,20%,25%,5%];
   }
