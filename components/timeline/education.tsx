@@ -15,7 +15,8 @@ const DefaultTimeline = ({
       {data.map((item: TimelineDataType) => {
         return (
           <li>
-            <h3 data-aos="animation-scale-y" data-aos-duration="500" className="mb-1 mb-6 flex items-center text-2xl md:text-4xl 2xl:text-6xl font-semibold md:w-[75%]">
+            <h3 data-aos="animation-scale-y" data-aos-duration="500"
+            className="mb-1 mb-6 flex items-center text-2xl md:text-4xl 2xl:text-6xl font-semibold md:w-9/12 2xl:w-10/12">
               {item.company}
               {item.isLatest
                 ? (

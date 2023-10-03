@@ -16,7 +16,7 @@ const HomepageHeader = ({ yourname, yourRole }: HeaderProps): JSX.Element => {
             className="text-3xl md:text-4xl 2xl:text-6xl text-base-2 font-semibold font-header flex md:justify-center"
             dangerouslySetInnerHTML={formattedHtml as { __html: string }}
           />
-          <h1 data-aos="animation-scale-y" data-aos-duration="500" className="title text-5xl md:text-7xl 2xl:text-[7rem] md:leading-none font-semibold font-header mt-4">
+          <h1 data-aos="animation-scale-y" data-aos-duration="500" className="title text-5xl md:text-8xl md:leading-none font-semibold font-header mt-4">
             {yourRole}
           </h1>
         </div>
