@@ -4,6 +4,7 @@ import {
   type TimelineDataArrayType,
   type TimelineDataType
 } from 'Consts/types/timeline.type'
+import Badge from '../badge'
 
 const DefaultTimeline = ({
   data = timelineData
@@ -34,9 +35,9 @@ const DefaultTimeline = ({
               {item.company}
               {item.isLatest
                 ? (
-                <span className="mr-2 ml-3 rounded bg-sky-100 px-3.5 py-1.5 text-sm font-medium text-blue-500">
+                <Badge className='bg-sky-100 text-blue-500 mx-3'>
                   Latest
-                </span>
+                </Badge>
                   )
                 : null}
             </h3>

@@ -1,22 +1,22 @@
 import { type HeaderProps } from './types'
 import BlogImg from '@/Assets/img/blog/blog-bg.png'
 import BlogImgM from '@/Assets/img/blog/blog-bg-m.png'
+import Badge from '../badge'
 
 const BlogHeader = ({ label = [], postTitle, date }: HeaderProps): JSX.Element => {
   return (
     <>
-      <div className="h-screen md:h-screen mb-6 md:mb-24 px-8 md:px-0 flex flex-col justify-center">
-        <div className="inner container md:mx-auto text-left">
-          {label.length && label?.map((item) => (
-
-<span data-aos="fade-up" data-aos-duration="900" className="mr-[16px] rounded bg-[rgba(224,242,254,0.50)] px-3.5 py-1.5 text-sm font-medium text-blue-500">
-{item}
-      </span>
+      <div className="h-screen md:h-screen mb-6 md:mb-24 px-8 md:px-0 flex flex-col justify-center container md:mx-auto">
+        <div className="inner text-left md:w-[49.375rem]">
+          {label.length && label?.map((item, idx: number) => (
+            <Badge key={String(idx)} className="bg-white">
+              {item}
+            </Badge>
           ))}
-          <h1 data-aos="animation-scale-y" data-aos-duration="500" className="title text-[40px] md:text-[72px] leading-[40px] md:leading-[72px] my-[12px] font-semibold font-header mt-4">
+          <h1 data-aos="animation-scale-y" data-aos-duration="500" className="title text-[40px] md:text-[72px] leading-[40px] md:leading-[78px] my-[12px] font-semibold font-header mt-5">
             {postTitle}
           </h1>
-          <p data-aos="fade-up" data-aos-duration="900" className='text-[#617FAD] not-italic font-semibold leading-[normal] my-[12px]'>{`Published on ${date}`}</p>
+          <p data-aos="fade-up" data-aos-duration="900" className='text-[#617FAD] not-italic font-semibold leading-[normal] my-[2rem]'>{`Published on ${date}`}</p>
         </div>
       </div>
       <style>
