@@ -16,7 +16,7 @@ export async function getStaticPaths({paginate}) {
     const filteredPosts = allPosts.filter((post) => post.frontmatter.label.join(", ").includes(tag));
     return paginate(filteredPosts, {
       params: { tag },
-      pageSize: 1
+      pageSize: 6
     });
   });
 }
