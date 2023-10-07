@@ -77,6 +77,38 @@
 
     @apply rounded-[0_0_20px_20px] p-[1.2rem] md:p-[2.5rem] pt-[0];
   }
+
+  .blog-card {
+    @apply md:w-11/12 mb-5 md:mb-0 hover:rotate-[0deg] rounded-[10px] md:rounded-[20px] flex flex-col justify-between bg-white drop-shadow-2xl;
+    height: 100%;
+    transition: all 0.5s ease 0s;
+  }
+
+  .blog-card .head {
+    @apply px-4 py-3 md:p-[2.5rem] md:px-8 md:py-6;
+  }
+
+  .blog-card .head .title {
+    @apply mt-2.5 block text-base leading-4 md:text-xl md:leading-6 font-semibold md:font-semibold;
+  }
+
+  .blog-card .head .desc {
+    @apply mt-2.5 md:mt-5 text-xs leading-3 md:text-sm font-normal text-base-2;
+  }
+
+  .blog-card .content img {
+    overflow: hidden;
+
+    @apply relative h-full w-full bg-white rounded-[10px] md:rounded-[20px] md:drop-shadow-[0_55px_55px_#ffc85d];
+
+    object-fit: cover;
+  }
+
+  .blog-card .content {
+    @apply h-max md:h-[20em];
+
+    @apply rounded-[0_0_20px_20px] p-[1.2rem] md:p-[2.5rem] pt-[0];
+  }
 }
 
 @layer base {

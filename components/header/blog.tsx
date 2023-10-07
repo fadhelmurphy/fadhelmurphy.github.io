@@ -3,7 +3,7 @@ import BlogImg from '@/Assets/img/blog/blog-bg.png'
 import BlogImgM from '@/Assets/img/blog/blog-bg-m.png'
 import Badge from '../badge'
 
-const BlogHeader = ({ label = [], postTitle, date }: HeaderProps): JSX.Element => {
+const BlogHeader = ({ label = [], postTitle, date, bgImg, bgImgM }: HeaderProps): JSX.Element => {
   return (
     <>
       <div className="h-screen md:h-screen mb-6 md:mb-24 px-8 md:px-0 flex flex-col justify-center container md:mx-auto">
@@ -23,12 +23,12 @@ const BlogHeader = ({ label = [], postTitle, date }: HeaderProps): JSX.Element =
         {`
     
     body {
-      background-image: url(${BlogImgM.src});
+      background-image: url(${bgImgM ?? BlogImgM.src});
     }
 
     @media (min-width: 768px) {
       body {
-        background-image: url(${BlogImg.src});
+        background-image: url(${bgImg ?? BlogImg.src});
       }
     }
         `}

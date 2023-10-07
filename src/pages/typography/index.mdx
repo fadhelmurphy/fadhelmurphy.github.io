@@ -1,7 +1,7 @@
 ---
 postTitle: "Pengaruh musik punk dalam melakukan coding, menurut Jack Dorsey pendiri Twitter"
 date: "23 Oct 2023"
-label: ["code"]
+label: ["story"]
 # layout: Containers/article.astro
 ---
 
@@ -12,7 +12,7 @@ import { prefix } from "Consts/config";
 
 {/* # {frontmatter.title} */}
 
-<Layout>
+<Layout titlePage={frontmatter.postTitle}>
   {/* <Header slot="Header" /> */}
   <Header variant="blog" {...frontmatter} />
   <article class="prose lg:prose-xl text-[#2e3e6a] p-8 md:container mx-auto md:w-[50%] place-items-center content-start">
