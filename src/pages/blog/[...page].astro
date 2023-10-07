@@ -1,0 +1,36 @@
+---
+import Header from "@/Components/header";
+import Layout from "Containers/layout";
+import {stripHtml} from "Helpers/utils"
+import Bg from '@/Assets/img/blog/blog-list-bg.jpg'
+import BgM from '@/Assets/img/blog/blog-list-bg-m.jpg'
+import BlogCard from "@/Components/blogCard";
+const frontmatter = {
+    title: "The blog of<br/>Fadhel Ijlal Falah",
+    description: "Tidak semua software engineer itu wibu, yang anak skena juga ada tau",
+date: "23 Oct 2023",
+}
+export async function getStaticPaths({ paginate }: any) {
+    const allPosts = await Astro.glob('../../pages/blog/**/*.mdx');
+  // Generate pages from our array of astronauts, with 2 to a page
+  return paginate(allPosts, { pageSize: 4 });
+}
+// All paginated data is passed on the "page" prop
+const { page } = Astro.props;
+---
+
+<Layout titlePage={stripHtml(frontmatter.title)}>
+
+    <div class="px-8 md:px-0 flex flex-col gap-y-20 md:gap-y-40 !justify-end md:!justify-center">
+<Header variant="blog-list" bgImg={Bg.src} bgImgM={BgM.src} {...frontmatter} />
+<div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-10 mb-20">
+
+    {page.data.map((post: any) => 
+    <BlogCard 
+    title={post.frontmatter.postTitle} 
+    url={post?.url || ""} 
+    label={post.frontmatter.label}
+    date={post.frontmatter.date} />)}
+</div>
+    </div>
+    </Layout>

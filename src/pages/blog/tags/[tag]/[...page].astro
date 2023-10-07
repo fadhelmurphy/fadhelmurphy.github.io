@@ -1,25 +1,37 @@
 ---
 import Header from "@/Components/header";
 import Layout from "Containers/layout";
-import {stripHtml} from "Helpers/utils"
 import Bg from '@/Assets/img/blog/blog-list-bg.jpg'
 import BgM from '@/Assets/img/blog/blog-list-bg-m.jpg'
 import BlogCard from "@/Components/blogCard";
-const allPosts = await Astro.glob('../pages/blog/**/*.mdx');
 const frontmatter = {
     title: "The blog of<br/>Fadhel Ijlal Falah",
     description: "Tidak semua software engineer itu wibu, yang anak skena juga ada tau",
 date: "23 Oct 2023",
 }
+export async function getStaticPaths({paginate}) {
+  const allPosts = await Astro.glob('../../../../pages/blog/**/*.mdx');
+  const getLabel = allPosts.map((item) => (item.frontmatter.label)).flat().filter((value: string, index: number, array: string[]) => array.indexOf(value) === index);
+  return getLabel.flatMap((tag) => {
+    const filteredPosts = allPosts.filter((post) => post.frontmatter.label.join(", ").includes(tag));
+    return paginate(filteredPosts, {
+      params: { tag },
+      pageSize: 1
+    });
+  });
+}
+
+const { page } = Astro.props;
+const params = Astro.params;
 ---
 
-<Layout titlePage={stripHtml(frontmatter.title)}>
+<Layout titlePage={params.tag}>
 
     <div class="px-8 md:px-0 flex flex-col gap-y-20 md:gap-y-40 !justify-end md:!justify-center">
 <Header variant="blog-list" bgImg={Bg.src} bgImgM={BgM.src} {...frontmatter} />
 <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-10 mb-20">
 
-    {allPosts.map((post) => 
+    {page.data.map((post: any) => 
     <BlogCard 
     title={post.frontmatter.postTitle} 
     url={post?.url || ""} 
