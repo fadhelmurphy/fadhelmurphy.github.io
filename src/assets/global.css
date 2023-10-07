@@ -79,7 +79,7 @@
   }
 
   .blog-card {
-    @apply md:w-11/12 mb-5 md:mb-0 hover:rotate-[0deg] rounded-[10px] md:rounded-[20px] flex flex-col justify-between bg-white drop-shadow-2xl;
+    @apply md:mb-0 hover:rotate-[0deg] rounded-[10px] md:rounded-[20px] flex flex-col justify-between bg-white drop-shadow-2xl;
     height: 100%;
     transition: all 0.5s ease 0s;
   }

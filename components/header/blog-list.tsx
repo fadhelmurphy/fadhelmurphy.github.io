@@ -6,7 +6,7 @@ const BlogListHeader = ({ description, title, bgImg, bgImgM, posts = [] }: Heade
   const headerTitle = { __html: title }
   return (
     <>
-        <div className="inner container md:mx-auto text-left md:text-center">
+        <div className="h-[50vh] md:h-[60vh] flex flex-col justify-end inner container md:mx-auto text-left md:text-center">
           <h1 data-aos="animation-scale-y" data-aos-duration="500"
           className="title text-5xl md:text-8xl md:leading-none font-semibold font-header mt-4"
           dangerouslySetInnerHTML={headerTitle as { __html: string }}

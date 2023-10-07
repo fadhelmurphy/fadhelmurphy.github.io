@@ -15,9 +15,9 @@ date: "23 Oct 2023",
 
 <Layout titlePage={stripHtml(frontmatter.title)}>
 
-    <div class="h-screen px-8 md:px-0 flex flex-col gap-y-20 md:gap-y-40 !justify-end md:!justify-center">
+    <div class="px-8 md:px-0 flex flex-col gap-y-20 md:gap-y-40 !justify-end md:!justify-center">
 <Header variant="blog-list" bgImg={Bg.src} bgImgM={BgM.src} {...frontmatter} />
-<div class="container mx-auto md:grid md:grid-cols-2">
+<div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-10 mb-20">
 
     {allPosts.map((post) => 
     <BlogCard 
