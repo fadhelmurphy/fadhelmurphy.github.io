@@ -22,6 +22,7 @@ const BlogListHeader = ({ description, title, bgImg, bgImgM }: HeaderProps): JSX
       <style>
         {`
     body {
+      background-size: 100%;
       background-image: url(${bgImgM ?? BgM?.src});
     }
 
