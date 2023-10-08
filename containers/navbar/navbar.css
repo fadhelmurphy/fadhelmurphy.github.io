@@ -4,7 +4,7 @@
     @apply drop-shadow-2xl backdrop-blur-md bg-white/80 rounded-lg p-2 w-[3.5rem] h-[3rem] md:w-[4.063rem] md:h-[3.75rem];
   }
   .all-menu .header {
-    justify-content: end;
+    justify-content: flex-end;
     display: flex;
     align-items: center;
   }
@@ -17,12 +17,12 @@
   .navbar-active .all-menu {
     width: 20vw;
     height: 60vh;
-    @apply w-[85vw] h-[30vh] md:w-[25vw] md:h-[30vh] p-5 md:p-5;
+    @apply w-[85vw] h-[30vh] md:w-[25vw] md:h-[30vh];
   }
   .navbar-active .content {
     visibility: visible;
     opacity: 1;
   }
   .all-menu .content .nav-link {
-    @apply py-5 flex flex-col border-b border-[#2e3e6a]/10;
+    @apply p-5 flex flex-col border-b border-[#2e3e6a]/10;
   }

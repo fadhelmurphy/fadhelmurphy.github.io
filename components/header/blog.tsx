@@ -12,13 +12,15 @@ const BlogHeader = ({ label = [], postTitle, date, bgImg, bgImgM }: HeaderProps)
         <div className="inner text-left md:w-[49.375rem]">
           {label.length && label?.map((item, idx: number) => (
             <Badge key={String(idx)} className="drop-shadow-2xl backdrop-blur-md bg-white/80">
+            <a href={`/blog/tags/${item}`}>
               {item}
+            </a>
             </Badge>
           ))}
           <h1 data-aos="animation-scale-y" data-aos-duration="500" className="title text-[40px] md:text-[72px] leading-[40px] md:leading-[78px] my-[12px] font-semibold font-header mt-5">
             {postTitle}
           </h1>
-          <p data-aos="fade-up" data-aos-duration="900" className='text-[#617FAD] not-italic font-semibold leading-[normal] my-[2rem]'>{`Published on ${date}`}</p>
+          <p className='text-[#617FAD] not-italic font-semibold leading-[normal] my-[2rem]'>{`Published on ${date}`}</p>
         </div>
       </div>
       <style>

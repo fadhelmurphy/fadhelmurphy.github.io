@@ -1,6 +1,8 @@
 import { useCallback, useState, useMemo } from 'react'
 import './navbar.css'
 import Hamburger from '@/Components/hamburger/hamburger'
+import { menulist } from 'Consts/navbar'
+import { type menulistType } from 'Consts/types/navbar.type'
 
 interface NavbarProps {
   onClick?: (params: boolean) => void
@@ -24,8 +26,9 @@ function Navbar ({ onClick = (params) => { }, customClassName }: NavbarProps): J
           <Hamburger isActive={isActive} onClick={activeHandler} customClassName="relative" />
         </div>
         <div className='content'>
-          <a className='nav-link' href='/'>Home</a>
-          <a className='nav-link' href='/blog'>Blog</a>
+          {menulist.map((item: menulistType) => (
+<a className='nav-link' href={item.link}>{item.text}</a>
+          ))}
         </div>
       </div>
     </div>
