@@ -3,12 +3,14 @@ import LogoSlider from '../logo-slider'
 import { type HeaderProps } from './types'
 import Bg from '@/Assets/img/home/bg.png'
 import BgM from '@/Assets/img/home/bg-m.png'
+import Navbar from 'Containers/navbar/navbar'
 
 const emoji = '%F0%9F%91%8B%F0%9F%8F%BC' // encode emoji manually
 const HomepageHeader = ({ yourname, yourRole }: HeaderProps): JSX.Element => {
   const formattedHtml = { __html: yourname }
   return (
     <>
+    <Navbar customClassName='!top-[3%] !right-[5%]' />
       <TopHeaderMenu />
       <div className="h-[55vh] md:h-[45vh] mb-6 md:mb-24 px-8 md:px-0 flex flex-col justify-end">
         <div className="inner container md:mx-auto text-left md:text-center">

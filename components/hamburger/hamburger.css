@@ -1,0 +1,56 @@
+.hamburger {
+    cursor: pointer;
+    @apply w-[3rem] md:w-[3.125rem] p-1 md:p-2;
+  }
+  
+  .bar {
+    height: 5px;
+    width: 100%;
+    display: block;
+    border-radius: 5px;
+    background-color: #2e3e6a;
+    transition: 0.3s ease;
+  }
+
+.bar:first-child
+{
+    width: 50%;
+  margin-bottom: 5px;
+}
+
+.bar:nth-last-child(2)
+{
+  margin-bottom: 5px;
+  width: 80%;
+}
+.bar:nth-last-child(1)
+{
+    width: 100%;
+}
+.hamburger-active {
+    @apply w-[2rem] md:w-[2.75rem];
+}
+
+  .hamburger-active .bar { /* terakhir */
+    margin: 0;
+    transform: translate(12px,4px) rotate(45deg);
+    width: 15px;
+  }
+
+  /*
+ * But let's hide the middle one.
+ */
+ .hamburger-active .bar:nth-last-child(3) /* pertama */
+{
+  transform: translate(2px,4px) rotate(45deg);
+  width: 15px;
+}
+
+/*
+ * Ohyeah and the last one should go the other direction
+ */
+ .hamburger-active .bar:nth-last-child(2) /* kedua */
+{
+  transform: translate(0, 4px) rotate(-45deg);
+  width: 30px;
+}

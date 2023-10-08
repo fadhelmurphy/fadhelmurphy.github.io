@@ -1,12 +1,14 @@
 import { type HeaderProps } from './types'
 import Bg from '@/Assets/img/blog/blog-bg.png'
 import BgM from '@/Assets/img/blog/blog-bg-m.png'
-const BlogListHeader = ({ description, title, bgImg, bgImgM, posts = [] }: HeaderProps): JSX.Element => {
+import Navbar from 'Containers/navbar/navbar'
+const BlogListHeader = ({ description, title, bgImg, bgImgM }: HeaderProps): JSX.Element => {
   const formattedHtml = { __html: description }
   const headerTitle = { __html: title }
   return (
     <>
-        <div className="h-[50vh] md:h-[60vh] flex flex-col justify-end inner container md:mx-auto text-left md:text-center">
+        <Navbar />
+        <div className="h-[50vh] md:h-[60vh] flex flex-col justify-end md:justify-end inner container md:mx-auto text-left md:text-center">
           <h1 data-aos="animation-scale-y" data-aos-duration="500"
           className="title text-5xl md:text-8xl md:leading-none font-semibold font-header mt-4"
           dangerouslySetInnerHTML={headerTitle as { __html: string }}
@@ -25,7 +27,7 @@ const BlogListHeader = ({ description, title, bgImg, bgImgM, posts = [] }: Heade
 
     @media (min-width: 768px) {
       body {
-        background-size: cover;
+        background-size: 100%;
         background-image: url(${bgImg ?? Bg?.src});
       }
     }

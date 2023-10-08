@@ -14,7 +14,7 @@ import { prefix } from "Consts/config";
 
 <Layout titlePage={frontmatter.postTitle}>
   {/* <Header slot="Header" /> */}
-  <Header variant="blog" {...frontmatter} />
+  <Header variant="blog" {...frontmatter} client:only/>
   <article class="prose lg:prose-xl text-[#2e3e6a] p-8 md:container mx-auto md:w-[50%] place-items-center content-start">
 <h1>h1. heading</h1>
 <h2>h2. heading</h2>
