@@ -2,12 +2,10 @@ import { type HeaderProps } from './types'
 import BlogImg from '@/Assets/img/blog/blog-bg.png'
 import BlogImgM from '@/Assets/img/blog/blog-bg-m.png'
 import Badge from '../badge'
-import Navbar from 'Containers/navbar/navbar'
 
 const BlogHeader = ({ label = [], postTitle, date, bgImg, bgImgM }: HeaderProps): JSX.Element => {
   return (
     <>
-    <Navbar />
       <div className="h-screen md:h-screen mb-6 md:mb-24 px-8 md:px-0 flex flex-col justify-center container md:mx-auto">
         <div className="inner text-left md:w-[49.375rem]">
           {label.length && label?.map((item, idx: number) => (

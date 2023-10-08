@@ -5,6 +5,7 @@ import {stripHtml} from "Helpers/utils"
 import Bg from '@/Assets/img/blog/blog-list-bg.jpg'
 import BgM from '@/Assets/img/blog/blog-list-bg-m.jpg'
 import BlogCard from "@/Components/blogCard";
+import Navbar from 'Containers/navbar/navbar'
 const frontmatter = {
     title: "The blog of<br/>Fadhel Ijlal Falah",
     description: "Tidak semua software engineer itu wibu, yang anak skena juga ada tau",
@@ -21,8 +22,9 @@ const { page } = Astro.props;
 
 <Layout titlePage={stripHtml(frontmatter.title)}>
 
+    <Navbar client:only/>
     <div class="px-8 md:px-0 flex flex-col gap-y-20 md:!gap-y-24 !justify-end md:!justify-center">
-<Header variant="blog-list" bgImg={Bg.src} bgImgM={BgM.src} {...frontmatter} client:only />
+<Header variant="blog-list" bgImg={Bg.src} bgImgM={BgM.src} {...frontmatter} />
 <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-10 mb-20">
 
     {page.data.map((post: any) => 

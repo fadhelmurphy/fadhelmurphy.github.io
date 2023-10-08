@@ -11,6 +11,7 @@ import Layout from "Containers/layout";
 import PortoList from "Containers/portoList";
 import Sections from "Containers/sections";
 import { SliderDataType } from "Consts/types/logo.type";
+import Navbar from 'Containers/navbar/navbar'
 // const condBg = import.meta.env.NODE_ENV === "production" ? "url(/revamp/home/bg.png)" : "url(/home/bg.png)";
 
 // Full Astro Component Syntax:
@@ -23,7 +24,8 @@ import { SliderDataType } from "Consts/types/logo.type";
 	}
 </style> -->
 <Layout>
-  <Header variant="homepage" client:load/>
+  <Navbar customClassName='!top-[3%] !right-[5%]' client:only/>
+  <Header variant="homepage"/>
   <Sections title="Work Experiences">
 	<p slot="desc">I have previously worked for a few companies <br/>as a freelance and full-time front end developer.</p>
   <Timeline client:visible/>

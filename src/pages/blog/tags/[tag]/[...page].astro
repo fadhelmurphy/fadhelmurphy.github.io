@@ -4,12 +4,13 @@ import Layout from "Containers/layout";
 import Bg from '@/Assets/img/blog/blog-list-bg.jpg'
 import BgM from '@/Assets/img/blog/blog-list-bg-m.jpg'
 import BlogCard from "@/Components/blogCard";
+import Navbar from 'Containers/navbar/navbar'
 const frontmatter = {
     title: "The blog of<br/>Fadhel Ijlal Falah",
     description: "Tidak semua software engineer itu wibu, yang anak skena juga ada tau",
 date: "23 Oct 2023",
 }
-export async function getStaticPaths({paginate}) {
+export async function getStaticPaths({paginate}: any) {
   const allPosts = await Astro.glob('../../../../pages/blog/**/*.mdx');
   const getLabel = allPosts.map((item) => (item.frontmatter.label)).flat().filter((value: string, index: number, array: string[]) => array.indexOf(value) === index);
   return getLabel.flatMap((tag) => {
@@ -27,8 +28,9 @@ const params = Astro.params;
 
 <Layout titlePage={params.tag}>
 
+  <Navbar client:only />
     <div class="px-8 md:px-0 flex flex-col gap-y-20 md:gap-y-40 !justify-end md:!justify-center">
-<Header variant="blog-list" bgImg={Bg.src} bgImgM={BgM.src} {...frontmatter} client:only />
+<Header variant="blog-list" bgImg={Bg.src} bgImgM={BgM.src} {...frontmatter} />
 <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-10 mb-20">
 
     {page.data.map((post: any) => 
