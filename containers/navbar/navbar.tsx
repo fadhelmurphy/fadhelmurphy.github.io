@@ -11,7 +11,7 @@ interface NavbarProps {
 
 function Navbar ({ onClick = (params) => { }, customClassName }: NavbarProps): JSX.Element {
   const [isActive, setIsActive] = useState<boolean>(false)
-  const [pathname, setPathname] = useState<string>('')
+  const [pathname, setPathname] = useState<string | undefined>()
   const activeHandler = useCallback(
     (active: boolean) => {
       setIsActive(active)
@@ -21,7 +21,7 @@ function Navbar ({ onClick = (params) => { }, customClassName }: NavbarProps): J
   )
   const className = useMemo(() => `z-[99] fixed top-[5%] right-[7%] navbar${isActive ? ' navbar-active' : ''}${customClassName ? ` ${customClassName}` : ''}`, [customClassName, isActive])
   useEffect(() => {
-    typeof window !== 'undefined' && setPathname(window?.location.pathname)
+    typeof window !== 'undefined' && setPathname(window?.location.pathname.slice(1))
   }, [pathname])
   return (
     <div className={className}>
@@ -31,7 +31,7 @@ function Navbar ({ onClick = (params) => { }, customClassName }: NavbarProps): J
         </div>
         <div className='content'>
           {menulist.map((item: menulistType) => {
-            const isCurrentNav = pathname !== '' && (pathname === '/' || pathname.includes(item.text.toLowerCase())) ? ' nav-active' : ''
+            const isCurrentNav = pathname !== undefined && (pathname === item.link.slice(1)) ? ' nav-active' : ''
             return (
               <a className={`nav-link${isCurrentNav}`} href={item.link}>{item.text}</a>
             )

@@ -6,6 +6,6 @@ export const menulist: menulistType[] = [
   },
   {
     text: 'Blog',
-    link: '/blog'
+    link: '/blog/'
   }
 ]
