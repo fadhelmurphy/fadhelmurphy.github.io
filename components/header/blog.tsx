@@ -9,16 +9,19 @@ const BlogHeader = ({ label = [], postTitle, date, bgImg, bgImgM }: HeaderProps)
       <div className="h-screen md:h-screen mb-6 md:mb-24 px-8 md:px-0 flex flex-col justify-center container md:mx-auto">
         <div className="inner text-left md:w-[49.375rem]">
           {label.length && label?.map((item, idx: number) => (
-            <Badge key={String(idx)} className="drop-shadow-2xl backdrop-blur-md bg-white/80">
+            <Badge key={String(idx)} className="drop-shadow-2xl backdrop-blur-md bg-white/80 !mr-6">
             <a href={`/blog/tags/${item}`}>
               {item}
             </a>
             </Badge>
           ))}
-          <h1 data-aos="animation-scale-y" data-aos-duration="500" className="title text-[40px] md:text-[72px] leading-[40px] md:leading-[78px] my-[12px] font-semibold font-header mt-5">
+          <h1 data-aos="animation-scale-y" data-aos-duration="500" className="title text-[40px] md:text-[72px] leading-[40px] md:leading-[78px] font-semibold font-header my-8 md:my-14">
             {postTitle}
           </h1>
-          <p className='text-[#617FAD] not-italic font-semibold leading-[normal] my-[2rem]'>{`Published on ${date}`}</p>
+          <div className="grid grid-cols-1">
+            <h2 className='text-teal-500 text-md md:text-[1.5rem] font-normal leading-[normal]'>Date</h2>
+          <p className='text-[#617FAD] text-sm md:text-[1.3rem] not-italic font-light leading-[normal] mt-[0.5rem] md:mt-[1rem]'>{date}</p>
+          </div>
         </div>
       </div>
       <style>

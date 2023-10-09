@@ -1,4 +1,4 @@
-import { useCallback, useState, useMemo } from 'react'
+import { useCallback, useState, useMemo, useEffect } from 'react'
 import './navbar.css'
 import Hamburger from '@/Components/hamburger/hamburger'
 import { menulist } from 'Consts/navbar'
@@ -11,6 +11,7 @@ interface NavbarProps {
 
 function Navbar ({ onClick = (params) => { }, customClassName }: NavbarProps): JSX.Element {
   const [isActive, setIsActive] = useState<boolean>(false)
+  const [pathname, setPathname] = useState<string>('')
   const activeHandler = useCallback(
     (active: boolean) => {
       setIsActive(active)
@@ -19,6 +20,9 @@ function Navbar ({ onClick = (params) => { }, customClassName }: NavbarProps): J
     [isActive, onClick]
   )
   const className = useMemo(() => `z-[99] fixed top-[5%] right-[7%] navbar${isActive ? ' navbar-active' : ''}${customClassName ? ` ${customClassName}` : ''}`, [customClassName, isActive])
+  useEffect(() => {
+    typeof window !== 'undefined' && setPathname(window?.location.pathname)
+  }, [pathname])
   return (
     <div className={className}>
       <div className="all-menu">
@@ -26,9 +30,12 @@ function Navbar ({ onClick = (params) => { }, customClassName }: NavbarProps): J
           <Hamburger isActive={isActive} onClick={activeHandler} customClassName="relative" />
         </div>
         <div className='content'>
-          {menulist.map((item: menulistType) => (
-<a className='nav-link' href={item.link}>{item.text}</a>
-          ))}
+          {menulist.map((item: menulistType) => {
+            const isCurrentNav = pathname !== '' && (pathname === '/' || pathname.includes(item.text.toLowerCase())) ? ' nav-active' : ''
+            return (
+              <a className={`nav-link${isCurrentNav}`} href={item.link}>{item.text}</a>
+            )
+          })}
         </div>
       </div>
     </div>

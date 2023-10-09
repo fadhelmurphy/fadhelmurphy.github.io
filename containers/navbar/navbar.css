@@ -1,7 +1,7 @@
 
   .all-menu {
     transition: all 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
-    @apply drop-shadow-2xl backdrop-blur-md bg-white/80 rounded-lg p-2 w-[3.5rem] h-[3rem] md:w-[4.063rem] md:h-[3.75rem];
+    @apply overflow-hidden truncate drop-shadow-2xl backdrop-blur-md bg-white/80 rounded-lg p-2 w-[3.5rem] h-[3rem] md:w-[4.063rem] md:h-[3.75rem];
   }
   .all-menu .header {
     justify-content: flex-end;
@@ -13,6 +13,9 @@
     opacity: 0;
     transition: all 0.5s ease;
     @apply py-5;
+  }
+  .all-menu .content .nav-active {
+    @apply text-teal-500;
   }
   .navbar-active .all-menu {
     width: 20vw;

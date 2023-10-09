@@ -16,7 +16,7 @@ import Navbar from 'Containers/navbar/navbar'
 <Layout titlePage={frontmatter.postTitle}>
   {/* <Header slot="Header" /> */}
 
-  <Navbar client:only/>
+  <Navbar client:load/>
   <Header variant="blog" {...frontmatter}/>
   <article class="prose lg:prose-xl text-[#2e3e6a] p-8 md:container mx-auto md:w-[50%] place-items-center content-start">
 <h1>h1. heading</h1>
