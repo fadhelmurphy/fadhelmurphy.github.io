@@ -1,6 +1,11 @@
 .Section_default {
     background-position: 100% 100%, 95% 45%, 75% 55%, 90% 55%;
 }
+.Section_default br {
+    content: "";
+    margin: 1rem 0;
+    display: block;
+}
 
 .Section_education {
     background-repeat: no-repeat;
