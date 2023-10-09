@@ -12,7 +12,7 @@ const DefaultTimeline = ({
   data: TimelineDataType[]
 }): JSX.Element => {
   return (
-    <ol className="relative my-12 mx-5 border-l border-blue-400">
+    <ol className="relative my-12 mx-12 text-ellipsis md:!mx-5 border-l border-blue-400">
       {data.map((item: TimelineDataType) => {
         return (
           <li className="mb-10 ml-10">
