@@ -6,7 +6,7 @@ export const timelineData: TimelineDataType[] = [
     data: [
       {
         jobtitle: 'Frontend Developer - Part-time',
-        time: 'Aug 2023',
+        time: 'Aug 2023 - Present',
         description: `
         A company that is riding the coattails of this rise is Good Doctor Technology, <br />
         a joint venture health-tech company between Ping An Healthcare and Technology, <br />

@@ -12,11 +12,11 @@ const DefaultTimeline = ({
   data: TimelineDataType[]
 }): JSX.Element => {
   return (
-    <ol className="relative my-12 mx-12 text-ellipsis md:!mx-5 border-l border-blue-400">
+    <ol className="relative my-12 mx-10 md:mx-12 text-ellipsis md:!mx-5 md:border-l md:border-blue-400">
       {data.map((item: TimelineDataType) => {
         return (
-          <li className="mb-10 ml-10">
-            <span className="absolute -left-4 mt-3 flex h-8 w-8 items-center justify-center rounded-full bg-blue-400 ring-8 ring-white ring-blue-100">
+          <li className="mb-10 ml-0 md:ml-10 border-b border-blue-100 md:border-0">
+            <span className="hidden md:flex absolute -left-4 mt-3 flex h-8 w-8 items-center justify-center rounded-full bg-blue-400 ring-8 ring-white ring-blue-100">
               <svg
                 aria-hidden="true"
                 className="h-5 w-5 text-white"
