@@ -9,13 +9,13 @@ BRANCH=`git rev-parse --abbrev-ref HEAD`
 # ISARTICLE="article"
 
 
-if [[ "$BRANCH" =~ s???article* ]]
+if [[ "$BRANCH" =~ \article$ ]]
 then
   echo -e "\n🚫 Cannot push to remote $BRANCH branch, please create your own branch and use PR."
   echo -e "🚫 Tidak bisa push ke remote branch $BRANCH, silahkan buat branch kamu sendiri dan gunakan pull request.\n" && exit 1
 fi
 
-# exit 1
+exit 1
 echo -e ">> Finish checking branch name / Selesai mengecek nama branch.\n==="
 
 exit 0
