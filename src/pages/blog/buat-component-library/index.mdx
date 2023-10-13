@@ -21,6 +21,8 @@ import generateTokenNpmrc from "./img/generate-new-token-npmrc.png";
 import newAcccessNpmrc from "./img/new-access-token-npmrc.png";
 import resultNpmrc from "./img/result-npmrc.png";
 import rollupComponent from "./img/rollup-component.png";
+import build from "./img/build.png";
+import buildFolder from "./img/build-folder.png";
 
 {/* # {frontmatter.title} */}
 
@@ -28,12 +30,12 @@ import rollupComponent from "./img/rollup-component.png";
   {/* <Header slot="Header" /> */}
   <Navbar client:load/>
   <Header variant="blog" {...frontmatter}/>
-  <article class="prose lg:prose-xl text-[#2e3e6a] p-8 md:p-0 md:container mx-auto place-items-center content-start">
+  <article class="prose lg:prose-xl text-[#2e3e6a] p-8 md:p-0 md:container mx-auto place-items-start content-start">
   ## Final Source Code
   [Source Code](https://github.com/fadhelmurphy/mamatgarem-ui-starter)
   <hr/>
-  <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-x-20 my-5">
-  <h1 class="font-semibold leading-[normal] !m-0">Kenapa Implement?</h1>
+  <div class="grid grid-cols-1 md:grid-cols-3 items-start gap-x-20 my-5">
+  <h1 class="!m-0">Kenapa Implement?</h1>
 
 {" "}
 
@@ -46,8 +48,8 @@ import rollupComponent from "./img/rollup-component.png";
 
   </div>
   <div class="dotsep"/>
-  <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-x-20 my-5">
-  <h3 class="font-semibold leading-[normal] !m-0">1 component berubah nanti project lain ikutan berubah? <span class="text-teal-500">Kaga dong cuy</span></h3>
+  <div class="grid grid-cols-1 md:grid-cols-3 items-start gap-x-20 my-5">
+  <h3 class="!m-0">1 component berubah nanti project lain ikutan berubah? <span class="text-teal-500">Kaga dong cuy</span></h3>
 
 {" "}
 
@@ -61,8 +63,8 @@ import rollupComponent from "./img/rollup-component.png";
   </div>
 
   <div class="dotsep"/>
-      <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-x-20 my-5">
-  <h1 class="font-semibold leading-[normal] !m-0">Monorepo?</h1>
+      <div class="grid grid-cols-1 md:grid-cols-3 items-start gap-x-20 my-5">
+  <h1 class="!m-0">Monorepo?</h1>
 
 {" "}
 
@@ -79,9 +81,7 @@ import rollupComponent from "./img/rollup-component.png";
 
 {" "}
 
-<h1 class="font-semibold leading-[normal] !m-0">
-  Nanti pake componentnya gimana cuy?
-</h1>
+<h1 class="!m-0">Nanti pake componentnya gimana cuy?</h1>
 
 {" "}
 
@@ -114,11 +114,18 @@ yarn add @mamatgarem-ui/button@1.0.0
 
 <hr />
 
-# Registration
+      <div class="grid grid-cols-2 items-start gap-x-20 my-5">
+  # Registration
+
+{" "}
+
+<div class="col">
 
 Buat dulu akun lu di npm.
-
 https://www.npmjs.com/signup
+</div>
+
+  </div>
 
 Setelah login, bikin dulu organizationnya di npm. Klik tombol + pada Organizations.
 
@@ -135,7 +142,7 @@ Setelah login, bikin dulu organizationnya di npm. Klik tombol + pada Organizatio
 
 <div class="dotsep" />
 
-Terus lu masukin deh tuh nama library lu, misalkan disini gue namanya <b>@mamatgarem-ui</b>.
+Terus lu masukin deh tuh nama library lu, misalkan disini gue namanya <b class="text-teal-500">@mamatgarem-ui</b>.
 
     <div class="dotsep"/>
 
@@ -176,8 +183,8 @@ Nanti hasilnya kek gini.
 {" "}
 
 <hr />
-  <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-x-20 my-5">
-  <h1 class="font-semibold leading-[normal] !m-0">Setup .npmrc</h1>
+  <div class="grid grid-cols-1 md:grid-cols-3 items-start gap-x-20 my-5">
+  # Setup .npmrc
 
 {" "}
 
@@ -244,40 +251,39 @@ Nanti hasilnya tuh kek gini
 
 <div class="dotsep" />
 
-<h2 class="font-semibold text-center">
-  Jangan lupa untuk menyimpan token yang udah berhasil di generate, karena kita
-  akan menggunakannya pada file .npmrc
-</h2>
+<center>
+## Jangan lupa untuk menyimpan token yang udah berhasil di generate, karena kita akan menggunakannya pada file .npmrc
+</center>
 
 <div class="dotsep" />
 <hr />
 
-<h1 class="font-semibold">Membuat file .npmrc</h1>
+# Membuat file .npmrc
 
 Setelah itu bikin file .npmrc di device lu.
 
-  <div class="grid grid-cols-2 items-center my-5">
+  <div class="grid grid-cols-1 md:grid-cols-2 items-start my-5">
   <div>
 
 {" "}
-<h3 class="font-semibold leading-[normal] !m-0">Mac User</h3>
+<h3 class="!m-0">Mac User</h3>
 
 {" "}
 
-bikin file .npmrc di /Users/<b>fadhelfalah</b>
+bikin file .npmrc di /Users/<b class="text-teal-500">fadhelfalah</b>
 
-<b>fadhelfalah</b> : ini username di laptop gue.
+<b class="text-teal-500">fadhelfalah</b> : ini username di laptop gue.
   </div>
   <div>
 
 {" "}
-<h3 class="font-semibold leading-[normal] !m-0">Windows User</h3>
+<h3 class="!m-0">Windows User</h3>
 
 {" "}
 
-bikin file .npmrc di C:/users/<b>fadhelpc-gaming</b>/
+bikin file .npmrc di C:/users/<b class="text-teal-500">fadhelpc-gaming</b>/
 
-<b>fadhelpc-gaming</b> : ini username di device windows gue.
+<b class="text-teal-500">fadhelpc-gaming</b> : ini username di device windows gue.
   </div>
 
   </div>
@@ -291,15 +297,15 @@ email=krazefollow@gmail.com
 always-auth=true
 ```
 
-<b>npm_sebuahtoken</b> : ini merupakan token yg tadi lu generate di npm.
+<b class="text-teal-500">npm_sebuahtoken</b> : ini merupakan token yg tadi lu generate di npm.
 
-<b>mangkodir-ui</b> : ini nama organization di npm.
+<b class="text-teal-500">mangkodir-ui</b> : ini nama organization di npm.
 
 krazefollow@gmail.com : ini email yg lu daftarin di npm
 
   <hr/>
-  <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-x-20 my-5">
-  <h1 class="font-semibold leading-[normal] !m-0">Setup UI Component Library</h1>
+  <div class="grid grid-cols-1 md:grid-cols-3 items-start gap-x-20 my-5">
+  <h1 class="!m-0">Setup UI Component Library</h1>
 
 {" "}
 
@@ -430,18 +436,20 @@ Pada bagian @mangkodir-ui bisa diganti dengan nama organization yg udah lu buat 
 ```
 
 {" "}
-<b>build</b> : untuk melakukan build pada seluruh package
+<b class="text-teal-500">build</b> : untuk melakukan build pada seluruh package
 
-<b>watch</b> : untuk melakukan build pada seluruh package dan akan melakukan build
+<b class="text-teal-500">watch</b> : untuk melakukan build pada seluruh package dan akan melakukan build
 lagi ketika ada perubahan code.
 
-<b>single</b> : untuk melakukan build pada scope/spesifik package.
+<b class="text-teal-500">single</b> : untuk melakukan build pada scope/spesifik package.
 
-<b>single:watch</b> : untuk melakukan build pada scope/spesifik package.
+<b class="text-teal-500">single:watch</b> : untuk melakukan build pada scope/spesifik package.
 
 Setelah selesai mengubah package.json, kita perlu melakukan konfigurasi rollup.
 
-<h2 class="font-semibold">Konfigurasi rollup.config.js</h2>
+<div class="dotsep" />
+
+## Konfigurasi rollup.config.json
 
 Agar package dapat berjalan di browser lama dan mengecilkan hasil bundler, kita perlu melakukan konfigurasi seperti dibawah ini:
 
@@ -499,17 +507,136 @@ export default formats.map((format) => ({
 
 Disini terdapat 3 plugin yg digunakan pada rollup:
 
-Resolve: untuk menggabungkan modul-modul yg udah di install yg digunakan di node_modules
+<b class="text-teal-500">Resolve</b>: untuk menggabungkan modul-modul yg udah di install yg digunakan di node_modules
 
-Commonjs: untuk transpile javascript ke format module cjs.
+<b class="text-teal-500">Commonjs</b>: untuk transpile javascript ke format module cjs.
 (biar bisa pake syntax require(“nganu”) gitu deh)
 
-Babel: untuk menerjemah javascript agar dapat di gunakan di browser lama.
+<b class="text-teal-500">Babel</b>: untuk menerjemah javascript agar dapat di gunakan di browser lama.
 
 Pada konfigurasi rollup ini kita menggunakan modul UMD agar syntax nya bisa dijalankan di serverside atau clientside.
 
+Untuk penjelasannya ada disini yak, gue ga terlalu dalem soal module ini.
+
+https://mazipan.space/javascript-module-dan-keribetannya
+
+https://dev.to/iggredible/what-the-heck-are-cjs-amd-umd-and-esm-ikm
+
+
+<div class="dotsep" />
+
+## Konfigurasi package.json untuk scope package (Component)
+
+Setiap package perlu di konfigurasi agar hasil build dapat digunakan.
+
+```json
+{
+  "name": "@mangkodir-ui/button_test",
+  "version": "1.0.0",
+  "description": "> TODO: description",
+  "author": "Fadhel <fadhelijlalfalah@gmail.com>",
+  "homepage": "https://github.com/fadhelmurphy/mangkodir-ui-starter#readme",
+  "license": "ISC",
+  "srcFile": "lib",
+  "srcName": "button_test",
+  "main": "dist/button_test.umd.js",
+  "files": [
+    "dist/"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/fadhelmurphy/mamatgarem-ui-starter.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "browser": true,
+  "bugs": {
+    "url": "https://github.com/fadhelmurphy/mamatgarem-ui-starter/issues"
+  }
+}
+```
+
+<b class="text-teal-500">main</b>: merupakan path utama yg dituju ketika package diarahkan @mangkodir-ui/button_test. Disini diarahkan ke file hasil buildnya biar bisa di consume yaitu 
+<b class="text-teal-500">dist/button_test.umd.js</b>
+
+<b class="text-teal-500">publishConfig</b>: ini merupakan konfigurasi publish package kita. karena kita menggunakan npm, by default kita ga perlu menambahkan object key registry. 
+Jika kita menggunakan custom registry dapat menambahkan seperti ini.
+
+
+```json
+"publishConfig": {
+"registry": "https://registry.npmjs.org",
+"access": "public"
+},
+
+```
+
+<div class="dotsep" />
+
+## Cara Build
+
+  <div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-20 items-start my-5">
+  <div>
 
 {" "}
+<h3 class="!m-0">Mac User</h3>
+
+{" "}
+
+packages=nama_package_lu yarn single
+
+Contoh:
+
+```bash
+packages=button_test yarn single
+```
+  </div>
+  <div>
+
+{" "}
+<h3 class="!m-0">Windows User</h3>
+
+lerna exec --scope @mangkodir-ui/nama_package_lu -- rollup -c=../../rollup.config.js --bundleConfigAsCjs
+
+Contoh:
+
+```bash
+lerna exec --scope @mangkodir-ui/button_test -- rollup -c=../../rollup.config.js --bundleConfigAsCjs
+```
+  </div>
+
+  </div>
+
+  ### Hasil setelah build
+    <center>
+
+  <img src={build.src} />
+  </center>
+
+<div class="dotsep" />
+    <center>
+
+  <img src={buildFolder.src} />
+  </center>
+
+<div class="dotsep" />
+
+
+  Setelah berhasil build akan men generate file js di dalam folder distribution (dist) seperti diatas.
+
+
+<div class="dotsep" />
+
+
+## Publish & Versioning component
+
+Untuk publish component, pastikan lu berada di branch master. Karena pada config lerna hanya memperbolehkan melakukan publish di master.
+
+
 <div class="dotsep" />
 <h1 class="text-center">Lagi di ketik yaa cuy.. belom beres</h1>
 
