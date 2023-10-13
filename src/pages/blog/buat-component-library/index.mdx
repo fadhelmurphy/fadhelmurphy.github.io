@@ -28,13 +28,13 @@ import diagramImg from "./img/diagram.png"
 
   <div class="col-span-2">
   Ketika sedang mengerjakan berbagai macam project (misalkan ada 5 project) dengan desain Component yang sama,
-  kalau dengan copas code component dari project A ke project C,B,D,E itu repot cuuy yakali copas component navbar ke 5 project.
+  kalau dengan copas code component dari project A ke project C,B,D,E itu repot cuuy yakali copas code navbar (component) ke 5 project.
   </div>
 
   </div>
-  <hr/>
+  <div class="dotsep"/>
   <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-x-20 my-5">
-  <h3 class="font-semibold leading-[normal] !m-0">1 component berubah nanti project lain ikutan berubah? Kaga dong cuy</h3>
+  <h3 class="font-semibold leading-[normal] !m-0">1 component berubah nanti project lain ikutan berubah? <span class="text-teal-500">Kaga dong cuy</span></h3>
 
   <div class="col-span-2">
   Pada tutorial kali ini gue menerapkan versioning dengan menggunakan lerna, sehingga jika project A melakukan update component versi ke 1.0.2 tetapi
@@ -43,7 +43,7 @@ import diagramImg from "./img/diagram.png"
 
   </div>
 
-  <hr/>
+  <div class="dotsep"/>
       <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-x-20 my-5">
   <h1 class="font-semibold leading-[normal] !m-0">Monorepo?</h1>
 
@@ -53,25 +53,31 @@ import diagramImg from "./img/diagram.png"
   </div>
 
   </div>
-  <hr/>
+  <div class="dotsep"/>
   <div class="my-5">
 
-  <h2 class="font-semibold leading-[normal] !m-0">Nanti pake componentnya gimana cuy?</h2>
+  <h1 class="font-semibold leading-[normal] !m-0">Nanti pake componentnya gimana cuy?</h1>
 
   <p class="!my-5">lu nanti tinggal install aja melalui package manager seperti yarn atau npm.</p>
 
-  ``
+  ```bash
+  // kalo pake npm
   npm install @mamatgarem-ui/button@1.0.0
-  ``
+
+  // kalo pake yarn
+  yarn add @mamatgarem-ui/button@1.0.0
+  ```
 
   </div>
 
   <hr/>
 
-  ## Diagram
+  # Diagram
 
   <img src={diagramImg.src} />
 
-  ## Lagi di ketik yaa.. belom beres
+  <h1 class="text-center">Lagi di ketik yaa cuy.. belom beres</h1>
+
+  <div class="dotsep"/>
 </article>
 </Layout>

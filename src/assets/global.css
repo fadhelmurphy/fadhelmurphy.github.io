@@ -28,6 +28,16 @@
   .porto-clip-mweb {
     clip-path: polygon(30% 2%, 100% 0, 100% 95%, 75% 97%, 0 95%, 0 0);
   }
+
+  .dotsep {
+    font-size: 16px;
+    margin-top: 2.8em;
+    margin-bottom: 2.8em;
+    text-align: center;
+  }
+  .dotsep::before {
+    content: "• • •";
+}
 }
 
 @layer components {
@@ -135,5 +145,13 @@
 
   * {
     box-sizing: border-box;
+  }
+
+  p {
+    @apply !text-[#617FAD];
+  }
+
+  .prose a {
+    @apply !text-blue-500 !no-underline;
   }
 }
