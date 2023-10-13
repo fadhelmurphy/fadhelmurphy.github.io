@@ -3,35 +3,35 @@
 
 yarn build
 
-echo -e "===\n>> Pre-push Hook: Checking branch name / Mengecek nama branch..."
+# echo -e "===\n>> Pre-push Hook: Checking branch name / Mengecek nama branch..."
 
 BRANCH=`git rev-parse --abbrev-ref HEAD`
-ISASTROARTICLE=\astro-article$
-ISGATSBYARTICLE=\gatsby-article$
-ISASTRODEV=\dev-astro$
-ISGATSBYDEV=\dev$
+# ISASTROARTICLE=\astro-article$
+# ISGATSBYARTICLE=\gatsby-article$
+# ISASTRODEV=\dev-astro$
+# ISGATSBYDEV=\dev$
 
 
-if [[ "$BRANCH" =~ $ISASTROARTICLE ]]
-then
-  git push origin dev-astro
-fi
+# if [[ "$BRANCH" =~ $ISASTROARTICLE ]]
+# then
+#   git push origin dev-astro
+# fi
 
-if [[ "$BRANCH" =~ $ISASTRODEV ]]
-then
-  git push origin astro-article
-fi
+# if [[ "$BRANCH" =~ $ISASTRODEV ]]
+# then
+#   git push origin astro-article
+# fi
 
-if [[ "$BRANCH" =~ $ISGATSBYARTICLE ]]
-then
-  git push origin dev
-fi
+# if [[ "$BRANCH" =~ $ISGATSBYARTICLE ]]
+# then
+#   git push origin dev
+# fi
 
-if [[ "$BRANCH" =~ $ISGATSBYDEV ]]
-then
-  git push origin gatsby-article
-fi
+# if [[ "$BRANCH" =~ $ISGATSBYDEV ]]
+# then
+#   git push origin gatsby-article
+# fi
 
-echo -e ">> Finish checking branch name / Selesai mengecek nama branch.\n==="
+echo -e ">> You pushed to $BRANCH / Kamu ngepush ke $BRANCH.\n==="
 
 exit 0
