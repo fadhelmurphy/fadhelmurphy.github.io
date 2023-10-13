@@ -10,12 +10,17 @@ import Button from "@/Components/Button.astro";
 import Header from "@/Components/header";
 import Layout from "Containers/layout";
 import { prefix } from "Consts/config";
-import Navbar from 'Containers/navbar/navbar'
-import diagramImg from "./img/diagram.png"
-import organizationImg from "./img/create-organization.png"
-import inputOrganizationImg from "./img/input-organization.png"
-import skipOrganizationImg from "./img/skip-organization.png"
-import resOrganizationImg from "./img/result-organization.png"
+import Navbar from "Containers/navbar/navbar";
+import diagramImg from "./img/diagram.png";
+import organizationImg from "./img/create-organization.png";
+import inputOrganizationImg from "./img/input-organization.png";
+import skipOrganizationImg from "./img/skip-organization.png";
+import resOrganizationImg from "./img/result-organization.png";
+import acccessNpmrc from "./img/access-token-npmrc.png";
+import generateTokenNpmrc from "./img/generate-new-token-npmrc.png";
+import newAcccessNpmrc from "./img/new-access-token-npmrc.png";
+import resultNpmrc from "./img/result-npmrc.png";
+import rollupComponent from "./img/rollup-component.png";
 
 {/* # {frontmatter.title} */}
 
@@ -30,20 +35,28 @@ import resOrganizationImg from "./img/result-organization.png"
   <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-x-20 my-5">
   <h1 class="font-semibold leading-[normal] !m-0">Kenapa Implement?</h1>
 
-  <div class="col-span-2">
-  Ketika sedang mengerjakan berbagai macam project (misalkan ada 5 project) dengan desain Component yang sama,
-  kalau dengan copas code component dari project A ke project C,B,D,E itu repot cuuy yakali copas code navbar (component) ke 5 project.
-  </div>
+{" "}
+
+<div class="col-span-2">
+  Ketika sedang mengerjakan berbagai macam project (misalkan ada 5 project)
+  dengan desain Component yang sama, kalau dengan copas code component dari
+  project A ke project C,B,D,E itu repot cuuy yakali copas code navbar
+  (component) ke 5 project.
+</div>
 
   </div>
   <div class="dotsep"/>
   <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-x-20 my-5">
   <h3 class="font-semibold leading-[normal] !m-0">1 component berubah nanti project lain ikutan berubah? <span class="text-teal-500">Kaga dong cuy</span></h3>
 
-  <div class="col-span-2">
-  Pada tutorial kali ini gue menerapkan versioning dengan menggunakan lerna, sehingga jika project A melakukan update component versi ke 1.0.2 tetapi
-  pada project B masih ingin menggunakan versi 1.0.1 itu tidak masalah. kecuali, pada project B menggunakan versi @latest
-  </div>
+{" "}
+
+<div class="col-span-2">
+  Pada tutorial kali ini gue menerapkan versioning dengan menggunakan lerna,
+  sehingga jika project A melakukan update component versi ke 1.0.2 tetapi pada
+  project B masih ingin menggunakan versi 1.0.1 itu tidak masalah. kecuali, pada
+  project B menggunakan versi @latest
+</div>
 
   </div>
 
@@ -51,59 +64,78 @@ import resOrganizationImg from "./img/result-organization.png"
       <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-x-20 my-5">
   <h1 class="font-semibold leading-[normal] !m-0">Monorepo?</h1>
 
-  <div class="col-span-2">
-  Yoii, gue menerapkan monorepo yang mana semua component ini dalam 1 node_modules yang sama di dalam satu repo (centralize node_modules) 
-  dan ketika component lu dependencies ke component lain manggilnya juga gampang tinggal @mamatgarem-ui/my_component
-  </div>
+{" "}
+
+<div class="col-span-2">
+  Yoii, gue menerapkan monorepo yang mana semua component ini dalam 1
+  node_modules yang sama di dalam satu repo (centralize node_modules) dan ketika
+  component lu dependencies ke component lain manggilnya juga gampang tinggal
+  @mamatgarem-ui/my_component
+</div>
 
   </div>
   <div class="dotsep"/>
   <div class="my-5">
 
-  <h1 class="font-semibold leading-[normal] !m-0">Nanti pake componentnya gimana cuy?</h1>
+{" "}
 
-  <p class="!my-5">lu nanti tinggal install aja melalui package manager seperti yarn atau npm.</p>
+<h1 class="font-semibold leading-[normal] !m-0">
+  Nanti pake componentnya gimana cuy?
+</h1>
 
-  ```bash
-  // kalo pake npm
-  npm install @mamatgarem-ui/button@1.0.0
+{" "}
 
-  // kalo pake yarn
-  yarn add @mamatgarem-ui/button@1.0.0
-  ```
+<p class="!my-5">
+  lu nanti tinggal install aja melalui package manager seperti yarn atau npm.
+</p>
+
+```bash
+// kalo pake npm
+npm install @mamatgarem-ui/button@1.0.0
+
+// kalo pake yarn
+yarn add @mamatgarem-ui/button@1.0.0
+```
 
   </div>
 
-  <hr/>
+{" "}
 
-  # Diagram
+<hr />
+
+# Diagram
 
   <center>
 
   <img src={diagramImg.src} />
   </center>
 
-  <hr/>
+{" "}
 
-  # Registration
+<hr />
 
-  Buat dulu akun lu di npm.
-  
-  https://www.npmjs.com/signup
-  
-  Setelah login, bikin dulu organizationnya di npm. Klik tombol + pada Organizations.
+# Registration
 
+Buat dulu akun lu di npm.
 
-  <div class="dotsep"/>
+https://www.npmjs.com/signup
+
+Setelah login, bikin dulu organizationnya di npm. Klik tombol + pada Organizations.
+
+{" "}
+
+<div class="dotsep" />
 
     <center>
 
   <img src={organizationImg.src} />
   </center>
 
-  <div class="dotsep"/>
+{" "}
 
-  Terus lu masukin deh tuh nama library lu, misalkan disini gue namanya <b>@mamatgarem-ui</b>.
+<div class="dotsep" />
+
+Terus lu masukin deh tuh nama library lu, misalkan disini gue namanya <b>@mamatgarem-ui</b>.
 
     <div class="dotsep"/>
 
@@ -112,23 +144,26 @@ import resOrganizationImg from "./img/result-organization.png"
   <img src={inputOrganizationImg.src} />
   </center>
 
-  <div class="dotsep"/>
+{" "}
 
-  Setelah itu klik skip this for now aja.
+<div class="dotsep" />
 
-  <div class="dotsep"/>
+Setelah itu klik skip this for now aja.
 
+{" "}
+
+<div class="dotsep" />
 
     <center>
 
   <img src={skipOrganizationImg.src} />
   </center>
 
+{" "}
 
-  <div class="dotsep"/>
+<div class="dotsep" />
 
-
-  Nanti hasilnya kek gini.
+Nanti hasilnya kek gini.
 
     <div class="dotsep"/>
 
@@ -138,15 +173,345 @@ import resOrganizationImg from "./img/result-organization.png"
   <img src={resOrganizationImg.src} />
   </center>
 
+{" "}
 
-  <div class="dotsep"/>
+<hr />
+  <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-x-20 my-5">
+  <h1 class="font-semibold leading-[normal] !m-0">Setup .npmrc</h1>
 
-  # Setup .npmrc
+{" "}
 
-  Setelah lu registrasi dan buat organization di npm, kita perlu bikin file .npmrc di device biar bisa publish package lu.
+<div class="col-span-2">
+  Setelah lu registrasi dan buat organization di npm, kita perlu bikin file
+  .npmrc di device biar bisa publish package lu.
+</div>
+
+  </div>
+
+Sekarang, lu balik lagi ke dashboard website npmjs.com. dibagian sidebar kiri terdapat sebuah menu seperti dibawah ini
+
+    <div class="dotsep"/>
 
 
-  <h1 class="text-center">Lagi di ketik yaa cuy.. belom beres</h1>
+    <center>
+
+  <img src={acccessNpmrc.src} />
+  </center>
+
+{" "}
+
+<div class="dotsep" />
+
+Pilih “Access Token” pada sidebar
+
+     <div class="dotsep"/>
+
+
+    <center>
+
+  <img src={generateTokenNpmrc.src} />
+  </center>
+
+{" "}
+
+<div class="dotsep" />
+
+Pilih yg classic token.
+
+       <div class="dotsep"/>
+
+
+    <center>
+
+  <img src={newAcccessNpmrc.src} />
+  </center>
+
+{" "}
+
+<div class="dotsep" />
+
+Nanti hasilnya tuh kek gini
+
+        <div class="dotsep"/>
+
+
+    <center>
+
+  <img src={resultNpmrc.src} />
+  </center>
+
+{" "}
+
+<div class="dotsep" />
+
+<h2 class="font-semibold text-center">
+  Jangan lupa untuk menyimpan token yang udah berhasil di generate, karena kita
+  akan menggunakannya pada file .npmrc
+</h2>
+
+<div class="dotsep" />
+<hr />
+
+<h1 class="font-semibold">Membuat file .npmrc</h1>
+
+Setelah itu bikin file .npmrc di device lu.
+
+  <div class="grid grid-cols-2 items-center my-5">
+  <div>
+
+{" "}
+<h3 class="font-semibold leading-[normal] !m-0">Mac User</h3>
+
+{" "}
+
+bikin file .npmrc di /Users/<b>fadhelfalah</b>
+
+<b>fadhelfalah</b> : ini username di laptop gue.
+  </div>
+  <div>
+
+{" "}
+<h3 class="font-semibold leading-[normal] !m-0">Windows User</h3>
+
+{" "}
+
+bikin file .npmrc di C:/users/<b>fadhelpc-gaming</b>/
+
+<b>fadhelpc-gaming</b> : ini username di device windows gue.
+  </div>
+
+  </div>
+
+Terus lu isi file nya seperti dibawah ini:
+
+```
+//registry.npmjs.org/:_authToken=npm_sebuahtoken
+@mangkodir-ui:registry=https://registry.npmjs.org/
+email=krazefollow@gmail.com
+always-auth=true
+```
+
+<b>npm_sebuahtoken</b> : ini merupakan token yg tadi lu generate di npm.
+
+<b>mangkodir-ui</b> : ini nama organization di npm.
+
+krazefollow@gmail.com : ini email yg lu daftarin di npm
+
+  <hr/>
+  <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-x-20 my-5">
+  <h1 class="font-semibold leading-[normal] !m-0">Setup UI Component Library</h1>
+
+{" "}
+
+<div class="col-span-2">
+  Nah ini part yang akhirnya ditunggu, kita akan membuat UI Component Library
+  dengan bundler Rollup dan versioningnya Lerna
+</div>
+
+  </div>
+
+Pertama ketik dulu perintah dibawah ini.
+
+```
+npm init
+```
+
+Setelah itu lu install dulu lerna secara global dengan ketik
+
+```
+npm install -g lerna
+```
+
+Nah baru deh lu generate file json lerna nya dengan cara.
+
+```
+npx lerna init --packages="packages/*"
+```
+
+ubahlah file lerna.json seperti dibawah ini.
+
+```json
+{
+  "npmClient": "npm",
+  "version": "independent",
+  "hoist": true,
+  "stream": true,
+  "private": true,
+  "useWorkspaces": true,
+  "bootstrap": {
+    "npmClientArgs": ["--no-package-lock"]
+  },
+  "command": {
+    "publish": {
+      "allowBranch": ["master"]
+    }
+  },
+  "useNx": false
+}
+```
+
+Setelah itu kita setup si rollup buat nge bundling package kita.
+
+Dibawah ini ada analogi nya si rollup itu ngapain.
+
+        <div class="dotsep"/>
+
+
+    <center>
+
+  <img src={rollupComponent.src} />
+  </center>
+
+{" "}
+
+<div class="dotsep" />
+
+Sekarang kita install library-library yg dibutuhin untuk rollup.
+
+```bash
+yarn add –D rollup react react-dom rollup-plugin-babel rollup-plugin-commonjs rollup-plugin-node-resolve rollup-plugin-terser @babel/core @babel/preset-env @babel/preset-react
+```
+
+Berikut ini merupakan code untuk package.json nya.
+
+Pada bagian @mangkodir-ui bisa diganti dengan nama organization yg udah lu buat di npm.
+
+```json
+{
+  "name": "belajar-monorepo",
+  "commands": {
+    "publish": {
+      "ignoreChanges": [
+        "**/*.md",
+        "*.txt",
+        "**/example/**",
+        "test/**",
+        "**/test/**",
+        "tests/**",
+        "**/tests/**",
+        "packages/**/package-lock.json"
+      ]
+    }
+  },
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "npmClient": "yarn",
+  "private": true,
+  "scripts": {
+    "build": "lerna exec -- rollup -c=../../rollup.config.js --bundleConfigAsCjs",
+    "watch": "lerna exec --no-sort -- rollup -w -c=../../rollup.config.js --bundleConfigAsCjs",
+    "single": "lerna exec --scope @mangkodir-ui/$packages -- rollup -c=../../rollup.config.js --bundleConfigAsCjs",
+    "single:watch": "lerna exec --scope @mangkodir-ui/$packages -- rollup -w -c=../../rollup.config.js --bundleConfigAsCjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "Gunadarma",
+  "workspaces": ["packages/*"],
+  "devDependencies": {
+    "@babel/core": "^7.22.9",
+    "@babel/preset-env": "^7.22.9",
+    "@babel/preset-react": "^7.22.5",
+    "lerna": "^5.5.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rollup": "^3.26.3",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "styled-jsx": "^5.1.2"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "styled-jsx": "^5.1.2"
+  }
+}
+```
+
+{" "}
+<b>build</b> : untuk melakukan build pada seluruh package
+
+<b>watch</b> : untuk melakukan build pada seluruh package dan akan melakukan build
+lagi ketika ada perubahan code.
+
+<b>single</b> : untuk melakukan build pada scope/spesifik package.
+
+<b>single:watch</b> : untuk melakukan build pada scope/spesifik package.
+
+Setelah selesai mengubah package.json, kita perlu melakukan konfigurasi rollup.
+
+<h2 class="font-semibold">Konfigurasi rollup.config.js</h2>
+
+Agar package dapat berjalan di browser lama dan mengecilkan hasil bundler, kita perlu melakukan konfigurasi seperti dibawah ini:
+
+```javascript
+import babel from "rollup-plugin-babel";
+import resolve from "rollup-plugin-node-resolve";
+import commonjs from "rollup-plugin-commonjs";
+
+import path from "path";
+
+const { LERNA_PACKAGE_NAME } = process.env;
+const PACKAGE_ROOT_PATH = process.cwd();
+const PKG_JSON = require(path.join(PACKAGE_ROOT_PATH, "package.json"));
+const INPUT_FILE = path.join(
+  PACKAGE_ROOT_PATH,
+  `${PKG_JSON.srcFile}/${PKG_JSON.srcName}.js`
+);
+const OUTPUT_DIR = path.join(PACKAGE_ROOT_PATH, "dist");
+const IS_BROWSER_BUNDLE = !!PKG_JSON.browser;
+const formats = IS_BROWSER_BUNDLE ? ["umd"] : ["es", "cjs"];
+
+export default formats.map((format) => ({
+  plugins: [
+    resolve(),
+    commonjs({
+      include: /node_modules/,
+      namedExports: {
+        "react-js": ["isValidElementType"],
+        "react-is": ["typeOf", "isElement", "isValidElementType"],
+      },
+    }),
+    babel({
+      exclude: ["node_modules/**"],
+      presets: [["@babel/preset-env", { modules: false }], "@babel/react"],
+      plugins: ["styled-jsx/babel"],
+    }),
+  ],
+  input: INPUT_FILE,
+  external: ["react", "react-dom"],
+  output: {
+    ...(format === "umd"
+      ? { file: path.join(OUTPUT_DIR, `${PKG_JSON.srcName}.${format}.js`) }
+      : {}),
+    format,
+    sourcemap: true,
+    name: LERNA_PACKAGE_NAME,
+    amd: {
+      id: LERNA_PACKAGE_NAME,
+    },
+    ...(format !== "umd" ? { dir: OUTPUT_DIR } : {}),
+  },
+  ...(format !== "umd" ? { preserveModules: true } : {}),
+}));
+```
+
+Disini terdapat 3 plugin yg digunakan pada rollup:
+
+Resolve: untuk menggabungkan modul-modul yg udah di install yg digunakan di node_modules
+
+Commonjs: untuk transpile javascript ke format module cjs.
+(biar bisa pake syntax require(“nganu”) gitu deh)
+
+Babel: untuk menerjemah javascript agar dapat di gunakan di browser lama.
+
+Pada konfigurasi rollup ini kita menggunakan modul UMD agar syntax nya bisa dijalankan di serverside atau clientside.
+
+
+{" "}
+<div class="dotsep" />
+<h1 class="text-center">Lagi di ketik yaa cuy.. belom beres</h1>
 
   <div class="dotsep"/>
 </article>
