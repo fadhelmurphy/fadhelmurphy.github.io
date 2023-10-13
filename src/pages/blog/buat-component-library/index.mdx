@@ -12,6 +12,10 @@ import Layout from "Containers/layout";
 import { prefix } from "Consts/config";
 import Navbar from 'Containers/navbar/navbar'
 import diagramImg from "./img/diagram.png"
+import organizationImg from "./img/create-organization.png"
+import inputOrganizationImg from "./img/input-organization.png"
+import skipOrganizationImg from "./img/skip-organization.png"
+import resOrganizationImg from "./img/result-organization.png"
 
 {/* # {frontmatter.title} */}
 
@@ -74,7 +78,73 @@ import diagramImg from "./img/diagram.png"
 
   # Diagram
 
+  <center>
+
   <img src={diagramImg.src} />
+  </center>
+
+  <hr/>
+
+  # Registration
+
+  Buat dulu akun lu di npm.
+  
+  https://www.npmjs.com/signup
+  
+  Setelah login, bikin dulu organizationnya di npm. Klik tombol + pada Organizations.
+
+
+  <div class="dotsep"/>
+
+    <center>
+
+  <img src={organizationImg.src} />
+  </center>
+
+  <div class="dotsep"/>
+
+  Terus lu masukin deh tuh nama library lu, misalkan disini gue namanya <b>@mamatgarem-ui</b>.
+
+    <div class="dotsep"/>
+
+    <center>
+
+  <img src={inputOrganizationImg.src} />
+  </center>
+
+  <div class="dotsep"/>
+
+  Setelah itu klik skip this for now aja.
+
+  <div class="dotsep"/>
+
+
+    <center>
+
+  <img src={skipOrganizationImg.src} />
+  </center>
+
+
+  <div class="dotsep"/>
+
+
+  Nanti hasilnya kek gini.
+
+    <div class="dotsep"/>
+
+
+    <center>
+
+  <img src={resOrganizationImg.src} />
+  </center>
+
+
+  <div class="dotsep"/>
+
+  # Setup .npmrc
+
+  Setelah lu registrasi dan buat organization di npm, kita perlu bikin file .npmrc di device biar bisa publish package lu.
+
 
   <h1 class="text-center">Lagi di ketik yaa cuy.. belom beres</h1>
 
