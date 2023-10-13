@@ -10,7 +10,8 @@
     "prettier": "prettier --write .",
     "eslint": "eslint --max-warnings 0",
     "astro": "astro",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "publish-article:astro": "git push origin astro-article:{astro-article,dev-astro}"
   },
   "dependencies": {
     "@astrojs/image": "^0.16.5",
