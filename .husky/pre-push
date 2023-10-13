@@ -14,6 +14,7 @@ then
   echo -e "🚫 Tidak bisa push ke remote branch $BRANCH, silahkan buat branch kamu sendiri dan gunakan pull request.\n" && exit 1
 fi
 
+exit 1
 echo -e ">> Finish checking branch name / Selesai mengecek nama branch.\n==="
 
 exit 0
