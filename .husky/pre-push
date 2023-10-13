@@ -4,11 +4,11 @@
 yarn build
 
 BRANCH=`git rev-parse --abbrev-ref HEAD`
-ISARTICLE="^*-article"
+ISARTICLE="-article"
 
 echo -e "===\n>> Pre-push Hook: Checking branch name / Mengecek nama branch..."
 
-if [[ "$BRANCH" =~ $ISARTICLE ]]
+if [[ "$BRANCH" =~ *$ISARTICLE* ]]
 then
   echo -e "\n🚫 Cannot push to remote $BRANCH branch, please create your own branch and use PR."
   echo -e "🚫 Tidak bisa push ke remote branch $BRANCH, silahkan buat branch kamu sendiri dan gunakan pull request.\n" && exit 1
