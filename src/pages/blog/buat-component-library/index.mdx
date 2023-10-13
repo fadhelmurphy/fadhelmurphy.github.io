@@ -72,7 +72,7 @@ import buildFolder from "./img/build-folder.png";
   Yoii, gue menerapkan monorepo yang mana semua component ini dalam 1
   node_modules yang sama di dalam satu repo (centralize node_modules) dan ketika
   component lu dependencies ke component lain manggilnya juga gampang tinggal
-  @mamatgarem-ui/my_component
+  @mangkodir-ui/my_component
 </div>
 
   </div>
@@ -91,10 +91,10 @@ import buildFolder from "./img/build-folder.png";
 
 ```bash
 // kalo pake npm
-npm install @mamatgarem-ui/button@1.0.0
+npm install @mangkodir-ui/button@1.0.0
 
 // kalo pake yarn
-yarn add @mamatgarem-ui/button@1.0.0
+yarn add @mangkodir-ui/button@1.0.0
 ```
 
   </div>
@@ -142,7 +142,7 @@ Setelah login, bikin dulu organizationnya di npm. Klik tombol + pada Organizatio
 
 <div class="dotsep" />
 
-Terus lu masukin deh tuh nama library lu, misalkan disini gue namanya <b class="text-teal-500">@mamatgarem-ui</b>.
+Terus lu masukin deh tuh nama library lu, misalkan disini gue namanya <b class="text-teal-500">@mangkodir-ui</b>.
 
     <div class="dotsep"/>
 
@@ -297,11 +297,12 @@ email=krazefollow@gmail.com
 always-auth=true
 ```
 
-<b class="text-teal-500">npm_sebuahtoken</b> : ini merupakan token yg tadi lu generate di npm.
+- <b class="text-teal-500">npm_sebuahtoken</b> : ini merupakan token yg tadi lu generate di npm.
 
-<b class="text-teal-500">mangkodir-ui</b> : ini nama organization di npm.
+- <b class="text-teal-500">mangkodir-ui</b> : ini nama organization di npm.
+- krazefollow@gmail.com : ini email yg lu daftarin di npm
+{" "}
 
-krazefollow@gmail.com : ini email yg lu daftarin di npm
 
   <hr/>
   <div class="grid grid-cols-1 md:grid-cols-3 items-start gap-x-20 my-5">
@@ -436,14 +437,14 @@ Pada bagian @mangkodir-ui bisa diganti dengan nama organization yg udah lu buat 
 ```
 
 {" "}
-<b class="text-teal-500">build</b> : untuk melakukan build pada seluruh package
+- <b class="text-teal-500">build</b> : untuk melakukan build pada seluruh package
 
-<b class="text-teal-500">watch</b> : untuk melakukan build pada seluruh package dan akan melakukan build
+- <b class="text-teal-500">watch</b> : untuk melakukan build pada seluruh package dan akan melakukan build
 lagi ketika ada perubahan code.
 
-<b class="text-teal-500">single</b> : untuk melakukan build pada scope/spesifik package.
+- <b class="text-teal-500">single</b> : untuk melakukan build pada scope/spesifik package.
 
-<b class="text-teal-500">single:watch</b> : untuk melakukan build pada scope/spesifik package.
+- <b class="text-teal-500">single:watch</b> : untuk melakukan build pada scope/spesifik package.
 
 Setelah selesai mengubah package.json, kita perlu melakukan konfigurasi rollup.
 
@@ -507,12 +508,12 @@ export default formats.map((format) => ({
 
 Disini terdapat 3 plugin yg digunakan pada rollup:
 
-<b class="text-teal-500">Resolve</b>: untuk menggabungkan modul-modul yg udah di install yg digunakan di node_modules
+- <b class="text-teal-500">Resolve</b>: untuk menggabungkan modul-modul yg udah di install yg digunakan di node_modules
 
-<b class="text-teal-500">Commonjs</b>: untuk transpile javascript ke format module cjs.
+- <b class="text-teal-500">Commonjs</b>: untuk transpile javascript ke format module cjs.
 (biar bisa pake syntax require(“nganu”) gitu deh)
 
-<b class="text-teal-500">Babel</b>: untuk menerjemah javascript agar dapat di gunakan di browser lama.
+- <b class="text-teal-500">Babel</b>: untuk menerjemah javascript agar dapat di gunakan di browser lama.
 
 Pada konfigurasi rollup ini kita menggunakan modul UMD agar syntax nya bisa dijalankan di serverside atau clientside.
 
@@ -560,10 +561,10 @@ Setiap package perlu di konfigurasi agar hasil build dapat digunakan.
 }
 ```
 
-<b class="text-teal-500">main</b>: merupakan path utama yg dituju ketika package diarahkan @mangkodir-ui/button_test. Disini diarahkan ke file hasil buildnya biar bisa di consume yaitu 
+- <b class="text-teal-500">main</b>: merupakan path utama yg dituju ketika package diarahkan @mangkodir-ui/button_test. Disini diarahkan ke file hasil buildnya biar bisa di consume yaitu 
 <b class="text-teal-500">dist/button_test.umd.js</b>
 
-<b class="text-teal-500">publishConfig</b>: ini merupakan konfigurasi publish package kita. karena kita menggunakan npm, by default kita ga perlu menambahkan object key registry. 
+- <b class="text-teal-500">publishConfig</b>: ini merupakan konfigurasi publish package kita. karena kita menggunakan npm, by default kita ga perlu menambahkan object key registry. 
 Jika kita menggunakan custom registry dapat menambahkan seperti ini.
 
 
