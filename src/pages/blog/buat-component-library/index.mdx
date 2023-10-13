@@ -11,6 +11,7 @@ import Header from "@/Components/header";
 import Layout from "Containers/layout";
 import { prefix } from "Consts/config";
 import Navbar from 'Containers/navbar/navbar'
+import diagramImg from "./img/diagram.png"
 
 {/* # {frontmatter.title} */}
 
@@ -18,114 +19,52 @@ import Navbar from 'Containers/navbar/navbar'
   {/* <Header slot="Header" /> */}
   <Navbar client:load/>
   <Header variant="blog" {...frontmatter}/>
-  <article class="prose lg:prose-xl text-[#2e3e6a] p-8 md:container mx-auto md:w-[50%] place-items-center content-start">
-<h1>h1. heading</h1>
-<h2>h2. heading</h2>
-<h3>h3. heading</h3>
-<h4>h4. heading</h4>
-<h5>h5. heading</h5>
-<h6>h6. heading</h6>
-<h3 class="text-3xl font-medium leading-tight">
-  Fancy display heading
-  <small class="text-base-2"
-    >With faded secondary text</small>
-</h3>
-<h1 class="mb-4 border-b pb-4 leading-tight">Display 1</h1>
-<h2 class="mb-4 border-b pb-4 leading-tight">Display 2</h2>
-<h3 class="mb-4 border-b pb-4 leading-tight">Display 3</h3>
-<h4 class="mb-4 border-b pb-4 leading-tight">Display 4</h4>
-<h5 class="mb-4 border-b pb-4 leading-tight">Display 5</h5>
-<h6 class="leading-tight">Display 6</h6>
-<p class="text-xl font-light">
-  Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
-  Duis mollis, est non commodo luctus.
-</p>
-<p>You can use the mark tag to <mark>highlight</mark> text.</p>
-<p>
-  <del>This line of text is meant to be treated as deleted text.</del>
-</p>
-<p>
-  <s>This line of text is meant to be treated as no longer accurate.</s>
-</p>
-<p>
-  <ins
-    >This line of text is meant to be treated as an addition to the
-    document.</ins>
-</p>
-<p><u>This line of text will render as underlined</u></p>
-<p>
-  <small>This line of text is meant to be treated as fine print.</small>
-</p>
-<p><strong>This line rendered as bold text.</strong></p>
-<p><em>This line rendered as italicized text.</em></p>
+  <article class="prose lg:prose-xl text-[#2e3e6a] p-8 md:p-0 md:container mx-auto place-items-center content-start">
+  ## Final Source Code
+  [Source Code](https://github.com/fadhelmurphy/mamatgarem-ui-starter)
+  <hr/>
+  <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-x-20 my-5">
+  <h1 class="font-semibold leading-[normal] !m-0">Kenapa Implement?</h1>
 
-<figure>
-  <blockquote>
-    <p class="text-xl">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-      posuere erat a ante.
-    </p>
-  </blockquote>
-  <figcaption class="text-sm text-base-2">
-    - Someone famous in <cite title="Source Title">Source Title</cite>
-  </figcaption>
-</figure>
+  <div class="col-span-2">
+  Ketika sedang mengerjakan berbagai macam project (misalkan ada 5 project) dengan desain Component yang sama,
+  kalau dengan copas code component dari project A ke project C,B,D,E itu repot cuuy yakali copas component navbar ke 5 project.
+  </div>
 
-<ul>
-  <li>This is a list.</li>
-  <li>It appears completely unstyled.</li>
-  <li>Structurally, it's still a list.</li>
-  <li>However, this style only applies to immediate child elements.</li>
-  <li>
-    Nested lists:
-    <ul class="ml-6 list-disc">
-      <li>are unaffected by this style</li>
-      <li>will still show a bullet</li>
-      <li>and have appropriate left margin</li>
-    </ul>
-    <ul class="ml-6 list-decimal">
-      <li>are unaffected by this style</li>
-      <li>will still show a bullet</li>
-      <li>and have appropriate left margin</li>
-    </ul>
-  </li>
-  <li>This may still come in handy in some situations.</li>
-</ul>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-x-20 my-5">
+  <h3 class="font-semibold leading-[normal] !m-0">1 component berubah nanti project lain ikutan berubah? Kaga dong cuy</h3>
 
-<p class="text-start">Start aligned text on all viewport sizes.</p>
-<p class="text-center">Center aligned text on all viewport sizes.</p>
-<p class="text-right">End aligned text on all viewport sizes.</p>
+  <div class="col-span-2">
+  Pada tutorial kali ini gue menerapkan versioning dengan menggunakan lerna, sehingga jika project A melakukan update component versi ke 1.0.2 tetapi
+  pada project B masih ingin menggunakan versi 1.0.1 itu tidak masalah. kecuali, pada project B menggunakan versi @latest
+  </div>
 
-<p class="sm:text-start">
-  Start aligned text on viewports sized SM (small) or wider.
-</p>
-<p class="sm:text-start">
-  Start aligned text on viewports sized MD (medium) or wider.
-</p>
-<p class="sm:text-start">
-  Start aligned text on viewports sized LG (large) or wider.
-</p>
-<p class="sm:text-start">
-  Start aligned text on viewports sized XL (extra-large) or wider.
-</p>
+  </div>
 
-<div
-  class="text-wrap w-24 rounded bg-primary text-center text-sm font-semibold text-white">
-  This text should wrap.
-</div>
+      <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-x-20 my-5">
+  <h1 class="font-semibold leading-[normal] !m-0">Monorepo?</h1>
 
-<div class="w-40 whitespace-nowrap bg-primary-300 dark:bg-primary-500">
-  This text should overflow the parent.
-</div>
+  <div class="col-span-2">
+  Yoii, gue menerapkan monorepo yang mana semua component ini dalam 1 node_modules yang sama di dalam satu repo.
+  </div>
 
-<p class="mb-4 lowercase">Lowercased text.</p>
-<p class="mb-4 uppercase">Uppercased text.</p>
-<p class="capitalize">capitalized text.</p>
+  </div>
 
-<p class="mb-4 font-bold">Bold weight text.</p>
-<p class="mb-4 font-semibold">Semibold weight text.</p>
-<p class="mb-4 font-normal">Normal weight text.</p>
-<p class="mb-4 font-light">Light weight text.</p>
-<p class="italic">Italic text.</p>
+  <h2 class="font-semibold leading-[normal] !m-0">Nanti pake componentnya gimana cuy?</h2>
+
+  <p class="!my-5">lu nanti tinggal install aja melalui package manager seperti yarn atau npm.</p>
+
+  ``
+  npm install @mamatgarem-ui/button@v1.0.0
+  ``
+
+  <hr/>
+
+  ## Diagram
+
+  <img src={diagramImg.src} />
+
+  ## Lagi di ketik yaa.. belom beres
 </article>
 </Layout>
