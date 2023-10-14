@@ -24,7 +24,7 @@ export default defineConfig({
     remarkPlugins: [remarkToc],
     rehypePlugins: [rehypeMinifyHtml],
     remarkRehype: { footnoteLabel: 'Footnotes' },
-    gfm: false
+    gfm: true
   }), tailwind(), react()],
   // site: `http://localhost:3000${prefix}`,
   output: 'static',
