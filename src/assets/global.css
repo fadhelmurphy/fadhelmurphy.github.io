@@ -147,7 +147,7 @@
     box-sizing: border-box;
   }
 
-  p {
+  .prose p {
     @apply !text-[#617FAD];
   }
 
