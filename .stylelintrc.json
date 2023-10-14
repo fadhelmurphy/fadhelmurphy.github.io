@@ -1,10 +1,6 @@
 {
   "defaultSeverity": "warning",
-  "extends": [
-    "stylelint-config-standard",
-    "stylelint-config-sass-guidelines",
-    "stylelint-prettier/recommended"
-  ],
+  "extends": ["stylelint-config-html/html", "stylelint-config-html/astro"],
   "rules": {
     "at-rule-no-unknown": null,
     "scss/at-rule-no-unknown": [
