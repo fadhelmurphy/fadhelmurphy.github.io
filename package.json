@@ -11,7 +11,7 @@
     "eslint": "eslint --max-warnings 0",
     "astro": "astro",
     "prepare": "husky install",
-    "publish-article:astro": "git push origin astro-article:{astro-article,dev-astro}"
+    "publish-article:astro": "git push --atomic origin astro-article dev-astro"
   },
   "dependencies": {
     "@astrojs/mdx": "^1.1.2",
