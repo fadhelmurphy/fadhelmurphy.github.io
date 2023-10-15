@@ -35,6 +35,7 @@ const Layout = ({
       <script>
         AOS.init();
       </script>
+    <script src="/scripts/addCopyButton.js" defer></script>
       </body>
     </>
   )

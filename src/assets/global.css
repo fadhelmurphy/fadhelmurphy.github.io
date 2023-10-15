@@ -164,3 +164,24 @@ h6 {
   @apply !font-semibold;
 }
 }
+
+pre {
+  position: relative;
+  overflow: auto;
+}
+
+pre button {
+  font-family: Poppins, system-ui, sans-serif;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  border: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 8px 12px 7px;
+  cursor: pointer;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
