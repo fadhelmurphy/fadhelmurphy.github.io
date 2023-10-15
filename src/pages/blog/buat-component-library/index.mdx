@@ -27,6 +27,7 @@ import resPublish from "./img/result1-publish.png";
 import res2Publish from "./img/result2-publish.png";
 import resnpmPublish from "./img/result-npm-publish.png";
 import resgithubPublish from "./img/result-github-publish.png";
+import compStructure from "./img/component-structure.png";
 
 {/* # {frontmatter.title} */}
 
@@ -536,9 +537,75 @@ Untuk penjelasannya ada disini yak, gue ga terlalu dalem soal module ini.
 
 <div class="dotsep" />
 
-## Konfigurasi package.json untuk scope package (Component)
+## Konfigurasi Component
 
-Setiap package perlu di konfigurasi agar hasil build dapat digunakan.
+Setiap package perlu di konfigurasi agar hasil build dapat digunakan. Disini nama file untuk component ialah button_test.js yang berada di 
+<b>packages/button_test/package.json</b>.
+
+berikut ini merupakan contoh structure folder untuk component <b>button_test</b>
+
+<div class="dotsep" />
+    <center>
+
+  <img src={compStructure.src} />
+  </center>
+
+<div class="dotsep" />
+
+sebagai contoh berikut ini merupakan contoh code component nya.
+
+```jsx
+// packages/button_test/lib/button_test.js
+import React from "react";
+import css from "styled-jsx/css";
+
+const btnStyle = {
+  "btn-blue": `
+    background: linear-gradient(
+        102deg,
+        rgb(0, 196, 255) 0%,
+        rgb(0, 153, 255) 100%
+      );
+      color: #fff;
+      box-shadow: rgba(9, 172, 255, 0.518) 0.3981px 0.3981px 0.56299px -0.9375px,
+        rgba(9, 172, 255, 0.49) 1.20725px 1.20725px 1.70731px -1.875px,
+        rgba(9, 172, 255, 0.42) 3.19133px 3.19133px 4.51322px -2.8125px,
+        rgba(9, 172, 255, 0.176) 10px 10px 14.1421px -3.75px;
+    `,
+};
+
+export default function ButtonTest({ children, type = null, href = null, style = null }) {
+  const { className = "", styles = "" } = css.resolve`
+    ${btnStyle[type ? `btn-${type}` : "btn"] || ""}
+  `;
+  return (
+    <>
+      <button className={`mangkodir-btn ${className}`} {...{ href, style }}>
+        {children}
+      </button>
+      <style jsx>
+        {`
+          .mangkodir-btn {
+            height: 100%;
+            opacity: 1;
+            padding: 14px 16px;
+            border: 0;
+            border-radius: 12px;
+            cursor: pointer;
+          }
+        `}
+      </style>
+      {styles}
+    </>
+  );
+}
+
+```
+
+disini gue menggunakan styled-jsx untuk dapat melakukan styling css-in-js.
+
+lalu config untuk package.json di <b>packages/button_test/package.json</b>
+
 
 ```json
 {
@@ -586,7 +653,7 @@ Jika kita menggunakan custom registry dapat menambahkan seperti ini.
 
 ```
 
-<div class="dotsep" />
+<hr/>
 
 ## Cara Build
 
@@ -640,7 +707,7 @@ lerna exec --scope @mangkodir-ui/button_test -- rollup -c=../../rollup.config.js
   Setelah berhasil build akan men generate file js di dalam folder distribution (dist) seperti diatas.
 
 
-<div class="dotsep" />
+<hr/>
 
 
 ## Publish & Versioning component
@@ -694,7 +761,7 @@ Lalu pada npm dan github nanti akan ada update dengan tampilan seperti
 
 <div class="dotsep" />
 
-<h3 class="text-center">Kurang lebih tutorialnya kek gitu yaaa</h3>
+<h3 class="text-center">Kurang lebih tutorialnya kek gitu yaaa, <br/>thank you udah baca ampe bawah</h3>
 
   <div class="dotsep"/>
 </article>
