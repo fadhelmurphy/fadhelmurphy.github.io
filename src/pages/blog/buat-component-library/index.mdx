@@ -22,6 +22,11 @@ import resultNpmrc from "./img/result-npmrc.png";
 import rollupComponent from "./img/rollup-component.png";
 import build from "./img/build.png";
 import buildFolder from "./img/build-folder.png";
+import jsonPublish from "./img/json-publish.png";
+import resPublish from "./img/result1-publish.png";
+import res2Publish from "./img/result2-publish.png";
+import resnpmPublish from "./img/result-npm-publish.png";
+import resgithubPublish from "./img/result-github-publish.png";
 
 {/* # {frontmatter.title} */}
 
@@ -524,9 +529,9 @@ Pada konfigurasi rollup ini kita menggunakan modul UMD agar syntax nya bisa dija
 
 Untuk penjelasannya ada disini yak, gue ga terlalu dalem soal module ini.
 
-https://mazipan.space/javascript-module-dan-keribetannya
+- https://mazipan.space/javascript-module-dan-keribetannya
 
-https://dev.to/iggredible/what-the-heck-are-cjs-amd-umd-and-esm-ikm
+- https://dev.to/iggredible/what-the-heck-are-cjs-amd-umd-and-esm-ikm
 
 
 <div class="dotsep" />
@@ -640,11 +645,56 @@ lerna exec --scope @mangkodir-ui/button_test -- rollup -c=../../rollup.config.js
 
 ## Publish & Versioning component
 
-Untuk publish component, pastikan lu berada di branch master. Karena pada config lerna hanya memperbolehkan melakukan publish di master.
-
+Untuk publish component, pastikan lu berada di branch master. Karena pada config lerna.json hanya memperbolehkan melakukan publish di master.
 
 <div class="dotsep" />
-<h1 class="text-center">Lagi di ketik yaa cuy.. belom beres</h1>
+    <center>
+
+  <img src={jsonPublish.src} />
+  </center>
+
+<div class="dotsep" />
+
+Setelah itu jalankan perintah ini di terminal dan pastikan berada root repository.
+
+```
+npx lerna publish
+```
+
+Jika berhasil akan memiliki tampilan seperti dibawah ini.
+
+    <center>
+
+  <img src={resPublish.src} />
+  </center>
+
+<div class="dotsep" />
+
+
+    <center>
+
+  <img src={res2Publish.src} />
+  </center>
+
+<div class="dotsep" />
+
+Lalu pada npm dan github nanti akan ada update dengan tampilan seperti
+
+    <center>
+
+  <img src={resnpmPublish.src} />
+  </center>
+
+<div class="dotsep" />
+
+    <center>
+
+  <img src={resgithubPublish.src} />
+  </center>
+
+<div class="dotsep" />
+
+<h3 class="text-center">Kurang lebih tutorialnya kek gitu yaaa</h3>
 
   <div class="dotsep"/>
 </article>
