@@ -1,6 +1,9 @@
 import { type HeaderProps } from './types'
 import Bg from '@/Assets/img/blog/blog-bg.png'
 import BgM from '@/Assets/img/blog/blog-bg-m.png'
+import { getImage } from 'astro:assets'
+const optimizedBackgroundImageM = await getImage({ src: BgM })
+const optimizedBackgroundImage = await getImage({ src: Bg })
 const BlogListHeader = ({ description, title, bgImg, bgImgM }: HeaderProps): JSX.Element => {
   const formattedHtml = { __html: description }
   const headerTitle = { __html: title }
@@ -21,13 +24,13 @@ const BlogListHeader = ({ description, title, bgImg, bgImgM }: HeaderProps): JSX
         {`
     body {
       background-size: 100%;
-      background-image: url(${bgImgM ?? BgM?.src});
+      background-image: url(${bgImgM ?? optimizedBackgroundImageM?.src});
     }
 
     @media (min-width: 768px) {
       body {
         background-size: 100%;
-        background-image: url(${bgImg ?? Bg?.src});
+        background-image: url(${bgImg ?? optimizedBackgroundImage?.src});
       }
     }
         `}

@@ -3,7 +3,10 @@ import { type HeaderProps } from './types'
 import Bg from '@/Assets/img/home/bg.png'
 import BgM from '@/Assets/img/home/bg-m.png'
 import React from 'react'
+import { getImage } from 'astro:assets'
 const LogoSlider = React.lazy(async () => await import('../logo-slider'))
+const optimizedBackgroundImageM = await getImage({ src: BgM })
+const optimizedBackgroundImage = await getImage({ src: Bg })
 
 const emoji = '%F0%9F%91%8B%F0%9F%8F%BC' // encode emoji manually
 const HomepageHeader = ({ yourname, yourRole }: HeaderProps): JSX.Element => {
@@ -53,12 +56,12 @@ HomepageHeader.defaultProps = {
             z-index: -1;
         }   
     body {
-      background-image: url(${BgM.src});
+      background-image: url(${optimizedBackgroundImageM.src});
     }
 
     @media (min-width: 768px) {
       body {
-        background-image: url(${Bg.src});
+        background-image: url(${optimizedBackgroundImage.src});
       }
     }
         `}
