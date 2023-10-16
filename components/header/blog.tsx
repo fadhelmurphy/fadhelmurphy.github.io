@@ -2,6 +2,9 @@ import { type HeaderProps } from './types'
 import BlogImg from '@/Assets/img/blog/blog-bg.png'
 import BlogImgM from '@/Assets/img/blog/blog-bg-m.png'
 import Badge from '../badge'
+import { getImage } from 'astro:assets'
+const optimizedBackgroundImageM = await getImage({ src: BlogImgM })
+const optimizedBackgroundImage = await getImage({ src: BlogImg })
 
 const BlogHeader = ({ label = [], postTitle, date, bgImg, bgImgM }: HeaderProps): JSX.Element => {
   return (
@@ -35,12 +38,12 @@ const BlogHeader = ({ label = [], postTitle, date, bgImg, bgImgM }: HeaderProps)
         {`
     
     body {
-      background-image: url(${bgImgM ?? BlogImgM.src});
+      background-image: url(${bgImgM ?? optimizedBackgroundImageM.src});
     }
 
     @media (min-width: 768px) {
       body {
-        background-image: url(${bgImg ?? BlogImg.src});
+        background-image: url(${bgImg ?? optimizedBackgroundImage.src});
       }
     }
         `}

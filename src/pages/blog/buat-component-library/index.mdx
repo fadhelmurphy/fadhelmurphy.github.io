@@ -4,7 +4,7 @@ date: "23 Oct 2023"
 label: ["react", "rollup"]
 # layout: Containers/article.astro
 ---
-
+import { Image } from "astro:assets"
 import Button from "@/Components/Button.astro";
 import Header from "@/Components/header";
 import Layout from "Containers/layout";
@@ -139,7 +139,7 @@ import Button from "@mangkodir-ui/button";
 
   <center>
 
-  <img src={diagramImg.src} />
+  <Image alt="membuat component library" src={diagramImg} />
   </center>
 
   <div class="dotsep" />
@@ -174,7 +174,7 @@ Setelah login, bikin dulu organizationnya di npm. Klik tombol + pada Organizatio
 
     <center>
 
-  <img src={organizationImg.src} />
+  <Image alt="membuat component library" src={organizationImg} />
   </center>
 
 {" "}
@@ -187,7 +187,7 @@ Terus lu masukin deh tuh nama library lu, misalkan disini gue namanya <b class="
 
     <center>
 
-  <img src={inputOrganizationImg.src} />
+  <Image alt="membuat component library" src={inputOrganizationImg} />
   </center>
 
 {" "}
@@ -202,7 +202,7 @@ Setelah itu klik skip this for now aja.
 
     <center>
 
-  <img src={skipOrganizationImg.src} />
+  <Image alt="membuat component library" src={skipOrganizationImg} />
   </center>
 
 {" "}
@@ -216,7 +216,7 @@ Nanti hasilnya kek gini.
 
     <center>
 
-  <img src={resOrganizationImg.src} />
+  <Image alt="membuat component library" src={resOrganizationImg} />
   </center>
 
 {" "}
@@ -241,7 +241,7 @@ Sekarang, lu balik lagi ke dashboard website npmjs.com. dibagian sidebar kiri te
 
     <center>
 
-  <img src={acccessNpmrc.src} />
+  <Image alt="membuat component library" src={acccessNpmrc} />
   </center>
 
 {" "}
@@ -255,7 +255,7 @@ Pilih “Access Token” pada sidebar kiri
 
     <center>
 
-  <img src={generateTokenNpmrc.src} />
+  <Image alt="membuat component library" src={generateTokenNpmrc} />
   </center>
 
 {" "}
@@ -269,7 +269,7 @@ Pilih yg classic token.
 
     <center>
 
-  <img src={newAcccessNpmrc.src} />
+  <Image alt="membuat component library" src={newAcccessNpmrc} />
   </center>
 
 {" "}
@@ -283,7 +283,7 @@ Nanti hasilnya tuh kek gini
 
     <center>
 
-  <img src={resultNpmrc.src} />
+  <Image alt="membuat component library" src={resultNpmrc} />
   </center>
 
 {" "}
@@ -405,7 +405,7 @@ Dibawah ini ada analogi nya si rollup itu ngapain.
 
     <center>
 
-  <img src={rollupComponent.src} />
+  <Image alt="membuat component library" src={rollupComponent} />
   </center>
 
 {" "}
@@ -505,7 +505,7 @@ const PACKAGE_ROOT_PATH = process.cwd();
 const PKG_JSON = require(path.join(PACKAGE_ROOT_PATH, "package.json"));
 const INPUT_FILE = path.join(
   PACKAGE_ROOT_PATH,
-  `${PKG_JSON.srcFile}/${PKG_JSON.srcName}.js`
+  `${PKG_JSONFile}/${PKG_JSONName}.js`
 );
 const OUTPUT_DIR = path.join(PACKAGE_ROOT_PATH, "dist");
 const IS_BROWSER_BUNDLE = !!PKG_JSON.browser;
@@ -531,7 +531,7 @@ export default formats.map((format) => ({
   external: ["react", "react-dom"],
   output: {
     ...(format === "umd"
-      ? { file: path.join(OUTPUT_DIR, `${PKG_JSON.srcName}.${format}.js`) }
+      ? { file: path.join(OUTPUT_DIR, `${PKG_JSONName}.${format}.js`) }
       : {}),
     format,
     sourcemap: true,
@@ -575,7 +575,7 @@ berikut ini merupakan contoh structure folder untuk component <b>button_test</b>
 <div class="dotsep" />
     <center>
 
-  <img src={compStructure.src} />
+  <Image alt="membuat component library" src={compStructure} />
   </center>
 
 <div class="dotsep" />
@@ -720,13 +720,13 @@ lerna exec --scope @mangkodir-ui/button_test -- rollup -c=../../rollup.config.js
   ### Hasil setelah build
     <center>
 
-  <img src={build.src} />
+  <Image alt="membuat component library" src={build} />
   </center>
 
 <div class="dotsep" />
     <center>
 
-  <img src={buildFolder.src} />
+  <Image alt="membuat component library" src={buildFolder} />
   </center>
 
 <div class="dotsep" />
@@ -745,7 +745,7 @@ Untuk publish component, pastikan lu berada di branch master. Karena pada config
 <div class="dotsep" />
     <center>
 
-  <img src={jsonPublish.src} />
+  <Image alt="membuat component library" src={jsonPublish} />
   </center>
 
 <div class="dotsep" />
@@ -760,7 +760,7 @@ Jika berhasil akan memiliki tampilan seperti dibawah ini.
 
     <center>
 
-  <img src={resPublish.src} />
+  <Image alt="membuat component library" src={resPublish} />
   </center>
 
 <div class="dotsep" />
@@ -768,7 +768,7 @@ Jika berhasil akan memiliki tampilan seperti dibawah ini.
 
     <center>
 
-  <img src={res2Publish.src} />
+  <Image alt="membuat component library" src={res2Publish} />
   </center>
 
 <div class="dotsep" />
@@ -777,14 +777,14 @@ Lalu pada npm dan github nanti akan ada update dengan tampilan seperti
 
     <center>
 
-  <img src={resnpmPublish.src} />
+  <Image alt="membuat component library" src={resnpmPublish} />
   </center>
 
 <div class="dotsep" />
 
     <center>
 
-  <img src={resgithubPublish.src} />
+  <Image alt="membuat component library" src={resgithubPublish} />
   </center>
 
 <div class="dotsep" />
