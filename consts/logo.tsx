@@ -20,10 +20,6 @@ export const SliderData: SliderDataType[] = [
   },
   {
     type: 'text',
-    text: 'AWS'
-  },
-  {
-    type: 'text',
     text: 'NGINX'
   },
   {

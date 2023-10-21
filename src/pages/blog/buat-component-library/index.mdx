@@ -59,20 +59,6 @@ import compStructure from "./img/component-structure.png";
   </div>
 
   <div class="dotsep"/>
-      <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-x-20 my-5">
-  <h1 class="!m-0">Monorepo?</h1>
-
-{" "}
-
-<div class="col-span-2">
-  Yoii, gue menerapkan monorepo yang mana semua component ini dalam 1
-  node_modules yang sama di dalam satu repo (centralize node_modules) dan ketika
-  component lu dependencies ke component lain manggilnya juga gampang tinggal
-  @mangkodir-ui/my_component
-</div>
-
-  </div>
-  <div class="dotsep"/>
   <div class="my-5">
 
 {" "}
@@ -114,7 +100,8 @@ import Button from "@mangkodir-ui/button";
 
   <div class="dotsep" />
 
-  Jadi kita akan membuat semua component dalam satu repo (Monorepo) yang menggunakan 1 node_modules dan dapat melakukan sharing antar component.
+  Jadi, pada tutorial ini memungkinkan beberapa component dalam satu repo dengan version pada setiap component berbeda,
+  tetapi dengan 1 node_modules yg sama dan dapat dengan mudah melakukan sharing code antar component tanpa harus berpindah repository (Monorepo).
   Rollup akan melakukan build component yang hasilnya merupakan module umd, hasil build tersebut akan di publish menggunakan lerna. 
   Lerna akan melakukan push tag (untuk mempermudah jika ingin melakukan rollback) ke repo github dan publish component ke npmjs.com. 
   ketika component sudah di publish di npmjs.com, component dapat di install dan digunakan.
@@ -540,7 +527,9 @@ Untuk penjelasannya ada disini yak, gue ga terlalu dalem soal module ini.
 Setiap package perlu di konfigurasi agar hasil build dapat digunakan. Disini nama file untuk component ialah button_test.js yang berada di 
 <b>packages/button_test/package.json</b>.
 
-berikut ini merupakan contoh structure folder untuk component <b>button_test</b>
+berikut ini merupakan contoh structure folder untuk component <b>button_test</b>.
+
+<p><b>Notes: pada step ini abaikan folder dist, karena folder dist akan digenerate otomatis pada step cara build component.</b></p>
 
 <div class="dotsep" />
     <center>
@@ -620,6 +609,7 @@ lalu config untuk package.json di <b>packages/button_test/package.json</b>
     "dist/"
   ],
   "publishConfig": {
+    "registry": "https://registry.npmjs.org",
     "access": "public"
   },
   "repository": {
@@ -653,7 +643,7 @@ Jika kita menggunakan custom registry dapat menambahkan seperti ini.
 
 <hr/>
 
-## Cara Build
+## Cara Build Component
 
   <div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-20 items-start my-5">
   <div>
