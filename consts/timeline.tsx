@@ -129,7 +129,7 @@ export const eduTimelineData: TimelineDataType[] = [
     data: [
       {
         jobtitle: 'Data Science & Machine Learning',
-        time: '2023'
+        time: 'Oct 2023 - Feb 2024'
       }
     ],
     isLatest: true

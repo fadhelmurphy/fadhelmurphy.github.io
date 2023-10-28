@@ -20,7 +20,7 @@ const PortoCard = ({ title, desc, image, linkObj, customClassName }: IPortoCard)
             <h2>{title}</h2>
           </div>
           <div className="desc">
-            <p>{desc}</p>
+            <p dangerouslySetInnerHTML={{ __html: desc }} />
             {/* <a href={linkObj.link}>{linkObj.text}</a> */}
           </div>
         </div>
