@@ -698,6 +698,88 @@ lerna exec --scope @mangkodir-ui/button_test -- rollup -c=../../rollup.config.js
 <hr/>
 
 
+## Cobain component di local
+
+Sebelum di publish, component nya bisa lu coba di local untuk memastikan apakah component lu ini bisa digunakan.
+
+Misalkan saat ini lu lagi pake project react, lu bisa ubah `package.json` di project lu dengan cara sebagai berikut.
+
+Pertama, pastiin lu tau lokasi folder project UI Component Library lu dan Contoh project (React.js).
+
+  <center>
+
+  <div class="w-[20vw]">
+
+   ![import local](./img/current-dir-import-local.png)
+
+  </div>
+  </center>
+
+  <div class="dotsep" />
+
+Contoh, disini mangkodir-ui (UI Library Component) dan contoh-project-nextjs (React.js) dengan posisi sejajar 
+dalam satu folder yang sama.
+
+  <center>
+
+  <div class="w-[40vw]">
+
+   ![consume package json](./img/package-json-import-local.png)
+
+  </div>
+  </center>
+
+  <div class="dotsep" />
+
+
+lalu pada `contoh-project-nextjs/package.json` kita tambahkan package seperti dibawah ini dan arahkan source folder nya.
+
+- <b class="text-teal-500">@fdhl/button</b>: nama ini bisa kalian ubah sesuai keinginan.
+- <b class="text-teal-500">../mangkodir-ui/packages/button_test</b>: ini lokasi folder project UI Component Library kalian.
+
+Setelah itu install component nya.
+
+```
+npm install
+```
+setelah di install, component tersebut dapat digunakan.
+
+
+```tsx
+import FadhelBtn from "@fdhl/button"
+...
+
+<FadhelBtn>
+  Sebuah text
+</FadhelBtn>
+```
+
+Hasilnya akan tampil seperti gambar dibawah ini.
+
+  <center>
+
+  <div class="w-[40vw]">
+
+   ![consume package json](./img/result-import-local.png)
+
+  </div>
+  </center>
+
+  ### Untuk pengguna Nextjs 12 atau versi terbaru (Opsional)
+
+Lu bisa langsung import component dari luar project tanpa harus mengubah `package.json`.
+
+```tsx
+import FdhlButton from "../../mangkodir-ui/packages/button_test"
+...
+
+<FdhlButton>
+  Sebuah text
+</FdhlButton>
+```
+
+<hr/>
+
 ## Publish & Versioning component
 
 Untuk publish component, pastikan lu berada di branch master. Karena pada config lerna.json hanya memperbolehkan melakukan publish di master.
