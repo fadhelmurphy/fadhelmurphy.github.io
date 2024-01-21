@@ -63,7 +63,7 @@
   }
 
   .porto-card .head {
-    @apply p-[2rem] pb-[0] md:p-[2rem] md:self-center;
+    @apply p-[1.2rem] pb-[0] md:p-[2rem] md:self-center;
   }
 
   .porto-card .head .title {
@@ -85,7 +85,7 @@
   .porto-card .content {
     @apply h-max self-center;
 
-    @apply rounded-[0_0_20px_20px] p-[2rem] md:p-[2rem] pt-[0];
+    @apply rounded-[0_0_20px_20px] p-[1.2rem] md:p-[2rem] pt-[0];
   }
 
   .blog-card {
