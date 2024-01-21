@@ -77,7 +77,7 @@
   .porto-card .content img {
     overflow: hidden;
 
-    @apply relative h-full w-full bg-white rounded-[10px] md:rounded-[20px] md:drop-shadow-[0_75px_75px_#ffc85d] aspect-square;
+    @apply relative h-full w-full bg-white rounded-[10px] md:rounded-[20px] md:drop-shadow-[0_75px_75px_#ffbe7a] aspect-square;
 
     object-fit: cover;
   }
