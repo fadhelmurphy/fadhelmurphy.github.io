@@ -57,13 +57,13 @@
   }
 
   .porto-card {
-    @apply hover:rotate-[0deg] rounded-[10px] md:rounded-[20px] flex flex-col justify-between mx-6 md:mx-0 md:m-0 bg-[linear-gradient(345deg,rgba(255,255,255,0)_0%,rgba(255,255,255,1)_45%)] md:bg-[linear-gradient(345deg,rgba(255,255,255,0)_0%,rgba(255,255,255,1)_60%)];
+    @apply hover:rotate-[0deg] rounded-[10px] md:rounded-[20px] flex flex-col md:grid md:grid-cols-2 justify-between mx-6 md:mx-0 md:m-0 bg-[linear-gradient(345deg,rgba(255,255,255,0)_0%,rgba(255,255,255,1)_45%)] md:bg-[linear-gradient(315deg,rgba(255,255,255,0)_0%,rgba(255,255,255,1)_45%)];
     height: 100%;
     transition: all 0.5s ease 0s;
   }
 
   .porto-card .head {
-    @apply p-[1.5rem] pb-[0] md:p-[2.5rem] md:pb-[0];
+    @apply p-[1.5rem] pb-[0] md:p-[2.5rem] self-center;
   }
 
   .porto-card .head .title {
@@ -71,21 +71,21 @@
   }
 
   .porto-card .head .desc {
-    @apply my-6 text-base md:text-xl font-normal text-base-2;
+    @apply my-6 text-base font-normal text-base-2;
   }
 
   .porto-card .content img {
     overflow: hidden;
 
-    @apply relative h-full w-full bg-white rounded-[10px] md:rounded-[20px] md:drop-shadow-[0_55px_55px_#ffc85d];
+    @apply relative h-full w-full bg-white rounded-[10px] md:rounded-[20px] md:drop-shadow-[0_75px_75px_#ffc85d] aspect-square;
 
     object-fit: cover;
   }
 
   .porto-card .content {
-    @apply h-max md:h-[20em];
+    @apply h-max self-center;
 
-    @apply rounded-[0_0_20px_20px] p-[1.2rem] md:p-[2.5rem] pt-[0];
+    @apply rounded-[0_0_20px_20px] p-[1.2rem] md:p-[2rem] pt-[0];
   }
 
   .blog-card {
