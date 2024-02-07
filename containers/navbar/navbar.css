@@ -1,31 +1,56 @@
+  .mylogo {
+    @apply flex items-center border-r border-[#ced9eb] overflow-hidden w-full h-full;
+    transition: all 1s cubic-bezier(0.77,0.2,0.05,1.0);
+  }
+  .mylogo img {
+    width: 40px;
+    aspect-ratio: 1 / 1;
+    transition: all 1s cubic-bezier(0.77,0.2,0.05,1.0);
+  }
+  .mylogo p {
+    @apply text-xl font-semibold ml-2 mr-5;
+    visibility: visible;
+    opacity: 1;
+    transition: all 1s cubic-bezier(0.77,0.2,0.05,1.0);
+  }
+
+  .all-menu .bottom {
+    display: none;
+    opacity: 0;
+    justify-content: center;
+    transition: all 1s cubic-bezier(0.77,0.2,0.05,1.0);
+  }
+
+  .all-menu .active {
+    
+    display: flex;
+    width: 45px;
+    height: 40px;
+    opacity: 1;
+    transition: all 1s cubic-bezier(0.77,0.2,0.05,1.0);
+  }
+  .all-menu .active img {
+    content:url("https://www.svgrepo.com/show/4166/up-arrow.svg");
+    width: 20px;
+  }
 
   .all-menu {
-    transition: all 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
-    @apply overflow-hidden truncate drop-shadow-2xl backdrop-blur-md bg-white/80 rounded-lg p-2 w-[3.5rem] h-[3rem] md:w-[4.063rem] md:h-[3.75rem];
+    @apply overflow-hidden truncate flex drop-shadow-2xl backdrop-blur-sm bg-white/80 rounded-lg p-3;
   }
   .all-menu .header {
-    justify-content: flex-end;
     display: flex;
     align-items: center;
   }
   .all-menu .content {
-    visibility: hidden;
-    opacity: 0;
-    transition: all 0.5s ease;
-    @apply py-5;
+    @apply flex items-center;
   }
   .all-menu .content .nav-active {
     @apply text-teal-500;
-  }
-  .navbar-active .all-menu {
-    width: 20vw;
-    height: 60vh;
-    @apply w-[85vw] h-[30vh] md:w-[25vw] md:h-[30vh];
   }
   .navbar-active .content {
     visibility: visible;
     opacity: 1;
   }
   .all-menu .content .nav-link {
-    @apply p-5 flex flex-col border-b border-[#2e3e6a]/10;
+    @apply px-5;
   }

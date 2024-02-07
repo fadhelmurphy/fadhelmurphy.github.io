@@ -1,6 +1,6 @@
-import { useCallback, useState, useMemo, useEffect } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import './navbar.css'
-import Hamburger from '@/Components/hamburger/hamburger'
+import Mylogo from '@/Components/mylogo/mylogo'
 import { menulist } from 'Consts/navbar'
 import { type menulistType } from 'Consts/types/navbar.type'
 
@@ -10,24 +10,26 @@ interface NavbarProps {
 }
 
 function Navbar ({ onClick = (params) => { }, customClassName }: NavbarProps): JSX.Element {
-  const [isActive, setIsActive] = useState<boolean>(false)
   const [pathname, setPathname] = useState<string | undefined>()
-  const activeHandler = useCallback(
-    (active: boolean) => {
-      setIsActive(active)
-      onClick(active)
-    },
-    [isActive, onClick]
-  )
-  const className = useMemo(() => `z-[99] fixed top-[5%] right-[7%] navbar${isActive ? ' navbar-active' : ''}${customClassName ? ` ${customClassName}` : ''}`, [customClassName, isActive])
+  const [isHeaderScroll, setHeaderScroll] = useState<boolean>(true)
+  const className = useMemo(() => `z-[99] fixed top-[5%] right-[6%] md:right-[45%] navbar${customClassName ? ` ${customClassName}` : ''}`, [customClassName])
   useEffect(() => {
     typeof window !== 'undefined' && setPathname(window?.location.pathname.slice(1))
   }, [pathname])
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', function (e) {
+        // print "false" if direction is down and "true" if up
+        setHeaderScroll(this?.scrollY < 1100)
+      })
+    }
+  }, [])
   return (
     <div className={className}>
       <div className="all-menu">
         <div className="header">
-          <Hamburger isActive={isActive} onClick={activeHandler} customClassName="relative" />
+          <Mylogo />
         </div>
         <div className='content'>
           {menulist.map((item: menulistType) => {
@@ -36,6 +38,9 @@ function Navbar ({ onClick = (params) => { }, customClassName }: NavbarProps): J
               <a className={`nav-link${isCurrentNav}`} href={item.link}>{item.text}</a>
             )
           })}
+        </div>
+        <div onClick={() => { window?.scrollTo({ top: 0, behavior: 'smooth' }) }} className={`cursor-pointer bottom ${!isHeaderScroll ? 'active' : ''}`}>
+          <img src='https://www.svgrepo.com/show/4166/up-arrow.svg' />
         </div>
       </div>
     </div>
