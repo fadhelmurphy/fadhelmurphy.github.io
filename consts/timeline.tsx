@@ -2,6 +2,19 @@ import { type TimelineDataType } from 'Consts/types/timeline.type'
 
 export const timelineData: TimelineDataType[] = [
   {
+    company: 'Aruna Indonesia.',
+    data: [
+      {
+        jobtitle: 'Data Engineer - Internship',
+        time: 'Apr 2024 - present',
+        description: `
+        The Largest Integrated Fisheries Commerce in Indonesia. Making The Sea a Better Livelihood For All.
+        `
+      }
+    ],
+    isLatest: true
+  },
+  {
     company: 'Good Doctor Technology.',
     data: [
       {
@@ -14,7 +27,7 @@ export const timelineData: TimelineDataType[] = [
         `
       }
     ],
-    isLatest: true
+    isLatest: false
   },
   {
     company: 'Female Daily Network.',
