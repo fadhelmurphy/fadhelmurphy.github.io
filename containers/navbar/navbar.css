@@ -2,9 +2,6 @@
     @apply flex items-center border-r border-[#cdd1d6] overflow-hidden w-full h-full;
     transition: width 0.3s cubic-bezier(0.77,0.2,0.05,1.0);
   }
-  .all-menu .header .logo-hide{
-    width: 40px;
-  }
   .mylogo img {
     width: 2rem;
     aspect-ratio: 1 / 1;
@@ -22,19 +19,28 @@
     justify-content: center;
   }
 
-  .all-menu .active {
+  .all-menu .cursor-pointer {
     display: flex;
-    width: 40px;
+    justify-content: center;
     opacity: 1;
     transition: all 1s cubic-bezier(0.77,0.2,0.05,1.0);
+    width: 0;
+    margin: 0 auto;
   }
-  .all-menu .active img {
+  .all-menu .cursor-pointer img {
     content:url("https://www.svgrepo.com/show/4166/up-arrow.svg");
-    width: 1rem;
+  }
+
+  .all-menu-active {
+    @apply !grid-cols-[calc(1*_40px)_auto_calc(1*_40px)];
+  }
+
+  .all-menu-active .cursor-pointer {
+    width: 20px;
   }
 
   .all-menu {
-    @apply overflow-hidden truncate flex drop-shadow-2xl backdrop-blur-sm bg-white/70 rounded-lg p-2 md:p-3 text-sm;
+    @apply overflow-hidden truncate grid grid-cols-[calc(3*_40px)_auto_calc(0*_40px)] transition-[grid-template-columns] duration-[1s] drop-shadow-2xl backdrop-blur-sm bg-white/70 rounded-lg p-2 md:p-3 text-sm;
   }
   .all-menu .header {
     display: flex;

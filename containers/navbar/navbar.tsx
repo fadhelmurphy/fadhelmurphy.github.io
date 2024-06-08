@@ -27,7 +27,7 @@ function Navbar ({ onClick = (params) => { }, customClassName }: NavbarProps): J
   }, [])
   return (
     <div className={className}>
-      <div className="all-menu">
+      <div className={`all-menu ${!isHeaderScroll ? 'all-menu-active' : ''}`}>
         <div className="header">
           <Mylogo />
         </div>
@@ -39,7 +39,7 @@ function Navbar ({ onClick = (params) => { }, customClassName }: NavbarProps): J
             )
           })}
         </div>
-        <div onClick={() => { window?.scrollTo({ top: 0, behavior: 'smooth' }) }} className={`cursor-pointer bottom ${!isHeaderScroll ? 'active' : ''}`}>
+        <div onClick={() => { window?.scrollTo({ top: 0, behavior: 'smooth' }) }} className={'cursor-pointer bottom'}>
           <img src='https://www.svgrepo.com/show/4166/up-arrow.svg' />
         </div>
       </div>
