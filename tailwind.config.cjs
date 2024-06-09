@@ -148,13 +148,13 @@ module.exports = {
           zIndex: -1
         },
         '.base-card': {
-          '--border': '#e9e9fd',
-          '--card': 'rgb(249, 249, 255)',
+          '--border': '#e9f0ff',
+          '--card': 'rgb(249, 251, 255)',
           borderRadius: '12px',
           overflow: 'hidden',
           background: 'var(--card)',
           border: '1px solid var(--border)',
-          boxShadow: '0 3px 4px rgba(23, 22, 24, .04), 0 1px 2px rgba(23, 22, 24, .04)'
+          boxShadow: 'rgba(59, 130, 246, 0.1) 0px 20px 25px -5px, rgba(59, 130, 246, 0.04) 0px 10px 10px -5px'
         },
         '.text-shadow-white': {
           filter:
