@@ -1,39 +1,31 @@
-/* eslint-disable react/no-children-prop */
-/* eslint-disable max-len */
-/* eslint-disable react/forbid-prop-types */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable react/no-array-index-key */
-import React from "react";
-import { TemplateType } from "Consts/types/template.type";
-const Default = React.lazy(() => import("./default"));
-const Education = React.lazy(() => import("./education"));
+import React from 'react'
+import { type TemplateType } from 'Consts/types/template.type'
+const Default = React.lazy(async () => await import('./default'))
+const Education = React.lazy(async () => await import('./education'))
 
 const Template: TemplateType[] = [
   {
-    id: "default",
-    component: Default,
+    id: 'default',
+    component: Default
   },
   {
-    id: "education",
-    component: Education,
-  },
-];
+    id: 'education',
+    component: Education
+  }
+]
 
 const Sections = ({
   type,
   ...props
-}: {
-  [key: string]: any;
-}): React.ReactNode[] =>
+}: Record<string, any>): React.ReactNode[] =>
   Template.filter((item) => item.id === type).map(
     (style: TemplateType, idx: number) => (
       <style.component key={`${String(idx + 1)}`} {...props} />
-    ),
-  );
+    )
+  )
 
 Sections.defaultProps = {
-  type: "default",
-};
+  type: 'default'
+}
 
-export default Sections;
+export default Sections
