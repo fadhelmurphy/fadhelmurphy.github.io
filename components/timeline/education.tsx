@@ -15,7 +15,7 @@ const DefaultTimeline = ({
     <ol className="relative my-12 md:me-12">
       {data.map((item: TimelineDataType) => {
         return (
-          <li className='base-card p-12 mb-12' data-aos="animation-scale-y" data-aos-duration="500">
+          <li className='base-card p-8 md:p-12 mb-12' data-aos="animation-scale-y" data-aos-duration="500">
             <div className='education-detail' style={{
               placeContent: 'flex-start',
               alignItems: 'flex-start',
