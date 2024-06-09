@@ -1,31 +1,61 @@
+  .mylogo {
+    @apply flex items-center border-r border-[#cdd1d6] overflow-hidden w-full h-full;
+    transition: width 0.3s cubic-bezier(0.77,0.2,0.05,1.0);
+  }
+  .mylogo img {
+    width: 2rem;
+    aspect-ratio: 1 / 1;
+  }
+  .mylogo p {
+    @apply text-lg font-semibold ml-2 mr-5;
+    visibility: visible;
+    opacity: 1;
+    transition: all 1s cubic-bezier(0.77,0.2,0.05,1.0);
+  }
+
+  .all-menu .bottom {
+    width: 0;
+    opacity: 0;
+    justify-content: center;
+  }
+
+  .all-menu .cursor-pointer {
+    display: flex;
+    justify-content: center;
+    opacity: 1;
+    transition: all 1s cubic-bezier(0.77,0.2,0.05,1.0);
+    width: 0;
+    margin: 0 auto;
+  }
+  .all-menu .cursor-pointer img {
+    content:url("https://www.svgrepo.com/show/4166/up-arrow.svg");
+  }
+
+  .all-menu-active {
+    @apply !grid-cols-[calc(1*_40px)_auto_calc(1*_40px)];
+  }
+
+  .all-menu-active .cursor-pointer {
+    width: 15px;
+  }
 
   .all-menu {
-    transition: all 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
-    @apply overflow-hidden truncate drop-shadow-2xl backdrop-blur-md bg-white/80 rounded-lg p-2 w-[3.5rem] h-[3rem] md:w-[4.063rem] md:h-[3.75rem];
+    @apply overflow-hidden truncate grid grid-cols-[calc(3*_40px)_auto_calc(0*_40px)] transition-[grid-template-columns] duration-[1s] drop-shadow-2xl backdrop-blur-sm bg-white/70 rounded-lg p-2 md:p-3 text-sm;
   }
   .all-menu .header {
-    justify-content: flex-end;
     display: flex;
     align-items: center;
   }
   .all-menu .content {
-    visibility: hidden;
-    opacity: 0;
-    transition: all 0.5s ease;
-    @apply py-5;
+    @apply flex items-center;
   }
   .all-menu .content .nav-active {
     @apply text-teal-500;
-  }
-  .navbar-active .all-menu {
-    width: 20vw;
-    height: 60vh;
-    @apply w-[85vw] h-[30vh] md:w-[25vw] md:h-[30vh];
   }
   .navbar-active .content {
     visibility: visible;
     opacity: 1;
   }
   .all-menu .content .nav-link {
-    @apply p-5 flex flex-col border-b border-[#2e3e6a]/10;
+    @apply px-5;
   }

@@ -2,11 +2,24 @@ import { type TimelineDataType } from 'Consts/types/timeline.type'
 
 export const timelineData: TimelineDataType[] = [
   {
+    company: 'Aruna Indonesia.',
+    data: [
+      {
+        jobtitle: 'Data Engineer - Internship',
+        time: 'Apr 2024 - present',
+        description: `
+        The Largest Integrated Fisheries Commerce in Indonesia. Making The Sea a Better Livelihood For All.
+        `
+      }
+    ],
+    isLatest: true
+  },
+  {
     company: 'Good Doctor Technology.',
     data: [
       {
-        jobtitle: 'Frontend Developer - Part-time',
-        time: 'Aug 2023 - Present',
+        jobtitle: 'Frontend Developer - Freelance',
+        time: 'Aug 2023 - Dec 2023',
         description: `
         A company that is riding the coattails of this rise is Good Doctor Technology, <br />
         a joint venture health-tech company between Ping An Healthcare and Technology, <br />
@@ -14,7 +27,7 @@ export const timelineData: TimelineDataType[] = [
         `
       }
     ],
-    isLatest: true
+    isLatest: false
   },
   {
     company: 'Female Daily Network.',
@@ -129,7 +142,7 @@ export const eduTimelineData: TimelineDataType[] = [
     data: [
       {
         jobtitle: 'Data Science & Machine Learning',
-        time: 'Oct 2023 - Feb 2024'
+        time: 'Oct 2023 - Jun 2024'
       }
     ],
     isLatest: true

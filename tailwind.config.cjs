@@ -137,14 +137,24 @@ module.exports = {
         },
         '.pattern': {
           /* background: radial-gradient(#2e3e6a 1px, #fff 1px); */
-          background:
-              'linear-gradient(#2e3e6a 1px, transparent 1px), linear-gradient(to right, #2e3e6a 1px, rgb(229, 229, 247) 1px)',
+          '--size': '60px',
+          '--line': 'hsl(0 0% 0% / 0.15)',
+          background: 'linear-gradient(90deg, var(--line) 1px, transparent 1px var(--size)) 50% 50% / var(--size) var(--size), linear-gradient(var(--line) 1px, transparent 1px var(--size)) 50% 50% / var(--size) var(--size)',
+          mask: 'linear-gradient(-15deg, transparent 20%, white)',
           backgroundSize: '80px 80px',
-          /* background-size: 20px 20px; */
           width: '100%',
           height: '100%',
           position: 'absolute',
-          zIndex: 1
+          zIndex: -1
+        },
+        '.base-card': {
+          '--border': '#e9f0ff',
+          '--card': 'rgb(249, 251, 255)',
+          borderRadius: '12px',
+          overflow: 'hidden',
+          background: 'var(--card)',
+          border: '1px solid var(--border)',
+          boxShadow: 'rgba(59, 130, 246, 0.1) 0px 20px 25px -5px, rgba(59, 130, 246, 0.04) 0px 10px 10px -5px'
         },
         '.text-shadow-white': {
           filter:

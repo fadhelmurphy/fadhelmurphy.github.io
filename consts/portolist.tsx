@@ -17,8 +17,8 @@ export const portoList: SliderDataType[] = [
     }
   },
   {
-    title: 'SPIN',
-    desc: 'Period: Dec 2022 - Mar 2023. <br/>Tech Stack: PM2, Next.js, Antd, Leaflet',
+    title: 'Sistem Perwilayahan Industri Nasional',
+    desc: 'Tech Stack: <br/> PM2, Next.js, Antd, Leaflet',
     image: spin.src,
     linkObj: {
       link: '/',
@@ -26,8 +26,8 @@ export const portoList: SliderDataType[] = [
     }
   },
   {
-    title: 'ISTIH (Indonesian Smart Textile Hub Industry)',
-    desc: 'Period: Dec 2020 - Feb 2021. <br/>Tech Stack: Next.js, React.js, Redux, Redux-saga',
+    title: 'Indonesian Smart Textile Hub Industry',
+    desc: 'Tech Stack: <br/> Next.js, React.js, Redux, Redux-saga',
     image: istihImgpng.src,
     linkObj: {
       link: '/',
@@ -36,7 +36,7 @@ export const portoList: SliderDataType[] = [
   },
   {
     title: 'ENO | Venture Mind Labs X Tujju',
-    desc: 'Period: Mar - May 2022. <br/>Tech Stack: Build with React, SWR, Chakra UI and Zustand',
+    desc: 'Tech Stack: <br/> React, SWR, Chakra UI and Zustand',
     image: enoImgpng.src,
     linkObj: {
       link: '/',
@@ -45,7 +45,7 @@ export const portoList: SliderDataType[] = [
   },
   {
     title: 'Dashboard Keluarga Sehat',
-    desc: 'Period: Nov 2021 - Jan 2022. <br/>Tech Stack: Build with Next.Js, Bootstrap 5, HighChart, and React Context',
+    desc: 'Tech Stack: <br/> Next.Js, Bootstrap 5, HighChart, and React Context',
     image: kemenkesImgpng.src,
     linkObj: {
       link: '/',
@@ -54,7 +54,7 @@ export const portoList: SliderDataType[] = [
   },
   {
     title: 'BisaCPNS',
-    desc: 'Period: May 2020. <br/>Implementing design to code with bootstrap and aos.js',
+    desc: 'Tech Stack: <br/> bootstrap and aos.js',
     image: bisacpnsImgpng.src,
     linkObj: {
       link: '/',
