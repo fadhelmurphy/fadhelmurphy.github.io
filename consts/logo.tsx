@@ -4,9 +4,9 @@ import nextjsImgpng from '@/Assets/img/home/stack-slider/nextjs-icon.png'
 import gatsbyImgpng from '@/Assets/img/home/stack-slider/gatsby-icon.png'
 // import nginxImgpng from '@/Assets/img/home/stack-slider/nginx.png'
 // import dockerImgpng from '@/Assets/img/home/stack-slider/docker.png'
-import tensorflowImgpng from '@/Assets/img/home/stack-slider/tensorflow-logo.png'
+// import tensorflowImgpng from '@/Assets/img/home/stack-slider/tensorflow-logo.png'
 import mysqlImgpng from '@/Assets/img/home/stack-slider/mysql.png'
-import laravelImgpng from '@/Assets/img/home/stack-slider/laravel.png'
+// import laravelImgpng from '@/Assets/img/home/stack-slider/laravel.png'
 
 export const SliderData: SliderDataType[] = [
   {
@@ -17,6 +17,10 @@ export const SliderData: SliderDataType[] = [
     type: 'image',
     url: webpackImgpng.src,
     alt: 'webpack fadhel'
+  },
+  {
+    type: 'text',
+    text: 'Caddy'
   },
   {
     type: 'text',
@@ -48,10 +52,18 @@ export const SliderData: SliderDataType[] = [
     type: 'text',
     text: 'Redux'
   },
+  // {
+  //   type: 'image',
+  //   url: tensorflowImgpng.src,
+  //   alt: 'tensorflow fadhel'
+  // },
   {
-    type: 'image',
-    url: tensorflowImgpng.src,
-    alt: 'tensorflow fadhel'
+    type: 'text',
+    text: 'BigQuery'
+  },
+  {
+    type: 'text',
+    text: 'Airflow'
   },
   {
     type: 'text',
@@ -78,19 +90,19 @@ export const SliderData: SliderDataType[] = [
     url: mysqlImgpng.src,
     alt: 'mysql fadhel'
   },
-  {
-    type: 'image',
-    url: laravelImgpng.src,
-    alt: 'laravel fadhel'
-  },
+  // {
+  //   type: 'image',
+  //   url: laravelImgpng.src,
+  //   alt: 'laravel fadhel'
+  // },
   {
     type: 'text',
     text: 'GraphQL'
-  },
-  {
-    type: 'text',
-    text: 'MongoDB'
   }
+  // {
+  //   type: 'text',
+  //   text: 'MongoDB'
+  // }
 ]
 
 export const TopHeaderMenuConst: SliderDataType[] = [
