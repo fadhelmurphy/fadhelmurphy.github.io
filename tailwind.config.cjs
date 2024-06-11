@@ -138,9 +138,9 @@ module.exports = {
         '.pattern': {
           /* background: radial-gradient(#2e3e6a 1px, #fff 1px); */
           '--size': '60px',
-          '--line': 'hsl(0 0% 0% / 0.15)',
+          '--line': '#b2d2fd',
           background: 'linear-gradient(90deg, var(--line) 1px, transparent 1px var(--size)) 50% 50% / var(--size) var(--size), linear-gradient(var(--line) 1px, transparent 1px var(--size)) 50% 50% / var(--size) var(--size)',
-          mask: 'linear-gradient(-15deg, transparent 20%, white)',
+          mask: 'linear-gradient(-15deg, transparent 35%, white)',
           backgroundSize: '80px 80px',
           width: '100%',
           height: '100%',
