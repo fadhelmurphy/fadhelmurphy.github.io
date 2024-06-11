@@ -35,12 +35,12 @@ function Navbar ({ onClick = (params) => { }, customClassName }: NavbarProps): J
           {menulist.map((item: menulistType) => {
             const isCurrentNav = pathname !== undefined && (pathname === item.link.slice(1)) ? ' nav-active' : ''
             return (
-              <a className={`nav-link${isCurrentNav}`} href={item.link}>{item.text}</a>
+              <a aria-label={item.text} className={`nav-link${isCurrentNav}`} href={item.link}>{item.text}</a>
             )
           })}
         </div>
         <div onClick={() => { window?.scrollTo({ top: 0, behavior: 'smooth' }) }} className={'cursor-pointer bottom'}>
-          <img src='https://www.svgrepo.com/show/4166/up-arrow.svg' />
+          <img alt='fadhel-top' src='https://www.svgrepo.com/show/4166/up-arrow.svg' />
         </div>
       </div>
     </div>

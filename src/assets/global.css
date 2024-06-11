@@ -109,7 +109,7 @@
   .blog-card .content img {
     overflow: hidden;
 
-    @apply relative h-full w-full bg-white rounded-[10px] md:rounded-[20px] md:drop-shadow-[0_55px_55px_#ffc85d];
+    @apply relative h-full w-full bg-white rounded-[10px] md:rounded-[20px];
 
     object-fit: cover;
   }
@@ -127,6 +127,9 @@
     padding: 0;
     margin: 0;
     font-family: Poppins, system-ui, sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
     @apply text-base;
   }
