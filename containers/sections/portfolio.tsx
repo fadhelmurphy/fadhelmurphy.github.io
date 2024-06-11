@@ -15,7 +15,7 @@ const Portfolio = ({ title, desc, children }: TimelineSectionsType): JSX.Element
           {desc}
         </div>
       </div>
-      <div className="content grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20">
+      <div className="content my-12 md:my-0 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
         {children}
       </div>
     </div>

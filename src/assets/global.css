@@ -5,6 +5,8 @@
 :root {
   --bg-url-header-home: url("/home/bg.png");
   --bg-url-header-home-m: url("/home/bg-m.png");
+  --border: #e9f0ff;
+  --card: rgb(249, 251, 255);
 }
 
 [data-aos="animation-scale-y"] {
@@ -63,11 +65,11 @@
   }
 
   .porto-card .head {
-    @apply p-[1.2rem] pb-[0] md:p-[2rem] md:self-center;
+    @apply p-[1.5rem] pb-[0] md:p-[2rem] md:self-center;
   }
 
   .porto-card .head .title {
-    @apply mb-2 block text-[2rem] md:text-[2rem] font-bold md:font-semibold leading-9;
+    @apply mb-2 block text-2xl md:text-[2rem] font-bold md:font-semibold leading-9;
   }
 
   .porto-card .head .desc {
@@ -85,11 +87,11 @@
   .porto-card .content {
     @apply h-max self-center;
 
-    @apply rounded-[0_0_20px_20px] p-[1.2rem] md:p-[2rem] pt-[0];
+    @apply rounded-[0_0_20px_20px] p-[1.5rem] md:p-[2rem] pt-[0];
   }
 
   .blog-card {
-    @apply md:mb-0 hover:rotate-[0deg] rounded-[10px] md:rounded-[20px] flex flex-col justify-between bg-white drop-shadow-2xl;
+    @apply md:mb-0 hover:rotate-[0deg] rounded-[10px] md:rounded-[12px] flex flex-col justify-between bg-white border border-[color:var(--border)] shadow-[rgba(59,130,246,0.1)_0px_20px_25px_-5px,rgba(59,130,246,0.04)_0px_10px_10px_-5px] border-solid;
     height: 100%;
     transition: all 0.5s ease 0s;
   }

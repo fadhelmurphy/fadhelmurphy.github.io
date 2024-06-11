@@ -148,8 +148,6 @@ module.exports = {
           zIndex: -1
         },
         '.base-card': {
-          '--border': '#e9f0ff',
-          '--card': 'rgb(249, 251, 255)',
           borderRadius: '12px',
           overflow: 'hidden',
           background: 'var(--card)',
