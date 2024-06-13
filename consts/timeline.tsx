@@ -153,7 +153,7 @@ export const eduTimelineData: TimelineDataType[] = [
       {
         jobtitle: 'Informatics Engineering',
         time: 'Sep 2017 - Sep 2021',
-        description: 'Cum Laude Honour - GPA 3.75/4.0'
+        description: 'Magna Cum Laude Honor - GPA 3.75/4.0'
       }
     ],
     isLatest: false
