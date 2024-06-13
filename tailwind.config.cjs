@@ -148,10 +148,12 @@ module.exports = {
           zIndex: -1
         },
         '.base-card': {
+          position: 'relative',
           borderRadius: '12px',
-          overflow: 'hidden',
+          transform: 'rotate(-5deg) !important',
           background: 'var(--card)',
           border: '1px solid var(--border)',
+          transition: "opacity 3s ease, transform 3s ease",
           boxShadow: 'rgba(59, 130, 246, 0.1) 0px 20px 25px -5px, rgba(59, 130, 246, 0.04) 0px 10px 10px -5px'
         },
         '.text-shadow-white': {

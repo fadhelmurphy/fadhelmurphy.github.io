@@ -121,6 +121,51 @@
 
     @apply rounded-[0_0_20px_20px] p-[1.2rem] md:p-[2.5rem] pt-[0];
   }
+  .base-card::before,.base-card::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--card);
+    border: 1px solid var(--border);
+    box-shadow: #3b82f61a 0 20px 25px -5px, #3b82f60a 0 10px 10px -5px;
+}
+.base-card::before{
+  z-index: 1;
+  transform: rotate(-5deg);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.base-card::after{
+  z-index: -1;
+  transform: rotate(0deg);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+  /* When both aos-init and aos-animate classes are present */
+  .base-card.aos-init::after {
+    opacity: 0;
+  }
+  .base-card.aos-init.aos-animate::before {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+
+  .base-card:hover::after{
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: rotate(-10deg) !important;
+  }
+
+  /* When only aos-init class is present */
+  .base-card.aos-init.aos-animate::after {
+    opacity: 1;
+    transform: rotate(-5deg);
+  }
+  .base-card.aos-init.aos-animate {
+    transform: rotate(0deg) !important;
+  }
 }
 
 @layer base {

@@ -27,7 +27,8 @@ const DefaultTimeline = ({
               overflow: 'visible',
               padding: '0px',
               position: 'relative',
-              width: '100%'
+              width: '100%',
+              zIndex: 1
             }}>
               <h3 data-aos="animation-scale-y" data-aos-duration="700"
                 className="flex items-center mb-3 text-2xl md:text-4xl !font-semibold">
