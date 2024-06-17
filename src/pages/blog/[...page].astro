@@ -6,6 +6,7 @@ import Bg from '@/Assets/img/blog/blog-list-bg.jpg'
 import BgM from '@/Assets/img/blog/blog-list-bg-m.jpg'
 import BlogCard from "@/Components/blogCard";
 import Navbar from 'Containers/navbar/navbar'
+import Wave from '@/Components/wave'
 const frontmatter = {
     title: "The blog of<br/>Fadhel Ijlal Falah",
     description: "Tidak semua software engineer itu wibu, ada juga yg suka punk",
@@ -23,16 +24,22 @@ const { page } = Astro.props;
 <Layout titlePage={stripHtml(frontmatter.title)}>
 
     <Navbar client:load/>
-    <div class="px-8 md:px-0 flex flex-col gap-y-20 md:!gap-y-24 !justify-end md:!justify-center">
+    <div class="px-8 md:px-0 flex flex-col gap-y-20 md:!gap-0 !justify-end md:!justify-center">
 <Header variant="blog-list" bgImg={Bg.src} bgImgM={BgM.src} {...frontmatter} />
-<div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-10 mb-20">
+</div>
+<Wave />
+<div class="bg-white">
+
+<div class="h-80 items-start p-8 md:px-0 container mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-10">
 
     {page.data.map((post: any) => 
     <BlogCard 
     title={post.frontmatter.postTitle} 
     url={post?.url || ""} 
     label={post.frontmatter.label}
-    date={post.frontmatter.date} />)}
+    date={post.frontmatter.date}
+    customClassName='max-h-[115px] md:max-h-fit'
+    />)}
 </div>
-    </div>
+</div>
     </Layout>

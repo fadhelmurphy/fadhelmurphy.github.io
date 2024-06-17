@@ -9,9 +9,9 @@ const BlogListHeader = ({ description, title, bgImg, bgImgM }: HeaderProps): JSX
   const headerTitle = { __html: title }
   return (
     <>
-        <div className="h-[50vh] md:h-[60vh] flex flex-col justify-end md:justify-end inner container md:mx-auto text-left md:text-center">
+        <div className="h-[60vh] md:h-[80vh] flex flex-col justify-center md:justify-center inner container md:mx-auto text-left md:text-center">
           <h1 data-aos="animation-scale-y" data-aos-duration="500"
-          className="title text-5xl md:text-8xl md:leading-none font-semibold font-header mt-4"
+          className="title text-5xl md:text-8xl md:leading-none font-semibold font-header mt-36 md:mt-48"
           dangerouslySetInnerHTML={headerTitle as { __html: string }}
           />
           <p data-aos="fade-up" data-aos-duration="300"
