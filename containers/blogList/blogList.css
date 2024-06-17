@@ -1,5 +1,5 @@
 .custom-border-bottom:after {
-    background: #3b81f6;
+    @apply bg-cyan-500;
     content: "";
     display: block;
     height: 4px;
