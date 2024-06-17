@@ -1,0 +1,9 @@
+.custom-border-bottom:after {
+    background: #3b81f6;
+    content: "";
+    display: block;
+    height: 4px;
+    margin: 15px 0 0;
+    width: 40px;
+}
+

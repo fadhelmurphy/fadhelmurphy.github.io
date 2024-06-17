@@ -4,9 +4,8 @@ import Layout from "Containers/layout";
 import {stripHtml} from "Helpers/utils"
 import Bg from '@/Assets/img/blog/blog-list-bg.jpg'
 import BgM from '@/Assets/img/blog/blog-list-bg-m.jpg'
-import BlogCard from "@/Components/blogCard";
 import Navbar from 'Containers/navbar/navbar'
-import Wave from '@/Components/wave'
+import BlogList from "Containers/blogList"
 const frontmatter = {
     title: "The blog of<br/>Fadhel Ijlal Falah",
     description: "Tidak semua software engineer itu wibu, ada juga yg suka punk",
@@ -21,25 +20,12 @@ export async function getStaticPaths({ paginate }: any) {
 const { page } = Astro.props;
 ---
 
-<Layout titlePage={stripHtml(frontmatter.title)}>
+<Layout titlePage={stripHtml(frontmatter.title)} >
 
     <Navbar client:load/>
+
     <div class="px-8 md:px-0 flex flex-col gap-y-20 md:!gap-0 !justify-end md:!justify-center">
-<Header variant="blog-list" bgImg={Bg.src} bgImgM={BgM.src} {...frontmatter} />
-</div>
-<Wave />
-<div class="bg-white">
-
-<div class="h-80 items-start p-8 md:px-0 container mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-10">
-
-    {page.data.map((post: any) => 
-    <BlogCard 
-    title={post.frontmatter.postTitle} 
-    url={post?.url || ""} 
-    label={post.frontmatter.label}
-    date={post.frontmatter.date}
-    customClassName='md:max-h-fit'
-    />)}
-</div>
-</div>
+        <Header variant="blog-list" bgImg={Bg.src} bgImgM={BgM.src} {...frontmatter} />
+    </div>
+    <BlogList page={page} />
     </Layout>

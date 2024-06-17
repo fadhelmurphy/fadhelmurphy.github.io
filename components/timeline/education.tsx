@@ -30,14 +30,14 @@ const DefaultTimeline = ({
               width: '100%',
               zIndex: 1
             }}>
-              <h3 data-aos="animation-scale-y" data-aos-duration="700"
+              <h3
                 className="flex items-center mb-3 text-2xl md:text-4xl !font-semibold">
                 {item.company}
               </h3>
 
               {item.isLatest
                 ? (
-                  <Badge className='text-lg mb-6 me-3'>
+                  <Badge className='text-lg mb-6 me-3' noAnimation>
                     Latest
                   </Badge>
                   )
@@ -47,17 +47,17 @@ const DefaultTimeline = ({
                 return (
                   <>
                     {job.jobtitle && (
-                      <time data-aos="animation-scale-y" data-aos-duration="700" className="mb-2 block font-normal leading-6 text-xl">
+                      <time className="mb-2 block font-normal leading-6 text-xl">
                         {job.jobtitle}
                       </time>
                     )}
                     {job.time && (
-                      <time data-aos="fade-up" data-aos-duration="700" className="mb-2 block font-normal leading-6 text-base-2">
+                      <time className="mb-2 block font-normal leading-6 text-base-2">
                         {job.time}
                       </time>
                     )}
                     {job.description && (
-                      <p data-aos="fade-up" data-aos-duration="700"
+                      <p
                         className="font-normal text-base-2 py-5"
                         dangerouslySetInnerHTML={{ __html: job.description }}
                       />

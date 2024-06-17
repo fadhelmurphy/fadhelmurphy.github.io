@@ -3,4 +3,5 @@ export interface BadgeProps {
   className?: string
   dataAos?: string
   dataAosDuration?: string
+  noAnimation?: boolean
 }
