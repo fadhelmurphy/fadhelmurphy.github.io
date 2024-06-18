@@ -5,11 +5,8 @@ import Bg from '@/Assets/img/blog/blog-list-bg.jpg'
 import BgM from '@/Assets/img/blog/blog-list-bg-m.jpg'
 import BlogList from "Containers/blogList"
 import Navbar from 'Containers/navbar/navbar'
-const frontmatter = {
-    title: "The blog of<br/>Fadhel Ijlal Falah",
-    description: "Tidak semua software engineer itu wibu, ada juga yg suka punk",
-date: "23 Oct 2023",
-}
+import {frontmatter} from 'Consts/blog'
+
 export async function getStaticPaths({paginate}: any) {
   const allPosts = await Astro.glob('../../../../pages/blog/**/*.mdx');
   const getLabel = allPosts.map((item) => (item.frontmatter.label)).flat().filter((value: string, index: number, array: string[]) => array.indexOf(value) === index);
