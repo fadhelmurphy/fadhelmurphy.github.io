@@ -2,17 +2,31 @@ import { type TimelineDataType } from 'Consts/types/timeline.type'
 
 export const timelineData: TimelineDataType[] = [
   {
+    company: 'SG-EDTS.',
+    data: [
+      {
+        jobtitle: 'Data Engineer Associate',
+        time: 'Aug 2024 - present',
+        description: `
+        In the midst of disruption across industries from the digital natives, EDTS was born with a mission to democratize digital technology.
+        Since 2019, EDTS has become the Digital Center of Excellence of Salim Group. Equipped with digital and technology experts from various industries.
+        `
+      }
+    ],
+    isLatest: true
+  },
+  {
     company: 'Aruna Indonesia.',
     data: [
       {
         jobtitle: 'Data Engineer - Internship',
-        time: 'Apr 2024 - present',
+        time: 'Apr 2024 - Jul 2024',
         description: `
         The Largest Integrated Fisheries Commerce in Indonesia. Making The Sea a Better Livelihood For All.
         `
       }
     ],
-    isLatest: true
+    isLatest: false
   },
   {
     company: 'Good Doctor Technology.',
