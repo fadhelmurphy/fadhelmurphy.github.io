@@ -5,7 +5,7 @@ export const timelineData: TimelineDataType[] = [
     company: 'SG-EDTS.',
     data: [
       {
-        jobtitle: 'Data Engineer Associate',
+        jobtitle: 'Data Engineer Associate - Full-time',
         time: 'Aug 2024 - present',
         description: `
         In the midst of disruption across industries from the digital natives, EDTS was born with a mission to democratize digital technology.
