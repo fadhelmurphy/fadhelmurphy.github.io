@@ -34,7 +34,7 @@
     "paths": {
       "@/Store/*": ["./store/*"],
       "Helpers/*": ["./helpers/*"],
-      "Lib/*": ["./lib/*"],
+      "@/Lib/*": ["./lib/*"],
       "Containers/*": ["./containers/*"],
       "@/Components/*": ["./components/*"],
       "@/Pages/*": ["./src/pages/*"],

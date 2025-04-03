@@ -1,7 +1,7 @@
-import { SliderDataType } from "Consts/types/logo.type";
-import { TopHeaderMenuConst } from "Consts/logo";
+import { type SliderDataType } from 'Consts/types/logo.type'
+import { TopHeaderMenuConst } from 'Consts/logo'
 
-function TopHeaderMenu() {
+function TopHeaderMenu (): JSX.Element {
   return (
     <div className="hidden md:flex top-header-menu container mx-auto justify-end font-semibold text-base-2 px-8 md:px-0 py-12">
       {TopHeaderMenuConst.map((item: SliderDataType) => (
@@ -18,7 +18,7 @@ function TopHeaderMenu() {
         </a>
       ))}
     </div>
-  );
+  )
 }
 
-export default TopHeaderMenu;
+export default TopHeaderMenu

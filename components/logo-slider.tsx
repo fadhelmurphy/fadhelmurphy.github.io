@@ -1,12 +1,12 @@
 import { SliderData } from 'Consts/logo'
-import { type SliderDataType } from 'Consts/types/logo.type'
+// import { type SliderDataType } from '../consts/types/logo.type'
 import React from 'react'
 
 const LogoSlider = ({ data = SliderData }): JSX.Element => {
-  const duplicatedData: SliderDataType[] = [...data, ...data]
+  const duplicatedData: any[] = [...data, ...data]
   return (
     <>
-      <div className="mx-auto mb-0 md:mb-24 py-12 md:p-0 relative">
+      <div className="mx-auto mb-0 py-12 md:p-0 relative">
         <div className="slider h-[24vh] md:h-[30vh] flex items-start md:items-stretch">
           <div className="slide-track">
             {duplicatedData &&

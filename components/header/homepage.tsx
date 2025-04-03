@@ -4,7 +4,7 @@ import Bg from '@/Assets/img/home/bg.png'
 import BgM from '@/Assets/img/home/bg-m.png'
 import React from 'react'
 import { getImage } from 'astro:assets'
-const LogoSlider = React.lazy(async () => await import('../logo-slider'))
+import LogoSlider from '../logo-slider'
 const optimizedBackgroundImageM = await getImage({ src: BgM })
 const optimizedBackgroundImage = await getImage({ src: Bg })
 

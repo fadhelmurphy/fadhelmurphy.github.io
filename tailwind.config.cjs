@@ -1,5 +1,5 @@
-const flattenColorPalette =
-  require('tailwindcss/lib/util/flattenColorPalette').default
+import flattenColorPalette from 'tailwindcss/lib/util/flattenColorPalette'
+
 module.exports = {
   // content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   content: [
@@ -103,7 +103,7 @@ module.exports = {
         {
           values: theme.backgroundImage
         }
-      ),
+      )
       matchUtilities(
         {
           'text-base': (value) => {
@@ -119,7 +119,7 @@ module.exports = {
             })
           )
         }
-      ),
+      )
       addComponents({
         // ".porto-card": {
         //   borderRadius: "20px",
@@ -153,7 +153,7 @@ module.exports = {
           transform: 'rotate(-5deg) !important',
           background: 'var(--card)',
           border: '1px solid var(--border)',
-          transition: "opacity 3s ease, transform 3s ease",
+          transition: 'opacity 3s ease, transform 3s ease',
           boxShadow: 'rgba(59, 130, 246, 0.1) 0px 20px 25px -5px, rgba(59, 130, 246, 0.04) 0px 10px 10px -5px'
         },
         '.text-shadow-white': {

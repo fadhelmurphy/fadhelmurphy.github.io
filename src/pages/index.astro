@@ -1,7 +1,7 @@
 ---
 // Component Imports
 import Button from "@/Components/Button.astro";
-import Header from "@/Components/header/homepage";
+import Header from "@/Components/header";
 import Timeline from "@/Components/timeline";
 import { prefix } from "Consts/config";
 import { TopHeaderMenuConst } from "Consts/logo";
@@ -25,7 +25,7 @@ import Navbar from 'Containers/navbar/navbar'
 </style> -->
 <Layout>
   <Navbar customClassName='!top-[3%]' client:load/>
-  <Header variant="homepage"/>
+  <Header variant="new-homepage" client:idle/>
   <Sections title="Work Experiences">
 	<p slot="desc">I have previously worked for a few companies <br/>as a freelance and full-time front end developer.</p>
   <Timeline client:visible/>

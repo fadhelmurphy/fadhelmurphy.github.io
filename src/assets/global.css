@@ -43,6 +43,56 @@
 }
 
 @layer components {
+  .new-home-header-top-text {
+    @apply text-2xl font-medium text-3xl font-medium text-slate-700 sm:text-4xl;
+    font-family: Poppins, system-ui, sans-serif;
+    background: linear-gradient(133deg, #2E3E6A 10%, #60A5FA 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+  }
+  .new-home-header-text {
+    @apply relative text-6xl font-bold text-[#2E3E6A] sm:text-7xl md:text-8xl;
+
+    font-family: Poppins, system-ui, sans-serif;
+  }
+  .new-home-header-text h1 {
+    @apply mb-[-1rem];
+  }
+  .new-home-header-shadow-text {
+    /* content: attr(data-text); */
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    z-index: -1;
+    color: rgba(129, 178, 250, 0.3);
+    filter: blur(5px);
+  }
+  .new-home-header-text .white {
+    background: linear-gradient(108.18deg, #ffffff 10%, #a5f3fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+  }
+  .new-home-header-text .white-2 {
+    background: linear-gradient(42deg, #ffffff 30%, #a5f3fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+  }
+  .new-home-header-text .highlight-2 {
+    background: linear-gradient(113.87deg, #2E3E6A 53.02%, #60A5FA 96.86%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+    line-height: 8rem;
+    @apply mt-[-1rem];
+  }
+  .new-home-header-text .unset {
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: unset;
+    text-fill-color: unset;
+  }
   .container {
     @apply md:max-w-screen-sm lg:max-w-screen-md xl:max-w-screen-lg 2xl:max-w-screen-xl;
   }
