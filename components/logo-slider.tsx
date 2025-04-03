@@ -6,7 +6,7 @@ const LogoSlider = ({ data = SliderData }): JSX.Element => {
   const duplicatedData: any[] = [...data, ...data]
   return (
     <>
-      <div className="mx-auto mb-0 py-12 md:p-0 relative">
+      <div className="mx-auto mb-0 mt-20 md:mt-[unset] pt-12 md:p-0 relative">
         <div className="slider h-[24vh] md:h-[30vh] flex items-start md:items-stretch">
           <div className="slide-track">
             {duplicatedData &&
@@ -14,27 +14,28 @@ const LogoSlider = ({ data = SliderData }): JSX.Element => {
               duplicatedData.map((item: any, idx: number) =>
                 item.type === 'text'
                   ? (
-                  <div
-                    key={String(idx + 1)}
-                    className="slide w-48 h-24 md:w-80 md:h-36 relative backdrop-blur-sm bg-white/50 drop-shadow-2xl rounded-lg"
-                  >
-                    <h2 className="text-gray-500 text-2xl font-bold">
-                      {item.text}
-                    </h2>
-                  </div>
+                    <div
+                      key={String(idx + 1)}
+                      className="slide w-48 h-24 md:w-80 md:h-36 relative backdrop-blur-sm bg-white/50 drop-shadow-xl md:drop-shadow-2xl rounded-lg"
+                    >
+                      <h2 className="text-gray-500 text-2xl font-bold">
+                        {item.text}
+                      </h2>
+                    </div>
                     )
                   : (
-                  <div
-                    key={String(idx + 1)}
-                    className="slide w-48 h-24 md:w-80 md:h-36 relative backdrop-blur-sm bg-white/50 drop-shadow-2xl rounded-lg"
-                  >
-                    <img
-                      loading="lazy"
-                      className="p-6 md:p-[3.2rem]"
-                      src={item.url}
-                      alt={item.alt}
-                    />
-                  </div>
+                    <div
+                      key={String(idx + 1)}
+                      className="slide w-48 h-24 md:w-80 md:h-36 relative backdrop-blur-sm bg-white/50 drop-shadow-xl md:drop-shadow-2xl rounded-lg"
+                    >
+                      <img
+                        loading="lazy"
+                        decoding="async"
+                        className="p-6 md:p-[3.2rem]"
+                        src={item.url}
+                        alt={item.alt}
+                      />
+                    </div>
                     )
               )}
           </div>
@@ -56,6 +57,7 @@ const LogoSlider = ({ data = SliderData }): JSX.Element => {
           }
           
           .slide-track {
+          will-change: transform;
             width:calc(20rem * ${duplicatedData.length});
             animation: scroll 25s linear infinite;
             display: flex;
@@ -68,6 +70,7 @@ const LogoSlider = ({ data = SliderData }): JSX.Element => {
             position: relative;
             align-self: center;
             word-wrap: break-word;
+            text-align: center;
           }
           .slide img {
             display: block;

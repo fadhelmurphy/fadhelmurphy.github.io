@@ -5,7 +5,7 @@ import Header from "@/Components/header";
 import Timeline from "@/Components/timeline";
 import { prefix } from "Consts/config";
 import { TopHeaderMenuConst } from "Consts/logo";
-import { portoList } from "Consts/portolist";
+import { getPortoList } from "Consts/portolist";
 import { eduTimelineData } from "Consts/timeline";
 import Layout from "Containers/layout";
 import PortoList from "Containers/portoList";
@@ -27,7 +27,7 @@ import Navbar from 'Containers/navbar/navbar'
   <Navbar customClassName='!top-[3%]' client:load/>
   <Header variant="new-homepage"/>
   <Sections title="Work Experiences">
-	<p slot="desc">I have previously worked for a few companies <br/>as a freelance and full-time front end developer.</p>
+	<p slot="desc">I have previously worked for a few companies <br/>as a freelance and full-time front end developer <br/>and data engineer.</p>
   <Timeline client:visible/>
   </Sections>
   <Sections type="education" title="Education">
@@ -38,7 +38,7 @@ import Navbar from 'Containers/navbar/navbar'
     <p slot="desc">
       Look what I've <br/>Done 
     </p>
-    <PortoList data={portoList}/>
+    <PortoList data={getPortoList()}/>
     </Sections>
   <div class="container mx-5 md:mx-auto grid h-screen place-items-start content-center">
     <h2 data-aos="animation-scale-y" data-aos-duration="900" class="text-5xl md:text-7xl font-semibold">Do you have something great?</h2>

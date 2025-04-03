@@ -44,44 +44,29 @@
 
 @layer components {
   .base-bg-2-new-home-header {
-    @apply absolute inset-0;
+    @apply bg-[linear-gradient(180deg,_rgba(255,_255,_255,_0)_84.77%,_rgba(255,_255,_255,_0.9)_100%)];
+    @apply absolute inset-0 md:bg-[linear-gradient(_180deg,_rgba(255,_255,_255,_0)_75.5%,_rgba(255,_255,_255,_0.95)_100%_)];
     left: 0px;
     top: 0px;
     width: 100%;
     height: 100%;
     z-index: 2;
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0) 75.5%,
-      rgba(255, 255, 255, 0.95) 100%
-    );
   }
   .base-bg-1-new-home-header {
-    @apply absolute inset-0;
+    @apply bg-[radial-gradient(96.69%_55.16%_at_24.17%_44.84%,_rgba(255,_255,_255,_0)_0%,_rgba(255,_255,_255,_0.1)_40%,_rgba(255,_255,_255,_0.7)_98.5%)];
+    @apply absolute inset-0 md:bg-[radial-gradient(_65.41%_85.06%_at_50%_45.47%,_rgba(255,_255,_255,_0)_0%,_rgba(255,_255,_255,_0.1)_45.5%,_rgba(255,_255,_255,_0.7)_98.5%_)];
     left: 0px;
     top: 0px;
     width: 100%;
     height: 100%;
     z-index: 1;
-    background: radial-gradient(
-      65.41% 85.06% at 50% 45.47%,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.1) 45.5%,
-      rgba(255, 255, 255, 0.7) 98.5%
-    );
   }
   .base-bg-new-home-header {
-    @apply absolute inset-0;
+    @apply absolute inset-0 bg-[radial-gradient(100%_152.9%_at_0%_0%,_rgba(165,_243,_252,_0.9)_0%,_rgba(96,_165,_250,_0.8)_62.06%,_rgba(96,_165,_250,_0.6)_100%)] md:bg-[radial-gradient(_100%_152.9%_at_0%_0%,_rgba(165,_243,_252,_0.9)_0%,_rgba(96,_165,_250,_0.8)_62.06%,_rgba(96,_165,_250,_0.2)_100%_)];
     left: 0px;
     top: 0px;
     width: 100%;
     height: 100%;
-    background: radial-gradient(
-      100% 152.9% at 0% 0%,
-      rgba(165, 243, 252, 0.9) 0%,
-      rgba(96, 165, 250, 0.8) 62.06%,
-      rgba(96, 165, 250, 0.2) 100%
-    );
   }
   .new-home-header-top-text {
     @apply text-2xl font-medium md:text-4xl font-medium text-slate-700;
@@ -92,20 +77,18 @@
     text-fill-color: transparent;
   }
   .new-home-header-text {
-    @apply relative text-6xl font-bold text-[#2E3E6A] sm:text-7xl md:text-9xl;
-
+    @apply relative font-bold text-[#2E3E6A] text-6xl md:text-9xl leading-[3rem] md:leading-none;
     font-family: Poppins, system-ui, sans-serif;
   }
   .new-home-header-text h1 {
-    @apply mb-[-1rem];
+    @apply mb-0 md:mb-[-1rem];
   }
   .new-home-header-shadow-text {
     /* content: attr(data-text); */
+    @apply filter blur-[7px] md:blur-[5px] bottom-[25px] md:bottom-[5px] text-[rgba(129,_178,_250,_0.9)] md:text-[rgba(129,_178,_250,_0.3)];
     position: absolute;
-    bottom: 5px;
     left: 0;
     z-index: -1;
-    color: rgba(129, 178, 250, 0.3);
     filter: blur(5px);
   }
   .new-home-header-text .white {
@@ -125,8 +108,7 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-fill-color: transparent;
-    line-height: 10rem;
-    @apply mt-[-1rem];
+    @apply mt-[-1rem] md:mt-[-1rem] leading-[6rem] md:leading-[10rem];
   }
   .new-home-header-text .unset {
     -webkit-background-clip: unset;

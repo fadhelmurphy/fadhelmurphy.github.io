@@ -25,7 +25,10 @@ const PortoCard = ({ title, desc, image, linkObj, customClassName }: IPortoCard)
           </div>
         </div>
         <div className="content">
-          <img src={image} loading="lazy" />
+          <img src={image} loading="lazy"
+            decoding="async"
+            alt={title}
+          />
         </div>
       </a>
     </>

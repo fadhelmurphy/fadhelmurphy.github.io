@@ -7,6 +7,11 @@ import nextjsImgpng from '@/Assets/img/home/stack-slider/nextjs-icon.png'
 // import tensorflowImgpng from '@/Assets/img/home/stack-slider/tensorflow-logo.png'
 import mysqlImgpng from '@/Assets/img/home/stack-slider/mysql.png'
 // import laravelImgpng from '@/Assets/img/home/stack-slider/laravel.png'
+import { getImage } from 'astro:assets'
+
+const webpackImg = await getImage({ src: webpackImgpng, width: 200, format: 'webp' })
+const nextjsImg = await getImage({ src: nextjsImgpng, width: 200, format: 'webp' })
+const mysqlImg = await getImage({ src: mysqlImgpng, width: 200, format: 'webp' })
 
 export const SliderData: SliderDataType[] = [
   {
@@ -15,7 +20,7 @@ export const SliderData: SliderDataType[] = [
   },
   {
     type: 'image',
-    url: webpackImgpng.src,
+    url: webpackImg.src,
     alt: 'webpack fadhel'
   },
   {
@@ -32,7 +37,7 @@ export const SliderData: SliderDataType[] = [
   },
   {
     type: 'image',
-    url: nextjsImgpng.src,
+    url: nextjsImg.src,
     alt: 'nextjs fadhel'
   },
   // {
@@ -111,7 +116,7 @@ export const SliderData: SliderDataType[] = [
   },
   {
     type: 'image',
-    url: mysqlImgpng.src,
+    url: mysqlImg.src,
     alt: 'mysql fadhel'
   },
   // {

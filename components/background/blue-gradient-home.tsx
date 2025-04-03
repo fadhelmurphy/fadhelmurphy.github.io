@@ -11,7 +11,7 @@ export const BlueGradientBackground: React.FC<BlueGradientBackgroundProps> = ({ 
   return (
         <div className={`relative w-full h-full overflow-hidden ${className}`}>
             {/* Main gradient background - subtle blue gradient */}
-            <div className='absolute inset-0' style={{ zIndex: '3' }}>
+            <div className='absolute hidden md:!block inset-0' style={{ zIndex: '3' }}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="1512" height="982" viewBox="0 0 1512 982" fill="none" style={{
                   width: '100%',
                   height: '100%'
@@ -45,22 +45,22 @@ export const BlueGradientBackground: React.FC<BlueGradientBackgroundProps> = ({ 
             <div className="base-bg-new-home-header z-0" />
 
             {/* Top-left visible squares */}
-            <div className="absolute top-[7%] left-[22%] w-[75px] h-[75px] bg-[linear-gradient(180deg,_rgba(255,_255,_255,_0.5)_0%,_rgba(255,_255,_255,_0.1)_100%)] blur-[3px] z-10" />
-            <div className="absolute top-[10%] left-[15%] w-[150px] h-[150px] bg-[linear-gradient(180deg,_rgba(255,_255,_255,_0.5)_0%,_rgba(255,_255,_255,_0.1)_100%)] z-10" />
+            <div className="absolute top-[7%] left-[22%] w-[35px] h-[35px] md:w-[75px] md:h-[75px] bg-[linear-gradient(180deg,_rgba(255,_255,_255,_0.5)_0%,_rgba(255,_255,_255,_0.1)_100%)] blur-[3px] z-10" />
+            <div className="absolute top-[9%] md:top-[10%] left-[10%] md:left-[15%] w-[68px] h-[68px] md:w-[150px] md:h-[150px] bg-[linear-gradient(180deg,_rgba(255,_255,_255,_0.5)_0%,_rgba(255,_255,_255,_0.1)_100%)] z-10" />
 
             {/* Top-right visible squares */}
-            <div className="absolute top-[2%] right-[20%] w-[150px] h-[150px] bg-[linear-gradient(180deg,_rgba(255,_255,_255,_0.5)_0%,_rgba(255,_255,_255,_0.1)_100%)] z-10" />
-            <div className="absolute top-[9%] right-[13%] w-[180px] h-[180px] bg-[linear-gradient(180deg,_rgba(255,_255,_255,_0.5)_0%,_rgba(255,_255,_255,_0.1)_100%)] blur-[6px] z-10" />
+            <div className="absolute top-[12%] right-[20%] md:top-[2%] md:right-[20%] w-[98px] h-[98px] md:w-[150px] md:h-[150px] bg-[linear-gradient(180deg,_rgba(255,_255,_255,_0.5)_0%,_rgba(255,_255,_255,_0.1)_100%)] z-10" />
+            <div className="absolute top-[16%] right-[-5%] md:top-[9%] md:right-[13%] w-[150px] h-[150px] md:w-[180px] md:h-[180px] bg-[linear-gradient(180deg,_rgba(255,_255,_255,_0.5)_0%,_rgba(255,_255,_255,_0.1)_100%)] blur-[6px] z-10" />
 
             {/* Bottom-left visible squares */}
-            <div className="absolute bottom-[33%] left-[12%] w-[130px] h-[130px] bg-[linear-gradient(180deg,_rgba(255,_255,_255,_0.5)_0%,_rgba(255,_255,_255,_0.1)_100%)] blur-[3px] z-10" />
-            <div className="absolute bottom-[45%] left-[20%] w-[70px] h-[70px] bg-[linear-gradient(180deg,_rgba(255,_255,_255,_0.5)_0%,_rgba(255,_255,_255,_0.1)_100%)] z-10" />
+            <div className="absolute bottom-[33%] left-[unset] right-[35%] md:right-[unset] md:bottom-[33%] md:left-[12%] w-[40px] h-[40px] md:w-[130px] md:h-[130px] bg-[linear-gradient(180deg,_rgba(255,_255,_255,_0.5)_0%,_rgba(255,_255,_255,_0.1)_100%)] blur-[3px] z-10" />
+            <div className="absolute bottom-[28%] left-[unset] right-[22%] md:right-[unset] md:bottom-[45%] md:left-[20%] w-[65px] h-[65px] md:w-[70px] md:h-[70px] bg-[linear-gradient(180deg,_rgba(255,_255,_255,_0.5)_0%,_rgba(255,_255,_255,_0.1)_100%)] z-10" />
 
             {/* Bottom-right visible square */}
-            <div className="absolute bottom-[45%] right-[12%] w-[210px] h-[210px] bg-[linear-gradient(180deg,_rgba(255,_255,_255,_0.5)_0%,_rgba(255,_255,_255,_0.1)_100%)] blur-[10px] z-10" />
+            <div className="absolute hidden md:!block bottom-[45%] right-[12%] w-[210px] h-[210px] bg-[linear-gradient(180deg,_rgba(255,_255,_255,_0.5)_0%,_rgba(255,_255,_255,_0.1)_100%)] blur-[10px] z-10" />
 
             {/* Additional square in bottom-right area */}
-            <div className="absolute bottom-[40%] right-[20%] w-[170px] h-[170px] bg-[linear-gradient(180deg,_rgba(255,_255,_255,_0.5)_0%,_rgba(255,_255,_255,_0.1)_100%)] z-10" />
+            <div className="absolute hidden md:!block bottom-[40%] right-[20%] w-[170px] h-[170px] bg-[linear-gradient(180deg,_rgba(255,_255,_255,_0.5)_0%,_rgba(255,_255,_255,_0.1)_100%)] z-10" />
 
             {/* Content container */}
             <div className="relative z-20 w-full h-full">{children}</div>
