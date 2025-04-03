@@ -104,10 +104,6 @@ export const SliderData: SliderDataType[] = [
   },
   {
     type: 'text',
-    text: 'Keras'
-  },
-  {
-    type: 'text',
     text: 'Sklearn'
   },
   {
