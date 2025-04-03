@@ -1,7 +1,7 @@
 import { type SliderDataType } from 'Consts/types/logo.type'
 import webpackImgpng from '@/Assets/img/home/stack-slider/webpack.png'
 import nextjsImgpng from '@/Assets/img/home/stack-slider/nextjs-icon.png'
-import gatsbyImgpng from '@/Assets/img/home/stack-slider/gatsby-icon.png'
+// import gatsbyImgpng from '@/Assets/img/home/stack-slider/gatsby-icon.png'
 // import nginxImgpng from '@/Assets/img/home/stack-slider/nginx.png'
 // import dockerImgpng from '@/Assets/img/home/stack-slider/docker.png'
 // import tensorflowImgpng from '@/Assets/img/home/stack-slider/tensorflow-logo.png'
@@ -35,11 +35,11 @@ export const SliderData: SliderDataType[] = [
     url: nextjsImgpng.src,
     alt: 'nextjs fadhel'
   },
-  {
-    type: 'image',
-    url: gatsbyImgpng.src,
-    alt: 'gatsby fadhel'
-  },
+  // {
+  //   type: 'image',
+  //   url: gatsbyImgpng.src,
+  //   alt: 'gatsby fadhel'
+  // },
   {
     type: 'text',
     text: 'MobX'
@@ -57,6 +57,30 @@ export const SliderData: SliderDataType[] = [
   //   url: tensorflowImgpng.src,
   //   alt: 'tensorflow fadhel'
   // },
+  {
+    type: 'text',
+    text: 'Spark'
+  },
+  {
+    type: 'text',
+    text: 'Kubernetes'
+  },
+  {
+    type: 'text',
+    text: 'PostgreSQL'
+  },
+  {
+    type: 'text',
+    text: 'Cloud Run'
+  },
+  {
+    type: 'text',
+    text: 'Compute Engine'
+  },
+  {
+    type: 'text',
+    text: 'Looker'
+  },
   {
     type: 'text',
     text: 'BigQuery'
