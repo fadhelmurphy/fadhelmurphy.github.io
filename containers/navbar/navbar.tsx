@@ -40,7 +40,8 @@ function Navbar ({ onClick = (params) => { }, customClassName }: NavbarProps): J
           })}
         </div>
         <div onClick={() => { window?.scrollTo({ top: 0, behavior: 'smooth' }) }} className={'cursor-pointer bottom'}>
-          <img alt='fadhel-top' src='https://www.svgrepo.com/show/4166/up-arrow.svg' />
+          <img loading="lazy"
+            decoding="async" alt='fadhel-top' src='https://www.svgrepo.com/show/4166/up-arrow.svg' />
         </div>
       </div>
     </div>
