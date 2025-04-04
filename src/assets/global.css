@@ -83,13 +83,26 @@
   .new-home-header-text h1 {
     @apply mb-0 md:mb-[-1rem];
   }
-  .new-home-header-shadow-text {
+
+  .new-home-header-text h1:nth-child(1):before {
+    content: 'Data &';
+    @apply top-[0.5rem] md:top-[0.5rem] md:left-[4.5rem];
+  }
+  .new-home-header-text h1:nth-child(2):before {
+    content: 'Software';
+    @apply top-[3.5rem] md:top-[7.5rem] md:left-[0rem];
+  }
+  .new-home-header-text h1:nth-child(3):before {
+    content: 'Engineer';
+    @apply top-[6.8rem] md:top-[14.5rem] md:left-[0rem];
+  }
+  .new-home-header-text h1:before {
     /* content: attr(data-text); */
-    @apply filter blur-[7px] md:blur-[5px] bottom-[25px] md:bottom-[5px] text-[rgba(129,_178,_250,_0.9)] md:text-[rgba(129,_178,_250,_0.3)];
+    white-space: pre-wrap;
+    display: block;
+    @apply filter blur-[5px] md:blur-[5px] text-[rgba(129,_178,_250,_0.9)] md:text-[rgba(129,_178,_250,_0.5)];
     position: absolute;
-    left: 0;
     z-index: -1;
-    filter: blur(5px);
   }
   .new-home-header-text .white {
     background: linear-gradient(108.18deg, #ffffff 10%, #a5f3fc 100%);

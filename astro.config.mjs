@@ -25,7 +25,7 @@ export default defineConfig({
     rehypePlugins: [rehypeMinifyHtml],
     remarkRehype: { footnoteLabel: 'Footnotes' },
     gfm: true
-  }), tailwind(), react()],
+  }), tailwind(), react({ babel: { plugins: [['styled-jsx/babel', { optimizeForSpeed: true }]] } })],
   image: {
     service: passthroughImageService()
   },
