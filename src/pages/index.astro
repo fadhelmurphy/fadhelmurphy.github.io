@@ -1,6 +1,5 @@
 ---
 // Component Imports
-import Button from "@/Components/Button.astro";
 import Header from "@/Components/header";
 import Timeline from "@/Components/timeline";
 import { prefix } from "Consts/config";
@@ -47,7 +46,7 @@ import Navbar from 'Containers/navbar/navbar'
     <p data-aos="fade-up" data-aos-duration="700" class="text-2xl md:text-4xl font-normal my-5 text-base-2">fadhelijlalfalah@gmail.com</p>
     <div class="flex gap-4 md:gap-8">
       
-    <button class="text-white bg-cyan-500">Get in touch</button>
+    <button class="contact-btn text-white bg-cyan-500">Get in touch</button>
   {TopHeaderMenuConst.reverse().map((item: SliderDataType) => (
     
       <a
@@ -56,7 +55,7 @@ import Navbar from 'Containers/navbar/navbar'
       target="_blank"
       data-aos="zoom-in" data-aos-duration="400"
       >
-    <button class="md:p-6" style={`background-color:${item.background};color:${item.color};`}>
+    <button class="contact-btn md:p-6" style={`background-color:${item.background};color:${item.color};`}>
       <span
         set:html={item.icon}
       ></span>
