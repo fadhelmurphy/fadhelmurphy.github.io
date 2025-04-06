@@ -57,6 +57,9 @@ jobs:
         if: github.ref != 'refs/heads/astro-article'
         run: git fetch && git checkout dev-astro
 
+      - name: Restore .env
+        run: echo "${{ vars.ENV_FILE }}" > .env
+
       - name: Installing my packages
         if: github.ref != 'refs/heads/astro-article'
         run: yarn install

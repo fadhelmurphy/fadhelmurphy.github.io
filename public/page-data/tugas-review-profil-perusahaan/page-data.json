@@ -1,0 +1,20 @@
+{
+  "componentChunkName": "component---src-templates-blog-detail-js",
+  "path": "/tugas-review-profil-perusahaan/",
+  "result": {
+    "data": { "markdownRemark": null },
+    "pageContext": {
+      "prev": {
+        "node": {
+          "frontmatter": {
+            "tags": ["Pengantar bisnis informatika", "Tugas"],
+            "path": "/membuat-company-profile-yang-menarik",
+            "title": "Membuat company profile yang menarik"
+          }
+        }
+      }
+    }
+  },
+  "staticQueryHashes": ["3649515864", "63159454", "696936778"],
+  "slicesMap": {}
+}

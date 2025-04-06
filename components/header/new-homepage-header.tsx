@@ -40,59 +40,16 @@ export default function Header (): JSX.Element {
                 {/* Buttons */}
                 <div className="ml-5 mt-6 md:mt-12 md:mb-4 flex items-center justify-center space-x-4">
                     {['fulltime', 'freelance'].map((type) => (
-                        <button
+                        <span
                             key={type}
                             className={cn(
                                 `${type}-btn text-white rounded-full px-6 py-2 text-sm font-medium transition-all relative`
                             )}
                         >
-                            <span className={`${type}-icon`} dangerouslySetInnerHTML={{ __html: '&bull;' }}/>
-                            <span>{type.charAt(0).toUpperCase() + type.slice(1)}</span>
-                        </button>
+                            <p className={`${type}-icon`} dangerouslySetInnerHTML={{ __html: '&bull;' }}/>
+                            <p>{type.charAt(0).toUpperCase() + type.slice(1)}</p>
+                        </span>
                     ))}
-
-                    <style>
-                        {`
-
-      .fulltime-btn, .freelance-btn {
-        position: relative;
-        padding-left: 2rem;
-      }
-
-      .fulltime-icon, .freelance-icon {
-        position: absolute;
-        left: 0.5rem;
-        font-size: 3rem;
-        top: 50%;
-        transform: translateY(-50%);
-        color: white;
-      }
-
-      .fulltime-btn {
-        background: radial-gradient(
-          82.56% 332.81% at 56.98% -109.38%,
-          rgba(20, 168, 184, 0.56) 0%,
-          rgba(20, 168, 184, 0.12) 76.76%
-        );
-        border: 2px solid rgba(255, 255, 255, 0.2);
-        box-shadow: 0px 8px 14px 3px rgba(110, 191, 228, 0.3);
-        backdrop-filter: blur(2px);
-        border-radius: 20px;
-      }
-      
-      .freelance-btn {
-        background: radial-gradient(
-          82.56% 332.81% at 56.98% -109.38%,
-          rgba(74, 140, 247, 0.56) 0%,
-          rgba(74, 140, 247, 0.12) 76.76%
-        );
-        border: 2px solid rgba(255, 255, 255, 0.2);
-        box-shadow: 0px 8px 14px 3px rgba(129, 178, 250, 0.3);
-        backdrop-filter: blur(2px);
-        border-radius: 20px;
-      }
-    `}
-                    </style>
                 </div>
 
                 {/* Logo slider */}

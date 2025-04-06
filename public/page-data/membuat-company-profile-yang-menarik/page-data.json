@@ -1,0 +1,20 @@
+{
+  "componentChunkName": "component---src-templates-blog-detail-js",
+  "path": "/membuat-company-profile-yang-menarik/",
+  "result": {
+    "data": { "markdownRemark": null },
+    "pageContext": {
+      "next": {
+        "node": {
+          "frontmatter": {
+            "tags": ["Pengantar bisnis informatika", "Tugas"],
+            "path": "/tugas-review-profil-perusahaan",
+            "title": "Review profil perusahaan Biznet"
+          }
+        }
+      }
+    }
+  },
+  "staticQueryHashes": ["3649515864", "63159454", "696936778"],
+  "slicesMap": {}
+}

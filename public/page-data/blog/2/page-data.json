@@ -1,0 +1,33 @@
+{
+  "componentChunkName": "component---src-templates-blog-js",
+  "path": "/blog/2/",
+  "result": {
+    "data": {
+      "allMarkdownRemark": {
+        "edges": [
+          {
+            "node": {
+              "excerpt": "Biznet merupakan perusahaan infrastruktur digital terintegrasi di Indonesia, menyediakan layanan Internet, Data Center, Cloud Computing dan IPTV. Kami memiliki komitmen untuk membangun infrastruktur modern dengan tujuan mengurangi kesenjangan digital…",
+              "id": "4c7d8899-a6ef-5d38-88e0-7f4bca121acf",
+              "frontmatter": {
+                "title": "Review profil perusahaan Biznet",
+                "date": "28 September 2020",
+                "path": "/tugas-review-profil-perusahaan",
+                "tags": ["Pengantar bisnis informatika", "Tugas"]
+              }
+            }
+          }
+        ]
+      }
+    },
+    "pageContext": {
+      "limit": 1,
+      "skip": 1,
+      "filter": "/(post)/",
+      "numPages": 2,
+      "currentPage": 2
+    }
+  },
+  "staticQueryHashes": ["3649515864", "63159454", "696936778"],
+  "slicesMap": {}
+}

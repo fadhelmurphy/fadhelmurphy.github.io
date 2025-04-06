@@ -5,6 +5,7 @@ import react from '@astrojs/react'
 import { prefix } from './consts/config'
 import remarkToc from 'remark-toc'
 import rehypeMinifyHtml from 'rehype-preset-minify'
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
@@ -25,7 +26,9 @@ export default defineConfig({
     rehypePlugins: [rehypeMinifyHtml],
     remarkRehype: { footnoteLabel: 'Footnotes' },
     gfm: true
-  }), tailwind(), react({ babel: { plugins: [['styled-jsx/babel', { optimizeForSpeed: true }]] } })],
+  }), tailwind(), react({ babel: { plugins: [['styled-jsx/babel', { optimizeForSpeed: true }]] } }),
+  sitemap()
+],
   image: {
     service: passthroughImageService()
   },
@@ -33,6 +36,7 @@ export default defineConfig({
   compressHTML: true,
   output: 'static',
   base: prefix,
+  site: import.meta.env.PUBLIC_ROOT_DOMAIN,
   // base prefix
   assetsPrefix: prefix // asset prefix
   // publicDir: prefix,

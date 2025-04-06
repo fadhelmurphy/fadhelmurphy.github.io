@@ -1,0 +1,793 @@
+{
+  "data": {
+    "images": {
+      "edges": [
+        {
+          "node": {
+            "relativePath": "gatsby-icon.png",
+            "name": "gatsby-icon",
+            "prettySize": "21.2 kB",
+            "publicURL": "/static/4a9773549091c227cd2eb82ccd9c5e3a/gatsby-icon.png",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRg4CAABXRUJQVlA4WAoAAAAQAAAAEwAAEwAAQUxQSK0AAAABgFzbttrmvi+PJbfH0FG4CW5F0zDUwP+9d8JyCRExAZI1alcXT+5P5+tWjUmyRpMHEiC5n6qxH0dkeEJ6JEcjM9MeNfgzK/sqWuHJP9NZqrsk+HdwOV7jDHRWp9s4fiCHBH1lcPK8nXtySNCf4UOc0w0xbN1dEv8LLsdaUfM/WVnKtMeH/xUfHKhItkvWGqTXmuwUM1nR9J4ESO5mKibJirrlaf/y3J8uWxWTAABWUDggOgEAALAHAJ0BKhQAFAA+0WCoT6glI6IoCAEAGglsAJ05QVAeIU1zIBtgLsl3lglWfjBfEBkXazoln7B3M7iXq7BTV6qoLeIBB2AA/qZcpcT5KE74URiYSbi3pR6k1tfs0PkEULa02//DiFFQybKEg2B9LpcI+VNsrm7rKEnZTqVDEiscKNc3nz2fwU6X3J23nKPtTVZeURmrXpKe80i34HwJJFUhwjr5LXJea6J1+YN0WqW+1doBMjYmxDT3lMboRrQ7cb9rxCjYfMB01C2pf4/LSavVr7e/o5MR2Ug7+LzkZFWpn0b3+oFaXUY+HK3q0xUAWZ6mfc6vPM1c3r21RjAaCriAVlQcFXv2f6O9yOFje338mcHSe9wfsNLsPS5GAGuvow31ax+u6Ql9yebKcYRaVbNS1TVzXxmPdkwA",
+                "aspectRatio": 1,
+                "src": "/static/4a9773549091c227cd2eb82ccd9c5e3a/42956/gatsby-icon.webp",
+                "srcSet": "/static/4a9773549091c227cd2eb82ccd9c5e3a/4f377/gatsby-icon.webp 330w,\n/static/4a9773549091c227cd2eb82ccd9c5e3a/42956/gatsby-icon.webp 512w",
+                "sizes": "(max-width: 512px) 100vw, 512px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "logo/tetra-civic.jpg",
+            "name": "tetra-civic",
+            "prettySize": "62 kB",
+            "publicURL": "/static/fe8ac6030fa4cb24d58f51db4b671f6c/tetra-civic.jpg",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRoIAAABXRUJQVlA4IHYAAAAQBACdASoUABwAPsVQoUunpKMhsAwA8BiJbADKACHf6mgdzPUpvEx/AAD+9wKK3RHY5sgWwvUFCRq6NI23TMBYFUgkgijSnQOK7pYLJeBVD2IJdyCOeVNYfdoM86hziGl+WH5JEKeN0jBLpP5pxWJXCSQAAAAA",
+                "aspectRatio": 0.7066381156316917,
+                "src": "/static/fe8ac6030fa4cb24d58f51db4b671f6c/05362/tetra-civic.webp",
+                "srcSet": "/static/fe8ac6030fa4cb24d58f51db4b671f6c/4f377/tetra-civic.webp 330w,\n/static/fe8ac6030fa4cb24d58f51db4b671f6c/55db5/tetra-civic.webp 660w,\n/static/fe8ac6030fa4cb24d58f51db4b671f6c/05362/tetra-civic.webp 1320w,\n/static/fe8ac6030fa4cb24d58f51db4b671f6c/b77d8/tetra-civic.webp 1447w",
+                "sizes": "(max-width: 1320px) 100vw, 1320px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "web/classification.jpg",
+            "name": "classification",
+            "prettySize": "52.2 kB",
+            "publicURL": "/static/2de696cbee26420e33c8a28cbc8d2caf/classification.jpg",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAAAwAwCdASoUAAwAPtFUo0uoJKMhsAgBABoJaQAAXK+JBeWAAP7zpJ93I8KMAAAA",
+                "aspectRatio": 1.6019417475728155,
+                "src": "/static/2de696cbee26420e33c8a28cbc8d2caf/05362/classification.webp",
+                "srcSet": "/static/2de696cbee26420e33c8a28cbc8d2caf/4f377/classification.webp 330w,\n/static/2de696cbee26420e33c8a28cbc8d2caf/55db5/classification.webp 660w,\n/static/2de696cbee26420e33c8a28cbc8d2caf/05362/classification.webp 1320w,\n/static/2de696cbee26420e33c8a28cbc8d2caf/dcd29/classification.webp 1417w",
+                "sizes": "(max-width: 1320px) 100vw, 1320px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "web/dashboard-desktop.png",
+            "name": "dashboard-desktop",
+            "prettySize": "50.5 kB",
+            "publicURL": "/static/b19e559e3f8d42b4ce30eb9aee2b3917/dashboard-desktop.png",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAACQAwCdASoUAAwAPtFUpEuoJKOhsAgBABoJZwAAW4ymKRn+ZMJAAP7zdWLpUe+hqA3rbDQB2BW6sY5Y7Z9MltDt0BAQAA==",
+                "aspectRatio": 1.7010309278350515,
+                "src": "/static/b19e559e3f8d42b4ce30eb9aee2b3917/546a1/dashboard-desktop.webp",
+                "srcSet": "/static/b19e559e3f8d42b4ce30eb9aee2b3917/4f377/dashboard-desktop.webp 330w,\n/static/b19e559e3f8d42b4ce30eb9aee2b3917/55db5/dashboard-desktop.webp 660w,\n/static/b19e559e3f8d42b4ce30eb9aee2b3917/546a1/dashboard-desktop.webp 1237w",
+                "sizes": "(max-width: 1237px) 100vw, 1237px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "logo-fadhel.png",
+            "name": "logo-fadhel",
+            "prettySize": "87.1 kB",
+            "publicURL": "/static/95dce92ae91e45f3858c65b0c9bb1f78/logo-fadhel.png",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRroBAABXRUJQVlA4WAoAAAAQAAAAEwAAEwAAQUxQSMUAAAABgGJt2zLlft9/ZnB3d43TOTQyh0a2SOKwA3frvgMi0ZptgOy0cXuRX1hCREwAf1UILqCeUuS4CJOXdze3f68fLsIIKHNWMO8pFISyZ8vmXTO2gwLKQNIK9jdv9xWIy1DK4l9/P1/HcHCLLdchQKRCBLfoItG5+fmZhXEUV6Gh+dgKVrC0D5Qty2XTSVtCcReqX6xgebtyEA9lIGX2tH40iuJjKJ23IxzBp1fkHw5x8NcdN5sOIMitnSL4VyYeOwKBlin+AQBWUDggzgAAADAFAJ0BKhQAFAA+0VqjTSglIyIoDVEAGglsAMarUJ8WIh7dqgphuhBxzrRSmUTlQDkAAPjVWiRCG4FweE9cOvV2x6tw57LPpKuIiOvdiyjnp0QcHgNl6mUqSb/5MwsPdGTQXiwUUrIj0fR7iuP3o9N70F2m9tqHOX/KpIfk3n+3KmsiPGV85iXVIune7AiT7i2Ad8sJMPFBTY9RadZPa3c+vNqS3jMRO01OOiqpMpsm/HN8T/5dW9cSYKHql3wR89d8CoYo1cXB7aSUAAAA",
+                "aspectRatio": 1,
+                "src": "/static/95dce92ae91e45f3858c65b0c9bb1f78/05362/logo-fadhel.webp",
+                "srcSet": "/static/95dce92ae91e45f3858c65b0c9bb1f78/4f377/logo-fadhel.webp 330w,\n/static/95dce92ae91e45f3858c65b0c9bb1f78/55db5/logo-fadhel.webp 660w,\n/static/95dce92ae91e45f3858c65b0c9bb1f78/05362/logo-fadhel.webp 1320w,\n/static/95dce92ae91e45f3858c65b0c9bb1f78/c09ae/logo-fadhel.webp 1800w",
+                "sizes": "(max-width: 1320px) 100vw, 1320px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "another/poster.jpg",
+            "name": "poster",
+            "prettySize": "118 kB",
+            "publicURL": "/static/fac8dde79f1b5d83c47669e17a4ef984/poster.jpg",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRqoAAABXRUJQVlA4IJ4AAAAwBQCdASoUABsAPtFepE6oJSMiKAqpABoJZAC7L6GT+gMYmgMaWXWprY95PkbgLCoYgAD+tdFRxXSl3labeiai81QvVJ15nhJvRJ9G8KN3SOeHLHxfsDZEyNf0saa4ENm8bSjey/i1xnA9xOXCY5z4K5OH5CU3UlCmTvBCoqv5YA3P4iGs4s4z1ExGE8IKyhr6flc/ooCrlv14KoIAAA==",
+                "aspectRatio": 0.75,
+                "src": "/static/fac8dde79f1b5d83c47669e17a4ef984/dd44e/poster.webp",
+                "srcSet": "/static/fac8dde79f1b5d83c47669e17a4ef984/4f377/poster.webp 330w,\n/static/fac8dde79f1b5d83c47669e17a4ef984/55db5/poster.webp 660w,\n/static/fac8dde79f1b5d83c47669e17a4ef984/dd44e/poster.webp 900w",
+                "sizes": "(max-width: 900px) 100vw, 900px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "logo/Andrian-color-100.jpg",
+            "name": "Andrian-color-100",
+            "prettySize": "102 kB",
+            "publicURL": "/static/ae772290f2bf2fa3e39da498611c6a1b/Andrian-color-100.jpg",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAABwAwCdASoUABQAPtFgqU+oJSOiKAgBABoJZQDM0BEcx0cQxAAA/vYB3XfeBWTi6jyQMm7edAA8GzPm8/PCXQmOwukVvIJHAAAAAA==",
+                "aspectRatio": 1,
+                "src": "/static/ae772290f2bf2fa3e39da498611c6a1b/5c70c/Andrian-color-100.webp",
+                "srcSet": "/static/ae772290f2bf2fa3e39da498611c6a1b/4f377/Andrian-color-100.webp 330w,\n/static/ae772290f2bf2fa3e39da498611c6a1b/55db5/Andrian-color-100.webp 660w,\n/static/ae772290f2bf2fa3e39da498611c6a1b/5c70c/Andrian-color-100.webp 1200w",
+                "sizes": "(max-width: 1200px) 100vw, 1200px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "logo/Andrian-red-100.jpg",
+            "name": "Andrian-red-100",
+            "prettySize": "104 kB",
+            "publicURL": "/static/28c183a87858526f64328323d7048b59/Andrian-red-100.jpg",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAACQAwCdASoUABQAPtFgqU+oJSOiKAgBABoJZQDHMBEcy/b0y2GwAP72AjtUvwXpKcljSngjoc84yZNS2Xz8/oAtNtjv+Kubo7HpmSQP/ErMFngAAAA=",
+                "aspectRatio": 1,
+                "src": "/static/28c183a87858526f64328323d7048b59/5c70c/Andrian-red-100.webp",
+                "srcSet": "/static/28c183a87858526f64328323d7048b59/4f377/Andrian-red-100.webp 330w,\n/static/28c183a87858526f64328323d7048b59/55db5/Andrian-red-100.webp 660w,\n/static/28c183a87858526f64328323d7048b59/5c70c/Andrian-red-100.webp 1200w",
+                "sizes": "(max-width: 1200px) 100vw, 1200px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "logo/logo-air-v2.jpg",
+            "name": "logo-air-v2",
+            "prettySize": "84.2 kB",
+            "publicURL": "/static/3fe3279a60f1dee71a321ad354c80395/logo-air-v2.jpg",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAADwAwCdASoUABwAPtFapU0oJSOiMBgIAQAaCUAAEe6zc52oipFhtj8wAP74rFFtRvxOAFiFUaTPKCC/p6n9GeRkzKhxcKtqgHnWZse6n6gyXji86izhYBC9roMbnx/AAAA=",
+                "aspectRatio": 0.7066381156316917,
+                "src": "/static/3fe3279a60f1dee71a321ad354c80395/f50f4/logo-air-v2.webp",
+                "srcSet": "/static/3fe3279a60f1dee71a321ad354c80395/4f377/logo-air-v2.webp 330w,\n/static/3fe3279a60f1dee71a321ad354c80395/55db5/logo-air-v2.webp 660w,\n/static/3fe3279a60f1dee71a321ad354c80395/f50f4/logo-air-v2.webp 842w",
+                "sizes": "(max-width: 842px) 100vw, 842px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "web/kemenkes.png",
+            "name": "kemenkes",
+            "prettySize": "102 kB",
+            "publicURL": "/static/8ad0c5129ce2881515a472e3c362e34e/kemenkes.png",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAADwAwCdASoUAAoAPtFUo0uoJKMhsAgBABoJZgCdABuiBlA9Tq2l990AAOJROXa4fLZ4QspfMZnrx9NMSVRN3BeTPqq5Y3HpNf62GpZJGN07tWA5M645PuiiBHYTt8QxCkz5inbisMdn0eX8694UNT19+gAAAA==",
+                "aspectRatio": 1.952662721893491,
+                "src": "/static/8ad0c5129ce2881515a472e3c362e34e/05362/kemenkes.webp",
+                "srcSet": "/static/8ad0c5129ce2881515a472e3c362e34e/4f377/kemenkes.webp 330w,\n/static/8ad0c5129ce2881515a472e3c362e34e/55db5/kemenkes.webp 660w,\n/static/8ad0c5129ce2881515a472e3c362e34e/05362/kemenkes.webp 1320w,\n/static/8ad0c5129ce2881515a472e3c362e34e/65251/kemenkes.webp 1905w",
+                "sizes": "(max-width: 1320px) 100vw, 1320px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "web/personal-web.png",
+            "name": "personal-web",
+            "prettySize": "91.4 kB",
+            "publicURL": "/static/cc2156a0601c5425bffc6375e68417b3/personal-web.png",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAABQAwCdASoUAAoAPtFUpEuoJKOhsAgBABoJaQAAW+m//YIJ8AD+9R10TjfzP+9ED30tjxr/QkI0Lql4XrAAAA==",
+                "aspectRatio": 1.9411764705882353,
+                "src": "/static/cc2156a0601c5425bffc6375e68417b3/05362/personal-web.webp",
+                "srcSet": "/static/cc2156a0601c5425bffc6375e68417b3/4f377/personal-web.webp 330w,\n/static/cc2156a0601c5425bffc6375e68417b3/55db5/personal-web.webp 660w,\n/static/cc2156a0601c5425bffc6375e68417b3/05362/personal-web.webp 1320w,\n/static/cc2156a0601c5425bffc6375e68417b3/cc602/personal-web.webp 1903w",
+                "sizes": "(max-width: 1320px) 100vw, 1320px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "gatsby-astronaut.png",
+            "name": "gatsby-astronaut",
+            "prettySize": "167 kB",
+            "publicURL": "/static/6d91c86c0fde632ba4cd01062fd9ccfa/gatsby-astronaut.png",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRpoAAABXRUJQVlA4II4AAADwBACdASoUABQAPs1QoUunpKMht/VYAPAZiWMAVmZb2huiHfD8wnln+ZMSx1GrrUAA/vYHuE6V3f1gdWt5Fg75wHMOvJ1ZON9tm+HEdCCqDHpyJN7flurcs+PmtsqYbxw8So/KH6fe04il9NLdaAuvR41sCqIHb0cyY63EG3i/Sj7vrGf2HJYFiXdEAAAA",
+                "aspectRatio": 1,
+                "src": "/static/6d91c86c0fde632ba4cd01062fd9ccfa/2459c/gatsby-astronaut.webp",
+                "srcSet": "/static/6d91c86c0fde632ba4cd01062fd9ccfa/4f377/gatsby-astronaut.webp 330w,\n/static/6d91c86c0fde632ba4cd01062fd9ccfa/55db5/gatsby-astronaut.webp 660w,\n/static/6d91c86c0fde632ba4cd01062fd9ccfa/2459c/gatsby-astronaut.webp 800w",
+                "sizes": "(max-width: 800px) 100vw, 800px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "another/backdrop.jpg",
+            "name": "backdrop",
+            "prettySize": "172 kB",
+            "publicURL": "/static/c04b3ec69b72ed5b1399d10957d864ba/backdrop.jpg",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRngAAABXRUJQVlA4IGwAAADQAwCdASoUAAwAPtFUo0uoJKMhsAgBABoJbACdBagAsxL08RcNm4AA/Mar7+jAGp6isfVGo/yuqmn88Fo0f/DTwfJuj0hPEuHR/G/wEUJTvlT2AEUzZ5RSAf7anMalngDngds0YyZzeJpAAAA=",
+                "aspectRatio": 1.6666666666666667,
+                "src": "/static/c04b3ec69b72ed5b1399d10957d864ba/05362/backdrop.webp",
+                "srcSet": "/static/c04b3ec69b72ed5b1399d10957d864ba/4f377/backdrop.webp 330w,\n/static/c04b3ec69b72ed5b1399d10957d864ba/55db5/backdrop.webp 660w,\n/static/c04b3ec69b72ed5b1399d10957d864ba/05362/backdrop.webp 1320w,\n/static/c04b3ec69b72ed5b1399d10957d864ba/e0fdc/backdrop.webp 1360w",
+                "sizes": "(max-width: 1320px) 100vw, 1320px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "web/warehouse.jpg",
+            "name": "warehouse",
+            "prettySize": "229 kB",
+            "publicURL": "/static/406c147a07881894720a44a52de260cd/warehouse.jpg",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAADQAwCdASoUAAoAPtFWo0uoJKMhsAgBABoJQBOioAAON5OfZZk2r7AA/uevvqXObKF/9UPnGgw+x7QF1mVlMUA3NQIsNvtXxYgYu1g0Os2U8mb8KwdH6hSnb/DDK7kAAAA=",
+                "aspectRatio": 2.0121951219512195,
+                "src": "/static/406c147a07881894720a44a52de260cd/05362/warehouse.webp",
+                "srcSet": "/static/406c147a07881894720a44a52de260cd/4f377/warehouse.webp 330w,\n/static/406c147a07881894720a44a52de260cd/55db5/warehouse.webp 660w,\n/static/406c147a07881894720a44a52de260cd/05362/warehouse.webp 1320w,\n/static/406c147a07881894720a44a52de260cd/f94c4/warehouse.webp 1888w",
+                "sizes": "(max-width: 1320px) 100vw, 1320px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "logo/logo f grid.jpg",
+            "name": "logo f grid",
+            "prettySize": "311 kB",
+            "publicURL": "/static/5fe747f708ae179fd7c261bd8a758364/logo f grid.jpg",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRsoAAABXRUJQVlA4IL4AAACwBACdASoUABQAPtFUpU2oJCOiMBgIAQAaCWgAVbJb+pQZ7AyDmR36VBkt0fFgAP71GOjRTrfKyVXJVc+VPDj9GlkRSfBuWUpfCSwIkdGyy197m5kiWXLqSzSpAAayiQAh1beQ4b276cSNLOaYIRsadqENzO8ovIMkHf5WhT75ZujMEeevZtNRXAqVgLvMnLexYhzeGK6idhDqXnKtaB8ew3+0DdS0xL25+ybNUhYXkWKJTXijEnXKGTtGZgAA",
+                "aspectRatio": 1,
+                "src": "/static/5fe747f708ae179fd7c261bd8a758364/5c70c/logo%20f%20grid.webp",
+                "srcSet": "/static/5fe747f708ae179fd7c261bd8a758364/4f377/logo%20f%20grid.webp 330w,\n/static/5fe747f708ae179fd7c261bd8a758364/55db5/logo%20f%20grid.webp 660w,\n/static/5fe747f708ae179fd7c261bd8a758364/5c70c/logo%20f%20grid.webp 1200w",
+                "sizes": "(max-width: 1200px) 100vw, 1200px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "logo/maju-karya.jpg",
+            "name": "maju-karya",
+            "prettySize": "380 kB",
+            "publicURL": "/static/007f622d301e57796f72a56bf6d4750e/maju-karya.jpg",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRrIAAABXRUJQVlA4IKYAAAAwBQCdASoUABQAPslQoUunpKMnt/VYAPAZCWIAnTNVwVrTiG0SZjvRz4s/xlbxLBmHgAD+8BprbTtuRMYx8TLFPEvcsv/MxHNNjKKiqeaHdClyO2J6VGTlKbKFZcTy1K8Oug5IhfkpTkiLl7ZjO092o5TLApfTQ3rz5I6P+yvkHM4+CLl/LKpf5FN2Fl267PrKtkFs7IfyNp5dInw1RHle3fQsIAAA",
+                "aspectRatio": 1,
+                "src": "/static/007f622d301e57796f72a56bf6d4750e/05362/maju-karya.webp",
+                "srcSet": "/static/007f622d301e57796f72a56bf6d4750e/4f377/maju-karya.webp 330w,\n/static/007f622d301e57796f72a56bf6d4750e/55db5/maju-karya.webp 660w,\n/static/007f622d301e57796f72a56bf6d4750e/05362/maju-karya.webp 1320w,\n/static/007f622d301e57796f72a56bf6d4750e/c09ae/maju-karya.webp 1800w",
+                "sizes": "(max-width: 1320px) 100vw, 1320px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "web/eno.png",
+            "name": "eno",
+            "prettySize": "337 kB",
+            "publicURL": "/static/f571e1e4be5255213dec2a034c4ad90e/eno.png",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAADQAwCdASoUAAoAPtFUo0uoJKMhsAgBABoJaQDKACPuAG52mQSLGgAA/vLFKYIl46yecjBUwADmRii96uUGHWpxfTQeEsY25pAAAA==",
+                "aspectRatio": 1.9760479041916168,
+                "src": "/static/f571e1e4be5255213dec2a034c4ad90e/05362/eno.webp",
+                "srcSet": "/static/f571e1e4be5255213dec2a034c4ad90e/4f377/eno.webp 330w,\n/static/f571e1e4be5255213dec2a034c4ad90e/55db5/eno.webp 660w,\n/static/f571e1e4be5255213dec2a034c4ad90e/05362/eno.webp 1320w,\n/static/f571e1e4be5255213dec2a034c4ad90e/a026c/eno.webp 1919w",
+                "sizes": "(max-width: 1320px) 100vw, 1320px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "another/chelsea-islan.jpg",
+            "name": "chelsea-islan",
+            "prettySize": "431 kB",
+            "publicURL": "/static/8dd29ee6763d5792069f6001f13876a0/chelsea-islan.jpg",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRvwAAABXRUJQVlA4IPAAAADwBQCdASoUAB0APtFYpEuoJSOhsAgBABoJbACdMtB/+kgPfOdk+u+NtrmsvigFgFAWL+lf2kkNAADfwkbbKP/zOJpwIbBgyPbrUBOHX9RzE15306kx+XclIo5Mss16n+Nn7s8LfDaO6Nlr1LXVSchX2WxvsGK9p49l3F8dVLeUvBRSWxbQC+MaAm9oHIYYI0M+G8TDCLavnrk1O1lnXSFQWg63kGMUUsgWOMHO3gOxEDBoNSsR81XMUjVt1vzA+2GJ0+aHAEfXGBowUvRJ0/NraH5hAme/v3Y9jS679VlzdBl30JJG+Wr0r9vyErR4AAA=",
+                "aspectRatio": 0.6947368421052632,
+                "src": "/static/8dd29ee6763d5792069f6001f13876a0/a9bde/chelsea-islan.webp",
+                "srcSet": "/static/8dd29ee6763d5792069f6001f13876a0/4f377/chelsea-islan.webp 330w,\n/static/8dd29ee6763d5792069f6001f13876a0/55db5/chelsea-islan.webp 660w,\n/static/8dd29ee6763d5792069f6001f13876a0/a9bde/chelsea-islan.webp 828w",
+                "sizes": "(max-width: 828px) 100vw, 828px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "another/tatjana-100.jpg",
+            "name": "tatjana-100",
+            "prettySize": "446 kB",
+            "publicURL": "/static/b02bf06e1216da20fe8c2767b49cfadc/tatjana-100.jpg",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRgIBAABXRUJQVlA4IPYAAADQBQCdASoUABYAPtFgqU+oJaOiKAgBABoJbACxH1jwt0hgrEYYLlzmX9e5TA1BqOpDkzZQ9AAAAP7oqxIILgcZdCB+7HhF9ezHosh9sz1bcCdV+Yca+KJGhCR4G6exYxP0sGmxaLcLJ7TWsKeV4fB581kU3w0C/u/UtwVueliXwTDV/1lrJGeGv9pGv8WGmPhI/bOLCyGGXrOvXrs2RMvw+I/4sz4IpO4Rb0EhMRWfkgtOC4KyJpo72R2qEtY7TTbEmpr1fFhg3oS1PMO9cBr0aXIdwCkn/Mt1WwkN9eRHxn3euf4XdEW8JPDbXzLeeseKvqYAAAA=",
+                "aspectRatio": 0.9116022099447514,
+                "src": "/static/b02bf06e1216da20fe8c2767b49cfadc/82c8e/tatjana-100.webp",
+                "srcSet": "/static/b02bf06e1216da20fe8c2767b49cfadc/4f377/tatjana-100.webp 330w,\n/static/b02bf06e1216da20fe8c2767b49cfadc/55db5/tatjana-100.webp 660w,\n/static/b02bf06e1216da20fe8c2767b49cfadc/82c8e/tatjana-100.webp 1086w",
+                "sizes": "(max-width: 1086px) 100vw, 1086px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "web/bisacpns-2020.png",
+            "name": "bisacpns-2020",
+            "prettySize": "429 kB",
+            "publicURL": "/static/44d8e3389fad0e815dfc9b8ebfb7812b/bisacpns-2020.png",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRpAAAABXRUJQVlA4IIQAAABwBACdASoUAAoAPtFWpUwoJKOiMAgBABoJbAC1F17sAAKDZbMkhs2ka41KAAD+W/0Ajsj1gXvHYH+zkrEd29XBq6HzWt8XyFg7z/ADk6n+X9sgaxXkxezJB6pKf/kH8FzGL33h30dN4YFYMbJUzcTarVlfsf8m+0D97/k3yg1R82UAAAA=",
+                "aspectRatio": 1.952662721893491,
+                "src": "/static/44d8e3389fad0e815dfc9b8ebfb7812b/05362/bisacpns-2020.webp",
+                "srcSet": "/static/44d8e3389fad0e815dfc9b8ebfb7812b/4f377/bisacpns-2020.webp 330w,\n/static/44d8e3389fad0e815dfc9b8ebfb7812b/55db5/bisacpns-2020.webp 660w,\n/static/44d8e3389fad0e815dfc9b8ebfb7812b/05362/bisacpns-2020.webp 1320w,\n/static/44d8e3389fad0e815dfc9b8ebfb7812b/65251/bisacpns-2020.webp 1905w",
+                "sizes": "(max-width: 1320px) 100vw, 1320px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "another/not-now.jpg",
+            "name": "not-now",
+            "prettySize": "465 kB",
+            "publicURL": "/static/2c3faa9ce8b27000e3f7efade1d558a7/not-now.jpg",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRhwBAABXRUJQVlA4IBABAAAwBwCdASoUACQAPtFcpk4oJSMiKqgBABoJaQALBRcA0gTNofFKqDVQgH4YuTY2LoE5exwex1aC4Fg3SCHlaTKkegAA/vMpGA9vNo+S+X/s883sK/UBBxadHzVcxjrZmQg7ZuSQFHAZ51j/c0Qpba3XGnbyz1XY0L0nmVlUvJ8LLkAyiO8Di5IB6ZXyVmG6tDCaKnME9smPemCM2th1N5XeTkApTlEGN18gwaPpPBKD6SJN/ccF/pL0Kd+pwfEbwNcdOcz8+nWjNec7LnJW+UYFQGmkR9TAQCkPdrV7yf6u5QW57M0LaDeo6J2xIfXH/WHMQRTCUlZ6Ba2rShOsT/moXrXV7Mo+gVsh6csiAAAAAA==",
+                "aspectRatio": 0.5621805792163543,
+                "src": "/static/2c3faa9ce8b27000e3f7efade1d558a7/f775e/not-now.webp",
+                "srcSet": "/static/2c3faa9ce8b27000e3f7efade1d558a7/4f377/not-now.webp 330w,\n/static/2c3faa9ce8b27000e3f7efade1d558a7/55db5/not-now.webp 660w,\n/static/2c3faa9ce8b27000e3f7efade1d558a7/f775e/not-now.webp 750w",
+                "sizes": "(max-width: 750px) 100vw, 750px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "another/matchday-1.jpg",
+            "name": "matchday-1",
+            "prettySize": "613 kB",
+            "publicURL": "/static/261b20c3b163f50c7ca5a039a5d5f4ee/matchday-1.jpg",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRgIBAABXRUJQVlA4IPYAAADQBQCdASoUABQAPtFeqE+oJKOiKAgBABoJagCxHxx9Cr/SxQw/rQJLjO6iEDWaMi6b169L3sEwAOA3OTyJahwHHtFzWVJ7gpBOgHLEioGhZLgDFVSMgJN810TaBytUcLsWv99jWqds0XfLbh/78LFKu/0J4jU9kOF3j+TMhhRadr8Ab/3P/m7QyPX+4pIRJdj8lBLmqKe991EfxTYxvwnOdlQPu5GNQFnAIycEHJJeMZqdnUHP+0ax8Jep4Zm+cA3Vzx3gVgjoC3ONZTh4TCbmf1WA4d4ud6Q3deV9vgZXyEM0lZ/KjsxaWuwL0gYfIk2TRxWAAAA=",
+                "aspectRatio": 1,
+                "src": "/static/261b20c3b163f50c7ca5a039a5d5f4ee/dd44e/matchday-1.webp",
+                "srcSet": "/static/261b20c3b163f50c7ca5a039a5d5f4ee/4f377/matchday-1.webp 330w,\n/static/261b20c3b163f50c7ca5a039a5d5f4ee/55db5/matchday-1.webp 660w,\n/static/261b20c3b163f50c7ca5a039a5d5f4ee/dd44e/matchday-1.webp 900w",
+                "sizes": "(max-width: 900px) 100vw, 900px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "web/tour-travel.png",
+            "name": "tour-travel",
+            "prettySize": "700 kB",
+            "publicURL": "/static/a2c756c1dd26f0357627bb49dcae7d78/tour-travel.png",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAADQAwCdASoUAAoAPtFWo0uoJKMhsAgBABoJZQCdACGhMludF7nuDuAA/vBB7YX9H3OapiyNp1q3oArHootl5J4WNV2OhtOdj8/mOa0x8wxLi33qzJMVDfjNCQqSQ42MdkAAAA==",
+                "aspectRatio": 1.952662721893491,
+                "src": "/static/a2c756c1dd26f0357627bb49dcae7d78/05362/tour-travel.webp",
+                "srcSet": "/static/a2c756c1dd26f0357627bb49dcae7d78/4f377/tour-travel.webp 330w,\n/static/a2c756c1dd26f0357627bb49dcae7d78/55db5/tour-travel.webp 660w,\n/static/a2c756c1dd26f0357627bb49dcae7d78/05362/tour-travel.webp 1320w,\n/static/a2c756c1dd26f0357627bb49dcae7d78/df69f/tour-travel.webp 1906w",
+                "sizes": "(max-width: 1320px) 100vw, 1320px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "logo/logo-aliansi-v2.jpg",
+            "name": "logo-aliansi-v2",
+            "prettySize": "938 kB",
+            "publicURL": "/static/5cd7588be4d36c4b84a759425394f534/logo-aliansi-v2.jpg",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRuAAAABXRUJQVlA4INQAAADQBACdASoUABQAPtFao02oJSMiKA1RABoJZwC06dwLeMJtnxvMQSAvjktDr0Y5cAD+8OX+wbb9SVuQYtW6enw59rwG+lekyFR1qCgBxCz9p4Z55skpuz+0zh70rsn0FNtVBHCZAY5OWfJv+JjOHSkp65ObTwV9pSgSBQgYQs7Li7LcxDHdV8nn/SV2/7vTDzuf3g6YdN59RkdWWqgOG31UCMizNl+Pl95VEaF4BwdMJix7vZojQdwZ52MA9xV8XxJKDt6P9t5z3VvTfFMfddODReYAAA==",
+                "aspectRatio": 1,
+                "src": "/static/5cd7588be4d36c4b84a759425394f534/2459c/logo-aliansi-v2.webp",
+                "srcSet": "/static/5cd7588be4d36c4b84a759425394f534/4f377/logo-aliansi-v2.webp 330w,\n/static/5cd7588be4d36c4b84a759425394f534/55db5/logo-aliansi-v2.webp 660w,\n/static/5cd7588be4d36c4b84a759425394f534/2459c/logo-aliansi-v2.webp 800w",
+                "sizes": "(max-width: 800px) 100vw, 800px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "home-bg.jpg",
+            "name": "home-bg",
+            "prettySize": "1.01 MB",
+            "publicURL": "/static/be70d7dd4747afad93cef1636ef707c0/home-bg.jpg",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRnoAAABXRUJQVlA4IG4AAABwAwCdASoUAA0APtFYpkwoJSOiMAgBABoJZwAAR9xNaTq6Y5QA/mjDxm5WVp2sH1BfdeK1KWV88kYo1vcM6Xx6gHR6S2JxQJ9h7gzX5Aiwxe5amsgQ9fq319Hs+9PugpHKbPzgVfywKxowbIAAAA==",
+                "aspectRatio": 1.5,
+                "src": "/static/be70d7dd4747afad93cef1636ef707c0/05362/home-bg.webp",
+                "srcSet": "/static/be70d7dd4747afad93cef1636ef707c0/4f377/home-bg.webp 330w,\n/static/be70d7dd4747afad93cef1636ef707c0/55db5/home-bg.webp 660w,\n/static/be70d7dd4747afad93cef1636ef707c0/05362/home-bg.webp 1320w,\n/static/be70d7dd4747afad93cef1636ef707c0/799a5/home-bg.webp 1900w",
+                "sizes": "(max-width: 1320px) 100vw, 1320px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "another/matchday-2.jpg",
+            "name": "matchday-2",
+            "prettySize": "1.06 MB",
+            "publicURL": "/static/f342437d22751bd91eb9ee46616881a7/matchday-2.jpg",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRrYAAABXRUJQVlA4IKoAAACwBQCdASoUABQAPtFcp04oJSOiKAqpABoJZgCsMyRT9KfAL8hj8nfQ57aRpHBCwvltXsBZkoAA/ubQZJ+9uFAD6fG7tvmVq4+J/DKeKqWszvL0Mrra7ddQr0eEGq1CfzDoxaNcye9ariFw9x+MjIxaG4E7HSpgv/EYY78mYUKRhKGjzQoqIYckh+RZSC92cXwuWwT8o+xrSjBvrGYn9Va9hTEJDqBTCQoAAA==",
+                "aspectRatio": 1,
+                "src": "/static/f342437d22751bd91eb9ee46616881a7/5c70c/matchday-2.webp",
+                "srcSet": "/static/f342437d22751bd91eb9ee46616881a7/4f377/matchday-2.webp 330w,\n/static/f342437d22751bd91eb9ee46616881a7/55db5/matchday-2.webp 660w,\n/static/f342437d22751bd91eb9ee46616881a7/5c70c/matchday-2.webp 1200w",
+                "sizes": "(max-width: 1200px) 100vw, 1200px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "web/istih.png",
+            "name": "istih",
+            "prettySize": "1.72 MB",
+            "publicURL": "/static/a38e8fd4b1b97df209df0697f4c1f803/istih.png",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAADQAwCdASoUAAoAPtFUo0uoJKMhsAgBABoJZQAAXBX8PPSOfGLEHAAA/OYYc3AdIP9Y+08H6OG8hBgfvmRyXns+AMHwn9LMOpFsvI3sK2svxudUuGXkgbL9Lhg9bIUAbAmM/Fo5CnrwYnRa4Q7cL4k/0RSowwKvhfXm+LnDoB9pVzj1veE1gAAA",
+                "aspectRatio": 2.0754716981132075,
+                "src": "/static/a38e8fd4b1b97df209df0697f4c1f803/05362/istih.webp",
+                "srcSet": "/static/a38e8fd4b1b97df209df0697f4c1f803/4f377/istih.webp 330w,\n/static/a38e8fd4b1b97df209df0697f4c1f803/55db5/istih.webp 660w,\n/static/a38e8fd4b1b97df209df0697f4c1f803/05362/istih.webp 1320w,\n/static/a38e8fd4b1b97df209df0697f4c1f803/65251/istih.webp 1905w",
+                "sizes": "(max-width: 1320px) 100vw, 1320px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "another/carried-away-cover-rgb.jpg",
+            "name": "carried-away-cover-rgb",
+            "prettySize": "3.92 MB",
+            "publicURL": "/static/b05ce22dc7e083f889c88c4fb8e8c94b/carried-away-cover-rgb.jpg",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRpwAAABXRUJQVlA4IJAAAAAwBQCdASoUABQAPtFgqU+oJSOiKAgBABoJZQDE2BF+o7wg7MnWsQxRgyCdfS8pcheM8AD+7NtCEdGdMmmEfumPlLrZtYLRIRVca9T1LgvIJqB+QLTjFkGfJQQb/7pcv1zQfQx8DZ3SYYDWv/DaDGDkjxe/fqbx2tO+Oq+laK8nuLuPx/zmIkIxiK9R/Av4AAA=",
+                "aspectRatio": 1,
+                "src": "/static/b05ce22dc7e083f889c88c4fb8e8c94b/05362/carried-away-cover-rgb.webp",
+                "srcSet": "/static/b05ce22dc7e083f889c88c4fb8e8c94b/4f377/carried-away-cover-rgb.webp 330w,\n/static/b05ce22dc7e083f889c88c4fb8e8c94b/55db5/carried-away-cover-rgb.webp 660w,\n/static/b05ce22dc7e083f889c88c4fb8e8c94b/05362/carried-away-cover-rgb.webp 1320w,\n/static/b05ce22dc7e083f889c88c4fb8e8c94b/a8332/carried-away-cover-rgb.webp 1980w,\n/static/b05ce22dc7e083f889c88c4fb8e8c94b/2d136/carried-away-cover-rgb.webp 2640w,\n/static/b05ce22dc7e083f889c88c4fb8e8c94b/ef963/carried-away-cover-rgb.webp 3895w",
+                "sizes": "(max-width: 1320px) 100vw, 1320px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "another/Fadhel-AsianGames2018.jpg",
+            "name": "Fadhel-AsianGames2018",
+            "prettySize": "4.57 MB",
+            "publicURL": "/static/92ac8b548aecd88c79cc06edb9429148/Fadhel-AsianGames2018.jpg",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAAAwBQCdASoUABQAPtFYpEyoJSOiKA1RABoJZADKBpsFp/nDvtHmbNs+nJaiJ4iqDxcBAAD+9gm9gwQj832zr+w4f5l/4ULjjcbW3RucDi3rt38Rqq4EP3tLb+jMzYJtzTuHInG1l8avDB5U1VRIJn4XDCkrqu7MuAABWqqQq2dGDle+znGmylmu9uYHrjLilsJn7fOSgmAvBK06VWVQxPBlQAA=",
+                "aspectRatio": 1,
+                "src": "/static/92ac8b548aecd88c79cc06edb9429148/05362/Fadhel-AsianGames2018.webp",
+                "srcSet": "/static/92ac8b548aecd88c79cc06edb9429148/4f377/Fadhel-AsianGames2018.webp 330w,\n/static/92ac8b548aecd88c79cc06edb9429148/55db5/Fadhel-AsianGames2018.webp 660w,\n/static/92ac8b548aecd88c79cc06edb9429148/05362/Fadhel-AsianGames2018.webp 1320w,\n/static/92ac8b548aecd88c79cc06edb9429148/a8332/Fadhel-AsianGames2018.webp 1980w,\n/static/92ac8b548aecd88c79cc06edb9429148/2d136/Fadhel-AsianGames2018.webp 2640w,\n/static/92ac8b548aecd88c79cc06edb9429148/2dfdb/Fadhel-AsianGames2018.webp 7000w",
+                "sizes": "(max-width: 1320px) 100vw, 1320px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "404.js",
+            "name": "404",
+            "prettySize": "413 B",
+            "publicURL": "/static/a080b271274dbd1240bc0ba2603724a8/404.js",
+            "childImageSharp": null
+          }
+        },
+        {
+          "node": {
+            "relativePath": "about.js",
+            "name": "about",
+            "prettySize": "1.15 kB",
+            "publicURL": "/static/69b40d3548da7a4c35b90568b619df28/about.js",
+            "childImageSharp": null
+          }
+        },
+        {
+          "node": {
+            "relativePath": "index.js",
+            "name": "index",
+            "prettySize": "1.15 kB",
+            "publicURL": "/static/c5d9e1f000bae0b8d8ffd0398929b219/index.js",
+            "childImageSharp": null
+          }
+        },
+        {
+          "node": {
+            "relativePath": "posts/20-10-2020-membuat-company-profile/index.md",
+            "name": "index",
+            "prettySize": "3.18 kB",
+            "publicURL": "/static/2baf150c1f266fd746a49096cd502227/index.md",
+            "childImageSharp": null
+          }
+        },
+        {
+          "node": {
+            "relativePath": "posts/28-09-2020-review-perusahaan/index.md",
+            "name": "index",
+            "prettySize": "22.9 kB",
+            "publicURL": "/static/6cea0d815858f02c0da0cd1d914cf5d0/index.md",
+            "childImageSharp": null
+          }
+        },
+        {
+          "node": {
+            "relativePath": "projects/20-10-2020-vote-app/index.md",
+            "name": "index",
+            "prettySize": "3.83 kB",
+            "publicURL": "/static/5b700409253ed64674346ecc2acea7dc/index.md",
+            "childImageSharp": null
+          }
+        },
+        {
+          "node": {
+            "relativePath": "projects/20-10-2020-vote-app/img/dashboard-desktop-2.png",
+            "name": "dashboard-desktop-2",
+            "prettySize": "55 kB",
+            "publicURL": "/static/570cfa3fc941058bfc70d45b7a542614/dashboard-desktop-2.png",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAACQAwCdASoUAAsAPtFUpEuoJKOhsAgBABoJaQAAW4zog/hq2/UAAP7zdWLpT0VxI9UVIh73eXwiJ3v+/xHACAAA",
+                "aspectRatio": 1.8032786885245902,
+                "src": "/static/570cfa3fc941058bfc70d45b7a542614/96c0c/dashboard-desktop-2.webp",
+                "srcSet": "/static/570cfa3fc941058bfc70d45b7a542614/4f377/dashboard-desktop-2.webp 330w,\n/static/570cfa3fc941058bfc70d45b7a542614/55db5/dashboard-desktop-2.webp 660w,\n/static/570cfa3fc941058bfc70d45b7a542614/96c0c/dashboard-desktop-2.webp 1315w",
+                "sizes": "(max-width: 1315px) 100vw, 1315px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "projects/20-10-2020-vote-app/img/manage-link-mobile.jpg",
+            "name": "manage-link-mobile",
+            "prettySize": "53.3 kB",
+            "publicURL": "/static/923ceebfb3a6840090fc3013ba83a482/manage-link-mobile.jpg",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAADwBQCdASoUACQAPtFWqE6oJCOiKrgKAQAaCWcAzBwLNvgFQnoYc6yyJV0xZb1CbppPmSqEy2U4gAD8j/355Au1AQgWB5AWd0nctyaeS/+clfjkIQ9Wv5SIsejQGEXbvz/G01hT6QhCsA6PILv2/rwzXhT9AHHLZmrSjTenz1a6z4jlQOOtifGkdIBgmwjdWYAAAA==",
+                "aspectRatio": 0.5621805792163543,
+                "src": "/static/923ceebfb3a6840090fc3013ba83a482/f775e/manage-link-mobile.webp",
+                "srcSet": "/static/923ceebfb3a6840090fc3013ba83a482/4f377/manage-link-mobile.webp 330w,\n/static/923ceebfb3a6840090fc3013ba83a482/55db5/manage-link-mobile.webp 660w,\n/static/923ceebfb3a6840090fc3013ba83a482/f775e/manage-link-mobile.webp 750w",
+                "sizes": "(max-width: 750px) 100vw, 750px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "projects/20-10-2020-vote-app/img/result-mobile.jpg",
+            "name": "result-mobile",
+            "prettySize": "60.5 kB",
+            "publicURL": "/static/d8957ad445a833e23ce238c09ad2297b/result-mobile.jpg",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRtwAAABXRUJQVlA4INAAAABQBgCdASoUACQAPs1OoUunpCMhtVgIAPAZiWYAwP0Lur+f/AUw95QDpfhdQFgaoH/KO211QmbnlfSVgAD8j/36Y3i9tf3fLbP7yhIWjMaM8HB1NCNGGKBUVWPjeRU8HYb6v2PvrwbZZbNrii9QmldhC3XXcN2owOE2OVjcJj7byqXrZzed6PwFHeMuKjZA3O+Qq+3RSI7LDxD3CxOCLl+z+Hx3HUo7BvXGF8kGO9v6GVB7A4fSLvR6H953zqxex1m3VxjLXAr4FS6ZO9cQiyAA",
+                "aspectRatio": 0.5621805792163543,
+                "src": "/static/d8957ad445a833e23ce238c09ad2297b/f775e/result-mobile.webp",
+                "srcSet": "/static/d8957ad445a833e23ce238c09ad2297b/4f377/result-mobile.webp 330w,\n/static/d8957ad445a833e23ce238c09ad2297b/55db5/result-mobile.webp 660w,\n/static/d8957ad445a833e23ce238c09ad2297b/f775e/result-mobile.webp 750w",
+                "sizes": "(max-width: 750px) 100vw, 750px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "posts/28-09-2020-review-perusahaan/img/Biznet3.PNG",
+            "name": "Biznet3",
+            "prettySize": "62.4 kB",
+            "publicURL": "/static/43bb3e9f6c9774b26b754c5f9eeb8adc/Biznet3.PNG",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAAAwAwCdASoUABgAPtFWpk2oJCOiMBgIAQAaCWlruAAby5VAAP7xMFunPEbQ74ZTKWu/kAK6IBZyAYB/cj6AAAAA",
+                "aspectRatio": 0.8333333333333334,
+                "src": "/static/43bb3e9f6c9774b26b754c5f9eeb8adc/a12e2/Biznet3.webp",
+                "srcSet": "/static/43bb3e9f6c9774b26b754c5f9eeb8adc/4f377/Biznet3.webp 330w,\n/static/43bb3e9f6c9774b26b754c5f9eeb8adc/55db5/Biznet3.webp 660w,\n/static/43bb3e9f6c9774b26b754c5f9eeb8adc/a12e2/Biznet3.webp 686w",
+                "sizes": "(max-width: 686px) 100vw, 686px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "posts/28-09-2020-review-perusahaan/img/Biznet4.PNG",
+            "name": "Biznet4",
+            "prettySize": "26.5 kB",
+            "publicURL": "/static/f2601a1cc12480c633a8b101dfc74b92/Biznet4.PNG",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACwAgCdASoUAAoAPtFUo0uoJKMhsAgBABoJaQAAeyAA/vGCyRBuXHM3zJ/1AAAA",
+                "aspectRatio": 2.037037037037037,
+                "src": "/static/f2601a1cc12480c633a8b101dfc74b92/afe26/Biznet4.webp",
+                "srcSet": "/static/f2601a1cc12480c633a8b101dfc74b92/4f377/Biznet4.webp 330w,\n/static/f2601a1cc12480c633a8b101dfc74b92/55db5/Biznet4.webp 660w,\n/static/f2601a1cc12480c633a8b101dfc74b92/afe26/Biznet4.webp 683w",
+                "sizes": "(max-width: 683px) 100vw, 683px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "posts/28-09-2020-review-perusahaan/img/logo-biznet.png",
+            "name": "logo-biznet",
+            "prettySize": "7.37 kB",
+            "publicURL": "/static/ee07cf2335b1a71d0aded0481f4af859/logo-biznet.png",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRgABAABXRUJQVlA4WAoAAAAQAAAAEwAABQAAQUxQSHYAAAABgGtb2/Hoie10qex0dlKZtW1bY6NzOVNNb9/eXENEJBwPVxsQAYBAJJKIRALA+JI49wFn1SYjASCAI6Xa33A1ApaXJ8n0sjEK9jZHcL1C+JLBztb9fNrt1J+Pj7IQPzER+oMr7zeXA0aZPaWKA2Gd6TENIv4FVlA4IGQAAACQAwCdASoUAAYAPtFUo0uoJKMhsAgBABoJZACw7BwbfmHTP2wAAP4jW1SCsUBI63MWbG31vrsfOSD/80/vhcBJkC36QBgrsR4xBZOhv8JdZ9ae5UXe/JVPb0nVamsa3omyIAAA",
+                "aspectRatio": 3.297872340425532,
+                "src": "/static/ee07cf2335b1a71d0aded0481f4af859/d95d4/logo-biznet.webp",
+                "srcSet": "/static/ee07cf2335b1a71d0aded0481f4af859/d95d4/logo-biznet.webp 155w",
+                "sizes": "(max-width: 155px) 100vw, 155px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "projects/20-10-2020-vote-app/img/dashboard-edit-desktop.png",
+            "name": "dashboard-edit-desktop",
+            "prettySize": "67 kB",
+            "publicURL": "/static/bb29b37a77890d2f7090befd7cbed00d/dashboard-edit-desktop.png",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAACQAwCdASoUAA4APtFYpEwoJSOiMAgBABoJZwAAW+i61+Kw5bxQAP5sY8gWoGTo2iM4LgQnt1q0A8LBySD5P3Lvl3wP+53ye18TOsAAAAA=",
+                "aspectRatio": 1.4410480349344978,
+                "src": "/static/bb29b37a77890d2f7090befd7cbed00d/05362/dashboard-edit-desktop.webp",
+                "srcSet": "/static/bb29b37a77890d2f7090befd7cbed00d/4f377/dashboard-edit-desktop.webp 330w,\n/static/bb29b37a77890d2f7090befd7cbed00d/55db5/dashboard-edit-desktop.webp 660w,\n/static/bb29b37a77890d2f7090befd7cbed00d/05362/dashboard-edit-desktop.webp 1320w,\n/static/bb29b37a77890d2f7090befd7cbed00d/5e339/dashboard-edit-desktop.webp 1413w",
+                "sizes": "(max-width: 1320px) 100vw, 1320px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "projects/20-10-2020-vote-app/img/dashboard-mobile.jpg",
+            "name": "dashboard-mobile",
+            "prettySize": "68.7 kB",
+            "publicURL": "/static/57816544ad1cadf6bbe3077067c59a86/dashboard-mobile.jpg",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRuQAAABXRUJQVlA4INgAAADQBgCdASoUACQAPtFYoUuoJSMhsBqqqQAaCUAYVCDWUMFm9f8DRrFpaTIYfN36d+PlGMwFnG8kpOoQWm8c1sAA/tUX8fyz8akx+Q0Mwh0MdJlS1r3TsWGaw6zZRFtSjTGDg3AXCkI1dvgHdzAWDISO3sGRfT1iz25cl/WVe27bkGflchPCkwMkxP3WFjxI/ssOXdeqS1uwZ2nCGU/xeE2iMkL1QVhJ7qSm4NcJE7240MIvBA+1zOSDYvycvlYb6dWUye3YxLfGtppIM3MeqOYhJ5vyW6qdAAA=",
+                "aspectRatio": 0.5621805792163543,
+                "src": "/static/57816544ad1cadf6bbe3077067c59a86/97375/dashboard-mobile.webp",
+                "srcSet": "/static/57816544ad1cadf6bbe3077067c59a86/4f377/dashboard-mobile.webp 330w,\n/static/57816544ad1cadf6bbe3077067c59a86/55db5/dashboard-mobile.webp 660w,\n/static/57816544ad1cadf6bbe3077067c59a86/97375/dashboard-mobile.webp 720w",
+                "sizes": "(max-width: 720px) 100vw, 720px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "projects/20-10-2020-vote-app/img/vote-mobile.jpg",
+            "name": "vote-mobile",
+            "prettySize": "72.2 kB",
+            "publicURL": "/static/d50ebbe4de2f6d7151c1b82f0a312853/vote-mobile.jpg",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRiYBAABXRUJQVlA4IBoBAADQBgCdASoUACQAPsVQo0unpKMhsBqtUPAYiWIAeQBT/G9I4hkojofEacsgQLuytp5R64qy3Bft5Jja37hGPgAA/sj/6RukUOi0EAvUPKS1pWVacNN6YC1Bl0v9vsrqzcBoDw1R72HW5wGsIzAsd7AkXvV4rgNPlXvZMZDP5V722f2/i8VMKDTC+LyThEvkWtQYtrXWKHp/y3cn8tbBvS/1MBM6/jHYYcvMHAPRU8WJ3I8XJiYIOShM1oS1xKmP78Nj5BWxRUQft5D38lCZz1RWXMX/YYVBioac9I/kj7UsggssLZi+blZu/I3nckD5GRya2FaOylhcI5rmI5lY6y5lWquok/slsIxI5MrEL6EPHiP9h+b1B3MwAAA=",
+                "aspectRatio": 0.5621805792163543,
+                "src": "/static/d50ebbe4de2f6d7151c1b82f0a312853/f775e/vote-mobile.webp",
+                "srcSet": "/static/d50ebbe4de2f6d7151c1b82f0a312853/4f377/vote-mobile.webp 330w,\n/static/d50ebbe4de2f6d7151c1b82f0a312853/55db5/vote-mobile.webp 660w,\n/static/d50ebbe4de2f6d7151c1b82f0a312853/f775e/vote-mobile.webp 750w",
+                "sizes": "(max-width: 750px) 100vw, 750px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "posts/28-09-2020-review-perusahaan/img/Biznet1.PNG",
+            "name": "Biznet1",
+            "prettySize": "69.5 kB",
+            "publicURL": "/static/17c24974c3b0880115feec313e6b1e6f/Biznet1.PNG",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAABQAwCdASoUABYAPtFgqE+oJSOiKAgBABoJaWnOABtpPBN9gAD+8Tn/93V0yf+wXBkYvgRnRtRtgxZTJiLnGywWFxkKowAA",
+                "aspectRatio": 0.8991825613079019,
+                "src": "/static/17c24974c3b0880115feec313e6b1e6f/40d5e/Biznet1.webp",
+                "srcSet": "/static/17c24974c3b0880115feec313e6b1e6f/4f377/Biznet1.webp 330w,\n/static/17c24974c3b0880115feec313e6b1e6f/55db5/Biznet1.webp 660w,\n/static/17c24974c3b0880115feec313e6b1e6f/40d5e/Biznet1.webp 698w",
+                "sizes": "(max-width: 698px) 100vw, 698px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "posts/28-09-2020-review-perusahaan/img/Biznet2.PNG",
+            "name": "Biznet2",
+            "prettySize": "66.9 kB",
+            "publicURL": "/static/0a56b35d799aa9bbfde20fa4b0553387/Biznet2.PNG",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAABwAwCdASoUABUAPtFgqU+oJSOiKAgBABoJaWrDABuzObr4a8AA/vGCjjnFhtXziqoK++ucUXr0mnH5IBld3WbkraAAAAAA",
+                "aspectRatio": 0.9375,
+                "src": "/static/0a56b35d799aa9bbfde20fa4b0553387/1de67/Biznet2.webp",
+                "srcSet": "/static/0a56b35d799aa9bbfde20fa4b0553387/4f377/Biznet2.webp 330w,\n/static/0a56b35d799aa9bbfde20fa4b0553387/55db5/Biznet2.webp 660w,\n/static/0a56b35d799aa9bbfde20fa4b0553387/1de67/Biznet2.webp 697w",
+                "sizes": "(max-width: 697px) 100vw, 697px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "projects/20-10-2020-vote-app/img/vote-desktop.png",
+            "name": "vote-desktop",
+            "prettySize": "438 kB",
+            "publicURL": "/static/4268fd97468b3b909241128c645febe4/vote-desktop.png",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAABQBACdASoUABEAPtFco02oJSKiKA1RABoJYxFABEA3gH8AAPUFGpAktmKAAP7rxLLloR8LxJdx0pFT1wx+ZertXDWTNudPD+aUfBjx1iuNmXqlD/OegGmoryuLw6MGWg9NFvgVdj9yty4+/ucpSb/FdfgmujrrG73zJ/f3Cjt65o0hfP+lXV+gfD0uLh3c4RyFeRTRl6v5TUAt/1qZuhSQAAA=",
+                "aspectRatio": 1.2043795620437956,
+                "src": "/static/4268fd97468b3b909241128c645febe4/9279d/vote-desktop.webp",
+                "srcSet": "/static/4268fd97468b3b909241128c645febe4/4f377/vote-desktop.webp 330w,\n/static/4268fd97468b3b909241128c645febe4/55db5/vote-desktop.webp 660w,\n/static/4268fd97468b3b909241128c645febe4/9279d/vote-desktop.webp 1181w",
+                "sizes": "(max-width: 1181px) 100vw, 1181px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "projects/20-10-2020-vote-app/img/voting-mobile.png",
+            "name": "voting-mobile",
+            "prettySize": "532 kB",
+            "publicURL": "/static/64fce6fd9fe901c0770e421f4483eace/voting-mobile.png",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRvIAAABXRUJQVlA4IOYAAABwBQCdASoUACQAPr1MoUunJCOhtVv8AOAXiWUAgAAIjpSSUkWrO50n1HZK8kr7YtpO+ETQAP7XP/X91EIfs658Z0FFPgyw3ep2r1XPxJUBsqzPAid/zUGC/pBeQoX0LbAg1GezPykQp+nOWypBzpqfb4Zzx0xKV74ZEa43ZYo3FTgPn7Tcp/hp1ae+fwTNHq4fBPP2sfxBOBkc70me4Rq4bHcL+uHKFHu9We60fP5hlhOyKgxd/nl23PwOSOIf/cLvDYHM9AcJPt+VlmkJE1IhwUd4VE2y1TQ5Bcn02vn35l+5kQAAAA==",
+                "aspectRatio": 0.5621805792163543,
+                "src": "/static/64fce6fd9fe901c0770e421f4483eace/f775e/voting-mobile.webp",
+                "srcSet": "/static/64fce6fd9fe901c0770e421f4483eace/4f377/voting-mobile.webp 330w,\n/static/64fce6fd9fe901c0770e421f4483eace/55db5/voting-mobile.webp 660w,\n/static/64fce6fd9fe901c0770e421f4483eace/f775e/voting-mobile.webp 750w",
+                "sizes": "(max-width: 750px) 100vw, 750px"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "relativePath": "projects/20-10-2020-vote-app/img/mockup-header.jpg",
+            "name": "mockup-header",
+            "prettySize": "937 kB",
+            "publicURL": "/static/1c1d33b9914665b481fd3d7666ee6368/mockup-header.jpg",
+            "childImageSharp": {
+              "fluid": {
+                "base64": "data:image/webp;base64,UklGRqYAAABXRUJQVlA4IJoAAAAwBACdASoUAA8APtFUo0uoJKMhsAgBABoJYwDCn8ACNsuAbwKHSFrPnOAA/sj4T4k0sXzSJHjoFn4j9C5QyLSUvGScpkHYOLIvNN9VbKOzcY4SAYfe+cfGrrsN50WqTfBuxsTyN3X171HyzzlOMr0RRg9ODohsdfBhMbVRiwyvZgl63vqNko/+P/Y51ORCdvRSaXV7W6fxAAAA",
+                "aspectRatio": 1.3306451612903225,
+                "src": "/static/1c1d33b9914665b481fd3d7666ee6368/05362/mockup-header.webp",
+                "srcSet": "/static/1c1d33b9914665b481fd3d7666ee6368/4f377/mockup-header.webp 330w,\n/static/1c1d33b9914665b481fd3d7666ee6368/55db5/mockup-header.webp 660w,\n/static/1c1d33b9914665b481fd3d7666ee6368/05362/mockup-header.webp 1320w,\n/static/1c1d33b9914665b481fd3d7666ee6368/a8332/mockup-header.webp 1980w,\n/static/1c1d33b9914665b481fd3d7666ee6368/be320/mockup-header.webp 2048w",
+                "sizes": "(max-width: 1320px) 100vw, 1320px"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

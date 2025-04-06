@@ -10,5 +10,14 @@
   },
   "rules": {
     "@typescript-eslint/strict-boolean-expressions": 0
-  }
+  },
+  "overrides": [
+    {
+      "files": ["lint-staged.config.js"],
+      "rules": {
+        // Nonaktifkan semua rule atau rule tertentu
+        "@typescript-eslint/explicit-function-return-type": "off"
+      }
+    }
+  ]
 }

@@ -1,6 +1,24 @@
 /* eslint-disable eol-last */
 module.exports = {
-  '!(./lint-staged.config)*.{js,jsx,ts,tsx}': ['eslint --fix', 'eslint'],
+  // Trigger cleanup command kalau ada file tertentu diubah
+  '**/*': () => {
+    const { execSync } = require('child_process');
+
+    try {
+      execSync('rm -rf .cache dist package-lock.json yarn.lock');
+      console.log('🔥 Removed .cache, dist, package-lock.json, and yarn.lock');
+    } catch (err) {
+      console.error('Failed to remove folders/files:', err);
+    }
+
+    return [];
+  },
+  '**/*.{js,jsx,ts,tsx}': (files) => {
+  const filtered = files.filter(file => !file.includes('public/'));
+  console.log('✨ Files to lint:', filtered);
+  if (filtered.length === 0) return [];
+  return filtered.map(file => `eslint --fix "${file}"`);
+},
   '**/*.ts': 'tsc --noEmit --pretty',
   '*.json': ['prettier --write']
 }

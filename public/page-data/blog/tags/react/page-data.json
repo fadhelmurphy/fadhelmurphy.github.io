@@ -1,0 +1,40 @@
+{
+  "componentChunkName": "component---src-templates-tags-js",
+  "path": "/blog/tags/react/",
+  "result": {
+    "data": {
+      "allMarkdownRemark": {
+        "totalCount": 1,
+        "edges": [
+          {
+            "node": {
+              "excerpt": "",
+              "id": "f7b025be-2a33-5ba4-b0e3-021161ff444d",
+              "frontmatter": {
+                "title": "Vote app web-based",
+                "date": "20 October 2020",
+                "path": "/project/vote-app",
+                "tags": ["React", "Laravel"]
+              }
+            }
+          }
+        ]
+      }
+    },
+    "pageContext": {
+      "alltags": [
+        { "fieldValue": "Laravel" },
+        { "fieldValue": "Pengantar bisnis informatika" },
+        { "fieldValue": "React" },
+        { "fieldValue": "Tugas" }
+      ],
+      "tag": "React",
+      "limit": 3,
+      "skip": 0,
+      "currentPage": 1,
+      "tagPages": 2
+    }
+  },
+  "staticQueryHashes": ["3649515864", "63159454", "696936778"],
+  "slicesMap": {}
+}

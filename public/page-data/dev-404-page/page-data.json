@@ -1,0 +1,43 @@
+{
+  "componentChunkName": "component---cache-dev-404-page-js",
+  "path": "/dev-404-page/",
+  "result": {
+    "data": {
+      "allSiteFunction": { "nodes": [] },
+      "allSitePage": {
+        "nodes": [
+          { "path": "/blog/" },
+          { "path": "/blog?page=2/" },
+          { "path": "/blog/membuat-company-profile-yang-menarik/" },
+          { "path": "/blog/tugas-review-profil-perusahaan/" },
+          { "path": "/blog/tags/laravel/" },
+          { "path": "/blog/tags/laravel/2/" },
+          { "path": "/blog/tags/pengantar-bisnis-informatika/" },
+          { "path": "/blog/tags/pengantar-bisnis-informatika/2/" },
+          { "path": "/blog/tags/react/" },
+          { "path": "/blog/tags/react/2/" },
+          { "path": "/blog/tags/tugas/" },
+          { "path": "/blog/tags/tugas/2/" },
+          { "path": "/project/" },
+          { "path": "/project/vote-app/" },
+          { "path": "/project/tags/laravel/" },
+          { "path": "/project/tags/laravel/2/" },
+          { "path": "/project/tags/pengantar-bisnis-informatika/" },
+          { "path": "/project/tags/pengantar-bisnis-informatika/2/" },
+          { "path": "/project/tags/react/" },
+          { "path": "/project/tags/react/2/" },
+          { "path": "/project/tags/tugas/" },
+          { "path": "/project/tags/tugas/2/" },
+          { "path": "/search/" },
+          { "path": "/404/" },
+          { "path": "/404.html" },
+          { "path": "/about/" },
+          { "path": "/" }
+        ]
+      }
+    },
+    "pageContext": {}
+  },
+  "staticQueryHashes": ["3649515864", "63159454", "696936778"],
+  "slicesMap": {}
+}
