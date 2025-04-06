@@ -14,7 +14,7 @@ module.exports = {
     return [];
   },
   '**/*.{js,jsx,ts,tsx}': (files) => {
-  const filtered = files.filter(file => !file.includes('public/'));
+  const filtered = files.filter(file => !file.includes('public/') && !file.includes('src/env.d.ts'));
   console.log('✨ Files to lint:', filtered);
   if (filtered.length === 0) return [];
   return filtered.map(file => `eslint --fix "${file}"`);
