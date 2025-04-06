@@ -60,7 +60,7 @@ jobs:
 
       - name: Restore .env
         run: |
-          echo "${{ vars.ENV_FILE }}" > .env
+          printf "%s" "${{ vars.ENV_FILE }}" > .env
 
       - name: Installing my packages
         if: github.ref != 'refs/heads/astro-article'
