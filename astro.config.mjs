@@ -38,7 +38,7 @@ export default defineConfig({
   compressHTML: true,
   output: 'static',
   base: prefix,
-  site: "https://fadhelmurphy.github.io",
+  site: process.env.SITE_FOR_BUILD,
   // base prefix
   assetsPrefix: prefix // asset prefix
   // publicDir: prefix,
