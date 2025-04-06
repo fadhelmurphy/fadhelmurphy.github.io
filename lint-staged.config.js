@@ -5,8 +5,8 @@ module.exports = {
     const { execSync } = require('child_process');
 
     try {
-      execSync('rm -rf .cache dist package-lock.json yarn.lock');
-      console.log('🔥 Removed .cache, dist, package-lock.json, and yarn.lock');
+      execSync('rm -rf .cache dist');
+      console.log('🔥 Removed .cache and dist');
     } catch (err) {
       console.error('Failed to remove folders/files:', err);
     }

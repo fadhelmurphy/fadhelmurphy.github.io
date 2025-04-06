@@ -6,7 +6,9 @@ import { prefix } from './consts/config'
 import remarkToc from 'remark-toc'
 import rehypeMinifyHtml from 'rehype-preset-minify'
 import sitemap from '@astrojs/sitemap';
+import 'dotenv/config';
 
+console.log('[DEBUG] site:', process.env.PUBLIC_ROOT_DOMAIN);
 // https://astro.build/config
 export default defineConfig({
   markdown: {
@@ -36,7 +38,7 @@ export default defineConfig({
   compressHTML: true,
   output: 'static',
   base: prefix,
-  site: import.meta.env.PUBLIC_ROOT_DOMAIN,
+  site: process.env.SITE_FOR_BUILD,
   // base prefix
   assetsPrefix: prefix // asset prefix
   // publicDir: prefix,
