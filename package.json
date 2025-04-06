@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "rm -rf ./dist && cp .env.local .env && astro dev",
     "start": "astro dev",
-    "build": "rm -rf ./dist && astro build",
+    "build": "rm -rf ./dist && astro build --remote",
     "preview": "astro preview",
     "lint:css": "stylelint ./src/**/*.{css,scss,sass} --fix --cache --cache-location",
     "prettier": "prettier --write .",
