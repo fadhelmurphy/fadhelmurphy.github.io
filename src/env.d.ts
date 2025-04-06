@@ -1,3 +1,4 @@
+
 export {};
 
 declare global {
@@ -14,3 +15,6 @@ declare global {
     readonly env: ImportMetaEnv;
   }
 }
+
+
+/// <reference path="../.astro/types.d.ts" />
