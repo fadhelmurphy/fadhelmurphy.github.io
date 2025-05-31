@@ -5,11 +5,21 @@ export const timelineData: TimelineDataType[] = [
     company: 'SG-EDTS.',
     data: [
       {
-        jobtitle: 'Data Engineer Associate - Full-time',
-        time: 'Aug 2024 - present',
+        jobtitle: 'Data Engineer Associate - Contract',
+        time: 'Aug 2024 - Aug 2025',
         description: `
-        In the midst of disruption across industries from the digital natives, EDTS was born with a mission to democratize digital technology.
-        Since 2019, EDTS has become the Digital Center of Excellence of Salim Group. Equipped with digital and technology experts from various industries.
+        Digital Center of Excellence of Salim Group Company.
+        <br/>- Developed & scheduled automated ETL workflows using Airflow, improving data pipeline efficiency.
+        <br/>- Designed fault-tolerant data pipelines, enabling real-time data ingestion of 500K+ records using Google Pub/Sub & Compute Engine.
+        <br/>- Led debugging & performance tuning efforts, improving pipeline and minimizing failure rates.
+        <br/>- Developed scraper engine, processing 3 billion CSV records with Flask, Cloud Run, and Pub/Sub, ensuring seamless data integration.
+        <br/>- Implemented CI/CD automation using Docker and Cloud Build.
+        <br/>- Built monitoring dashboards with Looker Studio & LookML, enabling proactive issue detection and business insights.
+        <br/>- Collaborated with data analysts & engineers, ensuring data integrity, compliance, and best practices in data architecture.
+        <br/>- I have implemented Google Batch with Compute Engine to process some data
+        <br/>- I did distributed processing across multiple VMs and parallel processes with Google Batch, Compute Engine, and Python.
+        <br/>- I perform data quality checks and ensure the data is usable in the Looker Studio dashboard.
+        <br/>- I created reusable custom macro in Airflow to generate job id and determine pipeline in School project
         `
       }
     ],
@@ -22,8 +32,47 @@ export const timelineData: TimelineDataType[] = [
         jobtitle: 'Data Engineer - Internship',
         time: 'Apr 2024 - Jul 2024',
         description: `
-        The Largest Integrated Fisheries Commerce in Indonesia. Making The Sea a Better Livelihood For All.
+        The Largest Integrated Fisheries Commerce in Indonesia.
+        <br/>- Developed & scheduled automated ETL workflows using Airflow, improving data pipeline
+efficiency.
+        <br/>- Extracted & integrated multi-source data from Google Sheets (GDrive) and PostgreSQL
+        (Odoo), ensuring seamless data ingestion.
+        <br/>- Transformed large-scale datasets with Pandas & NumPy, enhancing data quality & usability.
+        <br/>- Designed & optimized staging layer for ETL pipelines, ensuring efficient data processing
+        before warehouse ingestion.
+        <br/>- Managed & loaded high-volume data into Google BigQuery (OLAP Warehouse) for analytical
+        use.
+        <br/>- Diagnosed & resolved pipeline failures and accurate data representation in Looker Studio
+        dashboards.
         `
+      }
+    ],
+    isLatest: false
+  },
+  {
+    company: 'Teleskop.id',
+    data: [
+      {
+        jobtitle: 'Software Engineer - Freelance',
+        time: 'Mar 2024 - Jul 2024',
+        description: `
+        I was involved in a data analytics and monitoring project, collaborating closely with the Data Team.
+        <br/>
+        Backend:
+        <br/>- Developed RESTful APIs using FastAPI to serve data from a PostgreSQL data warehouse.
+        <br/>- Implemented authentication middleware integrating Auth0 for secure access.
+        <br/>- Applied basic design patterns including Controller, Service, Repository, and Model to maintain clean and modular code.
+        <br/>- Integrated Redis for caching database queries to improve performance.
+        <br/>
+        Frontend:
+        <br/>- Built interactive dashboards using Next.js, Mantine UI, React Query, Zustand, and Auth0.
+        <br/>- Visualized data using Chart.js components such as scatter plots, bar charts, line charts, and progress indicators.
+        <br/>
+        Deployment:
+        <br/>- Created Docker images and managed multi-container services using Docker Compose on a VPS.
+        <br/>- Set up reverse proxy routing using Caddy to expose services under specific URL paths.
+        <br/>- Implemented additional proxy and security layers using Cloudflare.
+          `
       }
     ],
     isLatest: false
@@ -35,9 +84,16 @@ export const timelineData: TimelineDataType[] = [
         jobtitle: 'Frontend Developer - Freelance',
         time: 'Aug 2023 - Dec 2023',
         description: `
-        A company that is riding the coattails of this rise is Good Doctor Technology, <br />
-        a joint venture health-tech company between Ping An Healthcare and Technology, <br />
-        Grab and ソフトバンク（SoftBank)
+        - I have sucessfully develop Payment & Insurance features on webview and internal dashboard website. 
+        <br/>- This payment feature allow users to make a transaction on Grab Mobile App (Grab Health) through webview technology.
+        <br/>- I integrated sentry to all website projects to detect unhandled error on client-side. this task make developers easier to trace error and bug-fixing.
+        <br/>
+        <br/>Tech Stack:
+        <br/>Nextjs, RTK, Redux, Tailwind, TypeScript, Github Actions, Sentry, and Storybook
+        <br/>
+        <br/>Tribe:
+        <br/>- Commerce
+        <br/>- Payment
         `
       }
     ],
@@ -50,30 +106,37 @@ export const timelineData: TimelineDataType[] = [
         jobtitle: 'Frontend Developer - Full-time',
         time: 'Oct 2022 - Sep 2023',
         description: `
-          Create Package/UI Library Component with Lerna, Rollup, React.js (Monorepo) <br />
-          Setup deployment for Storybook using GitLab-CI & PM2 to EC2 AWS Server <br />
-          Setup deployment with pm2, nginx, and aws <br />
-          Develop Payment for cross-platform (iOS and Android) with Micro-frontend method (Webpack 5) <br />
-          Research latest tech-stack <br />
-          Deployment with Pm2 + AWS Server and Docker + Kubernetes <br />
-          Develop and Maintain web application <br />
-          Trace error with Sentry and New Relic <br />
-          Create guidelines for other frontend engineers <br />
+        I have handled the monitoring and bug-fixing efforts for the e-commerce website and payment
+        system, and seamless transactions.
+        <br/>- Mentored & onboarded 2+ junior frontend developers, improving team productivity and code
+        quality.
+        <br/>- Developed an NPX tool to automate FD Website Boilerplate generation, reducing project
+        setup time by 50%.
+        <br/>- Architected a cross-platform payment library (iOS, Android, Web) using Webpack 5 & React.js
+        (Microfrontend), ensuring smooth integration across all platforms.
+        <br/>- Optimized CI/CD pipelines with GitLab-CI, Nginx, PM2, and AWS EC2.
+        <br/>- Built a scalable boilerplate for Female Daily Website using React-Query, Zustand, Next.js,
+        Next-Auth, and Styled-jsx, enabling faster feature development.
+        <br/>- Containerized the Female Daily Studio website using Docker, improving deployment
+        consistency and reducing server issues.
           `
       },
       {
         jobtitle: 'Jr. Frontend Developer - Full-time',
         time: 'Feb 2022 - Oct 2022',
         description: `
-          Improve SEO & Accessibility score from 70 to 100 in Lighthouse <br />
-          Implement Incremental Static Regeneration (ISR) on Homepage and
-          Product detail page <br />
-          Implement Server Side Rendering (SSR) and Client Side Rendering (CSR)
-          on several pages <br />
-          Create RSS Feed for data analytics in Next.js <br />
-          Create reusable components with Monorepo using Lerna <br />
-          Integrate API and Create API Proxy using Fetch API, API routes
-          Next.js, and Redux-saga <br />
+        - Developed a UI Component Library using Lerna, Rollup, and React.js (Monorepo), reducing
+        development redundancy.
+        <br/>- Created detailed documentation for the component library using DocZ, improving developer
+        onboarding efficiency.
+        <br/>- Implemented SSR, CSR, and ISR on the Female Daily Studio website, improving SEO and
+        initial page load speed.
+        <br/>- Integrated API with Redux-Saga and built an API proxy in Next.js, reducing external API
+        calls latency.
+        <br/>- Improved website SEO & Accessibility score from 70 to 100 (Google Lighthouse), increasing
+        organic traffic by 20%.
+        <br/>- Collaborated with the Commerce Tribe, optimizing frontend performance and user
+        experience for high-traffic e-commerce features.
           `
       }
     ],
