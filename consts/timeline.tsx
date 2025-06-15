@@ -60,7 +60,7 @@ export const timelineData: TimelineDataType[] = [
         jobtitle: 'Frontend Developer - Full-time',
         time: 'Oct 2022 - Sep 2023',
         description: `
-        I handled monitoring, bug-fixing, and ensured seamless transactions for e-commerce and payment systems, while mentoring junior developers and boosting team productivity. I built tools and libraries—including an NPX boilerplate generator, cross-platform payment library, and scalable web boilerplates and optimized CI/CD pipelines with GitLab-CI, Nginx, PM2, AWS EC2, and Docker.
+        I handled monitoring, bug-fixing, and ensured seamless transactions for e-commerce and payment systems, while mentoring junior developers and boosting team productivity. I built tools and libraries including an NPX boilerplate generator, cross-platform payment library, and scalable web boilerplates and optimized CI/CD pipelines with GitLab-CI, Nginx, PM2, AWS EC2, and Docker.
           `
       },
       {
