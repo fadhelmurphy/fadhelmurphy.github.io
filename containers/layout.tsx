@@ -20,7 +20,7 @@ const Layout = ({
       <head>
         <meta name="viewport" content="width=device-width" />
         <link rel="icon" type="image/svg+xml" href={`${prefix}favicon.png`} />
-        <title>{`${titlePage} | Fadhel Web`}</title>
+        <title>{`${titlePage} | Fadhel Ijlal Falah`}</title>
         <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" as="style" />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.min.css" />

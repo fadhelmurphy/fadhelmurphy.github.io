@@ -12,26 +12,13 @@ const DefaultTimeline = ({
   data: TimelineDataType[]
 }): JSX.Element => {
   return (
-    <ol className="relative my-12 mx-10 md:mx-12 text-ellipsis md:!mx-5 md:border-l md:border-blue-400">
+    <ol className="relative my-12 mx-10 text-ellipsis md:mx-0">
       {data.map((item: TimelineDataType) => {
         return (
-          <li className="mb-10 ml-0 md:ml-10 border-b border-blue-100 md:border-0">
-            <span className="hidden md:flex absolute -left-4 mt-3 flex h-8 w-8 items-center justify-center rounded-full bg-blue-400 ring-8 ring-white ring-blue-100">
-              <svg
-                aria-hidden="true"
-                className="h-5 w-5 text-white"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                  clip-rule="evenodd"
-                ></path>
-              </svg>
-            </span>
-            <h3 data-aos="animation-scale-y" data-aos-duration="400" className="mb-1 mb-6 flex items-center text-2xl md:text-4xl 2xl:text-6xl font-semibold">
+          <>
+          <div className="mb-10 grid grid-cols-1 md:grid-cols-2" key={item.company}>
+
+            <h3 data-aos="animation-scale-y" data-aos-duration="400" className="flex items-center pr-0 md:pr-8 text-2xl md:text-4xl 2xl:text-6xl font-semibold">
               {item.company}
               {item.isLatest
                 ? (
@@ -41,10 +28,13 @@ const DefaultTimeline = ({
                   )
                 : null}
             </h3>
+            </div>
+          <div className="mb-10 grid grid-cols-1 md:grid-cols-2" key={item.company}>
 
             {item.data.map((job: TimelineDataArrayType) => {
               return (
                 <>
+            <div className='job-desc-1 py-5'>
                   {job.jobtitle && (
                     <time data-aos="fade-up" data-aos-duration="200" className="mb-2 block font-normal leading-6">
                       {job.jobtitle}
@@ -55,17 +45,23 @@ const DefaultTimeline = ({
                       {job.time}
                     </time>
                   )}
+            </div>
+
+            <div className='job-desc-2'>
+
                   {job.description && (
                     <p data-aos="fade-up" data-aos-duration="200"
                       className="font-normal text-base-2 py-5"
                       dangerouslySetInnerHTML={{ __html: job.description }}
                     />
                   )}
-                  <br />
+              </div>
+
                 </>
               )
             })}
-          </li>
+          </div>
+          </>
         )
       })}
     </ol>
