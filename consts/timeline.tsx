@@ -6,7 +6,7 @@ export const timelineData: TimelineDataType[] = [
     data: [
       {
         jobtitle: 'Data Engineer Associate II - Full-time',
-        time: 'July 2025 - Present',
+        time: 'Aug 2025 - Present',
         description: `
         At Digital Center of Excellence of Salim Group Company, I built automated, fault-tolerant data pipelines using Airflow, Pub/Sub, Compute Engine, and Google Batch, handling real-time ingestion, distributed processing, and large-scale scraping. I also implemented CI/CD with Docker, built monitoring dashboards in Looker Studio, and ensured data quality for reliable business insights.
         `
@@ -14,9 +14,7 @@ export const timelineData: TimelineDataType[] = [
       {
         jobtitle: 'Data Engineer Associate - Contract',
         time: 'Aug 2024 - Aug 2025',
-        description: `
-        At Digital Center of Excellence of Salim Group Company, I built automated, fault-tolerant data pipelines using Airflow, Pub/Sub, Compute Engine, and Google Batch, handling real-time ingestion, distributed processing, and large-scale scraping. I also implemented CI/CD with Docker, built monitoring dashboards in Looker Studio, and ensured data quality for reliable business insights.
-        `
+        description: null
       }
     ],
     isLatest: true

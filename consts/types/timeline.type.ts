@@ -1,6 +1,6 @@
 export interface TimelineDataArrayType {
   [key: string]: string | boolean
-  description?: string
+  description?: string | null
 }
 
 export interface TimelineDataType {
