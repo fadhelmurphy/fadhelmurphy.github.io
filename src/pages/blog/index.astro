@@ -1,0 +1,17 @@
+---
+import { getCollection } from 'astro:content'
+import Base from '../../layouts/Base.astro'
+import PostList from '../../components/PostList.astro'
+const posts = (await getCollection('blog')).sort((a, b) => +b.data.date - +a.data.date)
+const tags = [...new Set(posts.flatMap(p => p.data.label))]
+---
+<Base title="Blog | Fadhel Ijlal Falah" description="Software engineer berkaos band.">
+  <section class="mx-auto max-w-[1440px] px-6 pt-40 pb-28 md:px-12">
+    <h1 class="text-[clamp(3.5rem,11vw,10rem)] leading-[0.9] font-semibold tracking-[-0.045em]"><span class="grad-navy">The blog</span></h1>
+    <div class="mt-8 grid gap-4 md:grid-cols-12">
+      <p class="text-lg text-base-2 md:col-span-6">Software engineer berkaos band. Notes in Bahasa Indonesia.</p>
+      <p class="flex flex-wrap gap-4 text-sm md:col-span-6 md:justify-end">{tags.map(t => <a href={`/blog/tags/${t}/`} class="text-base-2 underline hover:text-navy">#{t}</a>)}</p>
+    </div>
+    <div class="mt-16"><PostList posts={posts} /></div>
+  </section>
+</Base>

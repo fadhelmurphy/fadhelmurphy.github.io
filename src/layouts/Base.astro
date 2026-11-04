@@ -1,0 +1,46 @@
+---
+import '../styles/global.css'
+import Nav from '../components/Nav.astro'
+import Footer from '../components/Footer.astro'
+import Boot from '../components/Boot.astro'
+import { site } from '../data/site'
+// above-the-fold Poppins weights, preloaded so text never swaps (no layout shift)
+import f500 from '@fontsource/poppins/files/poppins-latin-500-normal.woff2?url'
+import f600 from '@fontsource/poppins/files/poppins-latin-600-normal.woff2?url'
+import f700 from '@fontsource/poppins/files/poppins-latin-700-normal.woff2?url'
+
+interface Props { title?: string; description?: string }
+const { title = `${site.name} | Data & Software Engineer`, description = site.tagline } = Astro.props
+const canonical = new URL(Astro.url.pathname, Astro.site)
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fbfcff" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.png" />
+    {[f500, f600, f700].map((f) => <link rel="preload" href={f} as="font" type="font/woff2" crossorigin />)}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script is:inline>try{sessionStorage.getItem('booted')&&document.documentElement.classList.add('booted')}catch(e){}</script>
+    <noscript><style>#boot{display:none}[data-reveal]{opacity:1!important;transform:none!important}</style></noscript>
+  </head>
+  <body>
+    <Boot />
+    <Nav />
+    <main><slot /></main>
+    <Footer />
+    <script>
+      // reveal once on scroll
+      const io = new IntersectionObserver((entries) => entries.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target) }
+      }), { rootMargin: '0px 0px -8% 0px' })
+      document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el))
+    </script>
+  </body>
+</html>

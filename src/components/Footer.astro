@@ -1,0 +1,12 @@
+---
+import { site } from '../data/site'
+const links: [string, string][] = [['Work', '/#work'], ['Open source', '/#oss'], ['Projects', '/#projects'], ...site.socials.map((s) => [s.label, s.href] as [string, string])]
+---
+<footer class="border-t border-edge bg-white px-6 py-8 text-sm md:px-12">
+  <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 md:flex-row">
+    <p class="text-slate"><span class="font-semibold text-navy">fadhel<span class="text-blue">.</span></span> · © {new Date().getFullYear()} {site.name} · Tangerang, Indonesia</p>
+    <ul class="flex flex-wrap justify-center gap-x-5 gap-y-2">
+      {links.map(([t, h]) => <li><a href={h} target={h.startsWith('http') ? '_blank' : undefined} rel="noopener" class="text-slate hover:text-navy">{t}</a></li>)}
+    </ul>
+  </div>
+</footer>

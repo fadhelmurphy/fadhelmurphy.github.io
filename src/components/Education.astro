@@ -1,0 +1,22 @@
+---
+import edu from '../data/education.json'
+---
+<section class="bg-mist px-6 py-24 md:px-12 md:py-28">
+  <div class="mx-auto max-w-6xl">
+    <h2 data-reveal class="s-head"><b>Education and certification.</b> Informatics engineering, a data science bootcamp and Google Cloud's data engineer exam.</h2>
+    <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      {edu.map((e, i) => (
+        <article data-reveal style={`transition-delay:${i * 80}ms`} class="s-card p-6">
+          <p class="text-xs text-slate tabular-nums">{e.start} – {e.end ?? 'Present'}</p>
+          <h3 class="mt-3 font-semibold text-navy">{e.school}</h3>
+          <p class="mt-1 text-sm text-slate">{e.degree}</p>
+          {e.notes && <p class="mt-4 text-xs font-medium text-teal">{e.notes}</p>}
+        </article>
+      ))}
+      <article data-reveal class="relative overflow-hidden rounded-[14px] bg-[linear-gradient(135deg,#22d3ee,#3b82f6_60%,#6366f1)] p-6 text-white shadow-[0_18px_36px_-20px_rgb(59_130_246_/_0.8)]">
+        <p class="text-xs text-white/80">Certification · 2025 – 2027</p>
+        <h3 class="mt-3 font-semibold">Google Cloud Professional Data Engineer</h3>
+      </article>
+    </div>
+  </div>
+</section>

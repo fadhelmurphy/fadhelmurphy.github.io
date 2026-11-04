@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content'
+const posts = (await getCollection('blog')).sort((a, b) => +b.data.date - +a.data.date).slice(0, 3)
+const fmt = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
+const tints = ['from-cyan to-blue', 'from-blue to-indigo-400', 'from-teal to-cyan']
+---
+<section id="writing" class="bg-white px-6 py-24 md:px-12 md:py-32">
+  <div class="mx-auto max-w-6xl">
+    <div class="flex flex-wrap items-end justify-between gap-6">
+      <p data-reveal class="s-head"><b>What I'm writing.</b> Notes in Bahasa Indonesia from a software engineer berkaos band.</p>
+      <a data-reveal href="/blog/" class="s-btn text-blue-600 hover:bg-mist">All posts <span class="chev">›</span></a>
+    </div>
+    <div class="mt-12 grid gap-5 md:grid-cols-3">
+      {posts.map((p, i) => (
+        <a data-reveal href={`/blog/${p.id}/`} style={`transition-delay:${i * 80}ms`} class="s-card group flex flex-col overflow-hidden">
+          <div class={`h-28 bg-gradient-to-br ${tints[i % 3]} opacity-80 transition-opacity group-hover:opacity-100`}></div>
+          <div class="flex flex-1 flex-col p-6">
+            <p class="text-xs text-slate">{fmt.format(p.data.date)} · {p.data.label.join(', ')}</p>
+            <h3 class="mt-2 leading-snug font-semibold text-navy">{p.data.title}</h3>
+            <p class="mt-auto pt-5 text-sm font-semibold text-blue-600">Read post <span class="inline-block transition-transform group-hover:translate-x-1">›</span></p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

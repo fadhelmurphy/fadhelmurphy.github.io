@@ -1,0 +1,87 @@
+---
+import { site } from '../data/site'
+// Same text + layout as the live hero; words carry data-swap="<dark gradient>" and are painted on the canvas,
+// turning white wherever the animated ribbon passes behind them.
+const navy = '#2e3e6a,#60a5fa'
+const lines = [
+  [{ w: 'Data', c: '#2563eb,#14b8a6', d: 170 }, { w: '&', c: '#2e3e6a,#2e3e6a', d: 170 }],
+  [{ w: 'Software', c: '#0284c7,#10b981', d: 290 }],
+  [{ w: 'Engineer', c: navy, d: 410 }]
+]
+---
+<section id="hero" class="live-hero relative isolate w-full overflow-hidden bg-white">
+    <canvas id="ribbon" class="pointer-events-none absolute inset-0 z-0" aria-hidden="true"></canvas>
+    <!-- white blur fade so the ribbon melts into the next section -->
+    <div class="hero-fade pointer-events-none absolute inset-x-0 bottom-0 z-[1]" aria-hidden="true"></div>
+
+  <div class="relative z-10 flex min-h-[100svh] w-full flex-col items-start justify-center pt-[24vh] text-left md:min-h-[110vh] md:items-center md:pt-0 md:text-center">
+    <p class="ml-5 text-2xl font-medium md:ml-0 md:text-4xl"><span class="swap grad-hi" data-swap="#2e3e6a,#60a5fa" data-delay="50">Hi, I'm Fadhel a</span></p>
+    <h1 class="ml-5 text-6xl leading-[3.8rem] font-bold md:ml-0 md:text-9xl md:leading-[8.6rem]" aria-label="Data & Software Engineer">
+      {lines.map((line) => (
+        <span class="flex gap-5 md:justify-center" aria-hidden="true">
+          {line.map(({ w, c, d }) => (
+            <span class="swap" data-swap={c} data-delay={d} style={`background:linear-gradient(113deg,${c.split(',')[0]} 30%,${c.split(',')[1]} 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent`}>{w}</span>
+          ))}
+        </span>
+      ))}
+    </h1>
+    <div class="mt-6 ml-5 flex gap-4 md:mt-12 md:ml-0">
+      <span class="chip-full" data-badge="rgba(167,243,208,0.45)|#10b981|#047857" data-delay="580">Fulltime</span>
+      <span class="chip-free" data-badge="rgba(191,219,254,0.55)|#3b82f6|#1d4ed8" data-delay="580">Freelance</span>
+    </div>
+
+    <div class="marquee hero-in mt-auto w-full pt-16 pb-10 md:mt-12 md:pt-8 md:pb-20" style="--d:720ms" aria-label="Tech stack">
+      <div class="marquee-track">
+        {[...site.stack, ...site.stack].map((t, i) => {
+          // adaptive size: longer labels shrink to fit the card, wrapping to at most 2 lines
+          const words = t.split(' ')
+          const lineLen = words.length > 1 && t.length > 10
+            ? Math.max(...words.map((w) => w.length), Math.ceil(t.length / 2))
+            : t.length
+          return (
+            <div aria-hidden={i >= site.stack.length ? 'true' : undefined}
+                 class="stack-card grid h-20 w-44 shrink-0 place-items-center rounded-lg border border-slate-200/70 bg-white/60 px-3 font-bold text-gray-500 backdrop-blur-md md:h-28 md:w-64"
+                 style={`--ll:${lineLen}`}><span>{t}</span></div>
+          )
+        })}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* chips need a solid tint on the light background */
+  .hero-bg { background: radial-gradient(100% 152.9% at 0% 0%, rgb(165 243 252 / .9) 0%, rgb(96 165 250 / .8) 62.06%, rgb(96 165 250 / .6) 100%); }
+  @media (min-width: 768px) { .hero-bg { background: radial-gradient(100% 152.9% at 0% 0%, rgb(165 243 252 / .9) 0%, rgb(96 165 250 / .8) 62.06%, rgb(96 165 250 / .2) 100%); } }
+  /* light glass badges */
+  .live-hero :global(.chip-full), .live-hero :global(.chip-free) {
+    color: #2e3e6a; border: 1px solid rgb(255 255 255 / .75);
+    backdrop-filter: blur(14px) saturate(160%); -webkit-backdrop-filter: blur(14px) saturate(160%);
+    box-shadow: none !important;
+  }
+  .live-hero :global(.chip-full) { background: linear-gradient(135deg, rgb(110 231 183 / .35), rgb(255 255 255 / .35)); }
+  .live-hero :global(.chip-free) { background: linear-gradient(135deg, rgb(147 197 253 / .4), rgb(255 255 255 / .35)); }
+  .live-hero :global(.chip-full) { color: #047857; }
+  .live-hero :global(.chip-free) { color: #1d4ed8; }
+  .live-hero :global(.chip-full)::before { background: #10b981; }
+  .live-hero :global(.chip-free)::before { background: #3b82f6; }
+  .hero-fade { height: 16%; background: linear-gradient(to bottom, rgb(255 255 255 / 0), rgb(255 255 255 / .5) 55%, #fff);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 60%); mask-image: linear-gradient(to bottom, transparent, #000 60%); }
+  @media (min-width: 768px) { .hero-fade { height: 14%; } }
+  .stack-card { container-type: inline-size; }
+  .stack-card span { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-align: center; line-height: 1.15;
+    font-size: clamp(.8rem, calc(100cqi * 1.45 / var(--ll)), 1.5rem); }
+  .live-hero.swap-ready [data-badge] { visibility: hidden; }
+  .live-hero.swap-ready .swap { -webkit-text-fill-color: transparent !important; background: none !important; color: transparent !important; }
+</style>
+
+<script>
+  import { mountRibbon } from '../scripts/hero-ribbon'
+  const go = () => document.body.classList.add('go')
+  ;(window as any).__booted ? go() : document.addEventListener('boot:done', go, { once: true })
+  setTimeout(go, 4000)
+  const c = document.getElementById('ribbon') as HTMLCanvasElement | null
+  const root = document.getElementById('hero')
+  if (c && root) document.fonts.ready.then(() => mountRibbon(c, root)).catch(() => {})
+</script>

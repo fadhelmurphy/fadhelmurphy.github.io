@@ -1,0 +1,50 @@
+---
+import SilkDivider from './SilkDivider.astro'
+const repos = [
+  { name: 'dagsflow', desc: 'An Airflow-like orchestrator in Go. DAGs, scheduling and a web UI in one binary.', href: 'https://github.com/fadhelmurphy/dagsflow-v2', tag: 'Go' },
+  { name: 'xp', desc: 'Write React/JSX once, render on the web with SSR and natively on iOS and Android.', href: 'https://github.com/fadhelmurphy/xp', tag: 'TypeScript' },
+  { name: 'next-devtools', desc: 'A Nuxt DevTools-style inspector for Next.js, App Router and Pages Router.', href: 'https://github.com/fadhelmurphy/next-devtools', tag: 'Next.js' }
+]
+---
+<section id="oss" class="relative s-dark px-6 pt-[calc(8rem+150px)] pb-[calc(6rem+150px)] text-white md:px-12 md:pt-[calc(9rem+260px)] md:pb-[calc(7rem+260px)]" style="background: radial-gradient(60% 80% at 85% 10%, rgb(34 211 238 / .22), transparent 60%), radial-gradient(50% 70% at 10% 90%, rgb(96 165 250 / .25), transparent 60%), #0a2540">
+  <SilkDivider above="#f6f9fc" />
+  <SilkDivider above="#ffffff" flip />
+  <div class="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
+    <div>
+      <p data-reveal class="text-sm font-semibold text-cyan">Open source</p>
+      <h2 data-reveal class="s-head mt-4"><b>Tools I build in the open.</b> Orchestration, cross-platform UI and developer tooling, used in my own work first.</h2>
+      <div data-reveal class="mt-8 flex flex-wrap gap-3">
+        <a href="https://github.com/fadhelmurphy" target="_blank" rel="noopener" class="s-btn bg-cyan text-ink hover:bg-white">View GitHub <span class="chev">›</span></a>
+      </div>
+    </div>
+
+    <!-- code window, Stripe-developer-section style -->
+    <div data-reveal class="overflow-hidden rounded-xl border border-white/10 bg-[#0d1b33] shadow-[0_40px_80px_-30px_rgb(0_0_0_/_0.6)]">
+      <div class="flex items-center gap-2 border-b border-white/10 px-4 py-3">
+        <span class="size-3 rounded-full bg-[#ff5f57]"></span><span class="size-3 rounded-full bg-[#febc2e]"></span><span class="size-3 rounded-full bg-[#28c840]"></span>
+        <span class="ml-3 text-xs text-[#adbdcc]">example.go, illustrative</span>
+      </div>
+<pre class="overflow-x-auto p-5 text-[13px] leading-6"><code><span class="text-[#c792ea]">package</span> <span class="text-white">dags</span>
+
+<span class="text-[#c792ea]">import</span> <span class="text-[#c3e88d]">"github.com/fadhelmurphy/dagsflow"</span>
+
+<span class="text-[#c792ea]">var</span> <span class="text-white">DailySales</span> = dagsflow.<span class="text-[#82aaff]">NewDAG</span>(<span class="text-[#c3e88d]">"daily_sales"</span>).
+  <span class="text-[#82aaff]">Schedule</span>(<span class="text-[#c3e88d]">"0 1 * * *"</span>).
+  <span class="text-[#82aaff]">Task</span>(<span class="text-[#c3e88d]">"extract"</span>, extractFromPostgres).
+  <span class="text-[#82aaff]">Task</span>(<span class="text-[#c3e88d]">"load"</span>, loadToBigQuery).
+  <span class="text-[#82aaff]">Task</span>(<span class="text-[#c3e88d]">"transform"</span>, runDataform).
+  <span class="text-[#82aaff]">Chain</span>(<span class="text-[#c3e88d]">"extract"</span>, <span class="text-[#c3e88d]">"load"</span>, <span class="text-[#c3e88d]">"transform"</span>)
+
+<span class="text-[#546e7a]">// $ dagsflow serve  →  web UI on :8080</span></code></pre>
+    </div>
+  </div>
+      <div class="mx-auto mt-14 grid max-w-6xl gap-4 md:grid-cols-3">
+    {repos.map((r, i) => (
+      <a data-reveal href={r.href} target="_blank" rel="noopener" style={`transition-delay:${i * 80}ms`} class="group rounded-xl border border-white/10 bg-white/5 p-5 transition hover:border-cyan/50 hover:bg-white/10">
+        <p class="text-xs text-cyan/80">{r.tag}</p>
+        <p class="mt-1 font-semibold">{r.name} <span class="inline-block transition-transform group-hover:translate-x-1">›</span></p>
+        <p class="mt-2 text-sm leading-relaxed text-[#adbdcc]">{r.desc}</p>
+      </a>
+    ))}
+  </div>
+</section>

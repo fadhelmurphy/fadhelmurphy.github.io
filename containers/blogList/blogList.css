@@ -1,9 +1,0 @@
-.custom-border-bottom:after {
-    @apply bg-cyan-500;
-    content: "";
-    display: block;
-    height: 4px;
-    margin: 15px 0 0;
-    width: 40px;
-}
-

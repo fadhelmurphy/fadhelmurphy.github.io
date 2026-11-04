@@ -1,0 +1,8 @@
+---
+interface Props { label: string; title: string; light?: boolean }
+const { label, title, light = false } = Astro.props
+---
+<div class="grid gap-6 md:grid-cols-12">
+  <p data-reveal class:list={["text-sm md:col-span-3", light ? "sh-label text-white/90" : "text-base-2"]}>{label}</p>
+  <h2 data-reveal class="text-4xl leading-[1.05] font-semibold tracking-[-0.03em] md:col-span-9 md:text-6xl"><Fragment set:html={title} /></h2>
+</div>

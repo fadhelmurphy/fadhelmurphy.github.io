@@ -1,0 +1,32 @@
+---
+// A silk ribbon (thin blue→green threads, like the hero wave) used as a section divider.
+// `above` = colour of the section above: the area over the ribbon's centre line is painted with it,
+// giving the section a wavy edge with the ribbon running along it.
+// `bg` = decorative band behind content, gently animated (one ribbon slowly swaying).
+import { VW, VH, edgePath } from '../lib/silk-svg'
+interface Props { above?: string; flip?: boolean; bg?: boolean }
+const { above, flip = false, bg = false } = Astro.props
+const size = bg ? 'h-[300px] md:h-[440px]' : 'h-[150px] md:h-[260px]'
+---
+<div class:list={['silk-divider pointer-events-none absolute inset-x-0', bg ? 'top-1/2 z-0 -translate-y-1/2' : 'z-10', !bg && (flip ? 'bottom-0 -scale-y-100' : 'top-0')]} aria-hidden="true">
+  {bg ? (
+    <div class:list={['relative -mx-[8%] w-[116%]', size]}>
+      <img src="/silk.svg" alt="" width={VW} height={VH} loading="lazy" decoding="async" class="silk-a absolute inset-0 block h-full w-full" />
+    </div>
+  ) : (
+    <div class:list={['relative w-full', size]}>
+      {above && <svg viewBox={`0 0 ${VW} ${VH}`} preserveAspectRatio="none" class="absolute inset-0 block h-full w-full"><path d={edgePath()} fill={above} /></svg>}
+      <img src="/silk-bold.svg" alt="" width={VW} height={VH} loading="lazy" decoding="async" class="absolute inset-0 block h-full w-full" />
+    </div>
+  )}
+</div>
+
+<style>
+  .silk-a { animation: silk-a 11s ease-in-out infinite alternate; transform-origin: 50% 50%; }
+  @keyframes silk-a {
+    0% { transform: translateX(-4%) scaleY(.9) skewY(1.5deg); }
+    50% { transform: translateX(1%) scaleY(1.15) skewY(-1deg); }
+    100% { transform: translateX(4%) scaleY(.95) skewY(-2deg); }
+  }
+  @media (prefers-reduced-motion: reduce) { .silk-a { animation: none; } }
+</style>

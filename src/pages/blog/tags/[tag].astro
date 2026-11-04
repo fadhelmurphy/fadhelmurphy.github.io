@@ -1,0 +1,18 @@
+---
+import { getCollection } from 'astro:content'
+import Base from '../../../layouts/Base.astro'
+import PostList from '../../../components/PostList.astro'
+export async function getStaticPaths () {
+  const posts = await getCollection('blog')
+  return [...new Set(posts.flatMap(p => p.data.label))].map(tag => ({ params: { tag }, props: { posts: posts.filter(p => p.data.label.includes(tag)) } }))
+}
+const { tag } = Astro.params
+const { posts } = Astro.props
+---
+<Base title={`#${tag} | Blog`}>
+  <section class="mx-auto max-w-[1440px] px-6 pt-40 pb-28 md:px-12">
+    <a href="/blog/" class="text-sm text-base-2 underline hover:text-navy">Back to blog</a>
+    <h1 class="grad-navy mt-6 text-6xl font-semibold tracking-[-0.04em] md:text-8xl">#{tag}</h1>
+    <div class="mt-16"><PostList posts={posts} /></div>
+  </section>
+</Base>

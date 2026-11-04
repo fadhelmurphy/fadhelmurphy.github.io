@@ -1,0 +1,23 @@
+[
+  {
+    "school": "Purwadhika Digital Technology School",
+    "degree": "Data Science & Machine Learning",
+    "start": "Oct 2023",
+    "end": "Jun 2024",
+    "notes": ""
+  },
+  {
+    "school": "Gunadarma University",
+    "degree": "Informatics Engineering",
+    "start": "Sep 2017",
+    "end": "Sep 2021",
+    "notes": "Magna Cum Laude Honor - GPA 3.75/4.0"
+  },
+  {
+    "school": "SMAN 4 Tangerang",
+    "degree": "Natural Science",
+    "start": "Sep 2014",
+    "end": "Sep 2017",
+    "notes": "I'm not good enough in school"
+  }
+]

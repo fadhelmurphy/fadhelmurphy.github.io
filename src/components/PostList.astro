@@ -1,0 +1,16 @@
+---
+interface Props { posts: { id: string; data: { title: string; date: Date; label: string[] } }[] }
+const { posts } = Astro.props
+const fmt = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
+---
+<ul class="border-t border-navy/15">
+  {posts.map((p) => (
+    <li data-reveal class="border-b border-navy/15">
+      <a href={`/blog/${p.id}/`} class="group grid grid-cols-12 items-baseline gap-x-4 gap-y-2 py-7 md:py-9">
+        <span class="col-span-12 text-sm text-mute md:col-span-3">{fmt.format(p.data.date)}</span>
+        <span class="col-span-12 text-2xl leading-snug font-medium tracking-tight transition-colors group-hover:text-blue md:col-span-7 md:text-3xl">{p.data.title}</span>
+        <span class="col-span-12 flex gap-3 text-sm text-base-2 md:col-span-2 md:justify-end">{p.data.label.map(l => <span>#{l}</span>)}</span>
+      </a>
+    </li>
+  ))}
+</ul>

@@ -1,0 +1,225 @@
+[
+  {
+    "company": "Seven Retail Group",
+    "current": true,
+    "roles": [
+      {
+        "company": "Seven Retail Group",
+        "title": "Data Engineer",
+        "type": "Full-time",
+        "location": "Tangerang",
+        "start": "Nov 2025",
+        "end": null,
+        "highlights": [
+          "At Seven Retail Group, home of Sparks and its sister business units, I build and run batch GCP data pipelines with Apache Airflow on Cloud Composer and Docker, land raw data in GCS, and model silver/gold layers in BigQuery with Dataform."
+        ],
+        "duration": "1 yr 1 mo"
+      }
+    ]
+  },
+  {
+    "company": "SG-EDTS",
+    "current": false,
+    "roles": [
+      {
+        "company": "SG-EDTS",
+        "title": "Data Engineer Associate II",
+        "type": "Full-time",
+        "location": "",
+        "start": "Aug 2025",
+        "end": "Nov 2025",
+        "highlights": [
+          "At Digital Center of Excellence of Salim Group Company, I built automated, fault-tolerant data pipelines using Airflow, Pub/Sub, Compute Engine, and Google Batch, handling real-time ingestion, distributed processing, and large-scale scraping. I also implemented CI/CD with Docker, built monitoring dashboards in Looker Studio, and ensured data quality for reliable business insights."
+        ],
+        "duration": "4 mos"
+      },
+      {
+        "company": "SG-EDTS",
+        "title": "Data Engineer Associate",
+        "type": "Contract",
+        "location": "",
+        "start": "Aug 2024",
+        "end": "Aug 2025",
+        "highlights": [],
+        "duration": "1 yr 1 mo"
+      }
+    ]
+  },
+  {
+    "company": "Aruna Indonesia",
+    "current": false,
+    "roles": [
+      {
+        "company": "Aruna Indonesia",
+        "title": "Data Engineer",
+        "type": "Internship",
+        "location": "",
+        "start": "Apr 2024",
+        "end": "Jul 2024",
+        "highlights": [
+          "At The Largest Integrated Fisheries Commerce in Indonesia, I built automated ETL workflows with Airflow, integrated data from Google Sheets and PostgreSQL, and transformed large datasets with Pandas and NumPy. I optimized staging layers, loaded data into BigQuery, and ensured accurate insights through Looker Studio dashboards."
+        ],
+        "duration": "4 mos"
+      }
+    ]
+  },
+  {
+    "company": "Teleskop.id",
+    "current": false,
+    "roles": [
+      {
+        "company": "Teleskop.id",
+        "title": "Software Engineer",
+        "type": "Freelance",
+        "location": "",
+        "start": "Mar 2024",
+        "end": "Jul 2024",
+        "highlights": [
+          "I was involved in a data analytics and monitoring project, developing RESTful APIs with FastAPI, PostgreSQL, Redis, and Auth0, and building interactive dashboards with Next.js, Mantine UI, React Query, and Chart.js. I containerized services with Docker, managed deployments on a VPS, and set up secure routing with Caddy and Cloudflare."
+        ],
+        "duration": "5 mos"
+      }
+    ]
+  },
+  {
+    "company": "Good Doctor Technology",
+    "current": false,
+    "roles": [
+      {
+        "company": "Good Doctor Technology",
+        "title": "Frontend Developer",
+        "type": "Freelance",
+        "location": "",
+        "start": "Aug 2023",
+        "end": "Dec 2023",
+        "highlights": [
+          "I successfully developed Payment & Insurance features on webview and internal dashboards, enabling transactions on Grab Health via webview in the Grab app. I integrated Sentry for client-side error tracking, making debugging and maintenance more efficient across projects using Next.js, RTK, Redux, Tailwind, TypeScript, and Github Actions."
+        ],
+        "duration": "5 mos"
+      }
+    ]
+  },
+  {
+    "company": "Female Daily Network",
+    "current": false,
+    "roles": [
+      {
+        "company": "Female Daily Network",
+        "title": "Frontend Developer",
+        "type": "Full-time",
+        "location": "",
+        "start": "Oct 2022",
+        "end": "Sep 2023",
+        "highlights": [
+          "I handled monitoring, bug-fixing, and ensured seamless transactions for e-commerce and payment systems, while mentoring junior developers and boosting team productivity. I built tools and libraries including an NPX boilerplate generator, cross-platform payment library, and scalable web boilerplates and optimized CI/CD pipelines with GitLab-CI, Nginx, PM2, AWS EC2, and Docker."
+        ],
+        "duration": "1 yr"
+      },
+      {
+        "company": "Female Daily Network",
+        "title": "Jr. Frontend Developer",
+        "type": "Full-time",
+        "location": "",
+        "start": "Feb 2022",
+        "end": "Oct 2022",
+        "highlights": [
+          "I developed a UI component library with Lerna, Rollup, and React (Monorepo), complete with DocZ documentation to streamline onboarding and reduce redundancy. I enhanced the Female Daily Studio site with SSR, CSR, ISR, optimized SEO/accessibility (boosting scores from 70 to 100), and improved API performance with Redux-Saga and Next.js API proxy. I also collaborated with the Commerce Tribe to enhance frontend performance for high-traffic e-commerce features."
+        ],
+        "duration": "9 mos"
+      }
+    ]
+  },
+  {
+    "company": "ISTIH & SPIN | Kemenperin",
+    "current": false,
+    "roles": [
+      {
+        "company": "ISTIH & SPIN | Kemenperin",
+        "title": "Frontend Developer",
+        "type": "Freelance",
+        "location": "",
+        "start": "Dec 2022",
+        "end": "Mar 2023",
+        "highlights": [
+          "Setup and develop Map with realtime data using Next.js",
+          "Slicing UI from Figma to Web using Ant Design",
+          "Integrate API using Fetch API and state management with React Context"
+        ],
+        "duration": "4 mos"
+      },
+      {
+        "company": "ISTIH & SPIN | Kemenperin",
+        "title": "Frontend Developer",
+        "type": "Freelance",
+        "location": "",
+        "start": "Dec 2020",
+        "end": "Feb 2021",
+        "highlights": [
+          "Develop Marketplace using Next.js",
+          "Slicing UI from Figma to Web using Ant Design",
+          "Integrate API using Fetch API and state management with Redux-saga"
+        ],
+        "duration": "3 mos"
+      }
+    ]
+  },
+  {
+    "company": "ENO | Venture Mind Labs",
+    "current": false,
+    "roles": [
+      {
+        "company": "ENO | Venture Mind Labs",
+        "title": "Frontend Developer",
+        "type": "Freelance",
+        "location": "",
+        "start": "Mar 2022",
+        "end": "May 2022",
+        "highlights": [
+          "Web Development with React, SWR, Chakra UI and Zustand"
+        ],
+        "duration": "3 mos"
+      }
+    ]
+  },
+  {
+    "company": "Incubator Business Center Gunadarma",
+    "current": false,
+    "roles": [
+      {
+        "company": "Incubator Business Center Gunadarma",
+        "title": "Frontend Developer",
+        "type": "Internship",
+        "location": "",
+        "start": "Sep 2021",
+        "end": "Jan 2022",
+        "highlights": [
+          "Web Development with Next.js (React.js) + React Context",
+          "Implementing UI Design from Figma to Bootstrap, HighChart, Antd (Slicing)",
+          "Project:",
+          "SIASN Instansi BKN",
+          "Dashboard Keluarga Sehat Kemenkes"
+        ],
+        "duration": "5 mos"
+      }
+    ]
+  },
+  {
+    "company": "BisaCPNS",
+    "current": false,
+    "roles": [
+      {
+        "company": "BisaCPNS",
+        "title": "Frontend Developer",
+        "type": "Freelance",
+        "location": "",
+        "start": "May 2020",
+        "end": "May 2020",
+        "highlights": [
+          "Web development with native stack (HTML & CSS) + Bootstrap",
+          "Develop custom on scroll animation with AOS.js"
+        ],
+        "duration": "1 mo"
+      }
+    ]
+  }
+]

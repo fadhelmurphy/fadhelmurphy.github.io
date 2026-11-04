@@ -1,0 +1,24 @@
+"Company Name","Title","Description","Location","Started On","Finished On"
+"Seven Retail Group","Data Engineer - Full-time","At Seven Retail Group, home of Sparks and its sister business units, I build and run batch GCP data pipelines with Apache Airflow on Cloud Composer and Docker, land raw data in GCS, and model silver/gold layers in BigQuery with Dataform.","Tangerang","Nov 2025",""
+"SG-EDTS","Data Engineer Associate II - Full-time","At Digital Center of Excellence of Salim Group Company, I built automated, fault-tolerant data pipelines using Airflow, Pub/Sub, Compute Engine, and Google Batch, handling real-time ingestion, distributed processing, and large-scale scraping. I also implemented CI/CD with Docker, built monitoring dashboards in Looker Studio, and ensured data quality for reliable business insights.","","Aug 2025","Nov 2025"
+"SG-EDTS","Data Engineer Associate - Contract","","","Aug 2024","Aug 2025"
+"Aruna Indonesia","Data Engineer - Internship","At The Largest Integrated Fisheries Commerce in Indonesia, I built automated ETL workflows with Airflow, integrated data from Google Sheets and PostgreSQL, and transformed large datasets with Pandas and NumPy. I optimized staging layers, loaded data into BigQuery, and ensured accurate insights through Looker Studio dashboards.","","Apr 2024","Jul 2024"
+"Teleskop.id","Software Engineer - Freelance","I was involved in a data analytics and monitoring project, developing RESTful APIs with FastAPI, PostgreSQL, Redis, and Auth0, and building interactive dashboards with Next.js, Mantine UI, React Query, and Chart.js. I containerized services with Docker, managed deployments on a VPS, and set up secure routing with Caddy and Cloudflare.","","Mar 2024","Jul 2024"
+"Good Doctor Technology","Frontend Developer - Freelance","I successfully developed Payment & Insurance features on webview and internal dashboards, enabling transactions on Grab Health via webview in the Grab app. I integrated Sentry for client-side error tracking, making debugging and maintenance more efficient across projects using Next.js, RTK, Redux, Tailwind, TypeScript, and Github Actions.","","Aug 2023","Dec 2023"
+"Female Daily Network","Frontend Developer - Full-time","I handled monitoring, bug-fixing, and ensured seamless transactions for e-commerce and payment systems, while mentoring junior developers and boosting team productivity. I built tools and libraries including an NPX boilerplate generator, cross-platform payment library, and scalable web boilerplates and optimized CI/CD pipelines with GitLab-CI, Nginx, PM2, AWS EC2, and Docker.","","Oct 2022","Sep 2023"
+"Female Daily Network","Jr. Frontend Developer - Full-time","I developed a UI component library with Lerna, Rollup, and React (Monorepo), complete with DocZ documentation to streamline onboarding and reduce redundancy. I enhanced the Female Daily Studio site with SSR, CSR, ISR, optimized SEO/accessibility (boosting scores from 70 to 100), and improved API performance with Redux-Saga and Next.js API proxy. I also collaborated with the Commerce Tribe to enhance frontend performance for high-traffic e-commerce features.","","Feb 2022","Oct 2022"
+"ISTIH & SPIN | Kemenperin","Frontend Developer - Freelance","Setup and develop Map with realtime data using Next.js <br/>
+Slicing UI from Figma to Web using Ant Design <br/>
+Integrate API using Fetch API and state management with React Context <br/>","","Dec 2022","Mar 2023"
+"ISTIH & SPIN | Kemenperin","Frontend Developer - Freelance","Develop Marketplace using Next.js <br/>
+Slicing UI from Figma to Web using Ant Design <br/>
+Integrate API using Fetch API and state management with Redux-saga <br/>","","Dec 2020","Feb 2021"
+"ENO | Venture Mind Labs","Frontend Developer - Freelance","Web Development with React, SWR, Chakra UI and Zustand","","Mar 2022","May 2022"
+"Incubator Business Center Gunadarma","Frontend Developer - Internship","Web Development with Next.js (React.js) + React Context  <br/>
+Implementing UI Design from Figma to Bootstrap, HighChart, Antd (Slicing)  <br/>
+<br/>
+Project: <br/>
+SIASN Instansi BKN  <br/>
+Dashboard Keluarga Sehat Kemenkes  <br/>","","Sep 2021","Jan 2022"
+"BisaCPNS","Frontend Developer - Freelance","Web development with native stack (HTML & CSS) + Bootstrap  <br/>
+Develop custom on scroll animation with AOS.js <br/>","","May 2020","May 2020"

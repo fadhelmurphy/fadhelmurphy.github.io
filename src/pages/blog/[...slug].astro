@@ -1,0 +1,20 @@
+---
+import { getCollection, render } from 'astro:content'
+import Base from '../../layouts/Base.astro'
+export async function getStaticPaths () {
+  return (await getCollection('blog')).map(post => ({ params: { slug: post.id }, props: { post } }))
+}
+const { post } = Astro.props
+const { Content } = await render(post)
+const fmt = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
+---
+<Base title={`${post.data.title} | Fadhel`} description={post.data.description ?? post.data.title}>
+  <header class="mx-auto max-w-[1440px] px-6 pt-40 pb-16 md:px-12">
+    <a href="/blog/" class="text-sm text-base-2 underline hover:text-navy">Back to blog</a>
+    <h1 class="grad-navy mt-8 max-w-5xl text-4xl leading-[1.02] font-semibold tracking-[-0.035em] md:text-7xl">{post.data.title}</h1>
+    <p class="mt-8 flex gap-6 border-t border-line pt-5 text-sm text-base-2"><span>{fmt.format(post.data.date)}</span>{post.data.label.map(l => <span>#{l}</span>)}</p>
+  </header>
+  <article class="prose prose-lg mx-auto max-w-3xl px-6 pb-28 prose-headings:tracking-tight prose-headings:text-navy prose-p:text-base-2 prose-a:text-blue-500 prose-img:rounded-xl prose-pre:rounded-xl">
+    <Content />
+  </article>
+</Base>

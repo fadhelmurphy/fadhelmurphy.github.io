@@ -1,66 +1,19 @@
 ---
-// Component Imports
-import Header from "@/Components/header";
-import Timeline from "@/Components/timeline";
-import { prefix } from "Consts/config";
-import { TopHeaderMenuConst } from "Consts/logo";
-import { getPortoList } from "Consts/portolist";
-import { eduTimelineData } from "Consts/timeline";
-import Layout from "Containers/layout";
-import PortoList from "Containers/portoList";
-import Sections from "Containers/sections";
-import type { SliderDataType } from "Consts/types/logo.type";
-import Navbar from 'Containers/navbar/navbar'
-// const condBg = import.meta.env.NODE_ENV === "production" ? "url(/revamp/home/bg.png)" : "url(/home/bg.png)";
-
-// Full Astro Component Syntax:
-// https://docs.astro.build/core-concepts/astro-components/
+import Base from '../layouts/Base.astro'
+import Hero from '../components/Hero.astro'
+import Intro from '../components/Intro.astro'
+import Work from '../components/Work.astro'
+import OpenSource from '../components/OpenSource.astro'
+import Projects from '../components/Projects.astro'
+import Education from '../components/Education.astro'
+import Contact from '../components/Contact.astro'
 ---
-
-<!-- <style is:global define:vars={{ condBg }}>
-	body {
-	  background-image: var(--condBg);
-	}
-</style> -->
-<Layout>
-  <Navbar customClassName='!top-[3%]' client:load/>
-  <Header variant="new-homepage"/>
-  <Sections title="Work Experiences">
-	<p slot="desc">I have previously worked for a few companies <br/>as a freelance and full-time front end developer <br/>and data engineer.</p>
-  <Timeline client:visible/>
-  </Sections>
-  <Sections type="education" title="Education">
-  <Timeline type="education" data={eduTimelineData} />
-  </Sections>
-  
-  <Sections type="portfolio" title="App Development">
-    <p slot="desc">
-      Look what I've <br/>Done 
-    </p>
-    <PortoList data={getPortoList()}/>
-    </Sections>
-  <div class="container mx-5 md:mx-auto grid h-screen place-items-start content-center">
-    <h2 data-aos="animation-scale-y" data-aos-duration="900" class="text-5xl md:text-7xl font-semibold">Do you have something great?</h2>
-    <br/>
-    <h2 data-aos="animation-scale-y" data-aos-duration="900" class="text-5xl md:text-7xl font-semibold">Let's <span class="bg-gradient-to-r from-teal-500 to-[rgba(96,165,250,1)] text-transparent bg-clip-text">work together!</span></h2>
-    <p data-aos="fade-up" data-aos-duration="700" class="text-2xl md:text-4xl font-normal my-5 text-base-2">fadhelijlalfalah@gmail.com</p>
-    <div class="flex gap-4 md:gap-8">
-      
-    <a href="mailto:fadhelijlalfalah@gmail.com" class="contact-btn text-white bg-cyan-500">Get in touch</a>
-  {TopHeaderMenuConst.reverse().map((item: SliderDataType) => (
-    
-      <a
-      href={item.href}
-      aria-label={`button-${item.text}`}
-      target="_blank"
-      data-aos="zoom-in" data-aos-duration="400"
-      >
-    <button class="contact-btn md:p-6" style={`background-color:${item.background};color:${item.color};`}>
-      <span
-        set:html={item.icon}
-      ></span>
-  </button></a>
-  ))}
-    </div>
-  </div>
-</Layout>
+<Base>
+  <Hero />
+  <Intro />
+  <Work />
+  <OpenSource />
+  <Projects />
+  <Education />
+  <Contact />
+</Base>

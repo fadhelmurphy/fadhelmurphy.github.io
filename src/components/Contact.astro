@@ -1,0 +1,39 @@
+---
+import { site } from '../data/site'
+import SilkDivider from './SilkDivider.astro'
+const links = [
+  { label: 'Email', href: `mailto:${site.email}`, icon: 'M4 6h16v12H4z M4 7l8 6 8-6' },
+  ...site.socials.filter((s) => s.label !== 'Instagram').map((s) => ({
+    label: s.label, href: s.href,
+    icon: s.label === 'LinkedIn' ? 'M6 9v9 M6 6v.01 M10 18v-5a3 3 0 0 1 6 0v5 M10 9v9' : 'M9 19c-4 1.5-4-2-6-2.5 M15 21v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1-.3-3.5 1.3a12 12 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21'
+  }))
+]
+---
+<!-- Contact: a glass card floating on the hero's silk ribbon -->
+<section id="contact" class="relative isolate scroll-mt-20 overflow-hidden bg-white px-6 py-28 md:px-12 md:py-40">
+  <SilkDivider bg />
+  <div data-reveal class="contact-card relative z-10 mx-auto max-w-2xl rounded-[28px] px-7 py-12 text-center md:px-14 md:py-16">
+    <h2 class="text-4xl leading-tight font-semibold tracking-tight text-navy md:text-5xl">Do you have something great? Let's <span class="bg-gradient-to-r from-[#2563eb] to-[#10b981] bg-clip-text text-transparent">work together!</span></h2>
+    <p class="mx-auto mt-4 max-w-md text-slate">Data platforms on GCP or fast web apps, full-time or freelance.</p>
+    <a href={`mailto:${site.email}`} class="contact-cta mt-8 inline-flex items-center gap-2 rounded-full px-7 py-3.5 font-semibold text-white">
+      Get in touch
+      <span class="flex items-center gap-1.5 text-xs font-medium text-white/85"><span class="size-1.5 rounded-full bg-emerald-300"></span>Open to work</span>
+    </a>
+    <ul class="mt-8 flex flex-wrap justify-center gap-3">
+      {links.map((l) => (
+        <li>
+          <a href={l.href} target={l.href.startsWith('http') ? '_blank' : undefined} rel="noopener" class="flex items-center gap-2 rounded-full bg-white/70 px-4 py-2 text-sm font-medium text-navy ring-1 ring-slate-200/80 transition-colors hover:bg-white">
+            <svg class="size-4 text-[#2563eb]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={l.icon} /></svg>
+            {l.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .contact-card { background: linear-gradient(135deg, rgb(255 255 255 / .72), rgb(240 249 255 / .5)); border: 1px solid rgb(203 213 225 / .7); backdrop-filter: blur(22px) saturate(160%); -webkit-backdrop-filter: blur(22px) saturate(160%); }
+  .contact-cta { background: linear-gradient(110deg, #2563eb, #0ea5e9 50%, #10b981); background-size: 200% 100%; transition: background-position .6s ease; }
+  .contact-cta:hover { background-position: 100% 0; }
+</style>

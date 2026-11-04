@@ -1,0 +1,40 @@
+---
+import { Image } from 'astro:assets'
+import personal from '../assets/projects/personal-web.png'
+import spin from '../assets/projects/spin.png'
+import istih from '../assets/projects/istih.png'
+import eno from '../assets/projects/eno.png'
+import kemenkes from '../assets/projects/kemenkes.png'
+import bisacpns from '../assets/projects/bisacpns-2020.png'
+const apps = [
+  { title: 'Sistem Perwilayahan Industri Nasional', note: 'Real-time industrial map for Kemenperin', stack: 'Next.js, Antd, Leaflet, PM2', img: spin, big: true },
+  { title: 'Indonesian Smart Textile Hub', note: 'B2B marketplace for the textile industry', stack: 'Next.js, Redux, Redux-saga', img: istih, big: true },
+  { title: 'Dashboard Keluarga Sehat', note: 'Health dashboard for Kemenkes', stack: 'Next.js, Bootstrap 5, Highcharts', img: kemenkes },
+  { title: 'ENO × Tujju', note: 'Subtitle tooling for Venture Mind Labs', stack: 'React, SWR, Chakra UI, Zustand', img: eno },
+  { title: 'BisaCPNS', note: 'Exam-prep landing pages', stack: 'Bootstrap, AOS.js', img: bisacpns },
+  { title: 'This website', note: 'Static Astro, LinkedIn-synced', stack: 'Astro, Tailwind', img: personal }
+]
+---
+<section id="projects" class="scroll-mt-20 bg-white px-6 pt-24 pb-24 md:px-12 md:pt-32 md:pb-32">
+  <div class="mx-auto max-w-6xl">
+    <p data-reveal class="text-sm font-semibold text-blue-500">App development</p>
+    <h2 data-reveal class="s-head mt-4"><b>Products I've shipped.</b> Government dashboards, marketplaces and internal tools, built during my frontend years.</h2>
+    <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      {apps.map((a, i) => (
+        <article data-reveal style={`transition-delay:${(i < 2 ? i : i - 2) * 80}ms`} class:list={['s-card group flex flex-col overflow-hidden', a.big ? 'sm:col-span-2 lg:col-span-2' : 'lg:col-span-1']}>
+          <div class="px-6 pt-6">
+            <h3 class="font-semibold text-navy">{a.title}</h3>
+            <p class="mt-1 text-sm text-slate">{a.note}</p>
+          </div>
+          <div class="mt-5 flex-1 px-6">
+            <div class="h-full overflow-hidden rounded-t-lg border border-b-0 border-edge bg-mist">
+              <Image src={a.img} alt={`Screenshot of ${a.title}`} width={a.big ? 900 : 600} widths={a.big ? [480, 900] : [360, 600]} sizes={a.big ? '(min-width: 768px) 50vw, 100vw' : '(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw'}
+                     loading="lazy" decoding="async" class:list={['w-full object-cover object-top transition duration-700 group-hover:scale-[1.03]', a.big ? 'aspect-[16/10]' : 'aspect-[4/3]']} />
+            </div>
+          </div>
+          <p class="border-t border-edge px-6 py-3 text-xs text-slate">{a.stack}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

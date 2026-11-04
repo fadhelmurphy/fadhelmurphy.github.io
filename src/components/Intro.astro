@@ -1,0 +1,24 @@
+---
+const years = new Date().getFullYear() - 2020
+// data engineering since Aug 2024
+const dataYears = Math.max(1, Math.floor((Date.now() - Date.UTC(2024, 7, 1)) / 31557600000))
+const stats = [
+  { n: `${years}+`, l: 'years in software' },
+  { n: `${dataYears}+`, l: 'years in data engineering' },
+  { n: 'GCP', l: 'Professional Data Engineer' },
+  { n: 'Batch', l: 'pipelines on Airflow & BigQuery' }
+]
+---
+<section class="bg-white px-6 pt-24 pb-20 md:px-12 md:pt-32">
+  <div class="mx-auto max-w-6xl">
+    <h2 data-reveal class="s-head mx-auto text-center"><b>The person behind your pipelines.</b> I design data platforms on Google Cloud and still ship the web apps that put that data to work.</h2>
+    <dl class="mt-16 grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-4">
+      {stats.map((s, i) => (
+        <div data-reveal style={`transition-delay:${i * 80}ms`} class="border-l border-edge pl-5">
+          <dt class="grad-navy text-4xl font-semibold tracking-tight md:text-5xl">{s.n}</dt>
+          <dd class="mt-2 text-sm leading-relaxed text-slate">{s.l}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>
