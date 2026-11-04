@@ -6,6 +6,8 @@
 @import "@fontsource/poppins/latin-600.css";
 @import "@fontsource/poppins/latin-700.css";
 
+:root { color-scheme: only light; }
+
 /* tokens carried over from the live site */
 @theme {
   --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;

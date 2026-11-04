@@ -19,6 +19,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site)
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#fbfcff" />
+    <!-- light-only design: opt out of browsers' forced/auto dark mode (Samsung Internet, Chrome) -->
+    <meta name="color-scheme" content="only light" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
