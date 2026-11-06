@@ -15,165 +15,178 @@ import hmns from '../assets/about/perfume-hmns.webp'
 import esteh from '../assets/about/perfume-esteh.webp'
 import dappers from '../assets/about/perfume-dappers.webp'
 
-const tools = ['Airflow', 'BigQuery', 'Dataform', 'SQL', 'Sklearn', 'React', 'Next.js', 'Google Cloud']
 const games = [
-  { t: 'GTA: San Andreas', why: 'Nostalgic charm and timeless exploration', img: gtasa },
-  { t: 'GTA V', why: 'A dynamic world and thrilling adventures', img: gta5 },
-  { t: 'Just Cause 4', why: 'Chaotic action and stress-free fun', img: jc4 }
+  { t: 'GTA: San Andreas', why: 'for its nostalgic charm and timeless exploration.', img: gtasa, r: -7, x: '0%', y: '26%', z: 3 },
+  { t: 'GTA V', why: 'for its dynamic world and thrilling adventures.', img: gta5, r: 5, x: '42%', y: '0%', z: 1 },
+  { t: 'Just Cause 4', why: 'for its chaotic action and stress-free fun.', img: jc4, r: -3, x: '40%', y: '56%', z: 2 }
 ]
 const films = [
-  { t: 'Jobs', meta: 'Biopic · 2013', img: jobs },
-  { t: 'Ford v Ferrari', meta: 'Drama · 2019', img: ford },
-  { t: 'Spider-Man: No Way Home', meta: 'Superhero · 2021', img: spidey },
-  { t: 'Interstellar', meta: 'Sci-fi · 2014', img: interstellar }
+  { t: 'Jobs', meta: 'Biopic, 2013', img: jobs },
+  { t: 'Ford v Ferrari', meta: 'Drama, 2019', img: ford },
+  { t: 'Spider-Man: No Way Home', meta: 'Superhero, 2021', img: spidey },
+  { t: 'Interstellar', meta: 'Sci-fi, 2014', img: interstellar }
 ]
 const music = [
-  { g: 'Pop-punk, for the nostalgia', a: ['Blink-182', 'Neck Deep'] },
-  { g: 'Metal, for the energy', a: ['Slayer', 'Napalm Death'] },
-  { g: 'Softer, for winding down', a: ['Taylor Swift', 'LANY'] }
+  { mood: 'Pop-punk that takes me back to my teens', bands: ['Blink-182', 'Neck Deep'] },
+  { mood: 'Metal riffs for energy', bands: ['Slayer', 'Napalm Death'] },
+  { mood: 'Softer songs for winding down', bands: ['Taylor Swift', 'LANY'] }
 ]
 const perfumes = [
-  { t: 'HMNS', n: 'Darker Shade of Orgasm', img: hmns },
-  { t: 'Es Teh Manis', n: 'Eau de parfum', img: esteh },
-  { t: 'Dappers', n: 'Teh Melati', img: dappers }
+  { t: 'HMNS', n: 'Darker Shade of Orgasm', img: hmns, r: -10 },
+  { t: 'Es Teh Manis', n: 'Eau de parfum', img: esteh, r: 0 },
+  { t: 'Dappers', n: 'Teh Melati', img: dappers, r: 10 }
 ]
-const rig = ['Ryzen 9 5900X', '30GB DDR4 Corsair', 'RTX 2060 Super', 'ASRock X570 Taichi', '1TB SSD + 1TB HDD', 'Cooler Master 240L V2', 'Windows 11']
+const rig = ['Ryzen 9 5900X', '30GB DDR4 Corsair', 'RTX 2060 Super', 'ASRock X570 Taichi', '1TB SSD, 1TB HDD', 'Cooler Master 240L V2', 'Windows 11']
 const desk = ['MSI Optix G241 144Hz', 'AIRO AIO24X 165Hz', 'Nemesis 1080p webcam', 'Rexus Daxa M71', 'Logitech G203', 'Panasonic TV']
 ---
-<Base title="About | Fadhel Ijlal Falah" description="Data & Software Engineer in Tangerang. What I work with, and what I do off the clock.">
-  <!-- intro: photo in a glass card riding the silk ribbon -->
-  <section class="relative isolate overflow-hidden bg-white px-6 pt-32 pb-24 md:px-12 md:pt-40 md:pb-32">
+<Base title="About | Fadhel Ijlal Falah" description="Data & Software Engineer in Tangerang. The person behind the pipelines, and what he does off the clock.">
+
+  <!-- 1. intro -->
+  <section class="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-white px-6 pt-28 pb-20 md:px-12">
     <SilkDivider bg eager />
-    <div class="relative z-10 mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-[1.1fr_0.9fr]">
+    <div class="relative z-10 mx-auto grid w-full max-w-6xl items-center gap-14 md:grid-cols-[1.25fr_0.75fr]">
       <div>
-        <p data-reveal class="text-sm font-semibold text-blue-600">About</p>
-        <h1 data-reveal class="mt-3 text-5xl leading-[1.05] font-bold tracking-tight text-navy md:text-7xl">Fadhel Ijlal Falah</h1>
-        <p data-reveal class="mt-6 max-w-xl text-lg leading-relaxed text-slate">
-          Data Engineer at Seven Retail Group in Jakarta, building batch pipelines on Google Cloud with Airflow, Dataform and BigQuery.
+        <h1 data-reveal class="text-[clamp(3.2rem,9vw,7.5rem)] leading-[0.95] font-bold tracking-[-0.04em] text-navy">
+          Hi, I'm<br /><span class="grad">Fadhel.</span>
+        </h1>
+        <p data-reveal class="mt-8 max-w-lg text-xl leading-relaxed text-slate md:text-2xl">
+          I move data around for a living, at Seven Retail Group in Jakarta.
         </p>
-        <p data-reveal class="mt-4 max-w-xl leading-relaxed text-slate">
-          Before data, I spent years as a frontend and fullstack engineer, full-time and freelance. I still enjoy shipping the web apps that put the data to work. Based in Tangerang.
+        <p data-reveal class="mt-4 max-w-lg leading-relaxed text-slate">
+          Batch pipelines on Google Cloud with Airflow, Dataform and BigQuery. Before that, years of frontend and fullstack work, full-time and freelance. I live in Tangerang.
         </p>
-        <ul data-reveal class="mt-7 flex max-w-xl flex-wrap gap-2">
-          {tools.map((t) => <li class="rounded-full bg-white/70 px-3.5 py-1.5 text-sm font-medium text-navy ring-1 ring-slate-200/80 backdrop-blur">{t}</li>)}
-        </ul>
       </div>
-      <figure data-reveal class="glass mx-auto w-full max-w-sm rounded-[28px] p-3">
-        <Image src={photo} alt="Fadhel smiling, taking a mirror selfie" width={443} height={660} widths={[360, 443]} sizes="(min-width: 768px) 384px, 90vw" class="aspect-[4/5] w-full rounded-[20px] object-cover object-top" loading="eager" />
-        <figcaption class="flex items-center justify-between px-2 pt-3 pb-1 text-sm">
-          <span class="font-semibold text-navy">Fadhel</span>
-          <span class="flex items-center gap-1.5 text-slate"><span class="size-1.5 rounded-full bg-emerald-500"></span>Open to work</span>
-        </figcaption>
+      <figure data-reveal class="polaroid mx-auto w-[min(80vw,300px)]" style="--r:4deg">
+        <Image src={photo} alt="Fadhel smiling, taking a mirror selfie" width={443} height={660} widths={[300, 443]} sizes="300px" class="aspect-[4/5] w-full rounded-[18px] object-cover object-top" loading="eager" />
+        <figcaption class="pt-3 text-center text-sm font-medium text-navy">Fadhel Ijlal Falah</figcaption>
       </figure>
     </div>
   </section>
 
-  <!-- off the clock: one bento, one card style -->
-  <section class="bg-mist px-6 py-24 md:px-12 md:py-32">
+  <!-- 2. games: copy left, fanned covers right -->
+  <section class="chapter bg-mist">
+    <div class="mx-auto grid max-w-6xl items-center gap-14 md:grid-cols-2">
+      <div>
+        <p data-reveal class="kicker">Off the clock</p>
+        <h2 data-reveal class="title">Frequently<br />played</h2>
+        <p data-reveal class="lede">Gaming is how I relax after a busy day.</p>
+        <ul data-reveal class="mt-6 space-y-3 text-slate">
+          {games.map((g) => <li><b class="font-semibold text-navy">{g.t}</b> {g.why}</li>)}
+        </ul>
+      </div>
+      <div class="fan relative mx-auto aspect-square w-full max-w-[520px]">
+        <div class="rings" aria-hidden="true"></div>
+        {games.map((g, i) => (
+          <figure data-reveal class="tilt polaroid absolute w-[56%]" style={`--r:${g.r}deg;left:${g.x};top:${g.y};z-index:${g.z};transition-delay:${i * 90}ms`}>
+            <Image src={g.img} alt={`${g.t} cover art`} width={460} widths={[320, 460]} sizes="(min-width: 768px) 300px, 55vw" class="aspect-[4/3] w-full rounded-[14px] object-cover" loading="lazy" />
+            <figcaption class="pt-2.5 text-center text-sm font-semibold text-navy">{g.t}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. films: big title, poster strip -->
+  <section class="chapter bg-white">
     <div class="mx-auto max-w-6xl">
-      <h2 data-reveal class="text-3xl font-semibold tracking-tight text-navy md:text-4xl">Off the clock</h2>
-      <p data-reveal class="mt-3 max-w-xl text-slate">What I play, watch, listen to and wear when I'm not moving data around.</p>
+      <div class="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+        <h2 data-reveal class="title">Top picks<br />in films</h2>
+        <p data-reveal class="lede max-w-sm md:text-right">Mostly stories about people who build things. And one about space.</p>
+      </div>
+      <ul class="no-bar -mx-6 mt-12 flex snap-x snap-mandatory scroll-px-6 gap-4 overflow-x-auto px-6 pb-4 md:mx-0 md:grid md:grid-cols-4 md:overflow-visible md:px-0">
+        {films.map((f, i) => (
+          <li data-reveal class="poster w-[46vw] shrink-0 snap-start md:w-auto" style={`transition-delay:${i * 80}ms`}>
+            <Image src={f.img} alt={`${f.t} poster`} width={300} widths={[240, 300]} sizes="(min-width: 768px) 270px, 46vw" class="aspect-[3/4] w-full rounded-[18px] object-cover object-top" loading="lazy" />
+            <p class="mt-4 font-semibold leading-snug text-navy">{f.t}</p>
+            <p class="text-sm text-slate">{f.meta}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
 
-      <div class="mt-12 grid gap-5 lg:grid-cols-6">
-        <!-- games -->
-        <article data-reveal class="card lg:col-span-4">
-          <h3 class="card-h">Frequently played</h3>
-          <p class="card-p">Gaming is how I unwind after a busy day.</p>
-          <ul class="mt-6 grid gap-4 sm:grid-cols-3">
-            {games.map((g) => (
-              <li>
-                <Image src={g.img} alt={`${g.t} cover`} width={460} widths={[320, 460]} sizes="(min-width: 1024px) 220px, (min-width: 640px) 30vw, 90vw" class="aspect-[4/3] w-full rounded-2xl object-cover" loading="lazy" />
-                <p class="mt-3 font-semibold text-navy">{g.t}</p>
-                <p class="text-sm text-slate">{g.why}</p>
-              </li>
-            ))}
-          </ul>
-        </article>
-
-        <!-- music -->
-        <article data-reveal class="card lg:col-span-2">
-          <h3 class="card-h">On repeat</h3>
-          <p class="card-p">Music has always been my escape.</p>
-          <div class="mt-6 space-y-5">
-            {music.map((m) => (
-              <div>
-                <p class="text-xs font-medium text-slate">{m.g}</p>
-                <ul class="mt-2 flex flex-wrap gap-2">
-                  {m.a.map((a) => <li class="rounded-full bg-gradient-to-r from-blue-50 to-emerald-50 px-3.5 py-1.5 text-sm font-semibold text-navy ring-1 ring-slate-200/70">{a}</li>)}
-                </ul>
-              </div>
-            ))}
+  <!-- 4. music: typographic, band names as the visual -->
+  <section class="chapter relative isolate overflow-hidden bg-white">
+    <SilkDivider above="#ffffff" />
+    <div class="relative mx-auto max-w-6xl pt-24 md:pt-40">
+      <h2 data-reveal class="title text-center">On repeat</h2>
+      <p data-reveal class="lede mx-auto max-w-md text-center">Music has always been my escape and my inspiration.</p>
+      <div class="mt-14 space-y-10">
+        {music.map((m, i) => (
+          <div data-reveal class:list={['flex flex-col gap-2', i % 2 ? 'items-end text-right' : 'items-start']}>
+            <p class="text-sm font-medium text-slate">{m.mood}</p>
+            <p class="band text-[clamp(2.4rem,7vw,5.5rem)] leading-none font-bold tracking-[-0.04em]">
+              {m.bands.map((b, k) => <>{k > 0 && <span class="text-slate-300"> / </span>}<span class="grad">{b}</span></>)}
+            </p>
           </div>
-        </article>
+        ))}
+      </div>
+    </div>
+  </section>
 
-        <!-- films -->
-        <article data-reveal class="card lg:col-span-4">
-          <h3 class="card-h">Top picks in films</h3>
-          <p class="card-p">Stories about people who build things, and one about space.</p>
-          <ul class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
-            {films.map((f) => (
-              <li>
-                <Image src={f.img} alt={`${f.t} poster`} width={260} class="aspect-[8/9] w-full rounded-2xl object-cover object-top" loading="lazy" />
-                <p class="mt-3 text-sm leading-snug font-semibold text-navy">{f.t}</p>
-                <p class="text-xs text-slate">{f.meta}</p>
-              </li>
-            ))}
-          </ul>
-        </article>
+  <!-- 5. perfume: fanned bottles -->
+  <section class="chapter bg-mist">
+    <div class="mx-auto grid max-w-6xl items-center gap-14 md:grid-cols-2">
+      <div class="order-2 flex justify-center md:order-1">
+        {perfumes.map((p, i) => (
+          <figure data-reveal class="tilt polaroid -mx-2 w-[36%] max-w-[200px] bg-white" style={`--r:${p.r}deg;z-index:${i === 1 ? 3 : 1};transition-delay:${i * 90}ms;margin-top:${i === 1 ? 0 : 2.5}rem`}>
+            <Image src={p.img} alt={`${p.t} perfume bottle`} width={180} class="aspect-[4/5] w-full object-contain p-3" loading="lazy" />
+            <figcaption class="px-1 text-center"><p class="text-sm font-semibold text-navy">{p.t}</p><p class="text-[11px] leading-tight text-slate">{p.n}</p></figcaption>
+          </figure>
+        ))}
+      </div>
+      <div class="order-1 md:order-2">
+        <h2 data-reveal class="title">Wearing<br />lately</h2>
+        <p data-reveal class="lede">Scent is a quiet way to show personality. These three cover a laid-back day out and a more formal evening.</p>
+      </div>
+    </div>
+  </section>
 
-        <!-- perfume -->
-        <article data-reveal class="card lg:col-span-2">
-          <h3 class="card-h">Wearing lately</h3>
-          <p class="card-p">A scent for every kind of day.</p>
-          <ul class="mt-6 space-y-3">
-            {perfumes.map((p) => (
-              <li class="flex items-center gap-4 rounded-2xl bg-white p-2 ring-1 ring-slate-200/70">
-                <Image src={p.img} alt={`${p.t} bottle`} width={120} class="size-16 rounded-xl object-contain" loading="lazy" />
-                <div><p class="font-semibold text-navy">{p.t}</p><p class="text-sm text-slate">{p.n}</p></div>
-              </li>
-            ))}
-          </ul>
-        </article>
-
-        <!-- gear -->
-        <article data-reveal class="card lg:col-span-6">
-          <div class="grid gap-8 md:grid-cols-[0.9fr_1.1fr]">
-            <div>
-              <h3 class="card-h">Gear</h3>
-              <p class="card-p">What I build and play on.</p>
-              <Image src={pc} alt="Inside the desktop PC, lit purple" width={640} widths={[400, 640]} sizes="(min-width: 768px) 480px, 90vw" class="mt-6 aspect-[4/3] w-full rounded-2xl object-cover" loading="lazy" />
-            </div>
-            <div class="grid content-start gap-6 sm:grid-cols-2">
-              <div>
-                <p class="text-xs font-medium text-slate">Desktop</p>
-                <ul class="mt-2 space-y-1.5 text-sm text-navy">{rig.map((r) => <li>{r}</li>)}</ul>
-              </div>
-              <div>
-                <p class="text-xs font-medium text-slate">Desk</p>
-                <ul class="mt-2 space-y-1.5 text-sm text-navy">{desk.map((r) => <li>{r}</li>)}</ul>
-              </div>
-              <div class="rounded-2xl bg-white p-4 ring-1 ring-slate-200/70">
-                <p class="text-xs font-medium text-slate">Laptop</p>
-                <p class="mt-1 text-2xl font-semibold tracking-tight text-navy">MacBook Pro M2</p>
-                <p class="text-sm text-slate">512GB</p>
-              </div>
-              <div class="rounded-2xl bg-white p-4 ring-1 ring-slate-200/70">
-                <p class="text-xs font-medium text-slate">Phones</p>
-                <p class="mt-1 font-semibold text-navy">Samsung S21 FE</p>
-                <p class="font-semibold text-navy">iPhone 15</p>
-                <p class="text-sm text-slate">256GB each</p>
-              </div>
-            </div>
+  <!-- 6. gear -->
+  <section class="chapter bg-white">
+    <div class="mx-auto max-w-6xl">
+      <h2 data-reveal class="title">Gear</h2>
+      <p data-reveal class="lede">What I build, and play, on.</p>
+      <div class="mt-12 grid gap-10 md:grid-cols-[1.1fr_0.9fr]">
+        <Image data-reveal src={pc} alt="Inside the desktop PC, lit purple" width={640} widths={[400, 640]} sizes="(min-width: 768px) 560px, 90vw" class="aspect-[4/3] w-full rounded-[24px] object-cover" loading="lazy" />
+        <div class="flex flex-col justify-between gap-10">
+          <div data-reveal>
+            <p class="text-sm font-medium text-slate">Laptop</p>
+            <p class="mt-1 text-[clamp(2.4rem,5vw,3.75rem)] leading-none font-bold tracking-[-0.03em] text-navy">MacBook Pro M2</p>
+            <p class="mt-3 text-sm font-medium text-slate">Phones</p>
+            <p class="mt-1 text-2xl font-semibold tracking-tight text-navy">Samsung S21 FE, iPhone 15</p>
           </div>
-        </article>
+          <div data-reveal class="grid grid-cols-2 gap-6 text-sm">
+            <div><p class="font-medium text-slate">Desktop</p><ul class="mt-2 space-y-1.5 text-navy">{rig.map((r) => <li>{r}</li>)}</ul></div>
+            <div><p class="font-medium text-slate">Desk</p><ul class="mt-2 space-y-1.5 text-navy">{desk.map((r) => <li>{r}</li>)}</ul></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 </Base>
 
 <style>
-  .glass { background: linear-gradient(135deg, rgb(255 255 255 / .72), rgb(240 249 255 / .5)); border: 1px solid rgb(203 213 225 / .7); backdrop-filter: blur(22px) saturate(160%); -webkit-backdrop-filter: blur(22px) saturate(160%); }
-  .card { border-radius: 28px; padding: 1.75rem; background: linear-gradient(135deg, rgb(255 255 255 / .9), rgb(248 250 252 / .75)); border: 1px solid rgb(226 232 240 / .9); }
-  .card-h { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.01em; color: var(--color-navy); }
-  .card-p { margin-top: .25rem; font-size: .875rem; color: var(--color-slate); }
+  .chapter { padding: 7rem 1.5rem; }
+  @media (min-width: 768px) { .chapter { padding: 9rem 3rem; min-height: 90vh; display: flex; align-items: center; } .chapter > div { width: 100%; } }
+  .kicker { font-size: .875rem; font-weight: 600; color: #2563eb; }
+  .title { margin-top: .75rem; font-size: clamp(2.8rem, 7vw, 5.5rem); line-height: .98; font-weight: 700; letter-spacing: -0.04em; color: var(--color-navy); }
+  .lede { margin-top: 1.25rem; font-size: 1.125rem; line-height: 1.65; color: var(--color-slate); }
+  .grad { background: linear-gradient(100deg, #2563eb, #0ea5e9 45%, #10b981); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+
+  /* instant-photo cards that sit at an angle and straighten on hover */
+  .polaroid { padding: .6rem .6rem .75rem; border-radius: 24px; background: rgb(255 255 255 / .85); border: 1px solid rgb(226 232 240); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 30px 60px -30px rgb(37 99 235 / .35); transform: rotate(var(--r, 0deg)); }
+  [data-reveal].polaroid { transform: translateY(24px) rotate(var(--r, 0deg)); }
+  [data-reveal].polaroid.in { transform: rotate(var(--r, 0deg)); }
+  .tilt { transition: transform .6s cubic-bezier(.34,1.56,.64,1), opacity .9s ease; }
+  .tilt:hover { transform: rotate(0deg) scale(1.04) !important; z-index: 10 !important; }
+  .rings { position: absolute; inset: 4%; border-radius: 50%; background:
+    radial-gradient(circle, rgb(16 185 129 / .12) 0 30%, transparent 30.5%),
+    radial-gradient(circle, transparent 0 48%, rgb(37 99 235 / .1) 48.5% 49%, transparent 49.5%),
+    radial-gradient(circle, transparent 0 68%, rgb(14 165 233 / .1) 68.5% 69%, transparent 69.5%); }
+  .poster img { transition: transform .7s cubic-bezier(.16,1,.3,1); }
+  .poster:hover img { transform: translateY(-6px); }
+  .no-bar { scrollbar-width: none; } .no-bar::-webkit-scrollbar { display: none; }
+  @media (prefers-reduced-motion: reduce) { .tilt, .poster img { transition: none; } }
 </style>
