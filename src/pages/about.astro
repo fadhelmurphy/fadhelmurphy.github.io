@@ -1,0 +1,179 @@
+---
+import { Image } from 'astro:assets'
+import Base from '../layouts/Base.astro'
+import SilkDivider from '../components/SilkDivider.astro'
+import photo from '../assets/about/photo.webp'
+import jobs from '../assets/about/film-jobs.webp'
+import ford from '../assets/about/film-ford.webp'
+import spidey from '../assets/about/film-spiderman.webp'
+import interstellar from '../assets/about/film-interstellar.webp'
+import gtasa from '../assets/about/game-gtasa.webp'
+import gta5 from '../assets/about/game-gta5.webp'
+import jc4 from '../assets/about/game-jc4.webp'
+import pc from '../assets/about/gear-pc.webp'
+import hmns from '../assets/about/perfume-hmns.webp'
+import esteh from '../assets/about/perfume-esteh.webp'
+import dappers from '../assets/about/perfume-dappers.webp'
+
+const tools = ['Airflow', 'BigQuery', 'Dataform', 'SQL', 'Sklearn', 'React', 'Next.js', 'Google Cloud']
+const games = [
+  { t: 'GTA: San Andreas', why: 'Nostalgic charm and timeless exploration', img: gtasa },
+  { t: 'GTA V', why: 'A dynamic world and thrilling adventures', img: gta5 },
+  { t: 'Just Cause 4', why: 'Chaotic action and stress-free fun', img: jc4 }
+]
+const films = [
+  { t: 'Jobs', meta: 'Biopic · 2013', img: jobs },
+  { t: 'Ford v Ferrari', meta: 'Drama · 2019', img: ford },
+  { t: 'Spider-Man: No Way Home', meta: 'Superhero · 2021', img: spidey },
+  { t: 'Interstellar', meta: 'Sci-fi · 2014', img: interstellar }
+]
+const music = [
+  { g: 'Pop-punk, for the nostalgia', a: ['Blink-182', 'Neck Deep'] },
+  { g: 'Metal, for the energy', a: ['Slayer', 'Napalm Death'] },
+  { g: 'Softer, for winding down', a: ['Taylor Swift', 'LANY'] }
+]
+const perfumes = [
+  { t: 'HMNS', n: 'Darker Shade of Orgasm', img: hmns },
+  { t: 'Es Teh Manis', n: 'Eau de parfum', img: esteh },
+  { t: 'Dappers', n: 'Teh Melati', img: dappers }
+]
+const rig = ['Ryzen 9 5900X', '30GB DDR4 Corsair', 'RTX 2060 Super', 'ASRock X570 Taichi', '1TB SSD + 1TB HDD', 'Cooler Master 240L V2', 'Windows 11']
+const desk = ['MSI Optix G241 144Hz', 'AIRO AIO24X 165Hz', 'Nemesis 1080p webcam', 'Rexus Daxa M71', 'Logitech G203', 'Panasonic TV']
+---
+<Base title="About | Fadhel Ijlal Falah" description="Data & Software Engineer in Tangerang. What I work with, and what I do off the clock.">
+  <!-- intro: photo in a glass card riding the silk ribbon -->
+  <section class="relative isolate overflow-hidden bg-white px-6 pt-32 pb-24 md:px-12 md:pt-40 md:pb-32">
+    <SilkDivider bg eager />
+    <div class="relative z-10 mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-[1.1fr_0.9fr]">
+      <div>
+        <p data-reveal class="text-sm font-semibold text-blue-600">About</p>
+        <h1 data-reveal class="mt-3 text-5xl leading-[1.05] font-bold tracking-tight text-navy md:text-7xl">Fadhel Ijlal Falah</h1>
+        <p data-reveal class="mt-6 max-w-xl text-lg leading-relaxed text-slate">
+          Data Engineer at Seven Retail Group in Jakarta, building batch pipelines on Google Cloud with Airflow, Dataform and BigQuery.
+        </p>
+        <p data-reveal class="mt-4 max-w-xl leading-relaxed text-slate">
+          Before data, I spent years as a frontend and fullstack engineer, full-time and freelance. I still enjoy shipping the web apps that put the data to work. Based in Tangerang.
+        </p>
+        <ul data-reveal class="mt-7 flex max-w-xl flex-wrap gap-2">
+          {tools.map((t) => <li class="rounded-full bg-white/70 px-3.5 py-1.5 text-sm font-medium text-navy ring-1 ring-slate-200/80 backdrop-blur">{t}</li>)}
+        </ul>
+      </div>
+      <figure data-reveal class="glass mx-auto w-full max-w-sm rounded-[28px] p-3">
+        <Image src={photo} alt="Fadhel smiling, taking a mirror selfie" width={443} height={660} widths={[360, 443]} sizes="(min-width: 768px) 384px, 90vw" class="aspect-[4/5] w-full rounded-[20px] object-cover object-top" loading="eager" />
+        <figcaption class="flex items-center justify-between px-2 pt-3 pb-1 text-sm">
+          <span class="font-semibold text-navy">Fadhel</span>
+          <span class="flex items-center gap-1.5 text-slate"><span class="size-1.5 rounded-full bg-emerald-500"></span>Open to work</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- off the clock: one bento, one card style -->
+  <section class="bg-mist px-6 py-24 md:px-12 md:py-32">
+    <div class="mx-auto max-w-6xl">
+      <h2 data-reveal class="text-3xl font-semibold tracking-tight text-navy md:text-4xl">Off the clock</h2>
+      <p data-reveal class="mt-3 max-w-xl text-slate">What I play, watch, listen to and wear when I'm not moving data around.</p>
+
+      <div class="mt-12 grid gap-5 lg:grid-cols-6">
+        <!-- games -->
+        <article data-reveal class="card lg:col-span-4">
+          <h3 class="card-h">Frequently played</h3>
+          <p class="card-p">Gaming is how I unwind after a busy day.</p>
+          <ul class="mt-6 grid gap-4 sm:grid-cols-3">
+            {games.map((g) => (
+              <li>
+                <Image src={g.img} alt={`${g.t} cover`} width={460} widths={[320, 460]} sizes="(min-width: 1024px) 220px, (min-width: 640px) 30vw, 90vw" class="aspect-[4/3] w-full rounded-2xl object-cover" loading="lazy" />
+                <p class="mt-3 font-semibold text-navy">{g.t}</p>
+                <p class="text-sm text-slate">{g.why}</p>
+              </li>
+            ))}
+          </ul>
+        </article>
+
+        <!-- music -->
+        <article data-reveal class="card lg:col-span-2">
+          <h3 class="card-h">On repeat</h3>
+          <p class="card-p">Music has always been my escape.</p>
+          <div class="mt-6 space-y-5">
+            {music.map((m) => (
+              <div>
+                <p class="text-xs font-medium text-slate">{m.g}</p>
+                <ul class="mt-2 flex flex-wrap gap-2">
+                  {m.a.map((a) => <li class="rounded-full bg-gradient-to-r from-blue-50 to-emerald-50 px-3.5 py-1.5 text-sm font-semibold text-navy ring-1 ring-slate-200/70">{a}</li>)}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </article>
+
+        <!-- films -->
+        <article data-reveal class="card lg:col-span-4">
+          <h3 class="card-h">Top picks in films</h3>
+          <p class="card-p">Stories about people who build things, and one about space.</p>
+          <ul class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
+            {films.map((f) => (
+              <li>
+                <Image src={f.img} alt={`${f.t} poster`} width={260} class="aspect-[8/9] w-full rounded-2xl object-cover object-top" loading="lazy" />
+                <p class="mt-3 text-sm leading-snug font-semibold text-navy">{f.t}</p>
+                <p class="text-xs text-slate">{f.meta}</p>
+              </li>
+            ))}
+          </ul>
+        </article>
+
+        <!-- perfume -->
+        <article data-reveal class="card lg:col-span-2">
+          <h3 class="card-h">Wearing lately</h3>
+          <p class="card-p">A scent for every kind of day.</p>
+          <ul class="mt-6 space-y-3">
+            {perfumes.map((p) => (
+              <li class="flex items-center gap-4 rounded-2xl bg-white p-2 ring-1 ring-slate-200/70">
+                <Image src={p.img} alt={`${p.t} bottle`} width={120} class="size-16 rounded-xl object-contain" loading="lazy" />
+                <div><p class="font-semibold text-navy">{p.t}</p><p class="text-sm text-slate">{p.n}</p></div>
+              </li>
+            ))}
+          </ul>
+        </article>
+
+        <!-- gear -->
+        <article data-reveal class="card lg:col-span-6">
+          <div class="grid gap-8 md:grid-cols-[0.9fr_1.1fr]">
+            <div>
+              <h3 class="card-h">Gear</h3>
+              <p class="card-p">What I build and play on.</p>
+              <Image src={pc} alt="Inside the desktop PC, lit purple" width={640} widths={[400, 640]} sizes="(min-width: 768px) 480px, 90vw" class="mt-6 aspect-[4/3] w-full rounded-2xl object-cover" loading="lazy" />
+            </div>
+            <div class="grid content-start gap-6 sm:grid-cols-2">
+              <div>
+                <p class="text-xs font-medium text-slate">Desktop</p>
+                <ul class="mt-2 space-y-1.5 text-sm text-navy">{rig.map((r) => <li>{r}</li>)}</ul>
+              </div>
+              <div>
+                <p class="text-xs font-medium text-slate">Desk</p>
+                <ul class="mt-2 space-y-1.5 text-sm text-navy">{desk.map((r) => <li>{r}</li>)}</ul>
+              </div>
+              <div class="rounded-2xl bg-white p-4 ring-1 ring-slate-200/70">
+                <p class="text-xs font-medium text-slate">Laptop</p>
+                <p class="mt-1 text-2xl font-semibold tracking-tight text-navy">MacBook Pro M2</p>
+                <p class="text-sm text-slate">512GB</p>
+              </div>
+              <div class="rounded-2xl bg-white p-4 ring-1 ring-slate-200/70">
+                <p class="text-xs font-medium text-slate">Phones</p>
+                <p class="mt-1 font-semibold text-navy">Samsung S21 FE</p>
+                <p class="font-semibold text-navy">iPhone 15</p>
+                <p class="text-sm text-slate">256GB each</p>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .glass { background: linear-gradient(135deg, rgb(255 255 255 / .72), rgb(240 249 255 / .5)); border: 1px solid rgb(203 213 225 / .7); backdrop-filter: blur(22px) saturate(160%); -webkit-backdrop-filter: blur(22px) saturate(160%); }
+  .card { border-radius: 28px; padding: 1.75rem; background: linear-gradient(135deg, rgb(255 255 255 / .9), rgb(248 250 252 / .75)); border: 1px solid rgb(226 232 240 / .9); }
+  .card-h { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.01em; color: var(--color-navy); }
+  .card-p { margin-top: .25rem; font-size: .875rem; color: var(--color-slate); }
+</style>

@@ -6,6 +6,7 @@ const links = [
   { href: '/#work', label: 'Work', id: 'work', note: 'Roles, synced from LinkedIn', icon: 'M4 7h16v12H4zM9 7V5h6v2' },
   { href: '/#oss', label: 'Open source', id: 'oss', note: 'Tools I build in public', icon: 'M8 9l-4 3 4 3M16 9l4 3-4 3M13 6l-2 12' },
   { href: '/#projects', label: 'Projects', id: 'projects', note: 'Apps I have shipped', icon: 'M4 5h7v7H4zM13 5h7v4h-7zM13 11h7v8h-7zM4 14h7v5H4z' },
+  { href: '/about/', label: 'About', id: 'about', note: 'Off the clock', icon: 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 20a8 8 0 0 1 16 0' },
   { href: '/#contact', label: 'Contact', id: 'contact', note: "Let's work together", icon: 'M4 6h16v12H4zM4 7l8 6 8-6' }
 ]
 ---
@@ -171,6 +172,10 @@ const links = [
 
   // label + active item follow the section you're reading
   const names: Record<string, string> = { work: 'Work', oss: 'Open source', projects: 'Projects', contact: 'Contact' }
+  // off the home page the pill names the page you're on
+  const onAbout = location.pathname.startsWith('/about')
+  const home = onAbout ? 'About' : 'Menu'
+  if (onAbout) { label.textContent = home; island.querySelector<HTMLElement>('.island-link[data-id="about"]')?.classList.add('active') }
   const links = [...island.querySelectorAll<HTMLElement>('.island-link')]
   const order = Object.keys(names)
   const step = (id: string | null) => {   // ring fills one step per section; Contact = complete
@@ -180,8 +185,8 @@ const links = [
   }
   const set = (id: string | null) => {
     step(id)
-    const t = id ? names[id] : 'Menu'
-    links.forEach(a => a.classList.toggle('active', a.dataset.id === id))
+    const t = id ? names[id] : home
+    links.forEach(a => a.classList.toggle('active', a.dataset.id === (id ?? (onAbout ? 'about' : null))))
     if (label.textContent === t) return
     label.textContent = t; label.classList.remove('swap'); void label.offsetWidth; label.classList.add('swap'); size()
   }

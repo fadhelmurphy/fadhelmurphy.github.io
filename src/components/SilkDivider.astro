@@ -4,14 +4,14 @@
 // giving the section a wavy edge with the ribbon running along it.
 // `bg` = decorative band behind content, gently animated (one ribbon slowly swaying).
 import { VW, VH, edgePath } from '../lib/silk-svg'
-interface Props { above?: string; flip?: boolean; bg?: boolean }
-const { above, flip = false, bg = false } = Astro.props
+interface Props { above?: string; flip?: boolean; bg?: boolean; eager?: boolean }
+const { above, flip = false, bg = false, eager = false } = Astro.props
 const size = bg ? 'h-[300px] md:h-[440px]' : 'h-[150px] md:h-[260px]'
 ---
 <div class:list={['silk-divider pointer-events-none absolute inset-x-0', bg ? 'top-1/2 z-0 -translate-y-1/2' : 'z-10', !bg && (flip ? 'bottom-0 -scale-y-100' : 'top-0')]} aria-hidden="true">
   {bg ? (
     <div class:list={['relative -mx-[8%] w-[116%]', size]}>
-      <img src="/silk.svg" alt="" width={VW} height={VH} loading="lazy" decoding="async" class="silk-a absolute inset-0 block h-full w-full" />
+      <img src="/silk.svg" alt="" width={VW} height={VH} loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : undefined} decoding="async" class="silk-a absolute inset-0 block h-full w-full" />
     </div>
   ) : (
     <div class:list={['relative w-full', size]}>
