@@ -164,17 +164,22 @@ export async function mountStory (stage: HTMLElement, gl3d: HTMLCanvasElement, m
     mx += (tmx - mx) * 0.06; my += (tmy - my) * 0.06
     // particles
     // each object rises out of the wave and melts back into it before the next one
-    const legs: [number, number, number][] = [[0.0, 0.09, 0.2], [0.24, 0.3, 0.39], [0.42, 0.47, 0.56]]
-    let wave = 1, morph = 0
-    legs.forEach(([a, b, c], i) => { if (p >= a - 0.02) { morph = i; wave = p < b ? 1 - ease(range(p, a, b)) : ease(range(p, c, c + 0.04)) } })
+    // back-to-back legs: [rise start, formed, start sinking, fully wave]. Each leg ends exactly where the next
+    // begins, so the shape only swaps while the particles are fully a wave and nothing ever jumps.
+    const legs: [number, number, number, number][] = [[0.0, 0.09, 0.18, 0.24], [0.24, 0.3, 0.36, 0.42], [0.42, 0.48, 0.55, 0.6]]
+    let wave = 1, morph = 2
+    for (let i = 0; i < legs.length; i++) {
+      const [a, b, c, d] = legs[i]
+      if (p < d || i === legs.length - 1) { morph = i; wave = p < b ? 1 - ease(range(p, a, b)) : ease(range(p, c, d)); break }
+    }
     u.uWave.value = wave
-    const fade = ease(range(p, 0.6, 0.68))
-    const side = small() ? 0 : (p < 0.2 ? 0.55 : p < 0.4 ? 0.5 : 0.5)
+    const fade = ease(range(p, 0.6, 0.67))
+    const side = small() ? 0 : 0.5
     const bt = (t * 1.15) % 1
     u.uBeat.value = Math.exp(-Math.pow((bt - 0.08) * 22, 2)) + 0.6 * Math.exp(-Math.pow((bt - 0.28) * 22, 2))
     u.uMorph.value = morph; u.uTime.value = t; u.uFade.value = fade
     const bikeW = morph === 2 ? 1 : 0
-    mesh.position.x = side * 2.3 * (1 - wave * 0.8); mesh.position.y = small() ? -1.05 : 0
+    mesh.position.x = side * 2.3 * (1 - wave); mesh.position.y = small() ? -1.05 : 0
     mesh.scale.set((small() ? 0.55 : 1) * (1 - bikeW * (small() ? 0.18 : 0.05)))
     // the object turns as you scroll; the bike only sways so both wheels stay in view
     const objY = (p * 7 + mx * 0.8) * (1 - bikeW) + (0.25 + Math.sin(p * 20) * 0.2 + mx * 0.3) * bikeW
