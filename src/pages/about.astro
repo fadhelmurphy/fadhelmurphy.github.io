@@ -2,7 +2,8 @@
 import { Image } from 'astro:assets'
 import Base from '../layouts/Base.astro'
 import SilkDivider from '../components/SilkDivider.astro'
-import photo from '../assets/about/photo.webp'
+import runner from '../assets/about/runner.png'
+import track from '../assets/about/track.jpg'
 import jobs from '../assets/about/film-jobs.webp'
 import ford from '../assets/about/film-ford.webp'
 import spidey from '../assets/about/film-spiderman.webp'
@@ -41,34 +42,45 @@ const desk = ['MSI Optix G241 144Hz', 'AIRO AIO24X 165Hz', 'Nemesis 1080p webcam
 ---
 <Base title="About | Fadhel Ijlal Falah" description="Data & Software Engineer in Tangerang. The person behind the pipelines, and what he does off the clock.">
 
-  <!-- 1. intro -->
-  <section class="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-white px-6 pt-28 pb-20 md:px-12">
+  <!-- 1. hero: cut-out portrait over a giant name, glass chips floating around -->
+  <section class="hero relative isolate overflow-hidden bg-white">
+    <div class="blob blob-a" aria-hidden="true"></div><div class="blob blob-b" aria-hidden="true"></div>
     <SilkDivider bg eager />
-    <div class="relative z-10 mx-auto grid w-full max-w-6xl items-center gap-14 md:grid-cols-[1.25fr_0.75fr]">
-      <div>
-        <h1 data-reveal class="text-[clamp(3.2rem,9vw,7.5rem)] leading-[0.95] font-bold tracking-[-0.04em] text-navy">
-          Hi, I'm<br /><span class="grad">Fadhel.</span>
-        </h1>
-        <p data-reveal class="mt-8 max-w-lg text-xl leading-relaxed text-slate md:text-2xl">
-          I move data around for a living, at Seven Retail Group in Jakarta.
-        </p>
-        <p data-reveal class="mt-4 max-w-lg leading-relaxed text-slate">
-          Batch pipelines on Google Cloud with Airflow, Dataform and BigQuery. Before that, years of frontend and fullstack work, full-time and freelance. I live in Tangerang.
-        </p>
-      </div>
-      <figure data-reveal class="polaroid mx-auto w-[min(80vw,300px)]" style="--r:4deg">
-        <Image src={photo} alt="Fadhel smiling, taking a mirror selfie" width={443} height={660} widths={[300, 443]} sizes="300px" class="aspect-[4/5] w-full rounded-[18px] object-cover object-top" loading="eager" />
-        <figcaption class="pt-3 text-center text-sm font-medium text-navy">Fadhel Ijlal Falah</figcaption>
-      </figure>
+    <div class="relative mx-auto flex min-h-[100svh] max-w-7xl flex-col items-center justify-end px-6 pt-28">
+      <p class="giant pointer-events-none select-none" aria-hidden="true">FADHEL</p>
+      <h1 class="sr-only">Fadhel Ijlal Falah, Data &amp; Software Engineer</h1>
+      <Image src={runner} alt="Fadhel running on a stadium track at night" width={580} height={1000} widths={[340, 580]} sizes="(min-width: 768px) 460px, 78vw" class="runner relative z-10 w-[78vw] max-w-[460px]" loading="eager" fetchpriority="high" />
+      <span class="chip chip-1"><i class="dot bg-emerald-500"></i>Data &amp; Software Engineer</span>
+      <span class="chip chip-2"><i class="dot bg-blue-500"></i>Seven Retail Group, Jakarta</span>
+      <span class="chip chip-3"><i class="dot bg-cyan-400"></i>Runner</span>
+      <span class="chip chip-4"><i class="dot bg-emerald-400"></i>Open to work</span>
     </div>
+  </section>
+
+  <!-- intro statement -->
+  <section class="bg-white px-6 py-24 md:px-12 md:py-32">
+    <div class="mx-auto max-w-5xl">
+      <p data-reveal class="statement">I move data around for a living. <span class="text-slate-400">Batch pipelines on Google Cloud with Airflow, Dataform and BigQuery, after years of frontend and fullstack work.</span> <span class="grad">When I'm not moving data, I'm moving.</span></p>
+    </div>
+  </section>
+
+  <!-- running: full-bleed photo card -->
+  <section class="bg-white px-4 pb-24 md:px-8 md:pb-32">
+    <figure data-reveal class="track relative mx-auto max-w-7xl overflow-hidden rounded-[36px]">
+      <Image src={track} alt="Fadhel leading a group run on a stadium track at night" width={1600} widths={[800, 1200, 1600]} sizes="(min-width: 1280px) 1248px, 96vw" class="aspect-[4/5] w-full object-cover object-[50%_60%] md:aspect-[16/9]" loading="lazy" />
+      <div class="absolute inset-0 bg-gradient-to-t from-[#0a1f44]/85 via-[#0a1f44]/10 to-transparent"></div>
+      <figcaption class="absolute inset-x-0 bottom-0 p-7 md:p-12">
+        <p class="text-sm font-medium text-cyan-200">Off the clock</p>
+        <p class="mt-2 max-w-2xl text-4xl leading-[1.02] font-bold tracking-[-0.03em] text-white md:text-6xl">Laps on the track, after the pipelines go green.</p>
+      </figcaption>
+    </figure>
   </section>
 
   <!-- 2. games: copy left, fanned covers right -->
   <section class="chapter bg-mist">
     <div class="mx-auto grid max-w-6xl items-center gap-14 md:grid-cols-2">
       <div>
-        <p data-reveal class="kicker">Off the clock</p>
-        <h2 data-reveal class="title">Frequently<br />played</h2>
+                <h2 data-reveal class="title">Frequently<br />played</h2>
         <p data-reveal class="lede">Gaming is how I relax after a busy day.</p>
         <ul data-reveal class="mt-6 space-y-3 text-slate">
           {games.map((g) => <li><b class="font-semibold text-navy">{g.t}</b> {g.why}</li>)}
@@ -167,6 +179,30 @@ const desk = ['MSI Optix G241 144Hz', 'AIRO AIO24X 165Hz', 'Nemesis 1080p webcam
 </Base>
 
 <style>
+  .blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .55; z-index: -1; }
+  .blob-a { width: 46vmax; height: 46vmax; left: -14vmax; top: 10%; background: radial-gradient(circle, #bfdbfe, transparent 70%); }
+  .blob-b { width: 40vmax; height: 40vmax; right: -12vmax; top: 30%; background: radial-gradient(circle, #a7f3d0, transparent 70%); }
+  .giant { position: absolute; left: 50%; top: 52%; transform: translate(-50%, -50%); z-index: 0; margin: 0; white-space: nowrap;
+    font-size: clamp(5.5rem, 24vw, 24rem); line-height: .8; font-weight: 800; letter-spacing: -0.06em;
+    background: linear-gradient(180deg, #2e3e6a 0%, #2563eb 55%, rgb(16 185 129 / .55) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    animation: rise 1.2s cubic-bezier(.16,1,.3,1) both; }
+  @media (max-width: 767px) { .giant { top: 40%; } }
+  .runner { animation: rise 1.2s .12s cubic-bezier(.16,1,.3,1) both; filter: drop-shadow(0 30px 40px rgb(37 99 235 / .18)); }
+  @keyframes rise { from { opacity: 0; transform: translate(var(--tx, 0), calc(var(--ty, 0px) + 40px)); } }
+  .giant { --tx: -50%; --ty: -50%; }
+  .chip { position: absolute; z-index: 20; display: inline-flex; align-items: center; gap: .5rem; padding: .6rem 1rem; border-radius: 999px; font-size: .875rem; font-weight: 600; color: var(--color-navy);
+    background: rgb(255 255 255 / .6); border: 1px solid rgb(255 255 255 / .9); backdrop-filter: blur(16px) saturate(160%); -webkit-backdrop-filter: blur(16px) saturate(160%);
+    box-shadow: 0 12px 30px -16px rgb(37 99 235 / .4); animation: float 6s ease-in-out infinite alternate, pop .8s cubic-bezier(.34,1.56,.64,1) both; }
+  .chip .dot { width: .45rem; height: .45rem; border-radius: 99px; }
+  .chip-1 { left: 6%; top: 30%; animation-delay: 0s, .5s; }
+  .chip-2 { right: 5%; top: 24%; animation-delay: -2s, .65s; }
+  .chip-3 { left: 12%; bottom: 20%; animation-delay: -4s, .8s; }
+  .chip-4 { right: 10%; bottom: 26%; animation-delay: -1s, .95s; }
+  @media (max-width: 767px) { .chip { font-size: .75rem; padding: .45rem .8rem; } .chip-1 { left: 4%; top: 19%; } .chip-2 { right: 4%; top: 27%; } .chip-3 { left: 4%; bottom: 8%; } .chip-4 { right: 4%; bottom: 14%; } }
+  @keyframes float { to { transform: translateY(-12px); } }
+  @keyframes pop { from { opacity: 0; scale: .6; } }
+  .statement { font-size: clamp(1.9rem, 4.4vw, 3.6rem); line-height: 1.12; font-weight: 600; letter-spacing: -0.03em; color: var(--color-navy); }
+  @media (prefers-reduced-motion: reduce) { .giant, .runner, .chip { animation: none; } }
   .chapter { padding: 7rem 1.5rem; }
   @media (min-width: 768px) { .chapter { padding: 9rem 3rem; min-height: 90vh; display: flex; align-items: center; } .chapter > div { width: 100%; } }
   .kicker { font-size: .875rem; font-weight: 600; color: #2563eb; }
