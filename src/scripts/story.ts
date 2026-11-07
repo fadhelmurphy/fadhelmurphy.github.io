@@ -12,24 +12,28 @@ const range = (p: number, a: number, b: number) => clamp((p - a) / (b - a))
 const ease = (t: number) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
 
 const vert = /* glsl */`
-attribute vec3 p0; attribute vec3 p1; attribute vec3 p2; attribute float seed;
-uniform float uMorph; uniform float uTime; uniform float uSize; uniform float uBeat; uniform float uFade;
+attribute vec3 p0; attribute vec3 p1; attribute vec3 p2; attribute float seed; attribute vec2 grid;
+uniform float uWave; uniform float uMorph; uniform float uTime; uniform float uSize; uniform float uBeat; uniform float uFade;
 uniform mat4 modelViewMatrix; uniform mat4 projectionMatrix;
 varying float vSeed; varying float vShape; varying float vDepth; varying float vGrad;
 void main(){
-  float k = clamp(uMorph, 0., 2.);
-  float i = floor(min(k, 1.999)); float f = k - i;
-  float e = smoothstep(0., 1., clamp(f * 1.7 - seed * .7, 0., 1.));
-  vec3 a = i < .5 ? p0 : p1; vec3 b = i < .5 ? p1 : p2;
-  vec3 pos = mix(a, b, e);
-  pos += normalize(pos + vec3(.001)) * sin(e * 3.14159) * (.6 + seed * .8);
+  float k = uMorph;
+  vec3 shp = k < .5 ? p0 : k < 1.5 ? p1 : p2;              // shape is swapped only while fully a wave
+  // the wave: a flowing sheet of dots
+  vec3 wv = vec3((grid.x - .5) * 5.2, 0., (grid.y - .5) * 3.2);
+  wv.y = sin(wv.x * 1.3 + uTime * 1.2) * .28 + cos(wv.z * 1.9 - uTime * .9) * .18 + sin((wv.x + wv.z) * 2.4 + uTime * 1.6) * .07;
+  wv = vec3(wv.x, wv.y * .9 - wv.z * .35, wv.z * .9 + wv.y * .35);   // lean the sheet towards the camera
+  // particles leave the wave a little after one another, so the shape rises out of it
+  float e = smoothstep(0., 1., clamp((1. - uWave) * 1.6 - (1. - grid.x) * .6, 0., 1.));
+  vec3 pos = mix(wv, shp, e);
+  pos.y += sin(e * 3.14159) * .35 * (seed - .5);
   pos += normalize(pos + vec3(.001)) * uFade * (1.5 + seed * 3.);          // scatter away when the map takes over
   pos += vec3(sin(uTime * .9 + seed * 40.), cos(uTime * .7 + seed * 23.), sin(uTime * .8 + seed * 17.)) * .012;
-  pos *= 1. + uBeat * (1. - clamp(k, 0., 1.)) * .07;
+  pos *= 1. + uBeat * step(k, .5) * e * .07;
   // living surface: layered waves push particles along their direction from the centre
   vec3 n = normalize(pos + vec3(.001));
   float w = sin(pos.x * 3.1 + uTime * 1.3) * sin(pos.y * 2.7 - uTime * 1.1) * sin(pos.z * 3.4 + uTime * .9);
-  pos += n * w * .09 * (1. - uFade);
+  pos += n * w * .09 * e;
   vGrad = clamp(pos.y * .38 + .5, 0., 1.);
   vec4 mv = modelViewMatrix * vec4(pos, 1.);
   gl_Position = projectionMatrix * mv;
@@ -59,13 +63,15 @@ export async function mountStory (stage: HTMLElement, gl3d: HTMLCanvasElement, m
   const raw = new Int16Array(await (await fetch('/shapes.bin')).arrayBuffer())
   const shape = (s: number) => { const d = new Float32Array(use * 3); for (let i = 0; i < use * 3; i++) d[i] = raw[s * N * 3 + i] / 8000; return { size: 3, data: d } }
   const seed = new Float32Array(use); for (let i = 0; i < use; i++) seed[i] = Math.random()
+  const cols = Math.round(Math.sqrt(use * 1.6)), rows = Math.ceil(use / cols)
+  const grid = new Float32Array(use * 2); for (let i = 0; i < use; i++) { grid[i * 2] = (i % cols) / (cols - 1); grid[i * 2 + 1] = Math.floor(i / cols) / (rows - 1) }
   const renderer = new Renderer({ canvas: gl3d, alpha: true, dpr: Math.min(devicePixelRatio, small() ? 1.5 : 2), premultipliedAlpha: true })
   const gl = renderer.gl; gl.clearColor(0, 0, 0, 0)
   const camera = new Camera(gl, { fov: 35 }); camera.position.set(0, 0, 6)
   const scene = new Transform()
   const p0 = shape(0)
-  const geometry = new Geometry(gl, { position: p0, p0, p1: shape(1), p2: shape(2), seed: { size: 1, data: seed } })
-  const u = { uMorph: { value: 0 }, uTime: { value: 0 }, uSize: { value: small() ? 12 : 14 }, uBeat: { value: 0 }, uFade: { value: 0 } }
+  const geometry = new Geometry(gl, { position: p0, p0, p1: shape(1), p2: shape(2), seed: { size: 1, data: seed }, grid: { size: 2, data: grid } })
+  const u = { uWave: { value: 1 }, uMorph: { value: 0 }, uTime: { value: 0 }, uSize: { value: small() ? 12 : 14 }, uBeat: { value: 0 }, uFade: { value: 0 } }
   const program = new Program(gl, { vertex: vert, fragment: frag, uniforms: u, transparent: true, depthTest: false })
   program.setBlendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA)
   const mesh = new Mesh(gl, { mode: gl.POINTS, geometry, program })
@@ -157,17 +163,22 @@ export async function mountStory (stage: HTMLElement, gl3d: HTMLCanvasElement, m
     const p = reduce ? progress() : sp
     mx += (tmx - mx) * 0.06; my += (tmy - my) * 0.06
     // particles
-    const morph = ease(range(p, 0.2, 0.36)) + ease(range(p, 0.4, 0.54))
-    const fade = ease(range(p, 0.58, 0.68))
+    // each object rises out of the wave and melts back into it before the next one
+    const legs: [number, number, number][] = [[0.0, 0.09, 0.2], [0.24, 0.3, 0.39], [0.42, 0.47, 0.56]]
+    let wave = 1, morph = 0
+    legs.forEach(([a, b, c], i) => { if (p >= a - 0.02) { morph = i; wave = p < b ? 1 - ease(range(p, a, b)) : ease(range(p, c, c + 0.04)) } })
+    u.uWave.value = wave
+    const fade = ease(range(p, 0.6, 0.68))
     const side = small() ? 0 : (p < 0.2 ? 0.55 : p < 0.4 ? 0.5 : 0.5)
     const bt = (t * 1.15) % 1
     u.uBeat.value = Math.exp(-Math.pow((bt - 0.08) * 22, 2)) + 0.6 * Math.exp(-Math.pow((bt - 0.28) * 22, 2))
     u.uMorph.value = morph; u.uTime.value = t; u.uFade.value = fade
-    const bikeW = range(p, 0.42, 0.5) * (1 - range(p, 0.58, 0.62))
-    mesh.position.x = side * 2.3; mesh.position.y = small() ? -1.05 : 0
+    const bikeW = morph === 2 ? 1 : 0
+    mesh.position.x = side * 2.3 * (1 - wave * 0.8); mesh.position.y = small() ? -1.05 : 0
     mesh.scale.set((small() ? 0.55 : 1) * (1 - bikeW * (small() ? 0.18 : 0.05)))
     // the object turns as you scroll; the bike only sways so both wheels stay in view
-    mesh.rotation.y = (p * 7 + mx * 0.8) * (1 - bikeW) + (0.25 + Math.sin(p * 20) * 0.2 + mx * 0.3) * bikeW
+    const objY = (p * 7 + mx * 0.8) * (1 - bikeW) + (0.25 + Math.sin(p * 20) * 0.2 + mx * 0.3) * bikeW
+    mesh.rotation.y = objY * (1 - wave) + mx * 0.3 * wave        // the wave always faces you
     mesh.rotation.x = 0.12 + my * 0.4
     if (fade < 1) renderer.render({ scene, camera }); else gl.clear(gl.COLOR_BUFFER_BIT)
     drawMap(p, t)
