@@ -26,22 +26,23 @@ const nav = [
     <span id="ride" class="anchor" style="top:42%;height:18%"></span>
     <span id="strava" class="anchor" style="top:60%;height:40%"></span>
     <div id="stage" class="sticky top-0 h-[100svh] overflow-hidden">
+      <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
       <canvas id="map" class="absolute inset-0 h-full w-full" aria-hidden="true"></canvas>
       <canvas id="gl3d" class="absolute inset-0 h-full w-full" aria-hidden="true"></canvas>
-      <div class="absolute inset-x-0 bottom-0 h-[3px] bg-slate-200/70"><div data-bar class="h-full origin-left scale-x-0 bg-gradient-to-r from-[#2563eb] via-[#0ea5e9] to-[#fc4c02]"></div></div>
+      <div class="absolute inset-x-0 bottom-0 h-[3px] bg-white/10"><div data-bar class="h-full origin-left scale-x-0 bg-gradient-to-r from-[#818cf8] via-[#22d3ee] to-[#4ade80]"></div></div>
 
       <div class="relative z-10 mx-auto h-full max-w-6xl px-6 md:px-12">
         <div data-from="-1" data-to="0.19" class="blk">
-          <p class="text-sm font-semibold text-[#fc4c02]">Off the clock</p>
+          <p class="kicker">Off the clock</p>
           <h1 class="big mt-4">Run.<br />Ride.<br /><span class="grad">Repeat.</span></h1>
-          <p class="mt-6 max-w-sm text-lg leading-relaxed text-slate">What keeps the heart going when I'm not at a desk. Keep scrolling.</p>
+          <p class="mt-6 max-w-sm text-lg leading-relaxed text-slate-400">What keeps the heart going when I'm not at a desk. Keep scrolling.</p>
         </div>
 
         <div data-from="0.22" data-to="0.4" class="blk">
           <p class="kicker">Run</p>
           <h2 class="title">Laps on <span class="grad">the track.</span></h2>
-          <ul class="mt-7 max-w-md divide-y divide-slate-200/80 border-y border-slate-200/80">
-            {runGear.map((g) => <li class="flex items-baseline justify-between gap-4 py-3"><span class="text-sm text-slate">{g.k}</span><span class="text-right font-semibold text-navy">{g.t}</span></li>)}
+          <ul class="mt-7 max-w-md divide-y divide-white/10 border-y border-white/10">
+            {runGear.map((g) => <li class="flex items-baseline justify-between gap-4 py-3"><span class="text-sm text-slate-400">{g.k}</span><span class="text-right font-semibold text-white">{g.t}</span></li>)}
           </ul>
         </div>
 
@@ -53,11 +54,11 @@ const nav = [
 
         <div data-from="0.62" data-to="0.94" class="blk blk-top">
           <p class="kicker !text-[#fc4c02]">Strava</p>
-          <h2 class="title">Tracking the <span class="text-[#fc4c02]">activity</span>,<br />keep scrolling.</h2>
+          <h2 class="title">Tracking the <span class="grad">activity</span>,<br />keep scrolling.</h2>
         </div>
 
         <div data-from="0.95" data-to="2" class="blk blk-top">
-          <h2 class="title">Activity <span class="text-[#fc4c02]">complete.</span></h2>
+          <h2 class="title">Activity <span class="grad">complete.</span></h2>
           <p class="lede max-w-sm">Every run and ride ends up here.</p>
           <a href={strava} target="_blank" rel="noopener" class="strava mt-8 inline-flex items-center gap-3 rounded-full px-8 py-4 text-lg font-semibold text-white">
             Follow me on Strava
@@ -84,7 +85,16 @@ const nav = [
 </script>
 
 <style>
-  :global(body:has(.sport)) { background: #fbfcff; }
+  :global(body:has(.sport)) { background: #05070d; }
+  :global(body:has(.sport) footer) { background: #05070d; border-color: rgb(255 255 255 / .08); }
+  :global(body:has(.sport) footer *) { color: rgb(148 163 184); }
+  .sport { color: #e2e8f0; }
+  .aurora { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+  .aurora i { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .5; animation: drift 18s ease-in-out infinite alternate; }
+  .aurora i:nth-child(1) { width: 60vmax; height: 40vmax; left: -15vmax; top: -18vmax; background: radial-gradient(closest-side, #0f766e, transparent); }
+  .aurora i:nth-child(2) { width: 55vmax; height: 40vmax; right: -18vmax; bottom: -20vmax; background: radial-gradient(closest-side, #1e3a8a, transparent); animation-duration: 24s; }
+  .aurora i:nth-child(3) { width: 40vmax; height: 30vmax; right: 10vmax; top: -15vmax; background: radial-gradient(closest-side, #134e4a, transparent); animation-duration: 21s; opacity: .35; }
+  @keyframes drift { to { transform: translate(6vmax, 4vmax) scale(1.12); } }
   .anchor { position: absolute; left: 0; width: 1px; pointer-events: none; }
   .blk { position: absolute; left: 1.5rem; right: 1.5rem; top: 50%; translate: 0 -50%; opacity: 0; will-change: opacity, transform; }
   @media (min-width: 768px) { .blk { left: 3rem; right: auto; max-width: 34rem; } }
@@ -92,12 +102,13 @@ const nav = [
   .blk-top { top: 7rem; translate: none; }
   @media (min-width: 768px) { .blk-top { top: 8rem; } }
   .blk:first-child { opacity: 1; }
-  .big { font-size: clamp(3.4rem, 10vw, 8.5rem); line-height: .9; font-weight: 800; letter-spacing: -0.05em; color: var(--color-navy); }
-  .title { margin-top: .75rem; font-size: clamp(2.4rem, 5.5vw, 4.5rem); line-height: .98; font-weight: 700; letter-spacing: -0.04em; color: var(--color-navy); }
-  .kicker { font-size: .875rem; font-weight: 600; color: #2563eb; }
-  .lede { margin-top: 1.25rem; font-size: 1.125rem; line-height: 1.65; color: var(--color-slate); }
-  .grad { background: linear-gradient(100deg, #2563eb, #0ea5e9 50%, #10b981); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-  .glass { background: rgb(255 255 255 / .7); border: 1px solid rgb(255 255 255 / .95); box-shadow: 0 24px 60px -36px rgb(37 99 235 / .45); }
+  .big { font-size: clamp(3.4rem, 9.5vw, 8rem); line-height: .95; font-weight: 300; letter-spacing: -0.045em; color: #fff; }
+  .title { margin-top: .75rem; font-size: clamp(2.4rem, 5.5vw, 4.5rem); line-height: 1; font-weight: 300; letter-spacing: -0.04em; color: #fff; }
+  .kicker { font-size: .75rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: #67e8f9; }
+  .lede { margin-top: 1.25rem; font-size: 1.0625rem; line-height: 1.65; color: rgb(148 163 184); }
+  .grad { background: linear-gradient(100deg, #4ade80, #22d3ee 50%, #818cf8); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .glass { background: rgb(255 255 255 / .04); border: 1px solid rgb(255 255 255 / .1); }
   .strava { background: #fc4c02; box-shadow: 0 18px 40px -16px rgb(252 76 2 / .7); transition: transform .4s cubic-bezier(.34,1.56,.64,1); }
   .strava:hover { transform: translateY(-2px) scale(1.03); }
+  @media (prefers-reduced-motion: reduce) { .aurora i { animation: none; } }
 </style>

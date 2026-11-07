@@ -15,7 +15,7 @@ const vert = /* glsl */`
 attribute vec3 p0; attribute vec3 p1; attribute vec3 p2; attribute float seed;
 uniform float uMorph; uniform float uTime; uniform float uSize; uniform float uBeat; uniform float uFade;
 uniform mat4 modelViewMatrix; uniform mat4 projectionMatrix;
-varying float vSeed; varying float vShape; varying float vDepth;
+varying float vSeed; varying float vShape; varying float vDepth; varying float vGrad;
 void main(){
   float k = clamp(uMorph, 0., 2.);
   float i = floor(min(k, 1.999)); float f = k - i;
@@ -26,20 +26,25 @@ void main(){
   pos += normalize(pos + vec3(.001)) * uFade * (1.5 + seed * 3.);          // scatter away when the map takes over
   pos += vec3(sin(uTime * .9 + seed * 40.), cos(uTime * .7 + seed * 23.), sin(uTime * .8 + seed * 17.)) * .012;
   pos *= 1. + uBeat * (1. - clamp(k, 0., 1.)) * .07;
+  // living surface: layered waves push particles along their direction from the centre
+  vec3 n = normalize(pos + vec3(.001));
+  float w = sin(pos.x * 3.1 + uTime * 1.3) * sin(pos.y * 2.7 - uTime * 1.1) * sin(pos.z * 3.4 + uTime * .9);
+  pos += n * w * .09 * (1. - uFade);
+  vGrad = clamp(pos.y * .38 + .5, 0., 1.);
   vec4 mv = modelViewMatrix * vec4(pos, 1.);
   gl_Position = projectionMatrix * mv;
-  gl_PointSize = uSize * (.55 + seed * .9) / -mv.z;
+  gl_PointSize = uSize * (.45 + seed * .7) / -mv.z;
   vSeed = seed; vShape = k; vDepth = -mv.z;
 }`
 const frag = /* glsl */`
-precision highp float; varying float vSeed; varying float vShape; varying float vDepth; uniform float uFade;
+precision highp float; varying float vSeed; varying float vShape; varying float vDepth; varying float vGrad; uniform float uFade;
 void main(){
   vec2 c = gl_PointCoord - .5; float d = length(c); if (d > .5) discard;
-  vec3 h = mix(vec3(.937,.267,.267), vec3(.957,.447,.714), vSeed);
-  vec3 s = mix(vec3(.145,.388,.922), vec3(.055,.647,.914), vSeed);
-  vec3 b = mix(vec3(.055,.647,.914), vec3(.063,.725,.506), vSeed);
-  vec3 col = vShape < 1. ? mix(h, s, smoothstep(0., 1., vShape)) : mix(s, b, smoothstep(1., 2., vShape));
-  float a = smoothstep(.5, .15, d) * clamp(1.5 - (vDepth - 4.) * .35, .45, 1.) * (1. - uFade);
+  // aurora gradient: indigo at the bottom → cyan → green at the top
+  vec3 indigo = vec3(.31,.27,.98), cyan = vec3(.13,.83,.93), green = vec3(.29,.87,.5);
+  vec3 col = vGrad < .5 ? mix(indigo, cyan, vGrad * 2.) : mix(cyan, green, (vGrad - .5) * 2.);
+  col = mix(col, vec3(1.), .12 * vSeed);
+  float a = smoothstep(.5, 0., d) * .85 * clamp(1.6 - (vDepth - 4.) * .3, .35, 1.) * (1. - uFade);
   gl_FragColor = vec4(col * a, a);
 }`
 
@@ -50,9 +55,10 @@ export async function mountStory (stage: HTMLElement, gl3d: HTMLCanvasElement, m
   const progress = () => { const r = track.getBoundingClientRect(); return clamp(-r.top / Math.max(1, r.height - innerHeight)) }
 
   // ---- particles ----
-  const N = 12000, use = innerWidth < 768 ? 7000 : N
+  const N = 12000, rep = innerWidth < 768 ? 2 : 3, base = innerWidth < 768 ? 9000 : N, use = base * rep
   const raw = new Int16Array(await (await fetch('/shapes.bin')).arrayBuffer())
-  const shape = (s: number) => { const d = new Float32Array(use * 3); for (let i = 0; i < use * 3; i++) d[i] = raw[s * N * 3 + i] / 8000; return { size: 3, data: d } }
+  const jit = new Float32Array(use * 3); for (let i = 0; i < use * 3; i++) jit[i] = i < base * 3 ? 0 : (Math.random() - 0.5) * 0.035
+  const shape = (s: number) => { const d = new Float32Array(use * 3); for (let i = 0; i < use * 3; i++) d[i] = raw[s * N * 3 + (i % (base * 3))] / 8000 + jit[i]; return { size: 3, data: d } }
   const seed = new Float32Array(use); for (let i = 0; i < use; i++) seed[i] = Math.random()
   const renderer = new Renderer({ canvas: gl3d, alpha: true, dpr: Math.min(devicePixelRatio, small() ? 1.5 : 2), premultipliedAlpha: true })
   const gl = renderer.gl; gl.clearColor(0, 0, 0, 0)
@@ -60,8 +66,10 @@ export async function mountStory (stage: HTMLElement, gl3d: HTMLCanvasElement, m
   const scene = new Transform()
   const p0 = shape(0)
   const geometry = new Geometry(gl, { position: p0, p0, p1: shape(1), p2: shape(2), seed: { size: 1, data: seed } })
-  const u = { uMorph: { value: 0 }, uTime: { value: 0 }, uSize: { value: small() ? 22 : 30 }, uBeat: { value: 0 }, uFade: { value: 0 } }
-  const mesh = new Mesh(gl, { mode: gl.POINTS, geometry, program: new Program(gl, { vertex: vert, fragment: frag, uniforms: u, transparent: true, depthTest: false }) })
+  const u = { uMorph: { value: 0 }, uTime: { value: 0 }, uSize: { value: small() ? 16 : 20 }, uBeat: { value: 0 }, uFade: { value: 0 } }
+  const program = new Program(gl, { vertex: vert, fragment: frag, uniforms: u, transparent: true, depthTest: false })
+  program.setBlendFunc(gl.ONE, gl.ONE)            // additive: overlapping particles glow
+  const mesh = new Mesh(gl, { mode: gl.POINTS, geometry, program })
   mesh.setParent(scene)
 
   // ---- 2D map ----
@@ -75,10 +83,17 @@ export async function mountStory (stage: HTMLElement, gl3d: HTMLCanvasElement, m
   resize(); addEventListener('resize', resize)
   const hgt = (x: number, z: number) => 0.32 * Math.sin(x * 1.3 + 0.4) * Math.cos(z * 1.1) + 0.16 * Math.sin(x * 2.7 - z * 1.9) + 0.08 * Math.cos(x * 5.1 + z * 4.3)
   const route = (s: number) => { const x = -1.7 + s * 3.4; return [x, Math.sin(s * 8) * 0.75 * (1 - s * 0.35) + Math.sin(s * 21) * 0.1] }
-  const confetti = Array.from({ length: 90 }, () => ({ x: Math.random(), v: 0.4 + Math.random() * 0.8, r: Math.random() * 6, c: ['#2563eb', '#0ea5e9', '#10b981', '#fc4c02', '#f472b6'][(Math.random() * 5) | 0], w: 4 + Math.random() * 5 }))
+  const stars = Array.from({ length: 220 }, () => ({ x: Math.random(), y: Math.random(), z: 0.2 + Math.random(), s: Math.random() < 0.85 ? 1 : 2, a: 0.15 + Math.random() * 0.5, r: Math.random() }))
+  const confetti = Array.from({ length: 90 }, () => ({ x: Math.random(), v: 0.4 + Math.random() * 0.8, r: Math.random() * 6, c: ['#4f46e5', '#22d3ee', '#4ade80', '#fc4c02', '#a5f3fc'][(Math.random() * 5) | 0], w: 4 + Math.random() * 5 }))
 
   const drawMap = (p: number, t: number) => {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H)
+    // dust / stars, drifting with scroll
+    for (const st of stars) {
+      const y = ((st.y - p * st.z * 0.6) % 1 + 1) % 1
+      ctx.fillStyle = `rgba(200,230,255,${st.a * (0.6 + 0.4 * Math.sin(t * 1.5 + st.r * 9))})`
+      ctx.fillRect(st.x * W, y * H, st.s, st.s)
+    }
     const show = ease(range(p, 0.58, 0.68)); if (show <= 0) return
     ctx.globalAlpha = show
     const tilt = ease(range(p, 0.68, 0.9))
@@ -97,14 +112,14 @@ export async function mountStory (stage: HTMLElement, gl3d: HTMLCanvasElement, m
     for (let pass = 0; pass < 2; pass++) for (let i = 0; i <= G; i++) {
       ctx.beginPath()
       for (let j = 0; j <= G; j++) { const a = -R + 2 * R * i / G, b = -R + 2 * R * j / G; const [x, z] = pass ? [b, a] : [a, b]; const q = P(x, z, hgt(x, z) * tilt); j ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1]) }
-      const e = Math.abs(i / G - 0.5) * 2; ctx.strokeStyle = `rgba(46,62,106,${0.16 * (1 - e * e)})`; ctx.stroke()
+      const e = Math.abs(i / G - 0.5) * 2; ctx.strokeStyle = `rgba(103,232,249,${0.16 * (1 - e * e)})`; ctx.stroke()
     }
     // radar ping at the start until the route begins
     const start = route(0), sp = P(start[0], start[1], hgt(start[0], start[1]) * tilt)
     const findT = range(p, 0.62, 0.72)
     if (findT > 0 && findT < 1) for (let k = 0; k < 2; k++) {
       const q = ((t * 0.8 + k * 0.5) % 1)
-      ctx.fillStyle = `rgba(252,76,2,${0.18 * (1 - q) * (1 - findT)})`; ctx.beginPath(); ctx.arc(sp[0], sp[1], 10 + q * Math.min(W, H) * 0.22, 0, Math.PI * 2); ctx.fill()
+      ctx.fillStyle = `rgba(34,211,238,${0.16 * (1 - q) * (1 - findT)})`; ctx.beginPath(); ctx.arc(sp[0], sp[1], 10 + q * Math.min(W, H) * 0.22, 0, Math.PI * 2); ctx.fill()
     }
     // the route, drawn up to the scroll position
     const drawn = ease(range(p, 0.72, 0.95))
@@ -112,11 +127,12 @@ export async function mountStory (stage: HTMLElement, gl3d: HTMLCanvasElement, m
     for (let k = 0; k <= end; k++) { const s = k / M, [x, z] = route(s); pts.push(P(x, z, hgt(x, z) * tilt + 0.03)) }
     ctx.lineCap = 'round'; ctx.lineJoin = 'round'
     if (pts.length > 1) {
-      ctx.strokeStyle = 'rgba(252,76,2,.18)'; ctx.lineWidth = 14; ctx.beginPath(); pts.forEach((q, k) => k ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1])); ctx.stroke()
-      ctx.strokeStyle = '#fc4c02'; ctx.lineWidth = 4.5; ctx.beginPath(); pts.forEach((q, k) => k ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1])); ctx.stroke()
+      const g = ctx.createLinearGradient(pts[0][0], 0, pts[pts.length - 1][0] + 1, 0); g.addColorStop(0, '#4f46e5'); g.addColorStop(0.5, '#22d3ee'); g.addColorStop(1, '#4ade80')
+      ctx.strokeStyle = 'rgba(34,211,238,.18)'; ctx.lineWidth = 16; ctx.beginPath(); pts.forEach((q, k) => k ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1])); ctx.stroke()
+      ctx.shadowColor = '#22d3ee'; ctx.shadowBlur = 14; ctx.strokeStyle = g; ctx.lineWidth = 4; ctx.beginPath(); pts.forEach((q, k) => k ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1])); ctx.stroke(); ctx.shadowBlur = 0
     }
     // start pin
-    ctx.fillStyle = '#fff'; ctx.strokeStyle = '#2e3e6a'; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(sp[0], sp[1], 7, 0, Math.PI * 2); ctx.fill(); ctx.stroke()
+    ctx.fillStyle = '#05070d'; ctx.strokeStyle = '#a5f3fc'; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(sp[0], sp[1], 7, 0, Math.PI * 2); ctx.fill(); ctx.stroke()
     // athlete
     const hd = pts[pts.length - 1] || sp
     ctx.fillStyle = '#fc4c02'; ctx.strokeStyle = '#fff'; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(hd[0], hd[1], 9, 0, Math.PI * 2); ctx.fill(); ctx.stroke()
