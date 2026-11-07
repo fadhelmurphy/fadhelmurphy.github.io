@@ -2,17 +2,20 @@
 import { Image } from 'astro:assets'
 import logo from '../assets/logo.png'
 import { site } from '../data/site'
-const links = [
-  { href: '/#work', label: 'Work', id: 'work', note: 'Roles, synced from LinkedIn', icon: 'M4 7h16v12H4zM9 7V5h6v2' },
-  { href: '/#oss', label: 'Open source', id: 'oss', note: 'Tools I build in public', icon: 'M8 9l-4 3 4 3M16 9l4 3-4 3M13 6l-2 12' },
-  { href: '/#projects', label: 'Projects', id: 'projects', note: 'Apps I have shipped', icon: 'M4 5h7v7H4zM13 5h7v4h-7zM13 11h7v8h-7zM4 14h7v5H4z' },
+export type NavLink = { href: string; label: string; id: string; note: string; icon: string; track?: boolean }
+interface Props { links?: NavLink[]; page?: string }
+const homeLinks: NavLink[] = [
+  { href: '/#work', label: 'Work', id: 'work', note: 'Roles, synced from LinkedIn', icon: 'M4 7h16v12H4zM9 7V5h6v2', track: true },
+  { href: '/#oss', label: 'Open source', id: 'oss', note: 'Tools I build in public', icon: 'M8 9l-4 3 4 3M16 9l4 3-4 3M13 6l-2 12', track: true },
+  { href: '/#projects', label: 'Projects', id: 'projects', note: 'Apps I have shipped', icon: 'M4 5h7v7H4zM13 5h7v4h-7zM13 11h7v8h-7zM4 14h7v5H4z', track: true },
   { href: '/about/', label: 'About', id: 'about', note: 'Off the clock', icon: 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 20a8 8 0 0 1 16 0' },
-  { href: '/#contact', label: 'Contact', id: 'contact', note: "Let's work together", icon: 'M4 6h16v12H4zM4 7l8 6 8-6' }
+  { href: '/#contact', label: 'Contact', id: 'contact', note: "Let's work together", icon: 'M4 6h16v12H4zM4 7l8 6 8-6', track: true }
 ]
+const { links = homeLinks, page = 'Menu' } = Astro.props
 ---
 <!-- Dynamic-Island menu: live-site pill, gradient ring, scroll progress, expands into a panel -->
 <header class="pointer-events-none fixed inset-x-0 top-4 z-50 flex justify-end px-3 md:top-6 md:px-8">
-  <nav id="island" aria-label="Main" class="island pointer-events-auto max-w-[calc(100vw-1.5rem)]">
+  <nav id="island" aria-label="Main" data-page={page} class="island pointer-events-auto max-w-[calc(100vw-1.5rem)]">
     <div class="island-inner">
       <div id="island-row" class="flex items-center justify-between">
         <a href="/" class="flex items-center gap-2 py-2 pr-3 pl-2.5 font-semibold text-navy">
@@ -42,7 +45,7 @@ const links = [
             <ul class="space-y-0.5">
               {links.map((l, i) => (
                 <li class="island-item" style={`--i:${i}`}>
-                  <a href={l.href} data-id={l.id} class="island-link group flex items-center gap-3 rounded-2xl px-2.5 py-2 transition-colors hover:bg-slate-900/[0.04]">
+                  <a href={l.href} data-id={l.id} data-track={l.track ? '1' : undefined} class="island-link group flex items-center gap-3 rounded-2xl px-2.5 py-2 transition-colors hover:bg-slate-900/[0.04]">
                     <span class="island-ic grid size-9 shrink-0 place-items-center rounded-xl text-blue-600">
                       <svg class="size-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d={l.icon} /></svg>
                     </span>
@@ -171,11 +174,11 @@ const links = [
   addEventListener('scroll', prog, { passive: true }); prog()
 
   // label + active item follow the section you're reading
-  const names: Record<string, string> = { work: 'Work', oss: 'Open source', projects: 'Projects', contact: 'Contact' }
-  // off the home page the pill names the page you're on
-  const onAbout = location.pathname.startsWith('/about')
-  const home = onAbout ? 'About' : 'Menu'
-  if (onAbout) { label.textContent = home; island.querySelector<HTMLElement>('.island-link[data-id="about"]')?.classList.add('active') }
+  // sections to follow come from this page's menu items (data-track); the pill shows the page name at the top
+  const home = island.dataset.page || 'Menu'
+  const tracked = [...island.querySelectorAll<HTMLElement>('.island-link[data-track]')]
+  const names: Record<string, string> = Object.fromEntries(tracked.map(a => [a.dataset.id!, a.querySelector('.text-\\[15px\\]')?.textContent?.trim() || a.dataset.id!]))
+  if (home !== 'Menu') label.textContent = home
   const links = [...island.querySelectorAll<HTMLElement>('.island-link')]
   const order = Object.keys(names)
   const step = (id: string | null) => {   // ring fills one step per section; Contact = complete
@@ -186,7 +189,7 @@ const links = [
   const set = (id: string | null) => {
     step(id)
     const t = id ? names[id] : home
-    links.forEach(a => a.classList.toggle('active', a.dataset.id === (id ?? (onAbout ? 'about' : null))))
+    links.forEach(a => a.classList.toggle('active', a.dataset.id === id))
     if (label.textContent === t) return
     label.textContent = t; label.classList.remove('swap'); void label.offsetWidth; label.classList.add('swap'); size()
   }
