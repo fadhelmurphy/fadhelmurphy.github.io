@@ -1,6 +1,6 @@
 import { NodeIO } from '@gltf-transform/core'
 import { writeFileSync } from 'node:fs'
-const N = 12000, TAU = Math.PI * 2
+const N = 30000, M = 220000, TAU = Math.PI * 2
 const R = Math.random
 // ---------- shoe: area-weighted surface sampling of the glTF mesh ----------
 const doc = await new NodeIO().read('shoe.glb')
@@ -21,7 +21,7 @@ for (const node of doc.getRoot().listNodes()) {
 const total = tris.reduce((s,t)=>s+t[3],0); const cum=[]; let acc=0; for (const t of tris){acc+=t[3];cum.push(acc)}
 const pick = () => { const r=R()*total; let lo=0,hi=cum.length-1; while(lo<hi){const mid=(lo+hi)>>1; cum[mid]<r?lo=mid+1:hi=mid} return tris[lo] }
 let shoe = []
-for (let i=0;i<N;i++){ const [a,b,c]=pick(); let u=R(),w=R(); if(u+w>1){u=1-u;w=1-w} shoe.push([a[0]+(b[0]-a[0])*u+(c[0]-a[0])*w, a[1]+(b[1]-a[1])*u+(c[1]-a[1])*w, a[2]+(b[2]-a[2])*u+(c[2]-a[2])*w]) }
+for (let i=0;i<M;i++){ const [a,b,c]=pick(); let u=R(),w=R(); if(u+w>1){u=1-u;w=1-w} shoe.push([a[0]+(b[0]-a[0])*u+(c[0]-a[0])*w, a[1]+(b[1]-a[1])*u+(c[1]-a[1])*w, a[2]+(b[2]-a[2])*u+(c[2]-a[2])*w]) }
 // ---------- heart: anatomical — ventricles, atria, aortic arch with branches, pulmonary trunk, vena cava, coronaries ----------
 const heart = []
 const rotZ = (p, a) => [p[0]*Math.cos(a)-p[1]*Math.sin(a), p[0]*Math.sin(a)+p[1]*Math.cos(a), p[2]]
@@ -52,7 +52,7 @@ const coronary = () => { // vessels running over the ventricle surface
   else { u = 0.7-s*1.3; a = 0.2 - s*0.5 }
   const sq=Math.sqrt(1-u*u); let x=sq*Math.cos(a)*0.88, y=u*1.08, z=sq*Math.sin(a)*0.75
   const k = y<0 ? 1+y*0.42 : 1; x*=k; z*=k; return rotZ([x, y-0.25, z], 0.42) }
-while (heart.length < N) { const r=R()
+while (heart.length < M) { const r=R()
   heart.push(r<0.44 ? ventricle() : r<0.52 ? blob([-0.58,0.5,0.12],0.42) : r<0.6 ? blob([0.48,0.55,-0.28],0.36) : r<0.9 ? tube() : coronary()) }
 // ---------- road bike: tubes, wheels with spokes, drop bars ----------
 const segs = [], add = (a,b,r,w=1) => segs.push([a,b,r,w*Math.hypot(b[0]-a[0],b[1]-a[1],b[2]-a[2])])
@@ -73,14 +73,20 @@ for (const c of [rear,front]) {
   for (let k=0;k<20;k++){ const a=k/20*TAU; add([c[0],c[1],(k%2?1:-1)*0.04],[c[0]+Math.cos(a)*0.6,c[1]+Math.sin(a)*0.6,0],0.004,0.35) } }
 const sTot=segs.reduce((s,x)=>s+x[3],0)
 const bike=[]
-for (const [a,b,r,w] of segs){ const n=Math.round(w/sTot*N); for(let i=0;i<n;i++){ const t=R(), ang=R()*TAU, rr=r*Math.sqrt(R())
+for (const [a,b,r,w] of segs){ const n=Math.round(w/sTot*M); for(let i=0;i<n;i++){ const t=R(), ang=R()*TAU, rr=r*Math.sqrt(R())
   bike.push([a[0]+(b[0]-a[0])*t+Math.cos(ang)*rr, a[1]+(b[1]-a[1])*t+Math.sin(ang)*rr*0.8, a[2]+(b[2]-a[2])*t+Math.sin(ang)*rr]) } }
-while (bike.length<N) bike.push(bike[(R()*bike.length)|0]); bike.length=N
+
 // ---------- normalise each shape to fit a ~2.6 unit box, centred ----------
 const norm = (pts, size) => { const mn=[1e9,1e9,1e9], mx=[-1e9,-1e9,-1e9]; for(const p of pts) for(let k=0;k<3;k++){mn[k]=Math.min(mn[k],p[k]);mx[k]=Math.max(mx[k],p[k])}
   const c=mn.map((v,k)=>(v+mx[k])/2), s=size/Math.max(mx[0]-mn[0],mx[1]-mn[1],mx[2]-mn[2]); return pts.map(p=>p.map((v,k)=>(v-c[k])*s)) }
 shoe = shoe.sort(()=>R()-0.5)
-const shapes=[norm(heart,2.6), norm(shoe,2.9), norm(bike,3.0)]
+const lattice = (pts) => {
+  // pick the grid step that leaves ~N occupied cells, then keep one dot per cell at the cell centre
+  let lo = 0.005, hi = 0.2, cells
+  for (let it = 0; it < 22; it++) { const st = (lo + hi) / 2; const m = new Map(); for (const p of pts) { const k = p.map(v => Math.round(v / st)).join(','); if (!m.has(k)) m.set(k, p.map(v => Math.round(v / st) * st)) }
+    cells = [...m.values()]; if (cells.length > N) lo = st; else hi = st }
+  cells = cells.sort(() => R() - 0.5); while (cells.length < N) cells.push(cells[(R() * cells.length) | 0]); return cells.slice(0, N) }
+const shapes=[lattice(norm(heart,2.6)), lattice(norm(shoe,2.9)), lattice(norm(bike,2.7))]
 const out=new Int16Array(shapes.length*N*3); shapes.forEach((sh,s)=>sh.forEach((p,i)=>{ for(let k=0;k<3;k++) out[(s*N+i)*3+k]=Math.round(p[k]*8000) }))
 writeFileSync('/home/claude/site-v6/public/shapes.bin', Buffer.from(out.buffer))
 console.log('ok', out.byteLength, 'tris', tris.length)
