@@ -22,14 +22,38 @@ const total = tris.reduce((s,t)=>s+t[3],0); const cum=[]; let acc=0; for (const 
 const pick = () => { const r=R()*total; let lo=0,hi=cum.length-1; while(lo<hi){const mid=(lo+hi)>>1; cum[mid]<r?lo=mid+1:hi=mid} return tris[lo] }
 let shoe = []
 for (let i=0;i<N;i++){ const [a,b,c]=pick(); let u=R(),w=R(); if(u+w>1){u=1-u;w=1-w} shoe.push([a[0]+(b[0]-a[0])*u+(c[0]-a[0])*w, a[1]+(b[1]-a[1])*u+(c[1]-a[1])*w, a[2]+(b[2]-a[2])*u+(c[2]-a[2])*w]) }
-// ---------- heart: parametric 3D heart, filled shell ----------
+// ---------- heart: anatomical — ventricles, atria, aortic arch with branches, pulmonary trunk, vena cava, coronaries ----------
 const heart = []
-while (heart.length < N) {
-  // rejection sample the Taubin heart: (x²+9/4y²+z²−1)³ − x²z³ − 9/80 y²z³ < 0, keep points near the surface
-  const x=(R()*2-1)*1.3, y=(R()*2-1)*0.8, z=(R()*2-1)*1.3
-  const f = Math.pow(x*x + 2.25*y*y + z*z - 1, 3) - x*x*z*z*z - 0.1125*y*y*z*z*z
-  if (f < 0 && f > -0.06) heart.push([x, z, y])
-}
+const rotZ = (p, a) => [p[0]*Math.cos(a)-p[1]*Math.sin(a), p[0]*Math.sin(a)+p[1]*Math.cos(a), p[2]]
+const ventricle = () => { // tilted, tapered ellipsoid shell pointing down-left to the apex
+  const u=R()*2-1, a=R()*TAU, s=Math.sqrt(1-u*u); let x=s*Math.cos(a)*0.85, y=u*1.05, z=s*Math.sin(a)*0.72
+  const k = y<0 ? 1+y*0.42 : 1; x*=k; z*=k; return rotZ([x, y-0.25, z], 0.42) }
+const blob = (c, r) => { const u=R()*2-1, a=R()*TAU, s=Math.sqrt(1-u*u); return [c[0]+s*Math.cos(a)*r, c[1]+u*r*0.85, c[2]+s*Math.sin(a)*r] }
+const tubes = []
+const curve = (pts, r, w) => { for (let i=0;i<pts.length-1;i++) tubes.push([pts[i],pts[i+1],r,w*Math.hypot(pts[i+1][0]-pts[i][0],pts[i+1][1]-pts[i][1],pts[i+1][2]-pts[i][2])]) }
+const arc = (c, rad, a0, a1, z, n=16) => Array.from({length:n+1},(_,i)=>{const a=a0+(a1-a0)*i/n; return [c[0]+Math.cos(a)*rad, c[1]+Math.sin(a)*rad, z]})
+curve([[0.05,0.45,0],[0.08,0.95,0.02],[0.1,1.15,0]],0.2,1)                                   // ascending aorta
+curve(arc([-0.2,1.15,0],0.32,0,Math.PI,-0.05),0.17,1)                                       // aortic arch
+curve([[-0.52,1.15,-0.1],[-0.55,0.75,-0.25],[-0.55,0.3,-0.35]],0.15,1)                       // descending aorta
+for (const x of [0.02,-0.2,-0.4]) curve([[x,1.42,-0.03],[x+0.04,1.78,-0.03]],0.065,1)        // arch branches
+curve([[0.3,0.5,0.3],[0.38,0.9,0.28],[0.4,1.02,0.22]],0.16,1)                                // pulmonary trunk
+curve([[0.4,1.02,0.22],[0.75,1.08,0.1]],0.11,1); curve([[0.4,1.02,0.22],[0.2,1.05,-0.25]],0.1,1) // pulmonary arteries
+curve([[-0.62,0.75,0.15],[-0.64,1.2,0.12],[-0.64,1.55,0.1]],0.14,1)                          // superior vena cava
+curve([[-0.7,0.2,0.05],[-0.75,-0.25,0.0]],0.12,0.7)                                          // inferior vena cava
+const tTot = tubes.reduce((s,t)=>s+t[3],0)
+const tube = () => { let r=R()*tTot, t=tubes[0]; for (const x of tubes){ if((r-=x[3])<=0){t=x;break} }
+  const [a,b,rad]=t, k=R(), ang=R()*TAU; return [a[0]+(b[0]-a[0])*k+Math.cos(ang)*rad, a[1]+(b[1]-a[1])*k+Math.sin(ang)*rad*0.4, a[2]+(b[2]-a[2])*k+Math.sin(ang)*rad] }
+const coronary = () => { // vessels running over the ventricle surface
+  const line = (R()*4)|0, s = R()
+  let u, a
+  if (line===0) { u = 0.8-s*1.6; a = 1.25 + Math.sin(s*6)*0.12 }          // anterior descending
+  else if (line===1) { u = 0.45; a = s*TAU }                               // circumflex ring
+  else if (line===2) { u = 0.6-s*1.2; a = 2.6 + s*0.6 }
+  else { u = 0.7-s*1.3; a = 0.2 - s*0.5 }
+  const sq=Math.sqrt(1-u*u); let x=sq*Math.cos(a)*0.88, y=u*1.08, z=sq*Math.sin(a)*0.75
+  const k = y<0 ? 1+y*0.42 : 1; x*=k; z*=k; return rotZ([x, y-0.25, z], 0.42) }
+while (heart.length < N) { const r=R()
+  heart.push(r<0.44 ? ventricle() : r<0.52 ? blob([-0.58,0.5,0.12],0.42) : r<0.6 ? blob([0.48,0.55,-0.28],0.36) : r<0.9 ? tube() : coronary()) }
 // ---------- road bike: tubes, wheels with spokes, drop bars ----------
 const segs = [], add = (a,b,r,w=1) => segs.push([a,b,r,w*Math.hypot(b[0]-a[0],b[1]-a[1],b[2]-a[2])])
 const rear=[-1,0,0], front=[1.02,0,0], bb=[-0.3,-0.02,0], seatTop=[-0.48,0.78,0], headTop=[0.66,0.72,0], headBot=[0.72,0.5,0]
@@ -56,7 +80,7 @@ while (bike.length<N) bike.push(bike[(R()*bike.length)|0]); bike.length=N
 const norm = (pts, size) => { const mn=[1e9,1e9,1e9], mx=[-1e9,-1e9,-1e9]; for(const p of pts) for(let k=0;k<3;k++){mn[k]=Math.min(mn[k],p[k]);mx[k]=Math.max(mx[k],p[k])}
   const c=mn.map((v,k)=>(v+mx[k])/2), s=size/Math.max(mx[0]-mn[0],mx[1]-mn[1],mx[2]-mn[2]); return pts.map(p=>p.map((v,k)=>(v-c[k])*s)) }
 shoe = shoe.sort(()=>R()-0.5)
-const shapes=[norm(heart,2.3), norm(shoe,2.9), norm(bike,3.0)]
+const shapes=[norm(heart,2.6), norm(shoe,2.9), norm(bike,3.0)]
 const out=new Int16Array(shapes.length*N*3); shapes.forEach((sh,s)=>sh.forEach((p,i)=>{ for(let k=0;k<3;k++) out[(s*N+i)*3+k]=Math.round(p[k]*8000) }))
 writeFileSync('/home/claude/site-v6/public/shapes.bin', Buffer.from(out.buffer))
 console.log('ok', out.byteLength, 'tris', tris.length)
