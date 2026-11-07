@@ -29,20 +29,20 @@ const nav = [
       <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
       <canvas id="map" class="absolute inset-0 h-full w-full" aria-hidden="true"></canvas>
       <canvas id="gl3d" class="absolute inset-0 h-full w-full" aria-hidden="true"></canvas>
-      <div class="absolute inset-x-0 bottom-0 h-[3px] bg-slate-200/70"><div data-bar class="h-full origin-left scale-x-0 bg-gradient-to-r from-[#4f46e5] via-[#0891b2] to-[#16a34a]"></div></div>
+      <div class="absolute inset-x-0 bottom-0 h-[3px] bg-slate-200/70"><div data-bar class="h-full origin-left scale-x-0 bg-gradient-to-r from-[#fc4c02] via-[#ff7a3d] to-[#ffa065]"></div></div>
 
       <div class="relative z-10 mx-auto h-full max-w-6xl px-6 md:px-12">
         <div data-from="-1" data-to="0.19" class="blk">
           <p class="kicker">Off the clock</p>
           <h1 class="big mt-4">Run.<br />Ride.<br /><span class="grad">Repeat.</span></h1>
-          <p class="mt-6 max-w-sm text-lg leading-relaxed text-slate">What keeps the heart going when I'm not at a desk. Keep scrolling.</p>
+          <p class="mt-6 max-w-sm text-lg leading-relaxed text-[#6d6d78]">What keeps the heart going when I'm not at a desk. Keep scrolling.</p>
         </div>
 
         <div data-from="0.22" data-to="0.4" class="blk">
           <p class="kicker">Run</p>
           <h2 class="title">Laps on <span class="grad">the track.</span></h2>
-          <ul class="mt-7 max-w-md divide-y divide-slate-200/80 border-y border-slate-200/80">
-            {runGear.map((g) => <li class="flex items-baseline justify-between gap-4 py-3"><span class="text-sm text-slate">{g.k}</span><span class="text-right font-semibold text-navy">{g.t}</span></li>)}
+          <ul class="mt-7 max-w-md divide-y divide-[#ececf0] border-y border-[#ececf0]">
+            {runGear.map((g) => <li class="flex items-baseline justify-between gap-4 py-3"><span class="text-sm text-[#6d6d78]">{g.k}</span><span class="text-right font-semibold text-[#242428]">{g.t}</span></li>)}
           </ul>
         </div>
 
@@ -85,13 +85,13 @@ const nav = [
 </script>
 
 <style>
-  :global(body:has(.sport)) { background: #f7fafc; }
-      .sport { color: var(--color-navy); }
+  :global(body:has(.sport)) { background: #fafaf9; }
+      .sport { color: #242428; }
   .aurora { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
   .aurora i { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .7; animation: drift 18s ease-in-out infinite alternate; }
-  .aurora i:nth-child(1) { width: 60vmax; height: 40vmax; left: -15vmax; top: -18vmax; background: radial-gradient(closest-side, #bbf7d0, transparent); }
-  .aurora i:nth-child(2) { width: 55vmax; height: 40vmax; right: -18vmax; bottom: -20vmax; background: radial-gradient(closest-side, #c7d2fe, transparent); animation-duration: 24s; }
-  .aurora i:nth-child(3) { width: 40vmax; height: 30vmax; right: 10vmax; top: -15vmax; background: radial-gradient(closest-side, #a5f3fc, transparent); animation-duration: 21s; opacity: .5; }
+  .aurora i:nth-child(1) { width: 60vmax; height: 40vmax; left: -15vmax; top: -18vmax; background: radial-gradient(closest-side, #ffedd5, transparent); }
+  .aurora i:nth-child(2) { width: 55vmax; height: 40vmax; right: -18vmax; bottom: -20vmax; background: radial-gradient(closest-side, #fed7aa, transparent); animation-duration: 24s; }
+  .aurora i:nth-child(3) { width: 40vmax; height: 30vmax; right: 10vmax; top: -15vmax; background: radial-gradient(closest-side, #fff7ed, transparent); animation-duration: 21s; opacity: .5; }
   @keyframes drift { to { transform: translate(6vmax, 4vmax) scale(1.12); } }
   .anchor { position: absolute; left: 0; width: 1px; pointer-events: none; }
   .blk { position: absolute; left: 1.5rem; right: 1.5rem; top: 50%; translate: 0 -50%; opacity: 0; will-change: opacity, transform; }
@@ -100,12 +100,12 @@ const nav = [
   .blk-top { top: 7rem; translate: none; }
   @media (min-width: 768px) { .blk-top { top: 8rem; } }
   .blk:first-child { opacity: 1; }
-  .big { font-size: clamp(3.4rem, 9.5vw, 8rem); line-height: .95; font-weight: 300; letter-spacing: -0.045em; color: var(--color-navy); }
-  .title { margin-top: .75rem; font-size: clamp(2.4rem, 5.5vw, 4.5rem); line-height: 1; font-weight: 300; letter-spacing: -0.04em; color: var(--color-navy); }
-  .kicker { font-size: .75rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: #0891b2; }
+  .big { font-size: clamp(3.4rem, 9.5vw, 8rem); line-height: .95; font-weight: 300; letter-spacing: -0.045em; color: #242428; }
+  .title { margin-top: .75rem; font-size: clamp(2.4rem, 5.5vw, 4.5rem); line-height: 1; font-weight: 300; letter-spacing: -0.04em; color: #242428; }
+  .kicker { font-size: .75rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: #fc4c02; }
   .lede { margin-top: 1.25rem; font-size: 1.0625rem; line-height: 1.65; color: var(--color-slate); }
-  .grad { background: linear-gradient(100deg, #16a34a, #0891b2 50%, #4f46e5); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-  .glass { background: rgb(255 255 255 / .7); border: 1px solid rgb(255 255 255 / .95); box-shadow: 0 24px 60px -36px rgb(8 145 178 / .45); }
+  .grad { background: linear-gradient(100deg, #fc4c02, #ff7a3d 55%, #ffa065); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .glass { background: rgb(255 255 255 / .7); border: 1px solid rgb(255 255 255 / .95); box-shadow: 0 24px 60px -36px rgb(252 76 2 / .35); }
   .strava { background: #fc4c02; box-shadow: 0 18px 40px -16px rgb(252 76 2 / .7); transition: transform .4s cubic-bezier(.34,1.56,.64,1); }
   .strava:hover { transform: translateY(-2px) scale(1.03); }
   @media (prefers-reduced-motion: reduce) { .aurora i { animation: none; } }

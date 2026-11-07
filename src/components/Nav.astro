@@ -2,13 +2,15 @@
 import { Image } from 'astro:assets'
 import logo from '../assets/logo.png'
 import { site } from '../data/site'
-export type NavLink = { href: string; label: string; id: string; note: string; icon: string; track?: boolean }
+export type NavLink = { href: string; label: string; id: string; note: string; icon: string; track?: boolean; children?: NavLink[] }
 interface Props { links?: NavLink[]; page?: string }
 const homeLinks: NavLink[] = [
   { href: '/#work', label: 'Work', id: 'work', note: 'Roles, synced from LinkedIn', icon: 'M4 7h16v12H4zM9 7V5h6v2', track: true },
   { href: '/#oss', label: 'Open source', id: 'oss', note: 'Tools I build in public', icon: 'M8 9l-4 3 4 3M16 9l4 3-4 3M13 6l-2 12', track: true },
   { href: '/#projects', label: 'Projects', id: 'projects', note: 'Apps I have shipped', icon: 'M4 5h7v7H4zM13 5h7v4h-7zM13 11h7v8h-7zM4 14h7v5H4z', track: true },
-  { href: '/about/', label: 'About', id: 'about', note: 'Off the clock', icon: 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 20a8 8 0 0 1 16 0' },
+  { href: '#', label: 'Pages', id: 'pages', note: 'More of me', icon: 'M5 4h10l4 4v12H5zM14 4v5h5', children: [
+    { href: '/about/', label: 'About', id: 'about', note: 'Run, ride, Strava', icon: 'M13 4a2 2 0 1 0 0 .01M7 21l3-6 3 2v4M10 15l1-5 4 3 3-1M8 9l3-2' }
+  ] },
   { href: '/#contact', label: 'Contact', id: 'contact', note: "Let's work together", icon: 'M4 6h16v12H4zM4 7l8 6 8-6', track: true }
 ]
 const { links = homeLinks, page = 'Menu' } = Astro.props
@@ -45,6 +47,35 @@ const { links = homeLinks, page = 'Menu' } = Astro.props
             <ul class="space-y-0.5">
               {links.map((l, i) => (
                 <li class="island-item" style={`--i:${i}`}>
+                  {l.children ? (
+                    <div class="island-group">
+                      <button type="button" aria-expanded="false" class="island-sub group flex w-full items-center gap-3 rounded-2xl px-2.5 py-2 text-left transition-colors hover:bg-slate-900/[0.04]">
+                        <span class="island-ic grid size-9 shrink-0 place-items-center rounded-xl text-blue-600">
+                          <svg class="size-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d={l.icon} /></svg>
+                        </span>
+                        <span class="min-w-0 flex-1">
+                          <span class="block text-[15px] font-medium text-navy">{l.label}</span>
+                          <span class="block truncate text-xs text-slate-500">{l.note}</span>
+                        </span>
+                        <svg class="island-chev size-4 text-slate-400 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" /></svg>
+                      </button>
+                      <div class="island-subwrap"><ul class="overflow-hidden">
+                        {l.children.map((c) => (
+                          <li>
+                            <a href={c.href} data-id={c.id} class="island-link group ml-6 flex items-center gap-3 rounded-2xl px-2.5 py-2 transition-colors hover:bg-slate-900/[0.04]">
+                              <span class="island-ic grid size-8 shrink-0 place-items-center rounded-xl text-blue-600">
+                                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d={c.icon} /></svg>
+                              </span>
+                              <span class="min-w-0 flex-1">
+                                <span class="block text-sm font-medium text-navy">{c.label}</span>
+                                <span class="block truncate text-xs text-slate-500">{c.note}</span>
+                              </span>
+                            </a>
+                          </li>
+                        ))}
+                      </ul></div>
+                    </div>
+                  ) : (
                   <a href={l.href} data-id={l.id} data-track={l.track ? '1' : undefined} class="island-link group flex items-center gap-3 rounded-2xl px-2.5 py-2 transition-colors hover:bg-slate-900/[0.04]">
                     <span class="island-ic grid size-9 shrink-0 place-items-center rounded-xl text-blue-600">
                       <svg class="size-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d={l.icon} /></svg>
@@ -55,6 +86,7 @@ const { links = homeLinks, page = 'Menu' } = Astro.props
                     </span>
                     <svg class="size-4 -translate-x-1 text-slate-400 opacity-0 transition group-hover:translate-x-0 group-hover:opacity-100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6" /></svg>
                   </a>
+                  )}
                 </li>
               ))}
             </ul>
@@ -95,6 +127,9 @@ const { links = homeLinks, page = 'Menu' } = Astro.props
   /* content: hidden instantly on close, blur/fade/slide in with a stagger on open */
   .island-menu { width: max-content; }
   #island-row > * { flex-shrink: 0; }
+  .island-subwrap { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .45s var(--spring, cubic-bezier(.32,.72,0,1)); }
+  .island-group.open .island-subwrap { grid-template-rows: 1fr; }
+  .island-group.open .island-chev { transform: rotate(180deg); }
   .island-item { opacity: 0; transform: translateY(-10px) scale(.97); filter: blur(6px); transform-origin: top right;
     transition: opacity .18s ease, transform .18s ease, filter .18s ease; }
   #island.open .island-item { opacity: 1; transform: none; filter: none;
@@ -146,6 +181,14 @@ const { links = homeLinks, page = 'Menu' } = Astro.props
     island.classList.toggle('open', o); toggle.setAttribute('aria-expanded', String(o)); size()
   }
   const close = () => setOpen(false)
+  // expandable groups inside the panel (e.g. Pages → About); the island re-measures as the group grows
+  island.querySelectorAll<HTMLElement>('.island-group').forEach((g) => {
+    const b = g.querySelector('button')!
+    b.addEventListener('click', (e) => {
+      e.stopPropagation(); const o = !g.classList.contains('open'); g.classList.toggle('open', o); b.setAttribute('aria-expanded', String(o))
+      const t0 = performance.now(); const tick = () => { size(); if (performance.now() - t0 < 500) requestAnimationFrame(tick) }; tick()
+    })
+  })
   requestAnimationFrame(() => { inner.style.transition = 'none'; size(); island.classList.add('sized'); void inner.offsetWidth; inner.style.transition = '' })
   addEventListener('resize', size)
   const fine = matchMedia('(hover: hover) and (pointer: fine)').matches

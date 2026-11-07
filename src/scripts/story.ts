@@ -15,18 +15,19 @@ const vert = /* glsl */`
 attribute vec3 p0; attribute vec3 p1; attribute vec3 p2; attribute float seed; attribute vec2 grid;
 uniform float uWave; uniform float uMorph; uniform float uTime; uniform float uSize; uniform float uBeat; uniform float uFade;
 uniform mat4 modelViewMatrix; uniform mat4 projectionMatrix;
-varying float vSeed; varying float vShape; varying float vDepth; varying float vGrad;
+varying float vSeed; varying float vShape; varying float vDepth; varying float vGrad; varying float vE;
 void main(){
   float k = uMorph;
   vec3 shp = k < .5 ? p0 : k < 1.5 ? p1 : p2;              // shape is swapped only while fully a wave
-  // the wave: a flowing sheet of dots
-  vec3 wv = vec3((grid.x - .5) * 5.2, 0., (grid.y - .5) * 3.2);
-  wv.y = sin(wv.x * 1.3 + uTime * 1.2) * .28 + cos(wv.z * 1.9 - uTime * .9) * .18 + sin((wv.x + wv.z) * 2.4 + uTime * 1.6) * .07;
-  wv = vec3(wv.x, wv.y * .9 - wv.z * .35, wv.z * .9 + wv.y * .35);   // lean the sheet towards the camera
+  // dissolved state: a loose, drifting cloud of dust (no sheet, no wave)
+  vec3 hsh = fract(sin(vec3(seed * 127.1, seed * 311.7, seed * 74.7) + vec3(1.3, 4.1, 7.9)) * 43758.5453);
+  vec3 dir = normalize(hsh * 2. - 1. + vec3(.0001));
+  float rad = .5 + pow(fract(sin(seed * 269.5 + 3.3) * 43758.5453), .8) * 1.1;
+  vec3 wv = dir * rad + vec3(sin(uTime * .35 + hsh.x * 30.), cos(uTime * .3 + hsh.y * 20.), sin(uTime * .4 + hsh.z * 11.)) * .2;
   // particles leave the wave a little after one another, so the shape rises out of it
-  float e = smoothstep(0., 1., clamp((1. - uWave) * 1.6 - (1. - grid.x) * .6, 0., 1.));
+  float e = smoothstep(0., 1., clamp((1. - uWave) * 1.6 - seed * .6, 0., 1.));
   vec3 pos = mix(wv, shp, e);
-  pos.y += sin(e * 3.14159) * .35 * (seed - .5);
+  
   pos += normalize(pos + vec3(.001)) * uFade * (1.5 + seed * 3.);          // scatter away when the map takes over
   pos += vec3(sin(uTime * .9 + seed * 40.), cos(uTime * .7 + seed * 23.), sin(uTime * .8 + seed * 17.)) * .012;
   pos *= 1. + uBeat * step(k, .5) * e * .07;
@@ -34,21 +35,21 @@ void main(){
   vec3 n = normalize(pos + vec3(.001));
   float w = sin(pos.x * 3.1 + uTime * 1.3) * sin(pos.y * 2.7 - uTime * 1.1) * sin(pos.z * 3.4 + uTime * .9);
   pos += n * w * .09 * e;
-  vGrad = clamp(pos.y * .38 + .5, 0., 1.);
+  vGrad = clamp(pos.y * .38 + .5, 0., 1.); vE = e;
   vec4 mv = modelViewMatrix * vec4(pos, 1.);
   gl_Position = projectionMatrix * mv;
   gl_PointSize = uSize / -mv.z;
   vSeed = seed; vShape = k; vDepth = -mv.z;
 }`
 const frag = /* glsl */`
-precision highp float; varying float vSeed; varying float vShape; varying float vDepth; varying float vGrad; uniform float uFade;
+precision highp float; varying float vSeed; varying float vShape; varying float vDepth; varying float vGrad; varying float vE; uniform float uFade;
 void main(){
   vec2 c = gl_PointCoord - .5; float d = length(c); if (d > .5) discard;
   // aurora gradient: indigo at the bottom → cyan → green at the top
-  vec3 indigo = vec3(.31,.27,.9), cyan = vec3(.03,.6,.75), green = vec3(.09,.64,.29);
+  vec3 indigo = vec3(.80,.18,.0), cyan = vec3(.988,.298,.008), green = vec3(1.,.55,.3);
   vec3 col = vGrad < .5 ? mix(indigo, cyan, vGrad * 2.) : mix(cyan, green, (vGrad - .5) * 2.);
   
-  float a = smoothstep(.5, .3, d) * clamp(1.7 - (vDepth - 4.) * .45, .4, 1.) * (1. - uFade);
+  float a = smoothstep(.5, .3, d) * clamp(1.7 - (vDepth - 4.) * .45, .4, 1.) * (1. - uFade) * mix(.3, 1., vE);
   gl_FragColor = vec4(col * a, a);
 }`
 
@@ -89,14 +90,14 @@ export async function mountStory (stage: HTMLElement, gl3d: HTMLCanvasElement, m
   const hgt = (x: number, z: number) => 0.32 * Math.sin(x * 1.3 + 0.4) * Math.cos(z * 1.1) + 0.16 * Math.sin(x * 2.7 - z * 1.9) + 0.08 * Math.cos(x * 5.1 + z * 4.3)
   const route = (s: number) => { const x = -1.7 + s * 3.4; return [x, Math.sin(s * 8) * 0.75 * (1 - s * 0.35) + Math.sin(s * 21) * 0.1] }
   const stars = Array.from({ length: 220 }, () => ({ x: Math.random(), y: Math.random(), z: 0.2 + Math.random(), s: Math.random() < 0.85 ? 1 : 2, a: 0.15 + Math.random() * 0.5, r: Math.random() }))
-  const confetti = Array.from({ length: 90 }, () => ({ x: Math.random(), v: 0.4 + Math.random() * 0.8, r: Math.random() * 6, c: ['#4f46e5', '#22d3ee', '#4ade80', '#fc4c02', '#a5f3fc'][(Math.random() * 5) | 0], w: 4 + Math.random() * 5 }))
+  const confetti = Array.from({ length: 90 }, () => ({ x: Math.random(), v: 0.4 + Math.random() * 0.8, r: Math.random() * 6, c: ['#fc4c02', '#ff7a3d', '#242428', '#ffa065', '#fc4c02'][(Math.random() * 5) | 0], w: 4 + Math.random() * 5 }))
 
   const drawMap = (p: number, t: number) => {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H)
     // dust / stars, drifting with scroll
     for (const st of stars) {
       const y = ((st.y - p * st.z * 0.6) % 1 + 1) % 1
-      ctx.fillStyle = `rgba(14,116,144,${st.a * 0.5 * (0.6 + 0.4 * Math.sin(t * 1.5 + st.r * 9))})`
+      ctx.fillStyle = `rgba(252,76,2,${st.a * 0.35 * (0.6 + 0.4 * Math.sin(t * 1.5 + st.r * 9))})`
       ctx.fillRect(st.x * W, y * H, st.s, st.s)
     }
     const show = ease(range(p, 0.58, 0.68)); if (show <= 0) return
@@ -117,14 +118,14 @@ export async function mountStory (stage: HTMLElement, gl3d: HTMLCanvasElement, m
     for (let pass = 0; pass < 2; pass++) for (let i = 0; i <= G; i++) {
       ctx.beginPath()
       for (let j = 0; j <= G; j++) { const a = -R + 2 * R * i / G, b = -R + 2 * R * j / G; const [x, z] = pass ? [b, a] : [a, b]; const q = P(x, z, hgt(x, z) * tilt); j ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1]) }
-      const e = Math.abs(i / G - 0.5) * 2; ctx.strokeStyle = `rgba(30,64,120,${0.13 * (1 - e * e)})`; ctx.stroke()
+      const e = Math.abs(i / G - 0.5) * 2; ctx.strokeStyle = `rgba(36,36,40,${0.12 * (1 - e * e)})`; ctx.stroke()
     }
     // radar ping at the start until the route begins
     const start = route(0), sp = P(start[0], start[1], hgt(start[0], start[1]) * tilt)
     const findT = range(p, 0.62, 0.72)
     if (findT > 0 && findT < 1) for (let k = 0; k < 2; k++) {
       const q = ((t * 0.8 + k * 0.5) % 1)
-      ctx.fillStyle = `rgba(8,145,178,${0.14 * (1 - q) * (1 - findT)})`; ctx.beginPath(); ctx.arc(sp[0], sp[1], 10 + q * Math.min(W, H) * 0.22, 0, Math.PI * 2); ctx.fill()
+      ctx.fillStyle = `rgba(252,76,2,${0.14 * (1 - q) * (1 - findT)})`; ctx.beginPath(); ctx.arc(sp[0], sp[1], 10 + q * Math.min(W, H) * 0.22, 0, Math.PI * 2); ctx.fill()
     }
     // the route, drawn up to the scroll position
     const drawn = ease(range(p, 0.72, 0.95))
@@ -132,12 +133,12 @@ export async function mountStory (stage: HTMLElement, gl3d: HTMLCanvasElement, m
     for (let k = 0; k <= end; k++) { const s = k / M, [x, z] = route(s); pts.push(P(x, z, hgt(x, z) * tilt + 0.03)) }
     ctx.lineCap = 'round'; ctx.lineJoin = 'round'
     if (pts.length > 1) {
-      const g = ctx.createLinearGradient(pts[0][0], 0, pts[pts.length - 1][0] + 1, 0); g.addColorStop(0, '#4f46e5'); g.addColorStop(0.5, '#0891b2'); g.addColorStop(1, '#16a34a')
-      ctx.strokeStyle = 'rgba(8,145,178,.14)'; ctx.lineWidth = 16; ctx.beginPath(); pts.forEach((q, k) => k ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1])); ctx.stroke()
-      ctx.shadowColor = 'rgba(8,145,178,.5)'; ctx.shadowBlur = 10; ctx.strokeStyle = g; ctx.lineWidth = 4; ctx.beginPath(); pts.forEach((q, k) => k ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1])); ctx.stroke(); ctx.shadowBlur = 0
+      const g = ctx.createLinearGradient(pts[0][0], 0, pts[pts.length - 1][0] + 1, 0); g.addColorStop(0, '#fc4c02'); g.addColorStop(1, '#fc4c02')
+      ctx.strokeStyle = 'rgba(252,76,2,.15)'; ctx.lineWidth = 16; ctx.beginPath(); pts.forEach((q, k) => k ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1])); ctx.stroke()
+      ctx.shadowColor = 'rgba(252,76,2,.45)'; ctx.shadowBlur = 10; ctx.strokeStyle = g; ctx.lineWidth = 4; ctx.beginPath(); pts.forEach((q, k) => k ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1])); ctx.stroke(); ctx.shadowBlur = 0
     }
     // start pin
-    ctx.fillStyle = '#fff'; ctx.strokeStyle = '#4f46e5'; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(sp[0], sp[1], 7, 0, Math.PI * 2); ctx.fill(); ctx.stroke()
+    ctx.fillStyle = '#fff'; ctx.strokeStyle = '#242428'; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(sp[0], sp[1], 7, 0, Math.PI * 2); ctx.fill(); ctx.stroke()
     // athlete
     const hd = pts[pts.length - 1] || sp
     ctx.fillStyle = '#fc4c02'; ctx.strokeStyle = '#fff'; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(hd[0], hd[1], 9, 0, Math.PI * 2); ctx.fill(); ctx.stroke()
@@ -166,7 +167,7 @@ export async function mountStory (stage: HTMLElement, gl3d: HTMLCanvasElement, m
     // each object rises out of the wave and melts back into it before the next one
     // back-to-back legs: [rise start, formed, start sinking, fully wave]. Each leg ends exactly where the next
     // begins, so the shape only swaps while the particles are fully a wave and nothing ever jumps.
-    const legs: [number, number, number, number][] = [[0.0, 0.09, 0.18, 0.24], [0.24, 0.3, 0.36, 0.42], [0.42, 0.48, 0.55, 0.6]]
+    const legs: [number, number, number, number][] = [[-1, 0, 0.18, 0.24], [0.24, 0.3, 0.36, 0.42], [0.42, 0.48, 0.55, 0.6]]
     let wave = 1, morph = 2
     for (let i = 0; i < legs.length; i++) {
       const [a, b, c, d] = legs[i]
@@ -183,7 +184,7 @@ export async function mountStory (stage: HTMLElement, gl3d: HTMLCanvasElement, m
     mesh.scale.set((small() ? 0.55 : 1) * (1 - bikeW * (small() ? 0.18 : 0.05)))
     // the object turns as you scroll; the bike only sways so both wheels stay in view
     const objY = (p * 7 + mx * 0.8) * (1 - bikeW) + (0.25 + Math.sin(p * 20) * 0.2 + mx * 0.3) * bikeW
-    mesh.rotation.y = objY * (1 - wave) + mx * 0.3 * wave        // the wave always faces you
+    mesh.rotation.y = objY * (1 - wave) + (objY * 0.3) * wave
     mesh.rotation.x = 0.12 + my * 0.4
     if (fade < 1) renderer.render({ scene, camera }); else gl.clear(gl.COLOR_BUFFER_BIT)
     drawMap(p, t)
