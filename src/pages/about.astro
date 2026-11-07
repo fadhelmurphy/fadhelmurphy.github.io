@@ -19,10 +19,10 @@ const nav = [
 ]
 ---
 <Base nav={nav} page="About" title="About | Fadhel Ijlal Falah" description="Fadhel Ijlal Falah off the clock: running and riding, tracked on Strava.">
-<canvas id="route" class="pointer-events-none fixed inset-0 z-0 h-full w-full" aria-hidden="true"></canvas>
+<canvas id="sport" class="pointer-events-none fixed inset-0 z-0 h-full w-full" aria-hidden="true"></canvas>
 <div class="sport relative z-10">
 
-  <section data-route="0" class="flex min-h-[100svh] items-start px-6 pt-28 md:items-center md:px-12 md:pt-0">
+  <section data-shape="0" data-x="0.55" class="flex min-h-[100svh] items-start px-6 pt-28 md:items-center md:px-12 md:pt-0">
     <div class="mx-auto w-full max-w-6xl">
       <p class="in text-sm font-semibold text-[#fc4c02]">Off the clock</p>
       <h1 class="in big mt-4">Run.<br />Ride.<br /><span class="grad">Repeat.</span></h1>
@@ -30,15 +30,12 @@ const nav = [
     </div>
   </section>
 
-  <section id="run" data-route="0" class="scroll-mt-16 px-6 py-24 md:px-12 md:py-32">
-    <div class="mx-auto grid max-w-6xl items-end gap-10 md:grid-cols-[1.1fr_0.9fr]">
-      <figure data-reveal class="glass overflow-hidden rounded-[32px] p-2">
-        <Image src={track} alt="Fadhel leading a group run on a stadium track at night" width={1600} widths={[800, 1200, 1600]} sizes="(min-width: 768px) 640px, 92vw" class="aspect-[4/5] w-full rounded-[26px] object-cover object-[50%_60%]" loading="lazy" />
-      </figure>
-      <div class="glass rounded-[28px] p-7 md:p-9">
+  <section id="run" data-shape="1" data-x="0.5" class="scroll-mt-16 flex min-h-[100svh] items-start px-6 pt-28 pb-24 md:items-center md:px-12">
+    <div class="mx-auto w-full max-w-6xl">
+      <div class="max-w-md">
         <p data-reveal class="kicker">Run</p>
         <h2 data-reveal class="title">Laps on <span class="grad">the track.</span></h2>
-        <p data-reveal class="lede">Track sessions, long runs, and the occasional ultra.</p>
+        <p data-reveal class="lede">Track sessions, long runs, and the occasional ultra. This is what goes on my feet and wrist.</p>
         <ul class="mt-8 divide-y divide-slate-200/80 border-y border-slate-200/80">
           {runGear.map((g, i) => (
             <li data-reveal class="kit flex items-baseline justify-between gap-4 py-3.5" style={`transition-delay:${i * 60}ms`}>
@@ -50,7 +47,13 @@ const nav = [
     </div>
   </section>
 
-  <section id="ride" data-route="1" class="scroll-mt-16 flex min-h-[90svh] items-center px-6 py-24 md:px-12">
+  <section data-shape="1" data-x="0" class="px-4 pb-24 md:px-8">
+    <figure data-reveal class="glass mx-auto max-w-6xl overflow-hidden rounded-[32px] p-2">
+      <Image src={track} alt="Fadhel leading a group run on a stadium track at night" width={1600} widths={[800, 1200, 1600]} sizes="(min-width: 1280px) 1150px, 92vw" class="aspect-[4/5] w-full rounded-[26px] object-cover object-[50%_60%] md:aspect-[16/9]" loading="lazy" />
+    </figure>
+  </section>
+
+  <section id="ride" data-shape="2" data-x="0.45" class="scroll-mt-16 flex min-h-[90svh] items-center px-6 py-24 md:px-12">
     <div class="mx-auto w-full max-w-6xl">
       <div class="max-w-md">
         <p data-reveal class="kicker">Ride</p>
@@ -60,7 +63,7 @@ const nav = [
     </div>
   </section>
 
-  <section id="strava" data-route="1" class="scroll-mt-16 px-6 pt-16 pb-32 md:px-12 md:pb-44">
+  <section id="strava" data-shape="0" data-x="0" class="scroll-mt-16 px-6 pt-16 pb-32 md:px-12 md:pb-44">
     <div data-reveal class="glass mx-auto max-w-3xl rounded-[32px] px-8 py-14 text-center md:py-20">
       <h2 class="title">Follow the <span class="text-[#fc4c02]">activity.</span></h2>
       <p class="lede mx-auto max-w-md">Runs, rides and everything in between, as they happen.</p>
@@ -74,9 +77,12 @@ const nav = [
 </Base>
 
 <script>
-  import { mountRoute } from '../scripts/route-scene'
-  const c = document.getElementById('route') as HTMLCanvasElement | null
-  if (c) mountRoute(c, [...document.querySelectorAll<HTMLElement>('[data-route]')])
+  import { mountSport } from '../scripts/sport-scene'
+  const c = document.getElementById('sport') as HTMLCanvasElement | null
+  if (c) {
+    const go = () => mountSport(c, [...document.querySelectorAll<HTMLElement>('[data-shape]')])
+    ;'requestIdleCallback' in window ? (window as any).requestIdleCallback(go, { timeout: 1200 }) : setTimeout(go, 500)
+  }
 </script>
 
 <style>
