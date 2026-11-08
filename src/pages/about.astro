@@ -1,112 +1,346 @@
 ---
 import { Image } from 'astro:assets'
+import '@fontsource/michroma/latin-400.css'
 import Base from '../layouts/Base.astro'
-import track from '../assets/about/track.jpg'
+import runner from '../assets/about/runner.jpg'
+import runnerBlur from '../assets/about/runner-blur.jpg'
+import trackGrey from '../assets/about/track-grey.jpg'
+import { longRun, recent, october, hr, gear } from '../data/strava'
 
 const strava = 'https://strava.app.link/E63xhR6AR7b'
-const runGear = [
-  { k: 'Watch', t: 'Garmin Forerunner 165' },
-  { k: 'Shoes', t: 'ASICS Superblast 3' },
-  { k: 'Shoes', t: 'adidas Adizero Boston 13' },
-  { k: 'Trail shoes', t: 'ASICS Novablast 5 TR' },
-  { k: 'Also', t: 'Camp SR3D' }
-]
+
+// heart-rate line for the long run, drawn into a 600×140 box
+const lo = Math.min(...hr), hi = Math.max(...hr)
+const hrPath = hr.map((v, i) => `${i ? 'L' : 'M'}${((i / (hr.length - 1)) * 600).toFixed(1)} ${(130 - ((v - lo) / (hi - lo)) * 120).toFixed(1)}`).join(' ')
+const hrArea = `${hrPath} L600 140 L0 140 Z`
+
+// stylised route outline (not the real GPS line, which would give away where the runs start)
+const route = 'M38 168c14-10 30-4 40-16s-2-30 12-38 30 6 40-6 4-34 20-40 34 8 38 26-14 30-2 42 30 2 34 18-12 26-28 30-34-6-44 8-6 28-22 34-40-10-52-4-24 8-40 4'
+
+const words = ['Distance', 'Discipline', 'Night laps', 'Heart rate', 'Long runs', 'Rain', 'Recovery', 'Repeat']
+
 const nav = [
-  { href: '#run', label: 'Run', id: 'run', note: 'Laps on the track', icon: 'M13 4a2 2 0 1 0 0 .01M7 21l3-6 3 2v4M10 15l1-5 4 3 3-1M8 9l3-2', track: true },
-  { href: '#ride', label: 'Ride', id: 'ride', note: 'Road and MTB', icon: 'M5.5 17.5a3.5 3.5 0 1 0 0-.01M18.5 17.5a3.5 3.5 0 1 0 0-.01M5.5 17.5L9 9h6l3.5 8.5M9 9l3 8.5 3-8.5M8 6h3', track: true },
+  { href: '#run', label: 'Run', id: 'run', note: 'The latest long run', icon: 'M13 4a2 2 0 1 0 0 .01M7 21l3-6 3 2v4M10 15l1-5 4 3 3-1M8 9l3-2', track: true },
+  { href: '#effort', label: 'Effort', id: 'effort', note: 'Heart rate and numbers', icon: 'M3 12h4l2-5 4 10 2-5h6', track: true },
+  { href: '#gear', label: 'Gear', id: 'gear', note: 'Shoes, watch and bike', icon: 'M3 16l6-2 4 2 8 1v2H3zM9 14l1-5 3 1', track: true },
   { href: '#strava', label: 'Strava', id: 'strava', note: 'Follow the activity', icon: 'M15 3l-5 10h4l1-2 3 6h3L15 3zM9 13l-4 8h4l2-4', track: true },
   { href: '/', label: 'Home', id: 'home', note: 'Back to the main page', icon: 'M4 11l8-7 8 7v9H4z' }
 ]
 ---
 <Base nav={nav} page="About" title="About | Fadhel Ijlal Falah" description="Fadhel Ijlal Falah off the clock: running and riding, tracked on Strava.">
-<div class="sport">
-  <!-- one pinned stage; the whole story plays as you scroll through this tall section -->
-  <section class="story relative" style="height:720vh">
-    <span id="run" class="anchor" style="top:22%;height:20%"></span>
-    <span id="ride" class="anchor" style="top:42%;height:18%"></span>
-    <span id="strava" class="anchor" style="top:60%;height:40%"></span>
-    <div id="stage" class="sticky top-0 h-[100svh] overflow-hidden">
-      <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
-      <canvas id="map" class="absolute inset-0 h-full w-full" aria-hidden="true"></canvas>
-      <canvas id="gl3d" class="absolute inset-0 h-full w-full" aria-hidden="true"></canvas>
-      <div class="absolute inset-x-0 bottom-0 h-[3px] bg-slate-200/70"><div data-bar class="h-full origin-left scale-x-0 bg-gradient-to-r from-[#fc4c02] via-[#ff7a3d] to-[#ffa065]"></div></div>
+<main class="ab">
 
-      <div class="relative z-10 mx-auto h-full max-w-6xl px-6 md:px-12">
-        <div data-from="-1" data-to="0.19" class="blk">
-          <p class="kicker">Off the clock</p>
-          <h1 class="big mt-4">Run.<br />Ride.<br /><span class="grad">Repeat.</span></h1>
-          <p class="mt-6 max-w-sm text-lg leading-relaxed text-[#6d6d78]">What keeps the heart going when I'm not at a desk. Keep scrolling.</p>
+  <!-- 1 · hero: pinned, the photo speeds up as you scroll -->
+  <section id="run" class="pin" data-pin style="height:210vh">
+    <div class="stick">
+      <div class="photo" aria-hidden="true">
+        <Image src={runner} alt="" widths={[640, 1100]} sizes="100vw" loading="eager" fetchpriority="high" class="ph sharp" />
+        <Image src={runnerBlur} alt="" widths={[900]} sizes="100vw" loading="eager" class="ph blur" />
+        <div class="shade"></div>
+      </div>
+
+      <div class="hero">
+        <h1 class="sr-only">Run. Ride. Repeat.</h1>
+        <p class="disp d-top" aria-hidden="true">RUN.</p>
+        <p class="disp d-bot" aria-hidden="true"><span class="slash">//</span> RIDE.<br />REPEAT.</p>
+
+        <div class="side">
+          <p class="side-lead">Night laps on the track, long runs at the weekend. All of it on Strava.</p>
+          <ol class="runs" aria-label="Recent runs">
+            {recent.map((r, i) => (
+              <li style={`--i:${i}`}><span>{r.date}</span><span>{r.km} km</span><span>{r.time}</span><span>{r.pace}</span></li>
+            ))}
+          </ol>
         </div>
 
-        <div data-from="0.22" data-to="0.4" class="blk">
-          <p class="kicker">Run</p>
-          <h2 class="title">Laps on <span class="grad">the track.</span></h2>
-          <ul class="mt-7 max-w-md divide-y divide-[#ececf0] border-y border-[#ececf0]">
-            {runGear.map((g) => <li class="flex items-baseline justify-between gap-4 py-3"><span class="text-sm text-[#6d6d78]">{g.k}</span><span class="text-right font-semibold text-[#242428]">{g.t}</span></li>)}
-          </ul>
-        </div>
+        <article class="card glass">
+          <p class="card-k">Long run completed</p>
+          <p class="card-v">{longRun.km}<small>km</small></p>
+          <svg viewBox="0 0 300 200" class="route" aria-hidden="true">
+            <path d={route} pathLength="1" class="r-line" />
+            <circle cx="38" cy="168" r="5" class="r-dot" />
+          </svg>
+          <dl class="card-s">
+            <div><dt>Pace</dt><dd>{longRun.pace}<small>/km</small></dd></div>
+            <div><dt>Time</dt><dd>{longRun.time}</dd></div>
+            <div><dt>Energy</dt><dd>{longRun.cal}<small>cal</small></dd></div>
+          </dl>
+        </article>
 
-        <div data-from="0.42" data-to="0.58" class="blk">
-          <p class="kicker">Ride</p>
-          <h2 class="title">Road and <span class="grad">dirt.</span></h2>
-          <p class="lede max-w-sm">When the legs need a break from running, I ride: long road loops, or the MTB on the trails.</p>
+        <div class="month">
+          <p class="month-v">{october.km}<small>km</small></p>
+          <p class="month-k">{october.runs} runs in October</p>
         </div>
+      </div>
+      <div class="scrollcue" aria-hidden="true"><i></i></div>
+    </div>
+  </section>
 
-        <div data-from="0.62" data-to="0.94" class="blk blk-top">
-          <p class="kicker !text-[#fc4c02]">Strava</p>
-          <h2 class="title">Tracking the <span class="grad">activity</span>,<br />keep scrolling.</h2>
-        </div>
+  <!-- 2 · word drum -->
+  <section class="pin words" data-pin style="height:260vh" aria-label="What running gives back">
+    <div class="stick wrap">
+      <p class="w-lead">Every kilometre takes something from you, and gives something back.</p>
+      <div class="drum" aria-hidden="true">
+        <svg class="arrow" viewBox="0 0 60 60"><path d="M6 30h44M32 12l18 18-18 18" /></svg>
+        <ul>{words.map((w) => <li>{w}</li>)}</ul>
+      </div>
+      <ul class="sr-only">{words.map((w) => <li>{w}</li>)}</ul>
+    </div>
+  </section>
 
-        <div data-from="0.95" data-to="2" class="blk blk-top">
-          <h2 class="title">Activity <span class="grad">complete.</span></h2>
-          <p class="lede max-w-sm">Every run and ride ends up here.</p>
-          <a href={strava} target="_blank" rel="noopener" class="strava mt-8 inline-flex items-center gap-3 rounded-full px-8 py-4 text-lg font-semibold text-white">
-            Follow me on Strava
-            <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" /></svg>
-          </a>
+  <!-- 3 · effort -->
+  <section id="effort" class="effort" data-scrub>
+    <div class="e-grid">
+      <div class="e-copy">
+        <h2 class="disp e-title">Push your<br /><span>limit</span></h2>
+        <p class="e-lede">{longRun.date}: the longest run so far. {longRun.km} km in the evening heat at {longRun.temp}°C, five personal records along the way.</p>
+        <p class="clock" data-clock={longRun.secs} aria-label={`Moving time ${longRun.time}`}>00:00:00</p>
+      </div>
+      <figure class="e-photo">
+        <Image src={trackGrey} alt="Fadhel running laps on a stadium track at night" widths={[480, 800]} sizes="(min-width: 900px) 40vw, 90vw" class="e-img" />
+        <svg viewBox="0 0 400 520" class="loops" aria-hidden="true">
+          <ellipse cx="210" cy="300" rx="170" ry="70" pathLength="1" transform="rotate(-18 210 300)" />
+          <ellipse cx="200" cy="290" rx="150" ry="200" pathLength="1" transform="rotate(12 200 290)" />
+        </svg>
+      </figure>
+    </div>
+
+    <div class="e-band">
+      <div class="block">
+        <p><b>{longRun.km}</b> km</p>
+        <p><b>{longRun.effort}</b> effort</p>
+        <p><b>{longRun.prs}</b> PRs</p>
+      </div>
+      <div class="chart">
+        <div class="chart-head">
+          <span>Heart rate</span><span>{lo}–{hi} bpm</span><span>+{longRun.elev} m</span><span>{longRun.time} h</span>
         </div>
+        <svg viewBox="0 0 600 140" preserveAspectRatio="none" aria-label={`Heart rate during the ${longRun.km} km run, between ${lo} and ${hi} beats per minute`}>
+          <defs><linearGradient id="hrg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#fc4c02" stop-opacity=".35" /><stop offset="1" stop-color="#fc4c02" stop-opacity="0" /></linearGradient></defs>
+          <path d={hrArea} fill="url(#hrg)" class="hr-area" />
+          <path d={hrPath} pathLength="1" class="hr-line" vector-effect="non-scaling-stroke" />
+        </svg>
       </div>
     </div>
   </section>
 
-  <section class="px-4 py-24 md:px-8">
-    <figure data-reveal class="glass mx-auto max-w-6xl overflow-hidden rounded-[32px] p-2">
-      <Image src={track} alt="Fadhel leading a group run on a stadium track at night" width={1600} widths={[800, 1200, 1600]} sizes="(min-width: 1280px) 1150px, 92vw" class="aspect-[4/5] w-full rounded-[26px] object-cover object-[50%_60%] md:aspect-[16/9]" loading="lazy" />
-    </figure>
+  <!-- 4 · gear -->
+  <section id="gear" class="gear" data-scrub>
+    <div class="g-grid">
+      <div class="g-card">
+        <h2 class="disp g-title">Gear I<br />trust</h2>
+        <ul class="g-list">
+          {gear.map((g, i) => (
+            <li style={`--i:${i}`}>
+              <span class="g-k">{g.k}</span>
+              <span class="g-t">{g.t}</span>
+              <span class="g-m">{g.m}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="g-side">
+        <h3 class="disp g-ride">Ride days</h3>
+        <p>When the legs need a break from running, the Camp SR3D comes out for long road loops. Easy spins, same discipline.</p>
+        <p class="g-note">Kilometres are what Strava has logged on each pair.</p>
+      </div>
+    </div>
   </section>
-</div>
-</Base>
 
-<script>
-  import { mountStory } from '../scripts/story'
-  const stage = document.getElementById('stage')
-  const a = document.getElementById('gl3d') as HTMLCanvasElement | null, b = document.getElementById('map') as HTMLCanvasElement | null
-  if (stage && a && b) mountStory(stage, a, b)
-</script>
+  <!-- 5 · Strava -->
+  <section id="strava" class="cta" data-scrub>
+    <p class="disp cta-1"><span class="mark" aria-hidden="true"></span>Step out of comfort.</p>
+    <p class="disp cta-2"><span class="mark" aria-hidden="true"></span>Stay in the fight.</p>
+    <a href={strava} target="_blank" rel="noopener" class="strava">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.4 17.9l-2.1-4.1h-3l5.1 10 5.1-10h-3M10.4 0L3.5 13.8h4.1l2.8-5.4 2.8 5.4h4z" /></svg>
+      Follow on Strava
+    </a>
+  </section>
+</main>
 
 <style>
-  :global(body:has(.sport)) { background: #fafaf9; }
-      .sport { color: #242428; }
-  .aurora { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
-  .aurora i { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .7; animation: drift 18s ease-in-out infinite alternate; }
-  .aurora i:nth-child(1) { width: 60vmax; height: 40vmax; left: -15vmax; top: -18vmax; background: radial-gradient(closest-side, #ffedd5, transparent); }
-  .aurora i:nth-child(2) { width: 55vmax; height: 40vmax; right: -18vmax; bottom: -20vmax; background: radial-gradient(closest-side, #fed7aa, transparent); animation-duration: 24s; }
-  .aurora i:nth-child(3) { width: 40vmax; height: 30vmax; right: 10vmax; top: -15vmax; background: radial-gradient(closest-side, #fff7ed, transparent); animation-duration: 21s; opacity: .5; }
-  @keyframes drift { to { transform: translate(6vmax, 4vmax) scale(1.12); } }
-  .anchor { position: absolute; left: 0; width: 1px; pointer-events: none; }
-  .blk { position: absolute; left: 1.5rem; right: 1.5rem; top: 50%; translate: 0 -50%; opacity: 0; will-change: opacity, transform; }
-  @media (min-width: 768px) { .blk { left: 3rem; right: auto; max-width: 34rem; } }
-  @media (max-width: 767px) { .blk { top: 6.5rem; translate: none; } }
-  .blk-top { top: 7rem; translate: none; }
-  @media (min-width: 768px) { .blk-top { top: 8rem; } }
-  .blk:first-child { opacity: 1; }
-  .big { font-size: clamp(3.4rem, 9.5vw, 8rem); line-height: .95; font-weight: 300; letter-spacing: -0.045em; color: #242428; }
-  .title { margin-top: .75rem; font-size: clamp(2.4rem, 5.5vw, 4.5rem); line-height: 1; font-weight: 300; letter-spacing: -0.04em; color: #242428; }
-  .kicker { font-size: .75rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: #fc4c02; }
-  .lede { margin-top: 1.25rem; font-size: 1.0625rem; line-height: 1.65; color: var(--color-slate); }
-  .grad { background: linear-gradient(100deg, #fc4c02, #ff7a3d 55%, #ffa065); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-  .glass { background: rgb(255 255 255 / .7); border: 1px solid rgb(255 255 255 / .95); box-shadow: 0 24px 60px -36px rgb(252 76 2 / .35); }
-  .strava { background: #fc4c02; box-shadow: 0 18px 40px -16px rgb(252 76 2 / .7); transition: transform .4s cubic-bezier(.34,1.56,.64,1); }
-  .strava:hover { transform: translateY(-2px) scale(1.03); }
-  @media (prefers-reduced-motion: reduce) { .aurora i { animation: none; } }
+  .ab { --ink: #17171a; --mute: #5d5d63; --bg: #e7e6e3; --or: #fc4c02; --or2: #ff7a3d; background: var(--bg); color: var(--ink); overflow-x: clip; }
+  .disp { font-family: 'Michroma', 'Poppins', sans-serif; font-weight: 400; -webkit-text-stroke: .02em currentColor; paint-order: stroke fill; letter-spacing: -.02em; line-height: .92; text-transform: uppercase; }
+  .pin { position: relative; }
+  .stick { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+
+  /* hero */
+  .photo { position: absolute; inset: 0; transform: scale(calc(1.04 + var(--p, 0) * .14)); transform-origin: 40% 40%; }
+  .ph { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+  .blur { opacity: calc(.55 + var(--p, 0) * .45);
+    -webkit-mask-image: linear-gradient(90deg, #000 0 14%, transparent 32% 52%, #000 74%);
+            mask-image: linear-gradient(90deg, #000 0 14%, transparent 32% 52%, #000 74%); }
+  .shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgb(40 40 44 / .28), transparent 30% 55%, rgb(32 32 36 / .62)); }
+  .hero { position: relative; height: 100%; max-width: 1280px; margin: 0 auto; padding: 108px clamp(20px, 4vw, 56px) 36px; color: #fff; }
+  .d-top { font-size: clamp(64px, 15vw, 230px); transform: translateX(calc(var(--p, 0) * -28vw)); text-shadow: 0 2px 30px rgb(0 0 0 / .12); }
+  .d-bot { position: absolute; right: clamp(20px, 4vw, 56px); bottom: clamp(150px, 20vh, 210px); text-align: right; font-size: clamp(40px, 8.4vw, 132px); transform: translateX(calc(var(--p, 0) * 30vw)); }
+  .slash { color: var(--or); }
+
+  .side { position: absolute; right: clamp(20px, 4vw, 56px); top: 120px; width: min(360px, 32vw); transform: translateY(calc(var(--p, 0) * -14vh)); opacity: calc(1 - var(--p, 0) * 1.6); }
+  .side-lead { border-left: 2px solid var(--or); padding-left: 14px; font-size: 17px; line-height: 1.45; }
+  .runs { margin-top: 18px; display: grid; gap: 6px; }
+  .runs li { display: grid; grid-template-columns: 1.1fr .9fr 1fr .8fr; gap: 8px; padding: 9px 14px; border-radius: 12px; font-size: 13.5px; font-variant-numeric: tabular-nums;
+    background: rgb(255 255 255 / calc(.32 - var(--i) * .05)); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    opacity: calc(1 - var(--i) * .17); transform: translateX(calc(var(--i) * 10px));
+    animation: rowIn .7s cubic-bezier(.2,.8,.2,1) both; animation-delay: calc(.5s + var(--i) * .08s); }
+  .runs li:first-child { background: rgb(255 255 255 / .5); color: var(--ink); }
+  @keyframes rowIn { from { opacity: 0; transform: translateX(40px); } }
+
+  .glass { background: rgb(255 255 255 / .16); border: 1px solid rgb(255 255 255 / .35); backdrop-filter: blur(18px) saturate(1.2); -webkit-backdrop-filter: blur(18px) saturate(1.2); }
+  .card { position: absolute; left: clamp(20px, 4vw, 56px); bottom: 36px; width: 252px; border-radius: 24px; padding: 18px 20px; transform: translateY(calc(var(--p, 0) * -10vh)); }
+  .card-k { font-size: 12px; letter-spacing: .02em; opacity: .9; }
+  .card-v { font-size: 34px; font-weight: 600; letter-spacing: -.02em; line-height: 1.1; }
+  .card-v small, .month-v small, dd small { font-size: .45em; margin-left: 3px; font-weight: 500; opacity: .85; }
+  .route { width: 100%; height: 130px; margin: 8px 0 12px; overflow: visible; }
+  .r-line { fill: none; stroke: #fff; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 2.6s .4s cubic-bezier(.6,0,.2,1) forwards; }
+  .r-dot { fill: var(--or); stroke: #fff; stroke-width: 2; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  .card-s { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgb(255 255 255 / .3); padding-top: 10px; }
+  .card-s dt { font-size: 11px; opacity: .8; }
+  .card-s dd { font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; }
+
+  .month { position: absolute; right: clamp(20px, 4vw, 56px); bottom: 40px; text-align: right; }
+  .month-v { font-size: 38px; font-weight: 600; letter-spacing: -.02em; line-height: 1; }
+  .month-k { font-size: 14px; opacity: .9; margin-top: 4px; }
+  .scrollcue { position: absolute; left: 50%; bottom: 18px; width: 22px; height: 34px; border: 1.5px solid rgb(255 255 255 / .7); border-radius: 12px; translate: -50% 0; opacity: calc(1 - var(--p, 0) * 4); }
+  .scrollcue i { position: absolute; left: 50%; top: 7px; width: 3px; height: 7px; border-radius: 2px; background: #fff; translate: -50% 0; animation: cue 1.6s infinite; }
+  @keyframes cue { 60% { transform: translateY(9px); opacity: 0; } 100% { opacity: 0; } }
+
+  /* word drum */
+  .words { background: var(--bg); }
+  .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); align-items: center; max-width: 1280px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 56px); gap: 4vw; }
+  .w-lead { font-size: clamp(18px, 1.6vw, 22px); line-height: 1.45; color: var(--mute); max-width: 22ch; }
+  .drum { position: relative; height: 100%; display: flex; align-items: center; }
+  .drum ul { position: relative; width: 100%; height: 100%; }
+  .drum li { position: absolute; left: 76px; top: 50%; font-family: 'Michroma', sans-serif; font-size: clamp(34px, 5.6vw, 84px); line-height: 1; white-space: nowrap; letter-spacing: -.02em; will-change: transform, filter, opacity; }
+  .arrow { position: absolute; left: 0; top: 50%; width: 56px; height: 56px; translate: 0 -50%; fill: none; stroke: var(--or); stroke-width: 7; stroke-linecap: square; }
+
+  /* effort */
+  .effort, .gear, .cta { max-width: 1280px; margin: 0 auto; padding: clamp(80px, 12vh, 140px) clamp(20px, 4vw, 56px); }
+  .e-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 4vw; align-items: center; }
+  .e-title { font-size: clamp(46px, 7.4vw, 116px); }
+  .e-title span { color: var(--or); }
+  .e-lede { margin-top: 26px; max-width: 46ch; font-size: 18px; line-height: 1.6; color: var(--mute); }
+  .clock { margin-top: 30px; font-family: 'Michroma', sans-serif; font-size: clamp(36px, 5vw, 72px); color: var(--or); font-variant-numeric: tabular-nums; letter-spacing: .02em; }
+  .e-photo { position: relative; aspect-ratio: 4 / 5; }
+  .e-img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; transform: translateY(calc((.5 - var(--s, .5)) * 60px)); }
+  .loops { position: absolute; inset: -6% -10%; width: 120%; height: 112%; overflow: visible; pointer-events: none; }
+  .loops ellipse { fill: none; stroke: var(--or); stroke-width: 2.4; stroke-dasharray: 1; stroke-dashoffset: calc(1 - min(1, var(--s, 0) * 2)); }
+  .loops ellipse + ellipse { stroke-width: 1.4; stroke-dashoffset: calc(1 - min(1, var(--s, 0) * 1.6)); }
+
+  .e-band { margin-top: clamp(48px, 8vh, 90px); display: grid; grid-template-columns: auto 1fr; gap: 20px; }
+  .block { background: var(--or); color: #fff; padding: 22px 30px; display: grid; gap: 2px; align-content: center; font-family: 'Michroma', sans-serif; font-size: clamp(22px, 2.6vw, 38px); line-height: 1.25; text-transform: uppercase;
+    clip-path: inset(0 calc((1 - min(1, var(--s, 0) * 2.2)) * 100%) 0 0); }
+  .block b { font-weight: 400; }
+  .chart { background: #fff; border-radius: 4px; padding: 18px 22px 10px; }
+  .chart-head { display: flex; flex-wrap: wrap; gap: 6px 26px; font-size: 13px; color: var(--mute); font-variant-numeric: tabular-nums; }
+  .chart-head span:first-child { color: var(--ink); font-weight: 600; margin-right: auto; }
+  .chart svg { display: block; width: 100%; height: 150px; margin-top: 8px; }
+  .hr-line { fill: none; stroke: var(--or); stroke-width: 2; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: calc(1 - min(1, max(0, var(--s, 0) * 2.4 - .25))); }
+  .hr-area { opacity: calc(min(1, max(0, var(--s, 0) * 2.4 - 1))); }
+
+  /* gear */
+  .g-grid { display: grid; grid-template-columns: 1.35fr 1fr; gap: 20px; align-items: stretch; }
+  .g-card { background: #fff; padding: clamp(26px, 3.4vw, 48px); border-radius: 4px; }
+  .g-title { font-size: clamp(34px, 4.6vw, 70px); }
+  .g-list { margin-top: 30px; border-top: 1px solid #e3e2df; }
+  .g-list li { display: grid; grid-template-columns: 110px 1fr auto; gap: 16px; align-items: baseline; padding: 16px 0; border-bottom: 1px solid #e3e2df;
+    opacity: clamp(0, calc(var(--s, 1) * 4 - var(--i) * .35 - .6), 1); transform: translateX(calc((1 - clamp(0, calc(var(--s, 1) * 4 - var(--i) * .35 - .6), 1)) * 50px)); }
+  .g-k { font-size: 13px; color: var(--mute); }
+  .g-t { font-size: clamp(16px, 1.5vw, 20px); font-weight: 600; letter-spacing: -.01em; }
+  .g-m { font-size: 13px; color: var(--or); font-variant-numeric: tabular-nums; font-weight: 600; }
+  .g-side { background: var(--ink); color: #f1f0ed; padding: clamp(26px, 3.4vw, 48px); border-radius: 4px; display: flex; flex-direction: column; gap: 18px; }
+  .g-ride { font-size: clamp(28px, 3.4vw, 50px); color: var(--or); }
+  .g-side p { font-size: 17px; line-height: 1.6; color: #c9c8c4; }
+  .g-side .g-note { margin-top: auto; font-size: 13px; color: #8d8c88; }
+
+  /* cta */
+  .cta { text-align: center; padding-bottom: clamp(100px, 16vh, 180px); }
+  .cta .disp { font-size: clamp(26px, 4vw, 62px); white-space: nowrap; }
+  .cta-1 { transform: translateX(calc((1 - min(1, var(--s, 1) * 2)) * -20vw)); opacity: min(1, var(--s, 1) * 2.5); }
+  .cta-2 { color: var(--or); margin-top: .2em; transform: translateX(calc((1 - min(1, var(--s, 1) * 2)) * 20vw)); opacity: min(1, var(--s, 1) * 2.5); }
+  .mark { width: .8em; height: .8em; background: var(--or); clip-path: polygon(0 0, 100% 0, 100% 100%, 72% 100%, 72% 46%, 18% 100%, 0 82%, 54% 28%, 0 28%); display: inline-block; margin-right: .35em; vertical-align: -.04em; }
+  .cta-2 .mark { background: var(--ink); }
+  .strava { margin-top: 44px; display: inline-flex; align-items: center; gap: 10px; padding: 16px 28px; border-radius: 999px; background: var(--or); color: #fff; font-weight: 600; font-size: 16px; transition: transform .25s cubic-bezier(.3,1.6,.5,1), box-shadow .25s; box-shadow: 0 10px 30px -10px rgb(252 76 2 / .6); }
+  .strava:hover { transform: translateY(-2px); }
+  .strava:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+  .strava svg { width: 18px; height: 18px; fill: currentColor; }
+
+  @media (max-width: 860px) {
+    .hero { padding-top: 96px; }
+    .d-top { font-size: 23vw; }
+    .d-bot { font-size: 11.5vw; bottom: auto; top: 46%; }
+    .side { position: static; width: auto; margin-top: 14px; transform: none; }
+    .cta .disp { white-space: normal; font-size: 8vw; }
+    .side-lead { font-size: 15px; max-width: 30ch; }
+    .runs { display: none; }
+    .card { width: auto; right: 20px; bottom: 24px; padding: 14px 16px; display: grid; grid-template-columns: 1fr 120px; column-gap: 12px; }
+    .card .route { grid-row: 1 / span 2; grid-column: 2; height: 80px; margin: 0; }
+    .card-s { grid-column: 1 / -1; margin-top: 10px; }
+    .month { display: none; }
+    .wrap { grid-template-columns: 1fr; grid-template-rows: auto 1fr; padding-top: 110px; }
+    .drum li { left: 56px; }
+    .arrow { width: 40px; height: 40px; }
+    .e-grid, .g-grid, .e-band { grid-template-columns: 1fr; }
+    .e-photo { max-width: 420px; }
+    .g-list li { grid-template-columns: 1fr auto; }
+    .g-k { grid-column: 1 / -1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .runs li, .r-line, .scrollcue i { animation: none; stroke-dashoffset: 0; }
+  }
 </style>
+
+<script>
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches
+  const pins = [...document.querySelectorAll<HTMLElement>('[data-pin]')]
+  const scrubs = [...document.querySelectorAll<HTMLElement>('[data-scrub]')]
+  const drum = document.querySelector<HTMLElement>('.drum')
+  const items = drum ? [...drum.querySelectorAll<HTMLElement>('li')] : []
+  const clock = document.querySelector<HTMLElement>('[data-clock]')
+  const total = Number(clock?.dataset.clock || 0)
+  const fmt = (s: number) => [s / 3600, (s % 3600) / 60, s % 60].map((n) => String(Math.floor(n)).padStart(2, '0')).join(':')
+  const clamp = (v: number) => Math.min(1, Math.max(0, v))
+
+  function frame() {
+    const vh = innerHeight
+    for (const el of pins) {
+      const r = el.getBoundingClientRect()
+      el.style.setProperty('--p', clamp(-r.top / (r.height - vh)).toFixed(4))
+    }
+    for (const el of scrubs) {
+      const r = el.getBoundingClientRect()
+      el.style.setProperty('--s', clamp((vh - r.top) / (vh + r.height * 0.6)).toFixed(4))
+    }
+    if (drum && items.length) {
+      const p = Number(drum.closest<HTMLElement>('[data-pin]')!.style.getPropertyValue('--p') || 0)
+      const at = p * (items.length - 1)
+      const gap = Math.min(110, innerWidth * 0.085) + 8
+      items.forEach((li, i) => {
+        const d = i - at, a = Math.abs(d)
+        li.style.transform = `translate3d(0, calc(-50% + ${d * gap}px), 0) rotateX(${-d * 12}deg) scale(${1 - Math.min(a, 3) * 0.08})`
+        li.style.filter = `blur(${Math.min(a * 4, 12).toFixed(1)}px)`
+        li.style.opacity = String(Math.max(0, 1 - a * 0.28))
+        li.style.color = a < 0.5 ? '#17171a' : '#8e8d89'
+      })
+    }
+    if (clock) {
+      const s = Number(clock.closest<HTMLElement>('[data-scrub]')!.style.getPropertyValue('--s') || 0)
+      clock.textContent = fmt(Math.round(total * clamp(s * 2.2 - 0.2)))
+    }
+  }
+
+  if (reduce) {
+    pins.forEach((el) => el.style.setProperty('--p', '0'))
+    scrubs.forEach((el) => el.style.setProperty('--s', '1'))
+    items.forEach((li, i) => { li.style.transform = `translateY(calc(-50% + ${(i - 3) * 90}px))`; li.style.color = '#17171a' })
+    if (clock) clock.textContent = fmt(total)
+  } else {
+    let raf = 0
+    const tick = () => { raf = 0; frame() }
+    addEventListener('scroll', () => { raf ||= requestAnimationFrame(tick) }, { passive: true })
+    addEventListener('resize', () => { raf ||= requestAnimationFrame(tick) })
+    frame()
+  }
+</script>
+</Base>
