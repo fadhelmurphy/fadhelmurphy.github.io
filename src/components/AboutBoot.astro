@@ -1,22 +1,21 @@
 ---
-// About page loader: the longest run counts up while a dot runs the lane, then an orange panel wipes the screen away.
+// About page loader: a percentage counts up while a marker runs the lane, then an orange panel wipes the screen away.
 // Shown once per session for this page; skipped under reduced motion.
-import { longRun, month, syncedAt } from '../data/strava'
+import { syncedAt } from '../data/strava'
 const d = new Date(syncedAt)
 const synced = `${d.getUTCDate()} ${['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][d.getUTCMonth()]}`
-const kmMax = Number(longRun.km)
-const ticks = [0, 10, 20, 30, 40].filter((t) => t <= kmMax)
+const ticks = [0, 25, 50, 75, 100]
 ---
-<div id="aboot" data-km={kmMax} role="status" aria-live="polite" aria-label="Loading">
+<div id="aboot" role="status" aria-live="polite" aria-label="Loading">
   <div class="ab-grid" aria-hidden="true"><i></i><i></i><i></i></div>
   <div class="ab-top"><span>Fadhel</span><span>Strava synced {synced}</span></div>
   <div class="ab-mid">
-    <p class="ab-num" aria-hidden="true"><b id="ab-km">0.00</b><span>km</span></p>
-    <p class="ab-sub">{month.runs} runs in the last 30 days. Longest: {longRun.km} km.</p>
+    <p class="ab-num" aria-hidden="true"><b id="ab-km">0</b><span>%</span></p>
+    <p class="ab-sub">Loading the last 30 days of running and riding.</p>
   </div>
   <div class="ab-lane" aria-hidden="true">
     <div class="ab-line"><i id="ab-fill"></i><b id="ab-dot"></b></div>
-    <div class="ab-ticks">{ticks.map((t) => <span style={`left:${(t / kmMax) * 100}%`}>{t}</span>)}</div>
+    <div class="ab-ticks">{ticks.map((t) => <span style={`left:${t}%`}>{t}</span>)}</div>
   </div>
   <p class="ab-status" id="ab-status">Pulling runs from Strava</p>
   <div class="ab-wipe" aria-hidden="true"></div>
@@ -56,7 +55,6 @@ const ticks = [0, 10, 20, 30, 40].filter((t) => t <= kmMax)
   if (!root || seen || matchMedia('(prefers-reduced-motion: reduce)').matches) { root && root.remove(); window.__booted = true; return }
   document.documentElement.style.overflow = 'hidden'
   var km = document.getElementById('ab-km'), st = document.getElementById('ab-status')
-  var total = parseFloat(root.dataset.km) || 0
   var steps = ['Pulling runs from Strava', 'Lacing up', 'Warming up', 'Go']
   var loaded = document.readyState === 'complete', t0 = performance.now(), p = 0, done = false
   addEventListener('load', function () { loaded = true })
@@ -69,7 +67,7 @@ const ticks = [0, 10, 20, 30, 40].filter((t) => t <= kmMax)
     p += (target - p) * (target === 1 ? 0.22 : 0.2)
     if (target === 1 && p > 0.99) p = 1
     root.style.setProperty('--p', p.toFixed(4))
-    km.textContent = (total * p).toFixed(2)
+    km.textContent = String(Math.round(p * 100))
     st.textContent = steps[Math.min(steps.length - 1, Math.floor(p * (steps.length - 1) + 0.0001))]
     if (p < 1) return requestAnimationFrame(frame)
     if (done) return
