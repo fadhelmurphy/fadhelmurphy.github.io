@@ -2,7 +2,6 @@
 import { Image } from 'astro:assets'
 import '@fontsource-variable/archivo/wdth.css'
 import Base from '../layouts/Base.astro'
-import RunFilm from '../components/RunFilm.astro'
 import runner from '../assets/about/runner.jpg'
 import runnerBlur from '../assets/about/runner-blur.jpg'
 import trackGrey from '../assets/about/track-grey.jpg'
@@ -97,8 +96,12 @@ const nav = [
     </div>
   </section>
 
-  <!-- 2 · short ad-style film, plays when it scrolls into view -->
-  <RunFilm time={longRun.time} km={longRun.km} gear={gear} />
+  <!-- 2 · scroll-linked word rows (no pin) -->
+  <section class="rows" aria-label="What running gives back">
+    <div class="row r1" data-row="-1" aria-hidden="true">{[...rowA, ...rowA].map((w) => <span>{w}<i>/</i></span>)}</div>
+    <div class="row r2" data-row="1" aria-hidden="true">{[...rowB, ...rowB].map((w) => <span>{w}<i>/</i></span>)}</div>
+    <p class="sr-only">{[...rowA, ...rowB].join(', ')}</p>
+  </section>
 
   <!-- 2b · horizontal photo strip: swipe / shift-scroll / arrows; the page keeps scrolling normally -->
   <section class="moments" aria-labelledby="mo-title">
