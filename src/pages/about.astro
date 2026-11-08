@@ -38,8 +38,8 @@ const nav = [
   <section id="run" class="pin" data-pin style="height:210vh">
     <div class="stick">
       <div class="photo" aria-hidden="true">
-        <Image src={runner} alt="" widths={[640, 1100]} sizes="100vw" loading="eager" fetchpriority="high" class="ph sharp" />
-        <Image src={runnerBlur} alt="" widths={[900]} sizes="100vw" loading="eager" class="ph blur" />
+        <Image src={runnerBlur} alt="" widths={[900]} sizes="100vw" loading="eager" fetchpriority="high" class="ph blur" />
+        <Image src={runner} alt="" widths={[640, 1100]} sizes="100vw" loading="eager" class="ph sharp" />
         <div class="shade"></div>
       </div>
 
@@ -176,9 +176,11 @@ const nav = [
   /* hero */
   .photo { position: absolute; inset: 0; transform: scale(calc(1.04 + var(--p, 0) * .14)); transform-origin: 40% 40%; }
   .ph { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
-  .blur { opacity: calc(.55 + var(--p, 0) * .45);
-    -webkit-mask-image: linear-gradient(90deg, #000 0 14%, transparent 32% 52%, #000 74%);
-            mask-image: linear-gradient(90deg, #000 0 14%, transparent 32% 52%, #000 74%); }
+  /* the whole frame is motion-blurred; only a soft ghost of the face and torso stays sharp, and it melts away on scroll */
+  .sharp { opacity: calc(.6 - var(--p, 0) * 1.1);
+    -webkit-mask-image: radial-gradient(ellipse 30% 60% at 45% 50%, #000 20%, transparent 75%);
+            mask-image: radial-gradient(ellipse 30% 60% at 45% 50%, #000 20%, transparent 75%); }
+  @media (max-width: 860px) { .sharp { -webkit-mask-image: radial-gradient(ellipse 52% 40% at 45% 42%, #000 20%, transparent 75%); mask-image: radial-gradient(ellipse 52% 40% at 45% 42%, #000 20%, transparent 75%); } }
   .shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgb(40 40 44 / .28), transparent 30% 55%, rgb(32 32 36 / .62)); }
   .hero { position: relative; height: 100%; max-width: 1280px; margin: 0 auto; padding: 108px clamp(20px, 4vw, 56px) 36px; color: #fff; }
   .d-top { font-size: clamp(64px, 15vw, 230px); transform: translateX(calc(var(--p, 0) * -28vw)); text-shadow: 0 2px 30px rgb(0 0 0 / .12); }
