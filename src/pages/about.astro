@@ -1,395 +1,397 @@
 ---
 import { Image } from 'astro:assets'
-import '@fontsource/michroma/latin-400.css'
+import '@fontsource-variable/archivo/wdth.css'
 import Base from '../layouts/Base.astro'
 import runner from '../assets/about/runner.jpg'
 import runnerBlur from '../assets/about/runner-blur.jpg'
 import trackGrey from '../assets/about/track-grey.jpg'
-import { longRun, recent, month, hr, gear } from '../data/strava'
+import { longRun, recent, month, gear, stream } from '../data/strava'
 
 const strava = 'https://strava.app.link/E63xhR6AR7b'
 
-// heart-rate line for the long run, drawn into a 600×140 box
-const lo = hr.length ? Math.min(...hr) : 0, hi = hr.length ? Math.max(...hr) : 1
-const hrPath = hr.map((v, i) => `${i ? 'L' : 'M'}${((i / (hr.length - 1)) * 600).toFixed(1)} ${(130 - ((v - lo) / (hi - lo)) * 120).toFixed(1)}`).join(' ')
-const hrArea = `${hrPath} L600 140 L0 140 Z`
+// ── long-run replay chart: heart rate across the distance, 1000×300 box ──
+const W = 1000, H = 300
+const { km, hr, v } = stream
+const has = hr.length > 1
+const kmMax = has ? km[km.length - 1] : 1
+const lo = has ? Math.min(...hr) - 6 : 0, hi = has ? Math.max(...hr) + 4 : 1
+const x = (k: number) => (k / kmMax) * W
+const y = (b: number) => H - ((b - lo) / (hi - lo)) * H
+const line = has ? hr.map((b, i) => `${i ? 'L' : 'M'}${x(km[i]).toFixed(1)} ${y(b).toFixed(1)}`).join(' ') : ''
+const area = has ? `${line} L${W} ${H} L0 ${H} Z` : ''
+const ticks = [0, 10, 20, 30, 40].filter((t) => t <= kmMax)
+const spark = has ? hr.map((b, i) => `${i ? 'L' : 'M'}${((i / (hr.length - 1)) * 200).toFixed(1)} ${(40 - ((b - lo) / (hi - lo)) * 40).toFixed(1)}`).join(' ') : ''
+const avgHr = has ? Math.round(hr.reduce((a, b) => a + b, 0) / hr.length) : 0
 
-// stylised route outline (not the real GPS line, which would give away where the runs start)
-const route = 'M38 168c14-10 30-4 40-16s-2-30 12-38 30 6 40-6 4-34 20-40 34 8 38 26-14 30-2 42 30 2 34 18-12 26-28 30-34-6-44 8-6 28-22 34-40-10-52-4-24 8-40 4'
-
-const laps = Math.round(Number(longRun.km) / 0.4)
-// stadium-shaped track lane, grown outward by `o`
-const oval = (o: number) => { const r = 70 + o, l = 110, cx = 210, cy = 110; return `M${cx - l} ${cy - r}h${2 * l}a${r} ${r} 0 0 1 0 ${2 * r}h${-2 * l}a${r} ${r} 0 0 1 0 ${-2 * r}z` }
-
-const words = ['Distance', 'Discipline', 'Night laps', 'Heart rate', 'Long runs', 'Rain', 'Recovery', 'Repeat']
+const rowA = ['Distance', 'Discipline', 'Night laps', 'Heart rate']
+const rowB = ['Long runs', 'Rain', 'Recovery', 'Repeat']
 
 const nav = [
-  { href: '#run', label: 'Run', id: 'run', note: 'The latest long run', icon: 'M13 4a2 2 0 1 0 0 .01M7 21l3-6 3 2v4M10 15l1-5 4 3 3-1M8 9l3-2', track: true },
-  { href: '#effort', label: 'Effort', id: 'effort', note: 'Heart rate and numbers', icon: 'M3 12h4l2-5 4 10 2-5h6', track: true },
+  { href: '#run', label: 'Run', id: 'run', note: 'The last 30 days', icon: 'M13 4a2 2 0 1 0 0 .01M7 21l3-6 3 2v4M10 15l1-5 4 3 3-1M8 9l3-2', track: true },
+  { href: '#replay', label: 'Long run', id: 'replay', note: 'Replay the longest run', icon: 'M3 12h4l2-5 4 10 2-5h6', track: true },
   { href: '#gear', label: 'Gear', id: 'gear', note: 'Shoes, watch and bike', icon: 'M3 16l6-2 4 2 8 1v2H3zM9 14l1-5 3 1', track: true },
   { href: '#strava', label: 'Strava', id: 'strava', note: 'Follow the activity', icon: 'M15 3l-5 10h4l1-2 3 6h3L15 3zM9 13l-4 8h4l2-4', track: true },
   { href: '/', label: 'Home', id: 'home', note: 'Back to the main page', icon: 'M4 11l8-7 8 7v9H4z' }
 ]
 ---
-<Base nav={nav} page="About" theme="sport" title="About | Fadhel Ijlal Falah" description="Fadhel Ijlal Falah off the clock: running and riding, tracked on Strava.">
+<Base nav={nav} page="About" theme="sport" title="About | Fadhel Ijlal Falah" description="Fadhel Ijlal Falah off the clock: running and riding, synced from Strava.">
 <main class="ab">
 
-  <!-- 1 · hero: pinned, the photo speeds up as you scroll -->
-  <section id="run" class="pin" data-pin style="height:210vh">
-    <div class="stick">
-      <div class="photo" aria-hidden="true">
-        <Image src={runnerBlur} alt="" widths={[900]} sizes="100vw" loading="eager" fetchpriority="high" class="ph blur" />
+  <!-- 1 · HERO (pin 1 of 2) -->
+  <section id="run" class="hero" data-hero>
+    <div class="h-stage">
+      <div class="h-photo" aria-hidden="true">
+        <Image src={runnerBlur} alt="" widths={[900]} sizes="100vw" loading="eager" fetchpriority="high" class="ph" />
         <Image src={runner} alt="" widths={[640, 1100]} sizes="100vw" loading="eager" class="ph sharp" />
-        <div class="shade"></div>
+        <div class="h-shade"></div>
       </div>
+      <div class="h-grid" aria-hidden="true"><i></i><i></i><i></i></div>
 
-      <div class="hero">
-        <h1 class="sr-only">Run. Ride. Repeat.</h1>
-        <p class="disp d-top" aria-hidden="true">RUN.</p>
-        <p class="disp d-bot" aria-hidden="true"><span class="slash">//</span> RIDE.<br />REPEAT.</p>
+      <div class="h-in">
+        <p class="h-intro" data-fade>I run most nights and ride when the legs need a break. This page pulls from Strava, so the numbers stay current.</p>
 
-        <div class="side">
-          <p class="side-lead">Night laps on the track, long runs at the weekend. All of it on Strava.</p>
-          <ol class="runs" aria-label="Recent runs">
-            {recent.map((r, i) => (
-              <li style={`--i:${i}`}><span>{r.date}</span><span>{r.km} km</span><span>{r.time}</span><span>{r.pace}</span></li>
-            ))}
-          </ol>
-        </div>
-
-        <article class="card glass">
-          <p class="card-k">Long run completed</p>
-          <p class="card-v">{longRun.km}<small>km</small></p>
-          <svg viewBox="0 0 300 200" class="route" aria-hidden="true">
-            <path d={route} pathLength="1" class="r-line" />
-            <circle cx="38" cy="168" r="5" class="r-dot" />
-          </svg>
-          <dl class="card-s">
+        <aside class="h-card" data-fade aria-label="Longest run in the last 30 days">
+          <p class="hc-k">Longest run, last 30 days</p>
+          <p class="hc-v">{longRun.km}<small>km</small></p>
+          {has && <svg viewBox="0 0 200 40" preserveAspectRatio="none" class="hc-spark" aria-hidden="true"><path d={spark} /></svg>}
+          <dl class="hc-s">
             <div><dt>Pace</dt><dd>{longRun.pace}<small>/km</small></dd></div>
             <div><dt>Time</dt><dd>{longRun.time}</dd></div>
             <div><dt>Energy</dt><dd>{longRun.cal}<small>cal</small></dd></div>
           </dl>
-        </article>
+        </aside>
 
-        <div class="month">
-          <p class="month-v">{month.km}<small>km</small></p>
-          <p class="month-k">{month.runs} runs in the last 30 days</p>
+        <table class="h-runs" data-fade>
+          <caption>Recent runs</caption>
+          <thead><tr><th scope="col">Date</th><th scope="col">Km</th><th scope="col">Time</th><th scope="col">Pace</th></tr></thead>
+          <tbody>{recent.map((r) => <tr><td>{r.date}</td><td>{r.km}</td><td>{r.time}</td><td>{r.pace}</td></tr>)}</tbody>
+        </table>
+
+        <div class="h-month" data-fade>
+          <p><b>{month.km}</b> km</p>
+          <p>{month.runs} runs in the last 30 days</p>
         </div>
+
+        <h1 class="h-word" aria-label="Run. Ride. Repeat.">
+          <span class="hw-run" data-split>Run.</span>
+          <span class="hw-sub" data-fade aria-hidden="true"><em>Ride.</em> Repeat.</span>
+        </h1>
       </div>
-      <div class="scrollcue" aria-hidden="true"><i></i></div>
     </div>
   </section>
 
-  <!-- 2 · word drum -->
-  <section class="pin words" data-pin style="height:260vh" aria-label="What running gives back">
-    <div class="stick wrap">
-      <p class="w-lead">Every kilometre takes something from you, and gives something back.</p>
-      <div class="drum" aria-hidden="true">
-        <svg class="arrow" viewBox="0 0 60 60"><path d="M6 30h44M32 12l18 18-18 18" /></svg>
-        <ul>{words.map((w) => <li>{w}</li>)}</ul>
+  <!-- 2 · scroll-linked word rows (no pin) -->
+  <section class="rows" aria-label="What running gives back">
+    <div class="row r1" data-row="-1" aria-hidden="true">{[...rowA, ...rowA].map((w) => <span>{w}<i>/</i></span>)}</div>
+    <div class="row r2" data-row="1" aria-hidden="true">{[...rowB, ...rowB].map((w) => <span>{w}<i>/</i></span>)}</div>
+    <p class="sr-only">{[...rowA, ...rowB].join(', ')}</p>
+  </section>
+
+  <!-- 3 · LONG-RUN REPLAY (pin 2 of 2): scroll moves a playhead through the real heart-rate and pace data -->
+  <section id="replay" class="replay" data-replay>
+    <div class="r-stage">
+      <header class="r-head">
+        <h2 class="disp r-title">The long run</h2>
+        <p class="r-date">{longRun.date}. Scroll to run it again.</p>
+      </header>
+
+      <div class="r-read" aria-hidden="true">
+        <div class="rd-km"><b data-r="km">0.0</b><span>km</span></div>
+        <dl class="rd-s">
+          <div><dt>Elapsed</dt><dd data-r="t">0:00:00</dd></div>
+          <div><dt>Heart rate</dt><dd><span data-r="hr">–</span> bpm</dd></div>
+          <div><dt>Pace</dt><dd><span data-r="pace">–</span> /km</dd></div>
+        </dl>
       </div>
-      <ul class="sr-only">{words.map((w) => <li>{w}</li>)}</ul>
+
+      {has && (
+        <figure class="r-chart">
+          <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" role="img" aria-label={`Heart rate over ${longRun.km} km, average ${avgHr} bpm`}>
+            <defs>
+              <linearGradient id="ra" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#fc4c02" stop-opacity=".38" /><stop offset="1" stop-color="#fc4c02" stop-opacity="0" /></linearGradient>
+              <clipPath id="rc"><rect data-r="clip" x="0" y="-10" width="0" height={H + 20} /></clipPath>
+            </defs>
+            {ticks.map((t) => <line x1={x(t)} x2={x(t)} y1="0" y2={H} class="rg" />)}
+            <path d={line} class="rl-ghost" vector-effect="non-scaling-stroke" />
+            <g clip-path="url(#rc)">
+              <path d={area} fill="url(#ra)" />
+              <path d={line} class="rl" vector-effect="non-scaling-stroke" />
+            </g>
+          </svg>
+          <div class="r-head-line" data-r="head" aria-hidden="true"><i></i></div>
+          <div class="r-ticks" aria-hidden="true">{ticks.map((t) => <span style={`left:${(t / kmMax) * 100}%`}>{t} km</span>)}</div>
+        </figure>
+      )}
+
+      <dl class="r-sum">
+        <div><dt>Distance</dt><dd>{longRun.km} km</dd></div>
+        <div><dt>Moving time</dt><dd>{longRun.time}</dd></div>
+        <div><dt>Avg pace</dt><dd>{longRun.pace} /km</dd></div>
+        <div><dt>Avg heart rate</dt><dd>{avgHr} bpm</dd></div>
+        <div><dt>Elevation</dt><dd>{longRun.elev} m</dd></div>
+        <div><dt>PRs</dt><dd>{longRun.prs}</dd></div>
+      </dl>
     </div>
   </section>
 
-  <!-- 3 · effort: pinned; the photo wipes in and a runner dot laps a track while the clock runs -->
-  <section id="effort" class="pin" data-pin style="height:300vh">
-    <div class="stick e-stage">
-      <div class="e-copy">
-        <h2 class="disp e-title"><span class="ln"><span>Push your</span></span><span class="ln"><span class="or">limit</span></span></h2>
-        <p class="e-lede">{longRun.date}: my longest run of the last 30 days. {longRun.km} km in {longRun.time}{longRun.prs ? `, with ${longRun.prs} personal record${longRun.prs > 1 ? 's' : ''} along the way` : ''}.</p>
-        <p class="clock" data-clock={longRun.secs} aria-label={`Moving time ${longRun.time}`}>00:00:00</p>
-        <p class="laps" aria-hidden="true"><b data-km={longRun.km}>0.00</b> km <span>/</span> lap <b data-lap={laps}>0</b> of {laps} on a 400 m track</p>
-      </div>
-      <figure class="e-photo">
-        <div class="e-frame"><Image src={trackGrey} alt="Fadhel running laps on a stadium track at night" widths={[480, 800]} sizes="(min-width: 900px) 40vw, 90vw" class="e-img" /></div>
-        <svg viewBox="0 0 420 220" class="track" aria-hidden="true">
-          <path d={oval(30)} class="t-lane" />
-          <path d={oval(0)} class="t-lane t-in" />
-          <path d={oval(15)} pathLength="1" class="t-run" data-track-path />
-          <circle r="7" class="t-dot" data-track-dot />
-        </svg>
-      </figure>
-    </div>
-  </section>
-
-  <section class="band" data-scrub>
-    <div class="e-band">
-      <div class="block">
-        <p><b>{longRun.km}</b> km</p>
-        {longRun.effort != null && <p><b>{longRun.effort}</b> effort</p>}
-        <p><b>{longRun.prs}</b> PRs</p>
-      </div>
-      {hr.length > 1 && <div class="chart">
-        <div class="chart-head">
-          <span>Heart rate</span><span>{lo}–{hi} bpm</span><span>+{longRun.elev} m</span><span>{longRun.time} h</span>
-        </div>
-        <svg viewBox="0 0 600 140" preserveAspectRatio="none" aria-label={`Heart rate during the ${longRun.km} km run, between ${lo} and ${hi} beats per minute`}>
-          <defs><linearGradient id="hrg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#fc4c02" stop-opacity=".35" /><stop offset="1" stop-color="#fc4c02" stop-opacity="0" /></linearGradient></defs>
-          <path d={hrArea} fill="url(#hrg)" class="hr-area" />
-          <path d={hrPath} pathLength="1" class="hr-line" vector-effect="non-scaling-stroke" />
-        </svg>
-      </div>}
-    </div>
-  </section>
-
-  <!-- 4 · gear -->
-  <section id="gear" class="gear" data-scrub>
-    <div class="g-grid">
-      <div class="g-card">
-        <h2 class="disp g-title">Gear I<br />trust</h2>
-        <ul class="g-list">
-          {gear.map((g, i) => (
-            <li style={`--i:${i}`}>
-              <span class="g-k">{g.k}</span>
-              <span class="g-t">{g.t}</span>
-              <span class="g-m">{g.m}</span>
-            </li>
+  <!-- 4 · GEAR -->
+  <section id="gear" class="gear">
+    <div class="g-photo"><Image src={trackGrey} alt="Fadhel running laps on a stadium track at night" widths={[480, 800]} sizes="(min-width: 900px) 34vw, 100vw" class="g-img" data-par /></div>
+    <div class="g-body">
+      <h2 class="disp g-title" data-split>Gear I trust</h2>
+      <table class="g-table">
+        <caption class="sr-only">Gear and distance logged on Strava</caption>
+        <tbody>
+          {gear.map((g) => (
+            <tr data-gear><th scope="row">{g.k}</th><td>{g.t}</td><td>{g.m}</td></tr>
           ))}
-        </ul>
-      </div>
-      <div class="g-side">
-        <h3 class="disp g-ride">Ride days</h3>
-        <p>When the legs need a break from running, the Camp SR3D comes out for long road loops. Easy spins, same discipline.</p>
-        <p class="g-note">Kilometres are what Strava has logged on each pair.</p>
-      </div>
+        </tbody>
+      </table>
+      <p class="g-note">Kilometres are what Strava has logged on each pair. The Camp SR3D comes out on ride days.</p>
     </div>
   </section>
 
-  <!-- 5 · Strava -->
-  <section id="strava" class="cta" data-scrub>
-    <p class="disp cta-1"><span class="mark" aria-hidden="true"></span>Step out of comfort.</p>
-    <p class="disp cta-2"><span class="mark" aria-hidden="true"></span>Stay in the fight.</p>
+  <!-- 5 · STRAVA -->
+  <section id="strava" class="cta">
+    <p class="disp cta-l" data-split>Step out of comfort.</p>
+    <p class="disp cta-l or" data-split>Stay in the fight.</p>
     <a href={strava} target="_blank" rel="noopener" class="strava">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.4 17.9l-2.1-4.1h-3l5.1 10 5.1-10h-3M10.4 0L3.5 13.8h4.1l2.8-5.4 2.8 5.4h4z" /></svg>
       Follow on Strava
     </a>
   </section>
+
+  <script type="application/json" id="run-stream" set:html={JSON.stringify({ km, hr, v, secs: longRun.secs, kmMax })} />
 </main>
 
 <style>
-  .ab { --ink: #17171a; --mute: #5d5d63; --bg: #e7e6e3; --or: #fc4c02; --or2: #ff7a3d; background: var(--bg); color: var(--ink); overflow-x: clip; }
-  .disp { font-family: 'Michroma', 'Poppins', sans-serif; font-weight: 400; -webkit-text-stroke: .02em currentColor; paint-order: stroke fill; letter-spacing: -.02em; line-height: .92; text-transform: uppercase; }
-  .pin { position: relative; }
-  .stick { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+  .ab { --ink: #141414; --mute: #5a5955; --bg: #efeeea; --line: rgb(20 20 20 / .14); --or: #fc4c02;
+    --ease: cubic-bezier(.16, 1, .3, 1);
+    background: var(--bg); color: var(--ink); overflow-x: clip; font-family: 'Archivo Variable', 'Poppins', sans-serif; }
+  .disp, .h-word, .row, .rd-km b { font-family: 'Archivo Variable', sans-serif; font-stretch: 125%; font-weight: 800; text-transform: uppercase; letter-spacing: -.035em; line-height: .86; }
 
-  /* hero */
-  .photo { position: absolute; inset: 0; transform: scale(calc(1.04 + var(--p, 0) * .14)); transform-origin: 40% 40%; }
+  /* ── hero ── */
+  .hero { position: relative; height: 200vh; }
+  .h-stage { position: sticky; top: 0; height: 100svh; overflow: hidden; color: #fff; }
+  .h-photo { position: absolute; inset: 0; will-change: transform; }
   .ph { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
-  /* the whole frame is motion-blurred; only a soft ghost of the face and torso stays sharp, and it melts away on scroll */
-  .sharp { opacity: calc(.6 - var(--p, 0) * 1.1);
-    -webkit-mask-image: radial-gradient(ellipse 30% 60% at 45% 50%, #000 20%, transparent 75%);
-            mask-image: radial-gradient(ellipse 30% 60% at 45% 50%, #000 20%, transparent 75%); }
-  @media (max-width: 860px) { .sharp { -webkit-mask-image: radial-gradient(ellipse 52% 40% at 45% 42%, #000 20%, transparent 75%); mask-image: radial-gradient(ellipse 52% 40% at 45% 42%, #000 20%, transparent 75%); } }
-  .shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgb(40 40 44 / .28), transparent 30% 55%, rgb(32 32 36 / .62)); }
-  .hero { position: relative; height: 100%; max-width: 1280px; margin: 0 auto; padding: 108px clamp(20px, 4vw, 56px) 36px; color: #fff; }
-  .d-top { font-size: clamp(64px, 15vw, 230px); transform: translateX(calc(var(--p, 0) * -28vw)); text-shadow: 0 2px 30px rgb(0 0 0 / .12); }
-  .d-bot { position: absolute; right: clamp(20px, 4vw, 56px); bottom: clamp(150px, 20vh, 210px); text-align: right; font-size: clamp(40px, 8.4vw, 132px); transform: translateX(calc(var(--p, 0) * 30vw)); }
-  .slash { color: var(--or); }
+  .sharp { opacity: .6; -webkit-mask-image: radial-gradient(ellipse 30% 60% at 45% 50%, #000 20%, transparent 75%); mask-image: radial-gradient(ellipse 30% 60% at 45% 50%, #000 20%, transparent 75%); }
+  .h-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgb(20 20 20 / .25), transparent 28% 50%, rgb(20 20 20 / .55)); }
+  .h-grid { position: absolute; inset: 0 clamp(20px, 4vw, 56px); display: grid; grid-template-columns: repeat(4, 1fr); pointer-events: none; }
+  .h-grid i { border-left: 1px solid rgb(255 255 255 / .14); }
+  .h-grid i:last-child { border-right: 1px solid rgb(255 255 255 / .14); }
+  .h-in { position: relative; height: 100%; padding: 104px clamp(20px, 4vw, 56px) 0; display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: auto 1fr auto; column-gap: 0; }
+  .h-intro { grid-column: 1 / 2; font-size: 15px; line-height: 1.5; padding-right: 20px; max-width: 30ch; }
+  .h-card { grid-column: 4; grid-row: 1 / 3; align-self: start; justify-self: end; width: 100%; max-width: 300px; padding: 16px 18px; background: rgb(255 255 255 / .14); border: 1px solid rgb(255 255 255 / .35); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+  .hc-k { font-size: 12px; opacity: .85; }
+  .hc-v { font-size: 40px; font-weight: 750; font-stretch: 110%; letter-spacing: -.03em; line-height: 1.05; margin-top: 2px; }
+  .hc-v small, .hc-s small { font-size: .42em; font-weight: 500; margin-left: 3px; opacity: .85; }
+  .hc-spark { width: 100%; height: 40px; margin: 10px 0; }
+  .hc-spark path { fill: none; stroke: var(--or); stroke-width: 2; vector-effect: non-scaling-stroke; }
+  .hc-s { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgb(255 255 255 / .3); padding-top: 10px; }
+  .hc-s dt { font-size: 11px; opacity: .8; }
+  .hc-s dd { font-size: 15px; font-weight: 650; font-variant-numeric: tabular-nums; }
+  .h-runs { grid-column: 3; grid-row: 2; align-self: start; margin: 24px 20px 0 20px; border-collapse: collapse; font-size: 12.5px; font-variant-numeric: tabular-nums; }
+  .h-runs caption { text-align: left; font-size: 12px; opacity: .8; padding-bottom: 6px; }
+  .h-runs th { text-align: left; font-weight: 500; opacity: .6; padding: 4px 10px 4px 0; border-bottom: 1px solid rgb(255 255 255 / .3); }
+  .h-runs td { padding: 6px 10px 6px 0; border-bottom: 1px solid rgb(255 255 255 / .14); }
+  .h-runs tbody tr:nth-child(n+4) { opacity: .55; }
+  .h-month { grid-column: 4; grid-row: 2; align-self: end; justify-self: end; text-align: right; padding-bottom: 24px; }
+  .h-month b { font-size: 44px; font-weight: 750; font-stretch: 110%; letter-spacing: -.03em; }
+  .h-month p + p { font-size: 13px; opacity: .85; }
+  .h-word { grid-column: 1 / -1; grid-row: 3; margin-left: -.04em; padding-bottom: 2vh; }
+  .hw-run { display: block; font-size: clamp(110px, 27vw, 420px); line-height: .78; white-space: nowrap; }
+  .hw-sub { display: block; font-size: clamp(22px, 3.2vw, 46px); margin: 10px 0 0 .3vw; }
+  .hw-sub em { font-style: normal; color: var(--or); }
 
-  .side { position: absolute; right: clamp(20px, 4vw, 56px); top: 120px; width: min(360px, 32vw); transform: translateY(calc(var(--p, 0) * -14vh)); opacity: calc(1 - var(--p, 0) * 1.6); }
-  .side-lead { border-left: 2px solid var(--or); padding-left: 14px; font-size: 17px; line-height: 1.45; }
-  .runs { margin-top: 18px; display: grid; gap: 6px; }
-  .runs li { display: grid; grid-template-columns: 1.1fr .9fr 1fr .8fr; gap: 8px; padding: 9px 14px; border-radius: 12px; font-size: 13.5px; font-variant-numeric: tabular-nums;
-    background: rgb(255 255 255 / calc(.32 - var(--i) * .05)); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-    opacity: calc(1 - var(--i) * .17); transform: translateX(calc(var(--i) * 10px));
-    animation: rowIn .7s cubic-bezier(.2,.8,.2,1) both; animation-delay: calc(.5s + var(--i) * .08s); }
-  .runs li:first-child { background: rgb(255 255 255 / .5); color: var(--ink); }
-  @keyframes rowIn { from { opacity: 0; transform: translateX(40px); } }
+  /* ── rows ── */
+  .rows { padding: clamp(70px, 12vh, 140px) 0; border-bottom: 1px solid var(--line); overflow: hidden; }
+  .row { display: flex; white-space: nowrap; font-size: clamp(52px, 9vw, 150px); will-change: transform; }
+  .row span { display: inline-flex; align-items: center; }
+  .row i { font-style: normal; color: var(--or); margin: 0 .25em; }
+  .r1 { -webkit-text-stroke: 1.5px var(--ink); color: transparent; }
+  .r1 i { -webkit-text-stroke: 0; }
+  .r2 { margin-top: .08em; }
 
-  .glass { background: rgb(255 255 255 / .16); border: 1px solid rgb(255 255 255 / .35); backdrop-filter: blur(18px) saturate(1.2); -webkit-backdrop-filter: blur(18px) saturate(1.2); }
-  .card { position: absolute; left: clamp(20px, 4vw, 56px); bottom: 36px; width: 252px; border-radius: 24px; padding: 18px 20px; transform: translateY(calc(var(--p, 0) * -10vh)); }
-  .card-k { font-size: 12px; letter-spacing: .02em; opacity: .9; }
-  .card-v { font-size: 34px; font-weight: 600; letter-spacing: -.02em; line-height: 1.1; }
-  .card-v small, .month-v small, dd small { font-size: .45em; margin-left: 3px; font-weight: 500; opacity: .85; }
-  .route { width: 100%; height: 130px; margin: 8px 0 12px; overflow: visible; }
-  .r-line { fill: none; stroke: #fff; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 2.6s .4s cubic-bezier(.6,0,.2,1) forwards; }
-  .r-dot { fill: var(--or); stroke: #fff; stroke-width: 2; }
-  @keyframes draw { to { stroke-dashoffset: 0; } }
-  .card-s { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgb(255 255 255 / .3); padding-top: 10px; }
-  .card-s dt { font-size: 11px; opacity: .8; }
-  .card-s dd { font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  /* ── replay ── */
+  .replay { position: relative; height: 320vh; }
+  .r-stage { position: sticky; top: 0; height: 100svh; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto 1fr auto; column-gap: 4vw; max-width: 1360px; margin: 0 auto; padding: 96px clamp(20px, 4vw, 56px) 28px; }
+  .r-head { grid-column: 1; }
+  .r-title { font-size: clamp(40px, 6vw, 96px); }
+  .r-date { margin-top: 14px; font-size: 16px; color: var(--mute); }
+  .r-read { grid-column: 2; grid-row: 1 / 3; justify-self: end; text-align: right; }
+  .rd-km { display: flex; align-items: baseline; justify-content: flex-end; gap: 10px; color: var(--or); }
+  .rd-km b { font-size: clamp(64px, 10vw, 170px); font-variant-numeric: tabular-nums; }
+  .rd-km span { font-size: 18px; font-weight: 600; color: var(--ink); }
+  .rd-s { display: flex; justify-content: flex-end; gap: 28px; margin-top: 10px; font-variant-numeric: tabular-nums; }
+  .rd-s dt { font-size: 12px; color: var(--mute); }
+  .rd-s dd { font-size: 20px; font-weight: 650; }
+  .r-chart { grid-column: 1 / -1; grid-row: 3; position: relative; margin: 28px 0 30px; border-bottom: 1px solid var(--ink); min-height: 160px; }
+  .r-chart svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .rg { stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke; }
+  .rl-ghost { fill: none; stroke: rgb(20 20 20 / .18); stroke-width: 1.5; }
+  .rl { fill: none; stroke: var(--or); stroke-width: 2.5; stroke-linejoin: round; }
+  .r-head-line { position: absolute; top: -12px; bottom: 0; left: 0; width: 0; border-left: 1.5px solid var(--ink); will-change: transform; }
+  .r-head-line i { position: absolute; left: -6px; top: -6px; width: 11px; height: 11px; background: var(--or); }
+  .r-ticks { position: absolute; left: 0; right: 0; bottom: -24px; height: 20px; font-size: 12px; color: var(--mute); white-space: nowrap; }
+  .r-ticks span { position: absolute; translate: -50% 0; }
+  .r-ticks span:first-child { translate: 0 0; }
+  .r-ticks span:last-child:not(:first-child) { translate: -100% 0; }
+  .r-sum { grid-column: 1 / -1; grid-row: 4; display: grid; grid-template-columns: repeat(6, 1fr); border-top: 1px solid var(--line); }
+  .r-sum div { padding: 14px 16px 0 0; }
+  .r-sum div + div { padding-left: 16px; border-left: 1px solid var(--line); }
+  .r-sum dt { font-size: 12px; color: var(--mute); }
+  .r-sum dd { font-size: clamp(16px, 1.5vw, 22px); font-weight: 650; font-variant-numeric: tabular-nums; margin-top: 2px; }
 
-  .month { position: absolute; right: clamp(20px, 4vw, 56px); bottom: 40px; text-align: right; }
-  .month-v { font-size: 38px; font-weight: 600; letter-spacing: -.02em; line-height: 1; }
-  .month-k { font-size: 14px; opacity: .9; margin-top: 4px; }
-  .scrollcue { position: absolute; left: 50%; bottom: 18px; width: 22px; height: 34px; border: 1.5px solid rgb(255 255 255 / .7); border-radius: 12px; translate: -50% 0; opacity: calc(1 - var(--p, 0) * 4); }
-  .scrollcue i { position: absolute; left: 50%; top: 7px; width: 3px; height: 7px; border-radius: 2px; background: #fff; translate: -50% 0; animation: cue 1.6s infinite; }
-  @keyframes cue { 60% { transform: translateY(9px); opacity: 0; } 100% { opacity: 0; } }
+  /* ── gear ── */
+  .gear { display: grid; grid-template-columns: 1fr 1.6fr; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .g-photo { position: relative; overflow: hidden; min-height: 520px; border-right: 1px solid var(--line); }
+  .g-img { position: absolute; inset: -8% 0; width: 100%; height: 116%; object-fit: cover; }
+  .g-body { padding: clamp(40px, 7vh, 90px) clamp(20px, 4vw, 56px); }
+  .g-title { font-size: clamp(40px, 6vw, 96px); }
+  .g-table { width: 100%; margin-top: 36px; border-collapse: collapse; border-top: 1px solid var(--ink); }
+  .g-table tr { border-bottom: 1px solid var(--line); }
+  .g-table th { width: 26%; text-align: left; font-size: 13px; font-weight: 500; color: var(--mute); padding: 18px 12px 18px 0; }
+  .g-table td { padding: 18px 0; font-size: clamp(17px, 1.6vw, 22px); font-weight: 650; letter-spacing: -.01em; }
+  .g-table td:last-child { text-align: right; color: var(--or); font-size: 15px; font-variant-numeric: tabular-nums; }
+  .g-note { margin-top: 22px; font-size: 14px; color: var(--mute); max-width: 52ch; line-height: 1.6; }
 
-  /* word drum */
-  .words { background: var(--bg); }
-  .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); align-items: center; max-width: 1280px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 56px); gap: 4vw; }
-  .w-lead { font-size: clamp(18px, 1.6vw, 22px); line-height: 1.45; color: var(--mute); max-width: 22ch; }
-  .drum { position: relative; height: 100%; display: flex; align-items: center; }
-  .drum ul { position: relative; width: 100%; height: 100%; }
-  .drum li { position: absolute; left: 76px; top: 50%; font-family: 'Michroma', sans-serif; font-size: clamp(34px, 5.6vw, 84px); line-height: 1; white-space: nowrap; letter-spacing: -.02em; will-change: transform, filter, opacity; }
-  .arrow { position: absolute; left: 0; top: 50%; width: 56px; height: 56px; translate: 0 -50%; fill: none; stroke: var(--or); stroke-width: 7; stroke-linecap: square; }
-
-  /* effort */
-  .gear, .cta, .band { max-width: 1280px; margin: 0 auto; padding: clamp(80px, 12vh, 140px) clamp(20px, 4vw, 56px); }
-  .band { padding-top: 0; }
-  .e-stage { display: grid; grid-template-columns: 1.05fr .95fr; gap: 4vw; align-items: center; max-width: 1280px; margin: 0 auto; padding: 96px clamp(20px, 4vw, 56px) 40px; }
-  .e-title { font-size: clamp(46px, 7vw, 112px); }
-  .ln { display: block; overflow: hidden; padding-bottom: .04em; }
-  .ln > span { display: block; transform: translateY(calc((1 - min(1, max(0, var(--e, 1) * 1.6 - .3))) * 105%)); }
-  .ln + .ln > span { transform: translateY(calc((1 - min(1, max(0, var(--e, 1) * 1.6 - .5))) * 105%)); }
-  .or { color: var(--or); }
-  .e-lede { margin-top: 24px; max-width: 44ch; font-size: 18px; line-height: 1.6; color: var(--mute); opacity: min(1, max(0, var(--e, 1) * 2 - .9)); }
-  .clock, .laps { opacity: min(1, max(0, var(--e, 1) * 2 - 1)); }
-  .clock { margin-top: 28px; font-family: 'Michroma', sans-serif; font-size: clamp(40px, 5.4vw, 80px); line-height: 1; color: var(--or); font-variant-numeric: tabular-nums; }
-  .laps { margin-top: 14px; font-size: 15px; color: var(--mute); font-variant-numeric: tabular-nums; }
-  .laps b { color: var(--ink); font-weight: 600; }
-  .laps span { margin: 0 6px; color: #b5b4b0; }
-  .e-photo { position: relative; height: min(76svh, 640px); }
-  .e-frame { height: 100%; overflow: hidden; border-radius: 6px; clip-path: inset(calc((1 - min(1, max(0, var(--e, 1) * 1.4 - .25))) * 100%) 0 0 0 round 6px); }
-  .e-img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; transform: scale(calc(1.3 - min(1, var(--e, 1)) * .22 + var(--p, 1) * .12)); transform-origin: 50% 70%; }
-  .track { position: absolute; left: -16%; right: -16%; bottom: -4%; width: 132%; overflow: visible; pointer-events: none;
-    transform: perspective(900px) rotateX(58deg) rotateZ(calc(var(--p, 1) * -18deg)) scale(calc(.85 + min(1, var(--e, 1)) * .15)); transform-origin: 50% 70%;
-    opacity: min(1, max(0, var(--e, 1) * 3 - 2)); }
-  .t-lane { fill: none; stroke: rgb(255 255 255 / .7); stroke-width: 2; }
-  .t-in { stroke-dasharray: 6 8; stroke: rgb(255 255 255 / .4); }
-  .t-run { fill: none; stroke: var(--or); stroke-width: 5; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; filter: drop-shadow(0 0 6px rgb(252 76 2 / .6)); }
-  .t-dot { fill: #fff; stroke: var(--or); stroke-width: 4; }
-
-  .e-band { margin-top: clamp(48px, 8vh, 90px); display: grid; grid-template-columns: auto 1fr; gap: 20px; }
-  .block { background: var(--or); color: #fff; padding: 22px 30px; display: grid; gap: 2px; align-content: center; font-family: 'Michroma', sans-serif; font-size: clamp(22px, 2.6vw, 38px); line-height: 1.25; text-transform: uppercase;
-    clip-path: inset(0 calc((1 - min(1, var(--s, 0) * 2.2)) * 100%) 0 0); }
-  .block b { font-weight: 400; }
-  .chart { background: #fff; border-radius: 4px; padding: 18px 22px 10px; }
-  .chart-head { display: flex; flex-wrap: wrap; gap: 6px 26px; font-size: 13px; color: var(--mute); font-variant-numeric: tabular-nums; }
-  .chart-head span:first-child { color: var(--ink); font-weight: 600; margin-right: auto; }
-  .chart svg { display: block; width: 100%; height: 150px; margin-top: 8px; }
-  .hr-line { fill: none; stroke: var(--or); stroke-width: 2; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: calc(1 - min(1, max(0, var(--s, 0) * 2.4 - .25))); }
-  .hr-area { opacity: calc(min(1, max(0, var(--s, 0) * 2.4 - 1))); }
-
-  /* gear */
-  .g-grid { display: grid; grid-template-columns: 1.35fr 1fr; gap: 20px; align-items: stretch; }
-  .g-card { background: #fff; padding: clamp(26px, 3.4vw, 48px); border-radius: 4px; }
-  .g-title { font-size: clamp(34px, 4.6vw, 70px); }
-  .g-list { margin-top: 30px; border-top: 1px solid #e3e2df; }
-  .g-list li { display: grid; grid-template-columns: 110px 1fr auto; gap: 16px; align-items: baseline; padding: 16px 0; border-bottom: 1px solid #e3e2df;
-    opacity: clamp(0, calc(var(--s, 1) * 4 - var(--i) * .35 - .6), 1); transform: translateX(calc((1 - clamp(0, calc(var(--s, 1) * 4 - var(--i) * .35 - .6), 1)) * 50px)); }
-  .g-k { font-size: 13px; color: var(--mute); }
-  .g-t { font-size: clamp(16px, 1.5vw, 20px); font-weight: 600; letter-spacing: -.01em; }
-  .g-m { font-size: 13px; color: var(--or); font-variant-numeric: tabular-nums; font-weight: 600; }
-  .g-side { background: var(--ink); color: #f1f0ed; padding: clamp(26px, 3.4vw, 48px); border-radius: 4px; display: flex; flex-direction: column; gap: 18px; }
-  .g-ride { font-size: clamp(28px, 3.4vw, 50px); color: var(--or); }
-  .g-side p { font-size: 17px; line-height: 1.6; color: #c9c8c4; }
-  .g-side .g-note { margin-top: auto; font-size: 13px; color: #8d8c88; }
-
-  /* cta */
-  .cta { text-align: center; padding-bottom: clamp(100px, 16vh, 180px); }
-  .cta .disp { font-size: clamp(26px, 4vw, 62px); white-space: nowrap; }
-  .cta-1 { transform: translateX(calc((1 - min(1, var(--s, 1) * 2)) * -20vw)); opacity: min(1, var(--s, 1) * 2.5); }
-  .cta-2 { color: var(--or); margin-top: .2em; transform: translateX(calc((1 - min(1, var(--s, 1) * 2)) * 20vw)); opacity: min(1, var(--s, 1) * 2.5); }
-  .mark { width: .8em; height: .8em; background: var(--or); clip-path: polygon(0 0, 100% 0, 100% 100%, 72% 100%, 72% 46%, 18% 100%, 0 82%, 54% 28%, 0 28%); display: inline-block; margin-right: .35em; vertical-align: -.04em; }
-  .cta-2 .mark { background: var(--ink); }
-  .strava { margin-top: 44px; display: inline-flex; align-items: center; gap: 10px; padding: 16px 28px; border-radius: 999px; background: var(--or); color: #fff; font-weight: 600; font-size: 16px; transition: transform .25s cubic-bezier(.3,1.6,.5,1), box-shadow .25s; box-shadow: 0 10px 30px -10px rgb(252 76 2 / .6); }
-  .strava:hover { transform: translateY(-2px); }
+  /* ── cta ── */
+  .cta { padding: clamp(90px, 16vh, 180px) clamp(20px, 4vw, 56px); text-align: center; }
+  .cta-l { font-size: clamp(30px, 5.4vw, 92px); }
+  .cta-l.or { color: var(--or); margin-top: .08em; }
+  .strava { margin-top: 48px; display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 30px; background: var(--or); color: #fff; font-weight: 650; font-size: 16px; cursor: pointer; transition: background-color .2s, transform .2s var(--ease); }
+  .strava:hover { background: #e04300; transform: translateY(-2px); }
   .strava:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
   .strava svg { width: 18px; height: 18px; fill: currentColor; }
 
-  @media (max-width: 860px) {
-    .hero { padding-top: 96px; }
-    .d-top { font-size: 23vw; }
-    .d-bot { font-size: 11.5vw; bottom: auto; top: 46%; }
-    .side { position: static; width: auto; margin-top: 14px; transform: none; }
-    .cta .disp { white-space: normal; font-size: 8vw; }
-    .side-lead { font-size: 15px; max-width: 30ch; }
-    .runs { display: none; }
-    .card { width: auto; right: 20px; bottom: 24px; padding: 14px 16px; display: grid; grid-template-columns: 1fr 120px; column-gap: 12px; }
-    .card .route { grid-row: 1 / span 2; grid-column: 2; height: 80px; margin: 0; }
-    .card-s { grid-column: 1 / -1; margin-top: 10px; }
-    .month { display: none; }
-    .wrap { grid-template-columns: 1fr; grid-template-rows: auto 1fr; padding-top: 110px; }
-    .drum li { left: 56px; }
-    .arrow { width: 40px; height: 40px; }
-    .g-grid, .e-band { grid-template-columns: 1fr; }
-    .e-stage { grid-template-columns: 1fr; align-content: start; gap: 18px; padding-top: 92px; }
-    .e-title { font-size: 12vw; }
-    .e-lede { font-size: 15px; margin-top: 12px; }
-    .clock { font-size: 11vw; margin-top: 14px; }
-    .laps { font-size: 13px; margin-top: 8px; }
-    .e-photo { height: 40svh; }
-    .g-list li { grid-template-columns: 1fr auto; }
-    .g-k { grid-column: 1 / -1; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .runs li, .r-line, .scrollcue i { animation: none; stroke-dashoffset: 0; }
+  /* split-text lines need a mask */
+  :global(.ab .sl) { overflow: hidden; padding-bottom: .06em; margin-bottom: -.06em; }
+
+  @media (max-width: 900px) {
+    .h-in { grid-template-columns: 1fr; grid-template-rows: auto auto 1fr auto; padding-top: 92px; }
+    .h-grid { grid-template-columns: repeat(2, 1fr); }
+    .h-intro, .h-card, .h-month, .h-word { grid-column: 1; }
+    .h-intro { font-size: 14px; }
+    .h-card { grid-row: 4; justify-self: stretch; max-width: none; margin-bottom: 20px; padding: 14px; }
+    .hc-spark { display: none; }
+    .h-runs { display: none; }
+    .h-month { grid-row: 2; justify-self: start; text-align: left; padding: 14px 0 0; }
+    .h-month b { font-size: 32px; }
+    .h-word { grid-row: 3; align-self: end; }
+    .hw-run { font-size: 31vw; }
+    .hw-sub { font-size: 7vw; margin-bottom: 14px; }
+    .r-stage { grid-template-columns: 1fr; grid-template-rows: auto auto 1fr auto; padding-top: 88px; }
+    .r-read { grid-column: 1; grid-row: 2; justify-self: start; text-align: left; margin-top: 18px; }
+    .rd-km { justify-content: flex-start; }
+    .rd-km b { font-size: 22vw; }
+    .rd-s { justify-content: flex-start; gap: 18px; }
+    .rd-s dd { font-size: 16px; }
+    .r-chart { margin: 20px 0 30px; }
+    .r-sum { grid-template-columns: repeat(3, 1fr); }
+    .r-sum div:nth-child(4) { border-left: 0; padding-left: 0; }
+    .r-sum dd { font-size: 15px; }
+    .gear { grid-template-columns: 1fr; }
+    .g-photo { min-height: 60vw; border-right: 0; border-bottom: 1px solid var(--line); }
+    .g-table th { width: auto; display: block; padding: 14px 0 0; }
+    .g-table td { display: inline-block; padding: 4px 0 14px; }
+    .g-table td:last-child { float: right; padding-top: 6px; }
   }
 </style>
 
 <script>
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches
-  const pins = [...document.querySelectorAll<HTMLElement>('[data-pin]')]
-  const scrubs = [...document.querySelectorAll<HTMLElement>('[data-scrub]')]
-  const drum = document.querySelector<HTMLElement>('.drum')
-  const items = drum ? [...drum.querySelectorAll<HTMLElement>('li')] : []
-  const clock = document.querySelector<HTMLElement>('[data-clock]')
-  const total = Number(clock?.dataset.clock || 0)
-  const fmt = (s: number) => [s / 3600, (s % 3600) / 60, s % 60].map((n) => String(Math.floor(n)).padStart(2, '0')).join(':')
-  const clamp = (v: number) => Math.min(1, Math.max(0, v))
-  const lapEl = document.querySelector<HTMLElement>('[data-lap]')
-  const kmEl = document.querySelector<HTMLElement>('[data-km]')
-  const runPath = document.querySelector<SVGPathElement>('[data-track-path]')
-  const dot = document.querySelector<SVGCircleElement>('[data-track-dot]')
-  const laps = Number(lapEl?.dataset.lap || 1), kmTotal = Number(kmEl?.dataset.km || 0)
-  const len = runPath ? runPath.getTotalLength() : 0
-  // t: 0..1 through the whole run; the dot laps the oval `laps` times, sped up
-  function run (t: number) {
-    clock!.textContent = fmt(Math.round(total * t))
-    if (lapEl) lapEl.textContent = String(Math.min(laps, Math.floor(t * laps) + (t > 0 ? 1 : 0)))
-    if (kmEl) kmEl.textContent = (kmTotal * t).toFixed(2)
-    if (!runPath || !dot) return
-    const shown = Math.min(laps, 12) // dot does 12 visible laps, the counter covers the real number
-    const f = (t * shown) % 1 || (t >= 1 ? 1 : 0)
-    runPath.style.strokeDashoffset = String(1 - f)
-    const pt = runPath.getPointAtLength(f * len)
-    dot.setAttribute('cx', pt.x.toFixed(1)); dot.setAttribute('cy', pt.y.toFixed(1))
-    dot.style.opacity = t > 0 ? '1' : '0'
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+  import { SplitText } from 'gsap/SplitText'
+  gsap.registerPlugin(ScrollTrigger, SplitText)
+
+  const data = JSON.parse(document.getElementById('run-stream')!.textContent || '{}') as { km: number[]; hr: number[]; v: number[]; secs: number; kmMax: number }
+  const $ = <T extends Element = HTMLElement>(s: string) => document.querySelector<T>(s)
+  const R = (k: string) => $(`[data-r="${k}"]`)
+  const fmt = (s: number) => `${Math.floor(s / 3600)}:${String(Math.floor((s % 3600) / 60)).padStart(2, '0')}:${String(Math.floor(s % 60)).padStart(2, '0')}`
+  const pace = (ms: number) => { if (!ms || ms < 0.5) return '–'; const p = 1000 / ms; return `${Math.floor(p / 60)}:${String(Math.round(p % 60)).padStart(2, '0')}` }
+
+  // cumulative moving time at each sample from distance / speed, scaled to the real total
+  const cum: number[] = []
+  data.km.reduce((acc, k, i) => { const dk = i ? k - data.km[i - 1] : k; const s = (dk * 1000) / Math.max(0.8, data.v[i] || 2.5); cum.push(acc + s); return acc + s }, 0)
+  const scale = cum.length ? data.secs / cum[cum.length - 1] : 1
+
+  function timeAt (k: number) {
+    const K = data.km
+    if (!K.length) return 0
+    let j = K.findIndex((x) => x >= k)
+    if (j < 0) j = K.length - 1
+    const k0 = j ? K[j - 1] : 0, c0 = j ? cum[j - 1] : 0
+    const u = Math.min(1, Math.max(0, (k - k0) / Math.max(1e-6, K[j] - k0)))
+    return (c0 + (cum[j] - c0) * u) * scale
   }
 
-  function frame() {
-    const vh = innerHeight
-    for (const el of pins) {
-      const r = el.getBoundingClientRect()
-      el.style.setProperty('--p', clamp(-r.top / (r.height - vh)).toFixed(4))
-      el.style.setProperty('--e', clamp(1 - r.top / vh).toFixed(4)) // 0 when it enters from below, 1 once pinned
-    }
-    for (const el of scrubs) {
-      const r = el.getBoundingClientRect()
-      el.style.setProperty('--s', clamp((vh - r.top) / (vh + r.height * 0.6)).toFixed(4))
-    }
-    if (drum && items.length) {
-      const p = Number(drum.closest<HTMLElement>('[data-pin]')!.style.getPropertyValue('--p') || 0)
-      const at = p * (items.length - 1)
-      const gap = Math.min(110, innerWidth * 0.085) + 8
-      items.forEach((li, i) => {
-        const d = i - at, a = Math.abs(d)
-        li.style.transform = `translate3d(0, calc(-50% + ${d * gap}px), 0) rotateX(${-d * 12}deg) scale(${1 - Math.min(a, 3) * 0.08})`
-        li.style.filter = `blur(${Math.min(a * 4, 12).toFixed(1)}px)`
-        li.style.opacity = String(Math.max(0, 1 - a * 0.28))
-        li.style.color = a < 0.5 ? '#17171a' : '#8e8d89'
-      })
-    }
-    if (clock) {
-      const p = Number(clock.closest<HTMLElement>('[data-pin]')!.style.getPropertyValue('--p') || 0)
-      run(clamp((p - 0.2) / 0.72))
-    }
+  // replay readout for a position t (0..1) along the run
+  function replay (t: number) {
+    const n = data.hr.length
+    if (!n) return
+    const f = t * (n - 1), i = Math.min(n - 1, Math.round(f))
+    const k = t * data.kmMax
+    R('km')!.textContent = k.toFixed(1)
+    R('t')!.textContent = fmt(timeAt(k))
+    R('hr')!.textContent = t > 0 ? String(data.hr[i]) : '–'
+    // smooth pace over ±3 samples so the number doesn't flicker
+    const win = data.v.slice(Math.max(0, i - 3), i + 4)
+    R('pace')!.textContent = t > 0 ? pace(win.reduce((a, b) => a + b, 0) / win.length) : '–'
+    R('clip')?.setAttribute('width', String(t * 1000))
+    const head = R('head')
+    if (head) head.style.transform = `translateX(${(head.parentElement!.clientWidth * t).toFixed(1)}px)`
   }
 
-  if (reduce) {
-    pins.forEach((el) => { el.style.setProperty('--p', '0'); el.style.setProperty('--e', '1') })
-    scrubs.forEach((el) => el.style.setProperty('--s', '1'))
-    items.forEach((li, i) => { li.style.transform = `translateY(calc(-50% + ${(i - 3) * 90}px))`; li.style.color = '#17171a' })
-    if (clock) run(1)
-  } else {
-    let raf = 0
-    const tick = () => { raf = 0; frame() }
-    addEventListener('scroll', () => { raf ||= requestAnimationFrame(tick) }, { passive: true })
-    addEventListener('resize', () => { raf ||= requestAnimationFrame(tick) })
-    frame()
-  }
+  const mm = gsap.matchMedia()
+
+  mm.add('(prefers-reduced-motion: reduce)', () => { replay(1) })
+
+  mm.add('(prefers-reduced-motion: no-preference)', () => {
+    // ── hero intro: "RUN." rises letter by letter once the loader is gone ──
+    const runWord = new SplitText('.hw-run', { type: 'chars', charsClass: 'hc' })
+    gsap.set('.hw-run', { overflow: 'hidden' })
+    gsap.set(runWord.chars, { yPercent: 105 })
+    gsap.set('[data-fade]', { autoAlpha: 0, y: 14 })
+    const intro = () => {
+      gsap.timeline({ defaults: { ease: 'expo.out' } })
+        .to(runWord.chars, { yPercent: 0, duration: 1.3, stagger: 0.06, onComplete: () => gsap.set('.hw-run', { overflow: 'visible' }) })
+        .to('[data-fade]', { autoAlpha: 1, y: 0, duration: 0.8, stagger: 0.08 }, 0.35)
+    }
+    ;(window as any).__booted ? intro() : document.addEventListener('boot:done', intro, { once: true })
+
+    // ── hero scroll (pinned by CSS sticky): photo zooms, the sharp ghost melts, letters spread ──
+    gsap.timeline({ scrollTrigger: { trigger: '[data-hero]', start: 'top top', end: 'bottom bottom', scrub: 1 } })
+      .to('.h-photo', { scale: 1.18, ease: 'none' }, 0)
+      .to('.sharp', { opacity: 0, ease: 'none' }, 0)
+      .to(runWord.chars, { xPercent: (i) => (i - 1.5) * 26, ease: 'none' }, 0)
+      .to('.h-card, .h-runs, .h-intro, .h-month', { y: -60, autoAlpha: 0, ease: 'none', stagger: 0.04 }, 0.35)
+
+    // ── word rows slide in opposite directions as the section passes ──
+    gsap.utils.toArray<HTMLElement>('[data-row]').forEach((row) => {
+      const dir = Number(row.dataset.row)
+      gsap.fromTo(row, { xPercent: dir < 0 ? 0 : -50 }, { xPercent: dir < 0 ? -50 : 0, ease: 'none', scrollTrigger: { trigger: '.rows', start: 'top bottom', end: 'bottom top', scrub: 1 } })
+    })
+
+    // ── long-run replay (pinned by CSS sticky) ──
+    const st = { t: 0 }
+    gsap.to(st, { t: 1, ease: 'none', onUpdate: () => replay(st.t), scrollTrigger: { trigger: '[data-replay]', start: 'top top', end: 'bottom bottom', scrub: 1 } })
+    gsap.from('.r-title', { yPercent: 40, autoAlpha: 0, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: '[data-replay]', start: 'top 70%' } })
+    gsap.from('.r-sum > div', { y: 16, autoAlpha: 0, duration: 0.6, stagger: 0.06, ease: 'power2.out', scrollTrigger: { trigger: '[data-replay]', start: 'top 40%' } })
+    replay(0)
+
+    // ── gear: subtle photo parallax + row stagger ──
+    gsap.to('[data-par]', { yPercent: -8, ease: 'none', scrollTrigger: { trigger: '.gear', start: 'top bottom', end: 'bottom top', scrub: true } })
+    gsap.from('[data-gear]', { y: 18, autoAlpha: 0, duration: 0.55, stagger: 0.07, ease: 'power2.out', scrollTrigger: { trigger: '.g-table', start: 'top 85%' } })
+
+    // ── headings that split into masked lines ──
+    gsap.utils.toArray<HTMLElement>('.g-title, .cta-l').forEach((el) => {
+      const s = new SplitText(el, { type: 'lines', linesClass: 'sl', mask: 'lines' })
+      gsap.from(s.lines, { yPercent: 105, duration: 1.1, stagger: 0.1, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 85%' } })
+    })
+
+    addEventListener('load', () => ScrollTrigger.refresh(), { once: true })
+    document.fonts?.ready.then(() => ScrollTrigger.refresh())
+  })
 </script>
 </Base>

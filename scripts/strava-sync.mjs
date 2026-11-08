@@ -66,10 +66,13 @@ async function main () {
   // the longest run of the last 30 days is the page's headline run
   const best = runs.reduce((a, b) => (b.distance > a.distance ? b : a))
   const detail = await get(`/activities/${best.id}`)
-  const streams = await get(`/activities/${best.id}/streams?keys=heartrate&key_by_type=true`).catch(() => ({}))
-  const raw = streams.heartrate?.data || []
-  const step = Math.max(1, raw.length / 120)
-  const hr = raw.length ? Array.from({ length: Math.min(120, raw.length) }, (_, i) => raw[Math.floor(i * step)]).slice(1) : []
+  // heart rate, speed and distance across the run, thinned to ~120 evenly spaced samples
+  const st = await get(`/activities/${best.id}/streams?keys=heartrate,velocity_smooth,distance&key_by_type=true`).catch(() => ({}))
+  const n = st.distance?.data?.length || 0
+  const pick = (arr, f) => Array.from({ length: Math.min(120, n) }, (_, i) => f(arr[Math.floor((i * n) / Math.min(120, n))])).slice(1)
+  const stream = n && st.heartrate && st.velocity_smooth
+    ? { km: pick(st.distance.data, (m) => Math.round(m / 10) / 100), hr: pick(st.heartrate.data, (x) => x), v: pick(st.velocity_smooth.data, (x) => Math.round(x * 100) / 100) }
+    : { km: [], hr: [], v: [] }
   const bd = day(best.start_date_local)
 
   const gear = await Promise.all(GEAR.map(async (g) => {
@@ -96,7 +99,7 @@ async function main () {
     }),
     month: { km: (runs.reduce((s, a) => s + a.distance, 0) / 1000).toFixed(1), runs: runs.length },
     gear,
-    hr
+    stream
   }
   await writeFile(OUT, JSON.stringify(data, null, 2) + '\n')
   console.log(`strava: ${runs.length} runs in 30 days, headline ${data.longRun.km} km on ${data.longRun.date}`)
