@@ -179,7 +179,7 @@ const nav = [
 
   <!-- 4 · GEAR -->
   <section id="gear" class="gear">
-    <div class="g-photo"><Image src={trackGrey} alt="Fadhel running laps on a stadium track at night" widths={[480, 800]} sizes="(min-width: 900px) 34vw, 100vw" class="g-img" data-par /></div>
+    <div class="g-photo" data-shader="photo" data-img={trackGrey.src}><Image src={trackGrey} alt="Fadhel running laps on a stadium track at night" widths={[480, 800]} sizes="(min-width: 900px) 34vw, 100vw" class="g-img" data-par /></div>
     <div class="g-body">
       <h2 class="disp g-title" data-split>Gear I trust</h2>
       <table class="g-table">
@@ -252,6 +252,10 @@ const nav = [
 
   /* ── rows ── */
   :global(.sec-gl) { position: absolute; inset: 0; width: 100% !important; height: 100% !important; z-index: -1; }
+  :global(.sc-gl) { opacity: 0; transition: opacity .8s ease; }
+  :global(.sc-gl.on) { opacity: 1; }
+  .g-photo { isolation: isolate; }
+  .g-photo :global(.sec-gl) { z-index: 1; }
   .rows, .cta { position: relative; isolation: isolate; }
   .rows { padding: clamp(70px, 12vh, 140px) 0; border-bottom: 1px solid var(--line); overflow: hidden; }
   .row { display: flex; white-space: nowrap; font-size: clamp(52px, 9vw, 150px); will-change: transform; }
@@ -388,7 +392,7 @@ const nav = [
   import { SplitText } from 'gsap/SplitText'
   import { mountHeroGL } from '../scripts/about-hero-gl'
   import { mountRun3D } from '../scripts/run3d'
-  import { mountShader, contours, heat } from '../scripts/section-shader'
+  import { mountSectionShaders } from '../scripts/shaders-com'
   gsap.registerPlugin(ScrollTrigger, SplitText)
 
   const data = JSON.parse(document.getElementById('run-stream')!.textContent || '{}') as { km: number[]; hr: number[]; v: number[]; secs: number; kmMax: number }
@@ -416,7 +420,7 @@ const nav = [
   const photo = $('[data-gl-src]')
   const heroGL = photo ? mountHeroGL(photo, photo.dataset.glSrc!, reduceM) : null
   const chartEl = $('.r-chart')
-  document.querySelectorAll<HTMLElement>('[data-shader]').forEach((el) => mountShader(el, el.dataset.shader === 'heat' ? heat : contours, reduceM))
+  mountSectionShaders(reduceM)
   const run3d = chartEl ? mountRun3D(chartEl, data, reduceM) : null
 
   // replay readout for a position t (0..1) along the run
