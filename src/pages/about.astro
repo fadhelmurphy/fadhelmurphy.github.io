@@ -103,14 +103,18 @@ const nav = [
     <p class="sr-only">{[...rowA, ...rowB].join(', ')}</p>
   </section>
 
-  <!-- 2b · horizontal photo strip: the section pins and vertical scroll moves the photos sideways -->
+  <!-- 2b · horizontal photo strip: swipe / shift-scroll / arrows; the page keeps scrolling normally -->
   <section class="moments" aria-labelledby="mo-title">
    <div class="mo-stage">
     <header class="mo-head">
       <h2 id="mo-title" class="disp mo-title" data-split>Out there</h2>
       <p class="mo-note">Mostly at night, sometimes in sandals.</p>
+      <div class="mo-nav">
+        <button type="button" class="mo-btn" data-mo-prev aria-label="Previous photos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg></button>
+        <button type="button" class="mo-btn" data-mo-next aria-label="Next photos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg></button>
+      </div>
     </header>
-    <div class="mo-strip">
+    <div class="mo-strip" data-mo-strip tabindex="0" role="region" aria-label="Running photos, scroll sideways">
       <ul class="mo-track" data-mo>
         {moments.map((m, i) => (
           <li class={`mo-item ${i % 2 ? 'low' : ''}`}>
@@ -254,21 +258,29 @@ const nav = [
   .r2 { margin-top: .08em; }
 
   /* ── moments ── */
-  .moments { border-bottom: 1px solid var(--line); overflow: hidden; }
-  .mo-stage { height: 100svh; display: flex; flex-direction: column; justify-content: center; padding: 88px 0 28px; }
-  .mo-bar { margin: clamp(18px, 3vh, 30px) clamp(20px, 4vw, 56px) 0; height: 2px; background: var(--line); }
-  .mo-bar i { display: block; height: 100%; width: 100%; background: var(--or); transform-origin: 0 50%; transform: scaleX(0); }
-  .mo-head { display: flex; align-items: end; justify-content: space-between; gap: 20px; padding: 0 clamp(20px, 4vw, 56px); }
-  .mo-title { font-size: clamp(40px, 6vw, 96px); }
+  .moments { padding: clamp(70px, 12vh, 140px) 0 clamp(50px, 8vh, 100px); border-bottom: 1px solid var(--line); }
+  .mo-stage { display: block; }
+  .mo-head { display: flex; align-items: end; gap: 24px; padding: 0 clamp(20px, 4vw, 56px); }
+  .mo-title { font-size: clamp(40px, 6vw, 96px); margin-right: auto; }
   .mo-note { font-size: 16px; color: var(--mute); padding-bottom: .4em; }
-  .mo-strip { margin-top: clamp(20px, 4vh, 44px); }
-  .mo-track { display: flex; gap: clamp(14px, 2vw, 28px); width: max-content; padding: 0 clamp(20px, 4vw, 56px); will-change: transform; }
-  .mo-item { width: calc((100svh - 330px) * .75); min-width: 200px; max-width: 460px; flex: none; }
+  .mo-nav { display: flex; gap: 8px; padding-bottom: .2em; }
+  .mo-btn { width: 48px; height: 48px; display: grid; place-items: center; border: 1px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; transition: background-color .2s, color .2s, opacity .2s; }
+  .mo-btn:hover:not(:disabled) { background: var(--ink); color: #fff; }
+  .mo-btn:disabled { opacity: .3; cursor: default; }
+  .mo-btn:focus-visible, .mo-strip:focus-visible { outline: 3px solid var(--or); outline-offset: 3px; }
+  .mo-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; }
+  .mo-strip { margin-top: clamp(24px, 5vh, 50px); overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: clamp(20px, 4vw, 56px); scrollbar-width: none; cursor: grab; }
+  .mo-strip::-webkit-scrollbar { display: none; }
+  .mo-strip.drag { cursor: grabbing; scroll-snap-type: none; }
+  .mo-track { display: flex; gap: clamp(14px, 2vw, 28px); width: max-content; padding: 0 clamp(20px, 4vw, 56px); }
+  .mo-item { width: clamp(240px, 26vw, 400px); flex: none; scroll-snap-align: start; }
   .mo-item.low { margin-top: clamp(24px, 6vh, 70px); }
   .mo-frame { aspect-ratio: 3 / 4; overflow: hidden; background: #d9d8d3; }
-  .mo-img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.18); will-change: transform; }
+  .mo-img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.12); pointer-events: none; user-select: none; -webkit-user-drag: none; }
   .mo-item figcaption { display: flex; gap: 12px; align-items: baseline; padding-top: 10px; border-top: 1px solid var(--ink); margin-top: 10px; font-size: 14px; font-weight: 600; }
   .mo-item figcaption span { color: var(--or); font-variant-numeric: tabular-nums; font-weight: 700; }
+  .mo-bar { margin: clamp(18px, 3vh, 30px) clamp(20px, 4vw, 56px) 0; height: 2px; background: var(--line); }
+  .mo-bar i { display: block; height: 100%; width: 100%; background: var(--or); transform-origin: 0 50%; transform: scaleX(0); transition: transform .15s linear; }
 
   /* ── replay ── */
   .replay { position: relative; height: 320vh; }
@@ -343,7 +355,8 @@ const nav = [
     .rd-km { justify-content: flex-start; }
     .rd-km b { font-size: 22vw; }
     .mo-head { flex-direction: column; align-items: start; }
-    .mo-item { width: min(66vw, calc((100svh - 330px) * .75)); }
+    .mo-item { width: 70vw; }
+    .mo-nav { display: none; }
     .rd-s { justify-content: flex-start; gap: 18px; }
     .rd-s dd { font-size: 16px; }
     .r-chart { margin: 20px 0 30px; }
@@ -402,6 +415,37 @@ const nav = [
     if (head) head.style.transform = `translateX(${(head.parentElement!.clientWidth * t).toFixed(1)}px)`
   }
 
+  // ── "Out there" strip: native horizontal scroll + arrow buttons + mouse drag + progress bar ──
+  const strip = $('[data-mo-strip]')
+  if (strip) {
+    const bar = $('[data-mo-bar]'), prev = $<HTMLButtonElement>('[data-mo-prev]'), next = $<HTMLButtonElement>('[data-mo-next]')
+    const imgs = [...strip.querySelectorAll<HTMLElement>('.mo-img')]
+    const sync = () => {
+      const max = strip.scrollWidth - strip.clientWidth, p = max > 0 ? strip.scrollLeft / max : 0
+      if (bar) bar.style.transform = `scaleX(${p.toFixed(3)})`
+      if (prev) prev.disabled = strip.scrollLeft < 4
+      if (next) next.disabled = strip.scrollLeft > max - 4
+      // each photo pans a little inside its frame as it travels across the screen
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const vw = innerWidth
+        imgs.forEach((im) => { const r = im.parentElement!.getBoundingClientRect(); const c = (r.left + r.width / 2) / vw - 0.5; im.style.transform = `scale(1.12) translateX(${(-c * 8).toFixed(2)}%)` })
+      }
+    }
+    const step = () => (strip.querySelector('.mo-item') as HTMLElement).offsetWidth + 24
+    prev?.addEventListener('click', () => strip.scrollBy({ left: -step(), behavior: 'smooth' }))
+    next?.addEventListener('click', () => strip.scrollBy({ left: step(), behavior: 'smooth' }))
+    strip.addEventListener('scroll', () => requestAnimationFrame(sync), { passive: true })
+    addEventListener('resize', sync)
+    // drag with a mouse (touch already scrolls natively)
+    let down = false, sx = 0, sl = 0, moved = false
+    strip.addEventListener('pointerdown', (e) => { if (e.pointerType !== 'mouse') return; down = true; moved = false; sx = e.clientX; sl = strip.scrollLeft; strip.setPointerCapture(e.pointerId) })
+    strip.addEventListener('pointermove', (e) => { if (!down) return; const dx = e.clientX - sx; if (Math.abs(dx) > 3) { moved = true; strip.classList.add('drag') } strip.scrollLeft = sl - dx })
+    const up = () => { if (!down) return; down = false; strip.classList.remove('drag') }
+    strip.addEventListener('pointerup', up); strip.addEventListener('pointercancel', up)
+    strip.addEventListener('click', (e) => { if (moved) { e.preventDefault(); e.stopPropagation() } }, true)
+    sync()
+  }
+
   const mm = gsap.matchMedia()
 
   mm.add('(prefers-reduced-motion: reduce)', () => { replay(1) })
@@ -431,16 +475,6 @@ const nav = [
       const dir = Number(row.dataset.row)
       gsap.fromTo(row, { xPercent: dir < 0 ? 0 : -50 }, { xPercent: dir < 0 ? -50 : 0, ease: 'none', scrollTrigger: { trigger: '.rows', start: 'top bottom', end: 'bottom top', scrub: 1 } })
     })
-
-    // ── photo strip: pinned, vertical scroll drives it horizontally ──
-    const track = document.querySelector<HTMLElement>('[data-mo]')
-    if (track) {
-      const dist = () => Math.max(0, track.scrollWidth - innerWidth)
-      const tl = gsap.timeline({ scrollTrigger: { trigger: '.moments', start: 'top top', end: () => `+=${dist()}`, pin: '.mo-stage', scrub: 1, invalidateOnRefresh: true, anticipatePin: 1 } })
-      tl.to(track, { x: () => -dist(), ease: 'none' }, 0)
-        .fromTo('[data-mo-bar]', { scaleX: 0 }, { scaleX: 1, ease: 'none' }, 0)
-        .fromTo('.mo-img', { xPercent: 8 }, { xPercent: -8, ease: 'none' }, 0)
-    }
 
     // ── long-run replay (pinned by CSS sticky) ──
     const st = { t: 0 }
