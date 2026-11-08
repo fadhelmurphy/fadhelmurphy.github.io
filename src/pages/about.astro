@@ -103,8 +103,9 @@ const nav = [
     <p class="sr-only">{[...rowA, ...rowB].join(', ')}</p>
   </section>
 
-  <!-- 2b · photo strip that drifts sideways as you scroll (no pin) -->
+  <!-- 2b · horizontal photo strip: the section pins and vertical scroll moves the photos sideways -->
   <section class="moments" aria-labelledby="mo-title">
+   <div class="mo-stage">
     <header class="mo-head">
       <h2 id="mo-title" class="disp mo-title" data-split>Out there</h2>
       <p class="mo-note">Mostly at night, sometimes in sandals.</p>
@@ -121,6 +122,8 @@ const nav = [
         ))}
       </ul>
     </div>
+    <div class="mo-bar" aria-hidden="true"><i data-mo-bar></i></div>
+   </div>
   </section>
 
   <!-- 3 · LONG-RUN REPLAY (pin 2 of 2): scroll moves a playhead through the real heart-rate and pace data -->
@@ -251,14 +254,17 @@ const nav = [
   .r2 { margin-top: .08em; }
 
   /* ── moments ── */
-  .moments { padding: clamp(70px, 12vh, 140px) 0 clamp(60px, 10vh, 120px); border-bottom: 1px solid var(--line); overflow: hidden; }
+  .moments { border-bottom: 1px solid var(--line); overflow: hidden; }
+  .mo-stage { height: 100svh; display: flex; flex-direction: column; justify-content: center; padding: 88px 0 28px; }
+  .mo-bar { margin: clamp(18px, 3vh, 30px) clamp(20px, 4vw, 56px) 0; height: 2px; background: var(--line); }
+  .mo-bar i { display: block; height: 100%; width: 100%; background: var(--or); transform-origin: 0 50%; transform: scaleX(0); }
   .mo-head { display: flex; align-items: end; justify-content: space-between; gap: 20px; padding: 0 clamp(20px, 4vw, 56px); }
   .mo-title { font-size: clamp(40px, 6vw, 96px); }
   .mo-note { font-size: 16px; color: var(--mute); padding-bottom: .4em; }
-  .mo-strip { margin-top: clamp(30px, 6vh, 60px); }
+  .mo-strip { margin-top: clamp(20px, 4vh, 44px); }
   .mo-track { display: flex; gap: clamp(14px, 2vw, 28px); width: max-content; padding: 0 clamp(20px, 4vw, 56px); will-change: transform; }
-  .mo-item { width: clamp(220px, 30vh + 6vw, 420px); }
-  .mo-item.low { margin-top: clamp(40px, 9vh, 110px); }
+  .mo-item { width: calc((100svh - 330px) * .75); min-width: 200px; max-width: 460px; flex: none; }
+  .mo-item.low { margin-top: clamp(24px, 6vh, 70px); }
   .mo-frame { aspect-ratio: 3 / 4; overflow: hidden; background: #d9d8d3; }
   .mo-img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.18); will-change: transform; }
   .mo-item figcaption { display: flex; gap: 12px; align-items: baseline; padding-top: 10px; border-top: 1px solid var(--ink); margin-top: 10px; font-size: 14px; font-weight: 600; }
@@ -337,7 +343,7 @@ const nav = [
     .rd-km { justify-content: flex-start; }
     .rd-km b { font-size: 22vw; }
     .mo-head { flex-direction: column; align-items: start; }
-    .mo-item { width: 62vw; }
+    .mo-item { width: min(66vw, calc((100svh - 330px) * .75)); }
     .rd-s { justify-content: flex-start; gap: 18px; }
     .rd-s dd { font-size: 16px; }
     .r-chart { margin: 20px 0 30px; }
@@ -426,14 +432,14 @@ const nav = [
       gsap.fromTo(row, { xPercent: dir < 0 ? 0 : -50 }, { xPercent: dir < 0 ? -50 : 0, ease: 'none', scrollTrigger: { trigger: '.rows', start: 'top bottom', end: 'bottom top', scrub: 1 } })
     })
 
-    // ── photo strip: drifts left with scroll, each photo pans inside its frame ──
+    // ── photo strip: pinned, vertical scroll drives it horizontally ──
     const track = document.querySelector<HTMLElement>('[data-mo]')
     if (track) {
       const dist = () => Math.max(0, track.scrollWidth - innerWidth)
-      gsap.to(track, { x: () => -dist(), ease: 'none', scrollTrigger: { trigger: '.mo-strip', start: 'top 85%', end: 'bottom 15%', scrub: 1, invalidateOnRefresh: true } })
-      gsap.utils.toArray<HTMLElement>('.mo-img').forEach((img) => {
-        gsap.fromTo(img, { xPercent: 7 }, { xPercent: -7, ease: 'none', scrollTrigger: { trigger: '.moments', start: 'top bottom', end: 'bottom top', scrub: 1 } })
-      })
+      const tl = gsap.timeline({ scrollTrigger: { trigger: '.moments', start: 'top top', end: () => `+=${dist()}`, pin: '.mo-stage', scrub: 1, invalidateOnRefresh: true, anticipatePin: 1 } })
+      tl.to(track, { x: () => -dist(), ease: 'none' }, 0)
+        .fromTo('[data-mo-bar]', { scaleX: 0 }, { scaleX: 1, ease: 'none' }, 0)
+        .fromTo('.mo-img', { xPercent: 8 }, { xPercent: -8, ease: 'none' }, 0)
     }
 
     // ── long-run replay (pinned by CSS sticky) ──
