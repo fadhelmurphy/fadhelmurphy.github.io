@@ -9,7 +9,11 @@
   "cal": "2,842",
   "elev": 121,
   "effort": 446,
-  "prs": 5
+  "prs": 5,
+  "moving": "4:43:35",
+  "movingSecs": 17015,
+  "movingPace": "7:05",
+  "avgHr": 156
  },
  "recent": [
   {

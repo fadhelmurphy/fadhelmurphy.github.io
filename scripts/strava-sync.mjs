@@ -73,6 +73,16 @@ async function main () {
   const stream = n && st.heartrate && st.velocity_smooth
     ? { km: pick(st.distance.data, (m) => Math.round(m / 10) / 100), hr: pick(st.heartrate.data, (x) => x), v: pick(st.velocity_smooth.data, (x) => Math.round(x * 100) / 100) }
     : { km: [], hr: [], v: [] }
+  // Garmin-style moving time: count the seconds where speed is above 0.5 m/s (full-resolution streams).
+  // Strava's own moving_time equals elapsed for Garmin uploads, so it can't be used.
+  let movingSecs = best.moving_time
+  try {
+    const full = await get(`/activities/${best.id}/streams?keys=time,velocity_smooth&key_by_type=true`)
+    const T = full.time?.data || [], V = full.velocity_smooth?.data || []
+    let m = 0
+    for (let i = 1; i < T.length; i++) if ((V[i] ?? 0) > 0.5) m += T[i] - T[i - 1]
+    if (m > 0) movingSecs = m
+  } catch {}
   const bd = day(best.start_date_local)
 
   const gear = await Promise.all(GEAR.map(async (g) => {
@@ -85,9 +95,13 @@ async function main () {
     longRun: {
       date: `${bd.d} ${MONTHS[bd.mo]} ${bd.y}`,
       km: km(best.distance),
-      pace: pace(best.moving_time, best.distance),
-      time: hms(best.moving_time),
-      secs: best.moving_time,
+      pace: pace(best.elapsed_time, best.distance),
+      time: hms(best.elapsed_time),
+      secs: best.elapsed_time,
+      moving: hms(movingSecs),
+      movingSecs,
+      movingPace: pace(movingSecs, best.distance),
+      avgHr: Math.round(detail.average_heartrate || 0),
       cal: Math.round(detail.calories || 0).toLocaleString('en-US'),
       elev: Math.round(best.total_elevation_gain || 0),
       effort: best.suffer_score ?? null,

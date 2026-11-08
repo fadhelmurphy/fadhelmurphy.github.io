@@ -21,7 +21,6 @@ const line = has ? hr.map((b, i) => `${i ? 'L' : 'M'}${x(km[i]).toFixed(1)} ${y(
 const area = has ? `${line} L${W} ${H} L0 ${H} Z` : ''
 const ticks = [0, 10, 20, 30, 40].filter((t) => t <= kmMax)
 const spark = has ? hr.map((b, i) => `${i ? 'L' : 'M'}${((i / (hr.length - 1)) * 200).toFixed(1)} ${(40 - ((b - lo) / (hi - lo)) * 40).toFixed(1)}`).join(' ') : ''
-const avgHr = has ? Math.round(hr.reduce((a, b) => a + b, 0) / hr.length) : 0
 
 const rowA = ['Distance', 'Discipline', 'Night laps', 'Heart rate']
 const rowB = ['Long runs', 'Rain', 'Recovery', 'Repeat']
@@ -56,7 +55,7 @@ const nav = [
           {has && <svg viewBox="0 0 200 40" preserveAspectRatio="none" class="hc-spark" aria-hidden="true"><path d={spark} /></svg>}
           <dl class="hc-s">
             <div><dt>Pace</dt><dd>{longRun.pace}<small>/km</small></dd></div>
-            <div><dt>Time</dt><dd>{longRun.time}</dd></div>
+            <div><dt>Moving</dt><dd>{longRun.moving}</dd></div>
             <div><dt>Energy</dt><dd>{longRun.cal}<small>cal</small></dd></div>
           </dl>
         </aside>
@@ -106,7 +105,7 @@ const nav = [
 
       {has && (
         <figure class="r-chart">
-          <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" role="img" aria-label={`Heart rate over ${longRun.km} km, average ${avgHr} bpm`}>
+          <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" role="img" aria-label={`Heart rate over ${longRun.km} km, average ${longRun.avgHr} bpm`}>
             <defs>
               <linearGradient id="ra" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#fc4c02" stop-opacity=".38" /><stop offset="1" stop-color="#fc4c02" stop-opacity="0" /></linearGradient>
               <clipPath id="rc"><rect data-r="clip" x="0" y="-10" width="0" height={H + 20} /></clipPath>
@@ -125,11 +124,11 @@ const nav = [
 
       <dl class="r-sum">
         <div><dt>Distance</dt><dd>{longRun.km} km</dd></div>
-        <div><dt>Moving time</dt><dd>{longRun.time}</dd></div>
+        <div><dt>Total time</dt><dd>{longRun.time}</dd></div>
+        <div><dt>Moving time</dt><dd>{longRun.moving}</dd></div>
         <div><dt>Avg pace</dt><dd>{longRun.pace} /km</dd></div>
-        <div><dt>Avg heart rate</dt><dd>{avgHr} bpm</dd></div>
-        <div><dt>Elevation</dt><dd>{longRun.elev} m</dd></div>
-        <div><dt>PRs</dt><dd>{longRun.prs}</dd></div>
+        <div><dt>Moving pace</dt><dd>{longRun.movingPace} /km</dd></div>
+        <div><dt>Avg heart rate</dt><dd>{longRun.avgHr} bpm</dd></div>
       </dl>
     </div>
   </section>
@@ -175,7 +174,8 @@ const nav = [
   .h-stage { position: sticky; top: 0; height: 100svh; overflow: hidden; color: #fff; }
   .h-photo { position: absolute; inset: 0; will-change: transform; }
   .ph { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
-  .sharp { opacity: .6; -webkit-mask-image: radial-gradient(ellipse 30% 60% at 45% 50%, #000 20%, transparent 75%); mask-image: radial-gradient(ellipse 30% 60% at 45% 50%, #000 20%, transparent 75%); }
+  .sharp { --m: radial-gradient(ellipse 16% 34% at 41% 32%, #000 55%, rgb(0 0 0 / .55) 78%, transparent 100%); -webkit-mask-image: var(--m); mask-image: var(--m); }
+  @media (max-width: 900px) { .sharp { --m: radial-gradient(ellipse 34% 20% at 45% 33%, #000 55%, rgb(0 0 0 / .55) 78%, transparent 100%); } }
   .h-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgb(20 20 20 / .25), transparent 28% 50%, rgb(20 20 20 / .55)); }
   .h-grid { position: absolute; inset: 0 clamp(20px, 4vw, 56px); display: grid; grid-template-columns: repeat(4, 1fr); pointer-events: none; }
   .h-grid i { border-left: 1px solid rgb(255 255 255 / .14); }
@@ -269,11 +269,11 @@ const nav = [
   :global(.ab .sl) { overflow: hidden; padding-bottom: .06em; margin-bottom: -.06em; }
 
   @media (max-width: 900px) {
-    .h-in { grid-template-columns: 1fr; grid-template-rows: auto auto 1fr auto; padding-top: 92px; }
+    .h-in { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto 1fr auto; padding-top: 92px; }
     .h-grid { grid-template-columns: repeat(2, 1fr); }
     .h-intro, .h-card, .h-month, .h-word { grid-column: 1; }
     .h-intro { font-size: 14px; }
-    .h-card { grid-row: 4; justify-self: stretch; max-width: none; margin-bottom: 20px; padding: 14px; }
+    .h-card { grid-row: 4; justify-self: stretch; width: auto; max-width: none; min-width: 0; margin-bottom: 20px; padding: 14px; }
     .hc-spark { display: none; }
     .h-runs { display: none; }
     .h-month { grid-row: 2; justify-self: start; text-align: left; padding: 14px 0 0; }
@@ -289,7 +289,7 @@ const nav = [
     .rd-s dd { font-size: 16px; }
     .r-chart { margin: 20px 0 30px; }
     .r-sum { grid-template-columns: repeat(3, 1fr); }
-    .r-sum div:nth-child(4) { border-left: 0; padding-left: 0; }
+    .r-sum > div:nth-child(3n+1) { border-left: 0 !important; padding-left: 0 !important; }
     .r-sum dd { font-size: 15px; }
     .gear { grid-template-columns: 1fr; }
     .g-photo { min-height: 60vw; border-right: 0; border-bottom: 1px solid var(--line); }
