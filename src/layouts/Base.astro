@@ -2,6 +2,7 @@
 import '../styles/global.css'
 import Nav from '../components/Nav.astro'
 import Footer from '../components/Footer.astro'
+import AboutBoot from '../components/AboutBoot.astro'
 import Boot from '../components/Boot.astro'
 import { site } from '../data/site'
 // above-the-fold Poppins weights, preloaded so text never swaps (no layout shift)
@@ -34,7 +35,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site)
     <noscript><style>#boot{display:none}[data-reveal]{opacity:1!important;transform:none!important}</style></noscript>
   </head>
   <body>
-    <Boot />
+    {theme === 'sport' ? <AboutBoot /> : <Boot />}
     <Nav links={nav} page={page} theme={theme} />
     <main><slot /></main>
     <Footer />

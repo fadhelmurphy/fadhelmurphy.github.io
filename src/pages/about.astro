@@ -97,7 +97,7 @@ const nav = [
   </section>
 
   <!-- 2 · scroll-linked word rows (no pin) -->
-  <section class="rows" aria-label="What running gives back">
+  <section class="rows" aria-label="What running gives back" data-shader="contours">
     <div class="row r1" data-row="-1" aria-hidden="true">{[...rowA, ...rowA].map((w) => <span>{w}<i>/</i></span>)}</div>
     <div class="row r2" data-row="1" aria-hidden="true">{[...rowB, ...rowB].map((w) => <span>{w}<i>/</i></span>)}</div>
     <p class="sr-only">{[...rowA, ...rowB].join(', ')}</p>
@@ -195,7 +195,7 @@ const nav = [
   </section>
 
   <!-- 5 · STRAVA -->
-  <section id="strava" class="cta">
+  <section id="strava" class="cta" data-shader="heat">
     <p class="disp cta-l" data-split>Step out of comfort.</p>
     <p class="disp cta-l or" data-split>Stay in the fight.</p>
     <a href={strava} target="_blank" rel="noopener" class="strava">
@@ -251,6 +251,8 @@ const nav = [
   .hw-sub em { font-style: normal; color: var(--or); }
 
   /* ── rows ── */
+  :global(.sec-gl) { position: absolute; inset: 0; width: 100% !important; height: 100% !important; z-index: -1; }
+  .rows, .cta { position: relative; isolation: isolate; }
   .rows { padding: clamp(70px, 12vh, 140px) 0; border-bottom: 1px solid var(--line); overflow: hidden; }
   .row { display: flex; white-space: nowrap; font-size: clamp(52px, 9vw, 150px); will-change: transform; }
   .row span { display: inline-flex; align-items: center; }
@@ -336,6 +338,10 @@ const nav = [
   .cta-l.or { color: var(--or); margin-top: .08em; }
   .strava { margin-top: 48px; display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 30px; background: var(--or); color: #fff; font-weight: 650; font-size: 16px; cursor: pointer; transition: background-color .2s, transform .2s var(--ease); }
   .strava:hover { background: #e04300; transform: translateY(-2px); }
+  .cta:global(.has-gl) .cta-l.or { color: #fff; }
+  .cta:global(.has-gl) .strava { background: var(--ink); box-shadow: 0 14px 30px -12px rgb(0 0 0 / .5); }
+  .cta:global(.has-gl) .strava:hover { background: #000; }
+  .cta:global(.has-gl) .strava:focus-visible { outline-color: #fff; }
   .strava:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
   .strava svg { width: 18px; height: 18px; fill: currentColor; }
 
@@ -382,6 +388,7 @@ const nav = [
   import { SplitText } from 'gsap/SplitText'
   import { mountHeroGL } from '../scripts/about-hero-gl'
   import { mountRun3D } from '../scripts/run3d'
+  import { mountShader, contours, heat } from '../scripts/section-shader'
   gsap.registerPlugin(ScrollTrigger, SplitText)
 
   const data = JSON.parse(document.getElementById('run-stream')!.textContent || '{}') as { km: number[]; hr: number[]; v: number[]; secs: number; kmMax: number }
@@ -409,6 +416,7 @@ const nav = [
   const photo = $('[data-gl-src]')
   const heroGL = photo ? mountHeroGL(photo, photo.dataset.glSrc!, reduceM) : null
   const chartEl = $('.r-chart')
+  document.querySelectorAll<HTMLElement>('[data-shader]').forEach((el) => mountShader(el, el.dataset.shader === 'heat' ? heat : contours, reduceM))
   const run3d = chartEl ? mountRun3D(chartEl, data, reduceM) : null
 
   // replay readout for a position t (0..1) along the run

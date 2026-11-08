@@ -1,0 +1,91 @@
+---
+// About page loader: the longest run counts up while a dot runs the lane, then an orange panel wipes the screen away.
+// Shown once per session for this page; skipped under reduced motion.
+import { longRun, month, syncedAt } from '../data/strava'
+const d = new Date(syncedAt)
+const synced = `${d.getUTCDate()} ${['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][d.getUTCMonth()]}`
+const kmMax = Number(longRun.km)
+const ticks = [0, 10, 20, 30, 40].filter((t) => t <= kmMax)
+---
+<div id="aboot" data-km={kmMax} role="status" aria-live="polite" aria-label="Loading">
+  <div class="ab-grid" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="ab-top"><span>Fadhel</span><span>Strava synced {synced}</span></div>
+  <div class="ab-mid">
+    <p class="ab-num" aria-hidden="true"><b id="ab-km">0.00</b><span>km</span></p>
+    <p class="ab-sub">{month.runs} runs in the last 30 days. Longest: {longRun.km} km.</p>
+  </div>
+  <div class="ab-lane" aria-hidden="true">
+    <div class="ab-line"><i id="ab-fill"></i><b id="ab-dot"></b></div>
+    <div class="ab-ticks">{ticks.map((t) => <span style={`left:${(t / kmMax) * 100}%`}>{t}</span>)}</div>
+  </div>
+  <p class="ab-status" id="ab-status">Pulling runs from Strava</p>
+  <div class="ab-wipe" aria-hidden="true"></div>
+</div>
+
+<style is:inline>
+#aboot{position:fixed;inset:0;z-index:9999;background:#efeeea;color:#141414;font-family:'Archivo Variable',system-ui,sans-serif;overflow:hidden;--p:0}
+#aboot .ab-grid{position:absolute;inset:0 clamp(20px,4vw,56px);display:grid;grid-template-columns:repeat(4,1fr);pointer-events:none}
+#aboot .ab-grid i{border-left:1px solid rgb(20 20 20 / .08)}
+#aboot .ab-grid i:last-child{border-right:1px solid rgb(20 20 20 / .08)}
+#aboot .ab-top{position:absolute;left:clamp(20px,4vw,56px);right:clamp(20px,4vw,56px);top:clamp(20px,3.5vw,40px);display:flex;justify-content:space-between;font-size:14px;color:#5a5955}
+#aboot .ab-top span:first-child{color:#141414;font-weight:700}
+#aboot .ab-mid{position:absolute;left:clamp(20px,4vw,56px);right:clamp(20px,4vw,56px);top:50%;transform:translateY(-62%)}
+#aboot .ab-num{display:flex;align-items:baseline;gap:.15em;font-stretch:125%;font-weight:800;letter-spacing:-.04em;line-height:.85;font-size:clamp(84px,19vw,300px);font-variant-numeric:tabular-nums}
+#aboot .ab-num b{font-weight:800;color:#fc4c02}
+#aboot .ab-num span{font-size:.22em;letter-spacing:0;color:#141414}
+#aboot .ab-sub{margin-top:18px;font-size:clamp(14px,1.3vw,17px);color:#5a5955}
+#aboot .ab-lane{position:absolute;left:clamp(20px,4vw,56px);right:clamp(20px,4vw,56px);bottom:clamp(90px,16vh,150px)}
+#aboot .ab-line{position:relative;height:2px;background:rgb(20 20 20 / .14)}
+#aboot .ab-line i{position:absolute;left:0;top:0;bottom:0;width:100%;background:#fc4c02;transform-origin:0 50%;transform:scaleX(var(--p))}
+#aboot .ab-line b{position:absolute;top:50%;left:calc(var(--p) * 100%);width:14px;height:14px;margin:-7px 0 0 -7px;background:#fc4c02;box-shadow:0 0 0 6px rgb(252 76 2 / .18)}
+#aboot .ab-ticks{position:relative;height:22px;margin-top:10px;font-size:12px;color:#5a5955;font-variant-numeric:tabular-nums}
+#aboot .ab-ticks span{position:absolute;translate:-50% 0}
+#aboot .ab-ticks span:first-child{translate:0 0}
+#aboot .ab-ticks span:last-child:not(:first-child){translate:-100% 0}
+#aboot .ab-status{position:absolute;left:clamp(20px,4vw,56px);bottom:clamp(30px,6vh,52px);font-size:14px;font-weight:600}
+#aboot .ab-wipe{position:absolute;inset:0;background:#fc4c02;transform:translateY(100%)}
+#aboot.go .ab-wipe{transition:transform .55s cubic-bezier(.76,0,.24,1);transform:translateY(0)}
+#aboot.out{transition:transform .7s cubic-bezier(.76,0,.24,1);transform:translateY(-100%)}
+@media (prefers-reduced-motion:reduce){#aboot{display:none}}
+</style>
+
+<script is:inline>
+(function () {
+  var root = document.getElementById('aboot'), seen = false
+  try { seen = !!sessionStorage.getItem('booted-about') } catch (e) {}
+  if (!root || seen || matchMedia('(prefers-reduced-motion: reduce)').matches) { root && root.remove(); window.__booted = true; return }
+  document.documentElement.style.overflow = 'hidden'
+  var km = document.getElementById('ab-km'), st = document.getElementById('ab-status')
+  var total = parseFloat(root.dataset.km) || 0
+  var steps = ['Pulling runs from Strava', 'Lacing up', 'Warming up', 'Go']
+  var loaded = document.readyState === 'complete', t0 = performance.now(), p = 0, done = false
+  addEventListener('load', function () { loaded = true })
+  function ease (x) { return 1 - Math.pow(1 - x, 3) }
+  function frame (now) {
+    var el = (now - t0) / 1000
+    // run to 85% on a timer, the rest once the page has loaded (max 4 s)
+    var target = Math.min(0.85, ease(Math.min(1, el / 1.3)) * 0.85)
+    if (loaded || el > 4) target = 1
+    p += (target - p) * (target === 1 ? 0.22 : 0.2)
+    if (target === 1 && p > 0.99) p = 1
+    root.style.setProperty('--p', p.toFixed(4))
+    km.textContent = (total * p).toFixed(2)
+    st.textContent = steps[Math.min(steps.length - 1, Math.floor(p * (steps.length - 1) + 0.0001))]
+    if (p < 1) return requestAnimationFrame(frame)
+    if (done) return
+    done = true
+    setTimeout(function () {
+      root.classList.add('go')
+      setTimeout(function () {
+        root.classList.add('out')
+        document.documentElement.style.overflow = ''
+        try { sessionStorage.setItem('booted-about', '1') } catch (e) {}
+        window.__booted = true
+        document.dispatchEvent(new Event('boot:done'))
+        setTimeout(function () { root.remove() }, 750)
+      }, 520)
+    }, 260)
+  }
+  requestAnimationFrame(frame)
+})()
+</script>
