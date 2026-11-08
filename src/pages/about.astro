@@ -17,6 +17,10 @@ const hrArea = `${hrPath} L600 140 L0 140 Z`
 // stylised route outline (not the real GPS line, which would give away where the runs start)
 const route = 'M38 168c14-10 30-4 40-16s-2-30 12-38 30 6 40-6 4-34 20-40 34 8 38 26-14 30-2 42 30 2 34 18-12 26-28 30-34-6-44 8-6 28-22 34-40-10-52-4-24 8-40 4'
 
+const laps = Math.round(Number(longRun.km) / 0.4)
+// stadium-shaped track lane, grown outward by `o`
+const oval = (o: number) => { const r = 70 + o, l = 110, cx = 210, cy = 110; return `M${cx - l} ${cy - r}h${2 * l}a${r} ${r} 0 0 1 0 ${2 * r}h${-2 * l}a${r} ${r} 0 0 1 0 ${-2 * r}z` }
+
 const words = ['Distance', 'Discipline', 'Night laps', 'Heart rate', 'Long runs', 'Rain', 'Recovery', 'Repeat']
 
 const nav = [
@@ -27,7 +31,7 @@ const nav = [
   { href: '/', label: 'Home', id: 'home', note: 'Back to the main page', icon: 'M4 11l8-7 8 7v9H4z' }
 ]
 ---
-<Base nav={nav} page="About" title="About | Fadhel Ijlal Falah" description="Fadhel Ijlal Falah off the clock: running and riding, tracked on Strava.">
+<Base nav={nav} page="About" theme="sport" title="About | Fadhel Ijlal Falah" description="Fadhel Ijlal Falah off the clock: running and riding, tracked on Strava.">
 <main class="ab">
 
   <!-- 1 · hero: pinned, the photo speeds up as you scroll -->
@@ -88,23 +92,28 @@ const nav = [
     </div>
   </section>
 
-  <!-- 3 · effort -->
-  <section id="effort" class="effort" data-scrub>
-    <div class="e-grid">
+  <!-- 3 · effort: pinned; the photo wipes in and a runner dot laps a track while the clock runs -->
+  <section id="effort" class="pin" data-pin style="height:300vh">
+    <div class="stick e-stage">
       <div class="e-copy">
-        <h2 class="disp e-title">Push your<br /><span>limit</span></h2>
+        <h2 class="disp e-title"><span class="ln"><span>Push your</span></span><span class="ln"><span class="or">limit</span></span></h2>
         <p class="e-lede">{longRun.date}: my longest run of the last 30 days. {longRun.km} km in {longRun.time}{longRun.prs ? `, with ${longRun.prs} personal record${longRun.prs > 1 ? 's' : ''} along the way` : ''}.</p>
         <p class="clock" data-clock={longRun.secs} aria-label={`Moving time ${longRun.time}`}>00:00:00</p>
+        <p class="laps" aria-hidden="true"><b data-km={longRun.km}>0.00</b> km <span>/</span> lap <b data-lap={laps}>0</b> of {laps} on a 400 m track</p>
       </div>
       <figure class="e-photo">
-        <Image src={trackGrey} alt="Fadhel running laps on a stadium track at night" widths={[480, 800]} sizes="(min-width: 900px) 40vw, 90vw" class="e-img" />
-        <svg viewBox="0 0 400 520" class="loops" aria-hidden="true">
-          <ellipse cx="210" cy="300" rx="170" ry="70" pathLength="1" transform="rotate(-18 210 300)" />
-          <ellipse cx="200" cy="290" rx="150" ry="200" pathLength="1" transform="rotate(12 200 290)" />
+        <div class="e-frame"><Image src={trackGrey} alt="Fadhel running laps on a stadium track at night" widths={[480, 800]} sizes="(min-width: 900px) 40vw, 90vw" class="e-img" /></div>
+        <svg viewBox="0 0 420 220" class="track" aria-hidden="true">
+          <path d={oval(30)} class="t-lane" />
+          <path d={oval(0)} class="t-lane t-in" />
+          <path d={oval(15)} pathLength="1" class="t-run" data-track-path />
+          <circle r="7" class="t-dot" data-track-dot />
         </svg>
       </figure>
     </div>
+  </section>
 
+  <section class="band" data-scrub>
     <div class="e-band">
       <div class="block">
         <p><b>{longRun.km}</b> km</p>
@@ -216,17 +225,30 @@ const nav = [
   .arrow { position: absolute; left: 0; top: 50%; width: 56px; height: 56px; translate: 0 -50%; fill: none; stroke: var(--or); stroke-width: 7; stroke-linecap: square; }
 
   /* effort */
-  .effort, .gear, .cta { max-width: 1280px; margin: 0 auto; padding: clamp(80px, 12vh, 140px) clamp(20px, 4vw, 56px); }
-  .e-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 4vw; align-items: center; }
-  .e-title { font-size: clamp(46px, 7.4vw, 116px); }
-  .e-title span { color: var(--or); }
-  .e-lede { margin-top: 26px; max-width: 46ch; font-size: 18px; line-height: 1.6; color: var(--mute); }
-  .clock { margin-top: 30px; font-family: 'Michroma', sans-serif; font-size: clamp(36px, 5vw, 72px); color: var(--or); font-variant-numeric: tabular-nums; letter-spacing: .02em; }
-  .e-photo { position: relative; aspect-ratio: 4 / 5; }
-  .e-img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; transform: translateY(calc((.5 - var(--s, .5)) * 60px)); }
-  .loops { position: absolute; inset: -6% -10%; width: 120%; height: 112%; overflow: visible; pointer-events: none; }
-  .loops ellipse { fill: none; stroke: var(--or); stroke-width: 2.4; stroke-dasharray: 1; stroke-dashoffset: calc(1 - min(1, var(--s, 0) * 2)); }
-  .loops ellipse + ellipse { stroke-width: 1.4; stroke-dashoffset: calc(1 - min(1, var(--s, 0) * 1.6)); }
+  .gear, .cta, .band { max-width: 1280px; margin: 0 auto; padding: clamp(80px, 12vh, 140px) clamp(20px, 4vw, 56px); }
+  .band { padding-top: 0; }
+  .e-stage { display: grid; grid-template-columns: 1.05fr .95fr; gap: 4vw; align-items: center; max-width: 1280px; margin: 0 auto; padding: 96px clamp(20px, 4vw, 56px) 40px; }
+  .e-title { font-size: clamp(46px, 7vw, 112px); }
+  .ln { display: block; overflow: hidden; padding-bottom: .04em; }
+  .ln > span { display: block; transform: translateY(calc((1 - min(1, max(0, var(--e, 1) * 1.6 - .3))) * 105%)); }
+  .ln + .ln > span { transform: translateY(calc((1 - min(1, max(0, var(--e, 1) * 1.6 - .5))) * 105%)); }
+  .or { color: var(--or); }
+  .e-lede { margin-top: 24px; max-width: 44ch; font-size: 18px; line-height: 1.6; color: var(--mute); opacity: min(1, max(0, var(--e, 1) * 2 - .9)); }
+  .clock, .laps { opacity: min(1, max(0, var(--e, 1) * 2 - 1)); }
+  .clock { margin-top: 28px; font-family: 'Michroma', sans-serif; font-size: clamp(40px, 5.4vw, 80px); line-height: 1; color: var(--or); font-variant-numeric: tabular-nums; }
+  .laps { margin-top: 14px; font-size: 15px; color: var(--mute); font-variant-numeric: tabular-nums; }
+  .laps b { color: var(--ink); font-weight: 600; }
+  .laps span { margin: 0 6px; color: #b5b4b0; }
+  .e-photo { position: relative; height: min(76svh, 640px); }
+  .e-frame { height: 100%; overflow: hidden; border-radius: 6px; clip-path: inset(calc((1 - min(1, max(0, var(--e, 1) * 1.4 - .25))) * 100%) 0 0 0 round 6px); }
+  .e-img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; transform: scale(calc(1.3 - min(1, var(--e, 1)) * .22 + var(--p, 1) * .12)); transform-origin: 50% 70%; }
+  .track { position: absolute; left: -16%; right: -16%; bottom: -4%; width: 132%; overflow: visible; pointer-events: none;
+    transform: perspective(900px) rotateX(58deg) rotateZ(calc(var(--p, 1) * -18deg)) scale(calc(.85 + min(1, var(--e, 1)) * .15)); transform-origin: 50% 70%;
+    opacity: min(1, max(0, var(--e, 1) * 3 - 2)); }
+  .t-lane { fill: none; stroke: rgb(255 255 255 / .7); stroke-width: 2; }
+  .t-in { stroke-dasharray: 6 8; stroke: rgb(255 255 255 / .4); }
+  .t-run { fill: none; stroke: var(--or); stroke-width: 5; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; filter: drop-shadow(0 0 6px rgb(252 76 2 / .6)); }
+  .t-dot { fill: #fff; stroke: var(--or); stroke-width: 4; }
 
   .e-band { margin-top: clamp(48px, 8vh, 90px); display: grid; grid-template-columns: auto 1fr; gap: 20px; }
   .block { background: var(--or); color: #fff; padding: 22px 30px; display: grid; gap: 2px; align-content: center; font-family: 'Michroma', sans-serif; font-size: clamp(22px, 2.6vw, 38px); line-height: 1.25; text-transform: uppercase;
@@ -281,8 +303,13 @@ const nav = [
     .wrap { grid-template-columns: 1fr; grid-template-rows: auto 1fr; padding-top: 110px; }
     .drum li { left: 56px; }
     .arrow { width: 40px; height: 40px; }
-    .e-grid, .g-grid, .e-band { grid-template-columns: 1fr; }
-    .e-photo { max-width: 420px; }
+    .g-grid, .e-band { grid-template-columns: 1fr; }
+    .e-stage { grid-template-columns: 1fr; align-content: start; gap: 18px; padding-top: 92px; }
+    .e-title { font-size: 12vw; }
+    .e-lede { font-size: 15px; margin-top: 12px; }
+    .clock { font-size: 11vw; margin-top: 14px; }
+    .laps { font-size: 13px; margin-top: 8px; }
+    .e-photo { height: 40svh; }
     .g-list li { grid-template-columns: 1fr auto; }
     .g-k { grid-column: 1 / -1; }
   }
@@ -301,12 +328,32 @@ const nav = [
   const total = Number(clock?.dataset.clock || 0)
   const fmt = (s: number) => [s / 3600, (s % 3600) / 60, s % 60].map((n) => String(Math.floor(n)).padStart(2, '0')).join(':')
   const clamp = (v: number) => Math.min(1, Math.max(0, v))
+  const lapEl = document.querySelector<HTMLElement>('[data-lap]')
+  const kmEl = document.querySelector<HTMLElement>('[data-km]')
+  const runPath = document.querySelector<SVGPathElement>('[data-track-path]')
+  const dot = document.querySelector<SVGCircleElement>('[data-track-dot]')
+  const laps = Number(lapEl?.dataset.lap || 1), kmTotal = Number(kmEl?.dataset.km || 0)
+  const len = runPath ? runPath.getTotalLength() : 0
+  // t: 0..1 through the whole run; the dot laps the oval `laps` times, sped up
+  function run (t: number) {
+    clock!.textContent = fmt(Math.round(total * t))
+    if (lapEl) lapEl.textContent = String(Math.min(laps, Math.floor(t * laps) + (t > 0 ? 1 : 0)))
+    if (kmEl) kmEl.textContent = (kmTotal * t).toFixed(2)
+    if (!runPath || !dot) return
+    const shown = Math.min(laps, 12) // dot does 12 visible laps, the counter covers the real number
+    const f = (t * shown) % 1 || (t >= 1 ? 1 : 0)
+    runPath.style.strokeDashoffset = String(1 - f)
+    const pt = runPath.getPointAtLength(f * len)
+    dot.setAttribute('cx', pt.x.toFixed(1)); dot.setAttribute('cy', pt.y.toFixed(1))
+    dot.style.opacity = t > 0 ? '1' : '0'
+  }
 
   function frame() {
     const vh = innerHeight
     for (const el of pins) {
       const r = el.getBoundingClientRect()
       el.style.setProperty('--p', clamp(-r.top / (r.height - vh)).toFixed(4))
+      el.style.setProperty('--e', clamp(1 - r.top / vh).toFixed(4)) // 0 when it enters from below, 1 once pinned
     }
     for (const el of scrubs) {
       const r = el.getBoundingClientRect()
@@ -325,16 +372,16 @@ const nav = [
       })
     }
     if (clock) {
-      const s = Number(clock.closest<HTMLElement>('[data-scrub]')!.style.getPropertyValue('--s') || 0)
-      clock.textContent = fmt(Math.round(total * clamp(s * 2.2 - 0.2)))
+      const p = Number(clock.closest<HTMLElement>('[data-pin]')!.style.getPropertyValue('--p') || 0)
+      run(clamp((p - 0.2) / 0.72))
     }
   }
 
   if (reduce) {
-    pins.forEach((el) => el.style.setProperty('--p', '0'))
+    pins.forEach((el) => { el.style.setProperty('--p', '0'); el.style.setProperty('--e', '1') })
     scrubs.forEach((el) => el.style.setProperty('--s', '1'))
     items.forEach((li, i) => { li.style.transform = `translateY(calc(-50% + ${(i - 3) * 90}px))`; li.style.color = '#17171a' })
-    if (clock) clock.textContent = fmt(total)
+    if (clock) run(1)
   } else {
     let raf = 0
     const tick = () => { raf = 0; frame() }

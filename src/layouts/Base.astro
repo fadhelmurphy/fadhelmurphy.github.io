@@ -10,8 +10,8 @@ import f600 from '@fontsource/poppins/files/poppins-latin-600-normal.woff2?url'
 import f700 from '@fontsource/poppins/files/poppins-latin-700-normal.woff2?url'
 
 import type { NavLink } from '../components/Nav.astro'
-interface Props { title?: string; description?: string; nav?: NavLink[]; page?: string }
-const { title = `${site.name} | Data & Software Engineer`, description = site.tagline, nav, page } = Astro.props
+interface Props { title?: string; description?: string; nav?: NavLink[]; page?: string; theme?: 'sport' }
+const { title = `${site.name} | Data & Software Engineer`, description = site.tagline, nav, page, theme } = Astro.props
 const canonical = new URL(Astro.url.pathname, Astro.site)
 ---
 <!doctype html>
@@ -35,7 +35,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site)
   </head>
   <body>
     <Boot />
-    <Nav links={nav} page={page} />
+    <Nav links={nav} page={page} theme={theme} />
     <main><slot /></main>
     <Footer />
     <script>
