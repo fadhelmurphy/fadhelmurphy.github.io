@@ -1,10 +1,11 @@
-name: Sync LinkedIn & deploy
+name: Sync LinkedIn + Strava & deploy
 on:
   push:
     branches: [astro-v2]
     tags: ['*v*-release']
   schedule:
-    - cron: '0 18 * * *'   # every day 01:00 WIB
+    - cron: '0 18 * * *'      # 01:00 WIB: LinkedIn + Strava
+    - cron: '0 0,6,12 * * *'  # 07:00, 13:00, 19:00 WIB: Strava only
   workflow_dispatch:
 
 permissions: { contents: write, pages: write, id-token: write }
@@ -20,18 +21,37 @@ jobs:
       - run: npm ci
 
       - name: Pull latest LinkedIn profile
+        if: github.event.schedule != '0 0,6,12 * * *'
         run: npm run sync:linkedin
         env:
           APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
           LINKEDIN_URL: https://www.linkedin.com/in/fadhelijlalfalah/
 
+      - name: Pull latest Strava activity
+        id: strava
+        run: npm run sync:strava
+        env:
+          STRAVA_CLIENT_ID: ${{ secrets.STRAVA_CLIENT_ID }}
+          STRAVA_CLIENT_SECRET: ${{ secrets.STRAVA_CLIENT_SECRET }}
+          STRAVA_REFRESH_TOKEN: ${{ secrets.STRAVA_REFRESH_TOKEN }}
+
+      # Strava can hand out a new refresh token; store it so the next run still works (needs GH_PAT with secrets write)
+      - name: Save rotated Strava token
+        if: steps.strava.outputs.rotated != ''
+        run: |
+          if [ -n "$GH_TOKEN" ]; then gh secret set STRAVA_REFRESH_TOKEN --body "$NEW" --repo "$GITHUB_REPOSITORY"
+          else echo "::warning::Strava rotated the refresh token. Add a GH_PAT secret or update STRAVA_REFRESH_TOKEN by hand."; fi
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+          NEW: ${{ steps.strava.outputs.rotated }}
+
       - name: Commit data if it changed
         run: |
-          if ! git diff --quiet -- src/data/experience.json src/data/education.json; then
-            git config user.name  "linkedin-sync[bot]"
-            git config user.email "linkedin-sync@users.noreply.github.com"
-            git add src/data/experience.json src/data/education.json src/data/sync-meta.json
-            git commit -m "chore(data): sync LinkedIn experience"
+          if ! git diff --quiet -- src/data/experience.json src/data/education.json src/data/strava.json; then
+            git config user.name  "data-sync[bot]"
+            git config user.email "data-sync@users.noreply.github.com"
+            git add src/data/experience.json src/data/education.json src/data/sync-meta.json src/data/strava.json
+            git commit -m "chore(data): sync LinkedIn and Strava"
             git push origin HEAD:astro-v2 || echo 'branch moved on; data will be picked up next run'
           fi
 

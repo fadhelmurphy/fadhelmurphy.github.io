@@ -5,12 +5,12 @@ import Base from '../layouts/Base.astro'
 import runner from '../assets/about/runner.jpg'
 import runnerBlur from '../assets/about/runner-blur.jpg'
 import trackGrey from '../assets/about/track-grey.jpg'
-import { longRun, recent, october, hr, gear } from '../data/strava'
+import { longRun, recent, month, hr, gear } from '../data/strava'
 
 const strava = 'https://strava.app.link/E63xhR6AR7b'
 
 // heart-rate line for the long run, drawn into a 600×140 box
-const lo = Math.min(...hr), hi = Math.max(...hr)
+const lo = hr.length ? Math.min(...hr) : 0, hi = hr.length ? Math.max(...hr) : 1
 const hrPath = hr.map((v, i) => `${i ? 'L' : 'M'}${((i / (hr.length - 1)) * 600).toFixed(1)} ${(130 - ((v - lo) / (hi - lo)) * 120).toFixed(1)}`).join(' ')
 const hrArea = `${hrPath} L600 140 L0 140 Z`
 
@@ -68,8 +68,8 @@ const nav = [
         </article>
 
         <div class="month">
-          <p class="month-v">{october.km}<small>km</small></p>
-          <p class="month-k">{october.runs} runs in October</p>
+          <p class="month-v">{month.km}<small>km</small></p>
+          <p class="month-k">{month.runs} runs in the last 30 days</p>
         </div>
       </div>
       <div class="scrollcue" aria-hidden="true"><i></i></div>
@@ -93,7 +93,7 @@ const nav = [
     <div class="e-grid">
       <div class="e-copy">
         <h2 class="disp e-title">Push your<br /><span>limit</span></h2>
-        <p class="e-lede">{longRun.date}: the longest run so far. {longRun.km} km in the evening heat at {longRun.temp}°C, five personal records along the way.</p>
+        <p class="e-lede">{longRun.date}: my longest run of the last 30 days. {longRun.km} km in {longRun.time}{longRun.prs ? `, with ${longRun.prs} personal record${longRun.prs > 1 ? 's' : ''} along the way` : ''}.</p>
         <p class="clock" data-clock={longRun.secs} aria-label={`Moving time ${longRun.time}`}>00:00:00</p>
       </div>
       <figure class="e-photo">
@@ -108,10 +108,10 @@ const nav = [
     <div class="e-band">
       <div class="block">
         <p><b>{longRun.km}</b> km</p>
-        <p><b>{longRun.effort}</b> effort</p>
+        {longRun.effort != null && <p><b>{longRun.effort}</b> effort</p>}
         <p><b>{longRun.prs}</b> PRs</p>
       </div>
-      <div class="chart">
+      {hr.length > 1 && <div class="chart">
         <div class="chart-head">
           <span>Heart rate</span><span>{lo}–{hi} bpm</span><span>+{longRun.elev} m</span><span>{longRun.time} h</span>
         </div>
@@ -120,7 +120,7 @@ const nav = [
           <path d={hrArea} fill="url(#hrg)" class="hr-area" />
           <path d={hrPath} pathLength="1" class="hr-line" vector-effect="non-scaling-stroke" />
         </svg>
-      </div>
+      </div>}
     </div>
   </section>
 

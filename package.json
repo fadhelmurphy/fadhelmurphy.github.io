@@ -5,8 +5,9 @@
   "private": true,
   "scripts": {
     "sync:linkedin": "node scripts/linkedin-sync.mjs",
+    "sync:strava": "node scripts/strava-sync.mjs",
     "dev": "astro dev",
-    "build": "node scripts/linkedin-sync.mjs && astro build",
+    "build": "node scripts/linkedin-sync.mjs && node scripts/strava-sync.mjs && astro build",
     "preview": "astro preview"
   },
   "dependencies": {
