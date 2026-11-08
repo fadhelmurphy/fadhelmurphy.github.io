@@ -167,6 +167,14 @@ const { links = homeLinks, page = 'Menu', theme } = Astro.props
   #island[data-theme='sport'] .island-cta { background: #fc4c02; }
   #island[data-theme='sport'] .island-cta:hover { background: #e34402; }
   #island[data-theme='sport'] .bg-emerald-300 { background: #fff; }
+  /* squarer, sporty corners */
+  #island[data-theme='sport'], #island[data-theme='sport'].open { border-radius: 12px; }
+  #island[data-theme='sport'] .island-inner, #island[data-theme='sport'].open .island-inner { border-radius: 11px; }
+  #island[data-theme='sport'] #island-toggle { border-radius: 8px; }
+  #island[data-theme='sport'] #island-row a > span:first-child { border-radius: 8px; }
+  #island[data-theme='sport'] .island-link, #island[data-theme='sport'] .island-sub,
+  #island[data-theme='sport'] .island-cta, #island[data-theme='sport'] .island-top { border-radius: 8px; }
+  #island[data-theme='sport'] .island-ic { border-radius: 6px; }
 </style>
 
 <script>
