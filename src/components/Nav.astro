@@ -251,14 +251,15 @@ const { links = homeLinks, page = 'Menu', theme } = Astro.props
   const names: Record<string, string> = Object.fromEntries(tracked.map(a => [a.dataset.id!, a.querySelector('.text-\\[15px\\]')?.textContent?.trim() || a.dataset.id!]))
   if (home !== 'Menu') label.textContent = home
   const links = [...island.querySelectorAll<HTMLElement>('.island-link')]
-  const order = Object.keys(names)
-  const step = (id: string | null) => {   // ring fills one step per section; Contact = complete
-    const p = id ? (order.indexOf(id) + 1) / order.length : 0
+  // ring follows how far down the page you are, continuously
+  const fill = () => {
+    const max = document.documentElement.scrollHeight - innerHeight
+    const p = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0
     ring.setAttribute('stroke-dashoffset', String(C * (1 - p)))
-    prog_.classList.toggle('done', p >= 1)
+    prog_.classList.toggle('done', p >= 0.995)
   }
+  addEventListener('scroll', fill, { passive: true }); addEventListener('resize', fill); fill()
   const set = (id: string | null) => {
-    step(id)
     const t = id ? names[id] : home
     links.forEach(a => a.classList.toggle('active', a.dataset.id === id))
     if (label.textContent === t) return
@@ -267,5 +268,8 @@ const { links = homeLinks, page = 'Menu', theme } = Astro.props
   const secs = Object.keys(names).map(id => document.getElementById(id)).filter(Boolean) as HTMLElement[]
   const io = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) set(e.target.id) }), { rootMargin: '-45% 0px -50% 0px' })
   secs.forEach(s => io.observe(s))
-  addEventListener('scroll', () => { if (scrollY < innerHeight * 0.4) set(null) }, { passive: true })
+  // if the first followed section starts at the top (the About hero), the top of the page is that section, not the page name
+  const first = secs[0] && secs[0].offsetTop < innerHeight * 0.5 ? secs[0].id : null
+  const top = () => { if (scrollY < innerHeight * 0.4) set(first) }
+  addEventListener('scroll', top, { passive: true }); top()
 </script>
