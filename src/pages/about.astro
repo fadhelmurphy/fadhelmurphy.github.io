@@ -54,7 +54,7 @@ const nav = [
           <p class="hc-v">{longRun.km}<small>km</small></p>
           {has && <svg viewBox="0 0 200 40" preserveAspectRatio="none" class="hc-spark" aria-hidden="true"><path d={spark} /></svg>}
           <dl class="hc-s">
-            <div><dt>Pace</dt><dd>{longRun.pace}<small>/km</small></dd></div>
+            <div><dt>Pace</dt><dd>{longRun.movingPace}<small>/km</small></dd></div>
             <div><dt>Moving</dt><dd>{longRun.moving}</dd></div>
             <div><dt>Energy</dt><dd>{longRun.cal}<small>cal</small></dd></div>
           </dl>
@@ -126,9 +126,9 @@ const nav = [
         <div><dt>Distance</dt><dd>{longRun.km} km</dd></div>
         <div><dt>Total time</dt><dd>{longRun.time}</dd></div>
         <div><dt>Moving time</dt><dd>{longRun.moving}</dd></div>
-        <div><dt>Avg pace</dt><dd>{longRun.pace} /km</dd></div>
-        <div><dt>Moving pace</dt><dd>{longRun.movingPace} /km</dd></div>
+        <div><dt>Avg pace</dt><dd>{longRun.movingPace} /km</dd></div>
         <div><dt>Avg heart rate</dt><dd>{longRun.avgHr} bpm</dd></div>
+        <div><dt>Elevation</dt><dd>{longRun.elev} m</dd></div>
       </dl>
     </div>
   </section>

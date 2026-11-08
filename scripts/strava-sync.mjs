@@ -49,10 +49,23 @@ async function token () {
   return j.access_token
 }
 
+// Garmin-style moving time: seconds where speed is above 0.5 m/s, from full-resolution streams.
+// Strava's moving_time equals elapsed for Garmin uploads, so it can't be used directly.
+let get
+async function movingOf (a) {
+  try {
+    const full = await get(`/activities/${a.id}/streams?keys=time,velocity_smooth&key_by_type=true`)
+    const T = full.time?.data || [], V = full.velocity_smooth?.data || []
+    let m = 0
+    for (let i = 1; i < T.length; i++) if ((V[i] ?? 0) > 0.5) m += T[i] - T[i - 1]
+    return m > 0 ? m : a.moving_time
+  } catch { return a.moving_time }
+}
+
 async function main () {
   if (!id || !secret || !refresh) { console.log('strava: no credentials, keeping committed strava.json'); return }
   const at = await token()
-  const get = async (path) => {
+  get = async (path) => {
     const r = await fetch(API + path, { headers: { authorization: `Bearer ${at}` } })
     if (!r.ok) throw new Error(`${path} ${r.status}`)
     return r.json()
@@ -73,17 +86,15 @@ async function main () {
   const stream = n && st.heartrate && st.velocity_smooth
     ? { km: pick(st.distance.data, (m) => Math.round(m / 10) / 100), hr: pick(st.heartrate.data, (x) => x), v: pick(st.velocity_smooth.data, (x) => Math.round(x * 100) / 100) }
     : { km: [], hr: [], v: [] }
-  // Garmin-style moving time: count the seconds where speed is above 0.5 m/s (full-resolution streams).
-  // Strava's own moving_time equals elapsed for Garmin uploads, so it can't be used.
-  let movingSecs = best.moving_time
-  try {
-    const full = await get(`/activities/${best.id}/streams?keys=time,velocity_smooth&key_by_type=true`)
-    const T = full.time?.data || [], V = full.velocity_smooth?.data || []
-    let m = 0
-    for (let i = 1; i < T.length; i++) if ((V[i] ?? 0) > 0.5) m += T[i] - T[i - 1]
-    if (m > 0) movingSecs = m
-  } catch {}
+  const best_moving = await movingOf(best)
   const bd = day(best.start_date_local)
+
+  // recent runs: total time as logged, pace from Garmin-style moving time
+  const recent = await Promise.all(runs.slice(0, 6).map(async (a) => {
+    const d = day(a.start_date_local)
+    const mv = a.id === best.id ? best_moving : await movingOf(a)
+    return { date: `${d.d} ${MONTHS[d.mo].slice(0, 3)}`, km: km(a.distance), time: hms(a.elapsed_time), pace: pace(mv, a.distance) }
+  }))
 
   const gear = await Promise.all(GEAR.map(async (g) => {
     if (!g.id) return { k: g.k, t: g.t, m: g.m }
@@ -98,19 +109,16 @@ async function main () {
       pace: pace(best.elapsed_time, best.distance),
       time: hms(best.elapsed_time),
       secs: best.elapsed_time,
-      moving: hms(movingSecs),
-      movingSecs,
-      movingPace: pace(movingSecs, best.distance),
+      moving: hms(best_moving),
+      movingSecs: best_moving,
+      movingPace: pace(best_moving, best.distance),
       avgHr: Math.round(detail.average_heartrate || 0),
       cal: Math.round(detail.calories || 0).toLocaleString('en-US'),
       elev: Math.round(best.total_elevation_gain || 0),
       effort: best.suffer_score ?? null,
       prs: best.pr_count ?? 0
     },
-    recent: runs.slice(0, 6).map((a) => {
-      const d = day(a.start_date_local)
-      return { date: `${d.d} ${MONTHS[d.mo].slice(0, 3)}`, km: km(a.distance), time: hms(a.moving_time), pace: pace(a.moving_time, a.distance) }
-    }),
+    recent,
     month: { km: (runs.reduce((s, a) => s + a.distance, 0) / 1000).toFixed(1), runs: runs.length },
     gear,
     stream
