@@ -56,7 +56,7 @@ const nav = [
   <!-- 1 · HERO (pin 1 of 2) -->
   <section id="run" class="hero" data-hero>
     <div class="h-stage">
-      <div class="h-photo" aria-hidden="true">
+      <div class="h-photo" aria-hidden="true" data-gl-src={runner.src}>
         <Image src={runnerBlur} alt="" widths={[900]} sizes="100vw" loading="eager" fetchpriority="high" class="ph" />
         <Image src={runner} alt="" widths={[640, 1100]} sizes="100vw" loading="eager" class="ph sharp" />
         <div class="h-shade"></div>
@@ -220,6 +220,8 @@ const nav = [
   .ph { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
   .sharp { --m: radial-gradient(ellipse 16% 34% at 41% 32%, #000 55%, rgb(0 0 0 / .55) 78%, transparent 100%); -webkit-mask-image: var(--m); mask-image: var(--m); }
   @media (max-width: 900px) { .sharp { --m: radial-gradient(ellipse 34% 20% at 45% 33%, #000 55%, rgb(0 0 0 / .55) 78%, transparent 100%); } }
+  :global(.h-gl) { position: absolute; inset: 0; width: 100% !important; height: 100% !important; opacity: 0; transition: opacity .9s ease; }
+  :global(.h-gl.on) { opacity: 1; }
   .h-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgb(20 20 20 / .25), transparent 28% 50%, rgb(20 20 20 / .55)); }
   .h-grid { position: absolute; inset: 0 clamp(20px, 4vw, 56px); display: grid; grid-template-columns: repeat(4, 1fr); pointer-events: none; }
   .h-grid i { border-left: 1px solid rgb(255 255 255 / .14); }
@@ -297,6 +299,9 @@ const nav = [
   .rd-s dd { font-size: 20px; font-weight: 650; }
   .r-chart { grid-column: 1 / -1; grid-row: 3; position: relative; margin: 28px 0 30px; border-bottom: 1px solid var(--ink); min-height: 160px; }
   .r-chart svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  :global(.r-gl) { position: absolute; inset: 0; width: 100% !important; height: 100% !important; }
+  .r-chart:global(.gl-on) { border-bottom: 0; }
+  .r-chart:global(.gl-on) svg, .r-chart:global(.gl-on) .r-head-line, .r-chart:global(.gl-on) .r-ticks { display: none; }
   .rg { stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke; }
   .rl-ghost { fill: none; stroke: rgb(20 20 20 / .18); stroke-width: 1.5; }
   .rl { fill: none; stroke: var(--or); stroke-width: 2.5; stroke-linejoin: round; }
@@ -375,6 +380,8 @@ const nav = [
   import { gsap } from 'gsap'
   import { ScrollTrigger } from 'gsap/ScrollTrigger'
   import { SplitText } from 'gsap/SplitText'
+  import { mountHeroGL } from '../scripts/about-hero-gl'
+  import { mountRun3D } from '../scripts/run3d'
   gsap.registerPlugin(ScrollTrigger, SplitText)
 
   const data = JSON.parse(document.getElementById('run-stream')!.textContent || '{}') as { km: number[]; hr: number[]; v: number[]; secs: number; kmMax: number }
@@ -398,8 +405,15 @@ const nav = [
     return (c0 + (cum[j] - c0) * u) * scale
   }
 
+  const reduceM = matchMedia('(prefers-reduced-motion: reduce)').matches
+  const photo = $('[data-gl-src]')
+  const heroGL = photo ? mountHeroGL(photo, photo.dataset.glSrc!, reduceM) : null
+  const chartEl = $('.r-chart')
+  const run3d = chartEl ? mountRun3D(chartEl, data, reduceM) : null
+
   // replay readout for a position t (0..1) along the run
   function replay (t: number) {
+    run3d?.set(t)
     const n = data.hr.length
     if (!n) return
     const f = t * (n - 1), i = Math.min(n - 1, Math.round(f))
@@ -464,7 +478,7 @@ const nav = [
     ;(window as any).__booted ? intro() : document.addEventListener('boot:done', intro, { once: true })
 
     // ── hero scroll (pinned by CSS sticky): photo zooms, the sharp ghost melts, letters spread ──
-    gsap.timeline({ scrollTrigger: { trigger: '[data-hero]', start: 'top top', end: 'bottom bottom', scrub: 1 } })
+    gsap.timeline({ scrollTrigger: { trigger: '[data-hero]', start: 'top top', end: 'bottom bottom', scrub: 1, onUpdate: (self) => heroGL?.progress(self.progress) } })
       .to('.h-photo', { scale: 1.18, ease: 'none' }, 0)
       .to('.sharp', { opacity: 0, ease: 'none' }, 0)
       .to(runWord.chars, { xPercent: (i) => (i - 1.5) * 26, ease: 'none' }, 0)
