@@ -222,7 +222,12 @@ const nav = [
   @media (max-width: 900px) { .sharp { --m: radial-gradient(ellipse 34% 20% at 45% 33%, #000 55%, rgb(0 0 0 / .55) 78%, transparent 100%); } }
   :global(.h-gl) { position: absolute; inset: 0; width: 100% !important; height: 100% !important; opacity: 0; transition: opacity .9s ease; }
   :global(.h-gl.on) { opacity: 1; }
-  .h-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgb(20 20 20 / .25), transparent 28% 50%, rgb(20 20 20 / .55)); }
+  /* corner scrims: top-left behind the intro, bottom-left behind the headline, a warm Strava glow at the bottom right */
+  .h-shade { position: absolute; inset: 0; z-index: 2; pointer-events: none; background:
+    radial-gradient(ellipse 55% 45% at 0% 0%, rgb(14 14 18 / .62), rgb(14 14 18 / .25) 45%, transparent 75%),
+    radial-gradient(ellipse 75% 60% at 0% 100%, rgb(14 14 18 / .72), rgb(14 14 18 / .3) 50%, transparent 80%),
+    radial-gradient(ellipse 50% 45% at 100% 100%, rgb(252 76 2 / .5), rgb(252 76 2 / .16) 45%, transparent 75%),
+    linear-gradient(180deg, transparent 60%, rgb(14 14 18 / .25)); }
   .h-grid { position: absolute; inset: 0 clamp(20px, 4vw, 56px); display: grid; grid-template-columns: repeat(4, 1fr); pointer-events: none; }
   .h-grid i { border-left: 1px solid rgb(255 255 255 / .14); }
   .h-grid i:last-child { border-right: 1px solid rgb(255 255 255 / .14); }
