@@ -1,0 +1,250 @@
+---
+// A short ad-style motion piece about running, played with GSAP when it scrolls into view.
+// Kinetic type with focus pulls, glass objects, a camera that pushes in, a route drawn with light.
+interface Props { time: string; km: string; gear: { t: string; m: string }[] }
+const { time, km, gear } = Astro.props
+const shoes = gear.filter((g) => /km/.test(g.m)).slice(0, 3)
+const words = (s: string) => s.split(' ').map((w) => `<span class="w">${w}</span>`).join(' ')
+---
+<section class="film" data-film aria-label="Short film: run, ride, repeat">
+  <div class="f-bg" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
+  <div class="f-cam" data-cam>
+    <!-- 1 -->
+    <p class="f-line s1" set:html={words('Not every run')} />
+    <p class="f-line s2" set:html={words('needs a finish line.')} />
+    <div class="orb" data-orb aria-hidden="true"></div>
+
+    <!-- 2: watch -->
+    <p class="f-line small s3" set:html={words('Sometimes you just press start.')} />
+    <div class="watch" data-watch aria-hidden="true">
+      <svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="88" class="w-track" /><circle cx="100" cy="100" r="88" class="w-ring" pathLength="1" /></svg>
+      <span class="w-start">START</span>
+      <span class="w-time" data-time={time}>0:00:00</span>
+    </div>
+
+    <!-- 3: gear -->
+    <p class="f-line s4" set:html={words('Lace up.')} />
+    <div class="cards" aria-hidden="true">
+      {shoes.map((s, i) => <div class="card" style={`--i:${i}`}><span>{s.t}</span><b>{s.m}</b></div>)}
+    </div>
+
+    <!-- 4: route -->
+    <p class="f-line s5" set:html={words('Head out.')} />
+    <div class="route" aria-hidden="true"><svg viewBox="0 0 1000 400">
+      <defs><linearGradient id="fr" x1="0" x2="1"><stop offset="0" stop-color="#ff9a5c" /><stop offset="1" stop-color="#fc4c02" /></linearGradient></defs>
+      <path d="M-20 300 C 140 300 160 120 300 140 S 470 330 590 250 S 760 60 880 120 S 1000 220 1040 200" pathLength="1" class="r-path" data-rpath />
+      <circle r="9" class="r-dot" data-rdot />
+    </svg></div>
+    <p class="km-big" aria-hidden="true"><b data-km={km}>0.00</b> km</p>
+
+    <!-- 5: log it -->
+    <div class="pill" data-pill aria-hidden="true"><span class="p-txt">And log it</span><svg viewBox="0 0 24 24" class="p-chk"><path d="M5 12.5l4.5 4.5L19 7.5" pathLength="1" /></svg></div>
+
+    <!-- 6: kudos -->
+    <p class="f-line small s6" set:html={words('Kudos roll in, whenever friends are ready.')} />
+    <div class="kudos" aria-hidden="true">
+      {[0, 1, 2, 3, 4, 5].map((i) => <span class="k" style={`--i:${i}`}><svg viewBox="0 0 24 24"><path d="M7 11v9H4v-9h3zm2 9h7.6a2 2 0 0 0 2-1.6l1.3-6.4A2 2 0 0 0 18 9.6h-4.5l.7-3.4a1.6 1.6 0 0 0-2.9-1.2L9 9.3V20z" /></svg></span>)}
+    </div>
+
+    <!-- 7: end card -->
+    <p class="end" data-end><span>Run.</span> <span>Ride.</span> <span class="o">Repeat.</span></p>
+  </div>
+
+  <div class="f-ui">
+    <div class="f-prog" aria-hidden="true"><i data-fprog></i></div>
+    <button type="button" class="f-btn" data-freplay aria-label="Replay the film">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4h4" /></svg>
+    </button>
+  </div>
+  <p class="sr-only">Not every run needs a finish line. Sometimes you just press start. Lace up, head out, and log it. Kudos roll in whenever friends are ready. Run, ride, repeat.</p>
+</section>
+
+<style>
+  .film { position: relative; height: 100svh; min-height: 560px; overflow: hidden; background: #050814; color: #fff; isolation: isolate; font-family: 'Archivo Variable', sans-serif; }
+  .f-bg { position: absolute; inset: -20%; z-index: -1; }
+  .f-bg i { position: absolute; border-radius: 50%; mix-blend-mode: screen; }
+  .b1 { width: 60vmax; height: 60vmax; left: 10%; top: 20%; background: radial-gradient(circle, var(--c1, #1d4ed8), transparent 65%); }
+  .b2 { width: 50vmax; height: 50vmax; right: 5%; top: 5%; background: radial-gradient(circle, var(--c2, #0ea5e9), transparent 65%); opacity: .7; }
+  .b3 { width: 40vmax; height: 40vmax; left: 35%; bottom: 0; background: radial-gradient(circle, var(--c3, #1e1b4b), transparent 65%); }
+  .film::after { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .08; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+  .f-cam { position: absolute; inset: 0; perspective: 1200px; transform-style: preserve-3d; }
+  .f-cam > * { position: absolute; left: 50%; top: 50%; translate: -50% -50%; visibility: hidden; }
+  .f-line { font-size: clamp(30px, 5vw, 76px); font-weight: 700; font-stretch: 112%; letter-spacing: -.03em; white-space: nowrap; text-align: center; }
+  .f-line.small { font-size: clamp(20px, 2.8vw, 40px); font-weight: 600; white-space: normal; width: min(90vw, 760px); }
+  :global(.film .w) { display: inline-block; }
+
+  .orb { width: 26vmin; height: 26vmin; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff 0, #ffb48a 12%, #fc4c02 38%, #7c2d12 70%, #1a0a05 100%); box-shadow: 0 0 80px 10px rgb(252 76 2 / .45), inset -20px -30px 60px rgb(0 0 0 / .5); }
+
+  .watch { width: min(64vmin, 340px); aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center;
+    background: radial-gradient(circle at 30% 25%, rgb(255 255 255 / .18), rgb(255 255 255 / .03) 60%), #0b1022;
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / .18), 0 30px 80px -20px rgb(0 0 0 / .8), 0 0 120px -20px rgb(252 76 2 / .5); }
+  .watch svg { position: absolute; inset: 6%; width: 88%; height: 88%; transform: rotate(-90deg); }
+  .w-track { fill: none; stroke: rgb(255 255 255 / .1); stroke-width: 6; }
+  .w-ring { fill: none; stroke: #fc4c02; stroke-width: 6; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; filter: drop-shadow(0 0 8px #fc4c02); }
+  .w-start, .w-time { position: absolute; font-variant-numeric: tabular-nums; }
+  .w-start { font-size: clamp(18px, 3vmin, 26px); font-weight: 700; letter-spacing: .12em; color: #fc4c02; }
+  .w-time { font-size: clamp(30px, 7vmin, 56px); font-weight: 700; font-stretch: 110%; opacity: 0; }
+
+  .cards { width: 1px; height: 1px; transform-style: preserve-3d; }
+  .card { position: absolute; left: 0; top: 0; width: min(78vw, 300px); padding: 20px 22px; translate: -50% -50%; border-radius: 4px; display: grid; gap: 6px;
+    background: linear-gradient(135deg, rgb(255 255 255 / .2), rgb(255 255 255 / .05)); border: 1px solid rgb(255 255 255 / .25); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 30px 60px -20px rgb(0 0 0 / .7); }
+  .card span { font-size: clamp(17px, 2vw, 22px); font-weight: 650; }
+  .card b { font-size: 14px; color: #ff9a5c; font-weight: 600; }
+
+  .route { width: 104vw; }
+  .route svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .r-path { fill: none; stroke: url(#fr); stroke-width: 6; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; filter: drop-shadow(0 0 10px rgb(252 76 2 / .9)); }
+  .r-dot { fill: #fff; filter: drop-shadow(0 0 10px #fff); }
+  .km-big { top: 74% !important; font-size: clamp(22px, 3vw, 40px); font-weight: 600; color: rgb(255 255 255 / .8); font-variant-numeric: tabular-nums; }
+  .km-big b { font-weight: 800; color: #fff; font-stretch: 115%; }
+
+  .pill { height: 78px; width: 270px; border-radius: 999px; display: flex; align-items: center; justify-content: center; overflow: hidden;
+    background: linear-gradient(135deg, rgb(255 255 255 / .22), rgb(255 255 255 / .06)); border: 1px solid rgb(255 255 255 / .3); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+  .p-txt { font-size: 26px; font-weight: 650; white-space: nowrap; }
+  .p-chk { position: absolute; width: 34px; height: 34px; fill: none; stroke: #fff; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+
+  .kudos { width: 1px; height: 1px; }
+  .k { position: absolute; width: 72px; height: 72px; translate: -50% -50%; border-radius: 50%; display: grid; place-items: center;
+    background: linear-gradient(135deg, rgb(255 255 255 / .25), rgb(255 255 255 / .06)); border: 1px solid rgb(255 255 255 / .3); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  .k svg { width: 32px; height: 32px; fill: #fc4c02; }
+
+  .end { font-size: clamp(34px, 6.6vw, 112px); font-weight: 800; font-stretch: 125%; letter-spacing: -.04em; line-height: .9; text-transform: uppercase; white-space: nowrap; text-align: center; }
+  .end span { display: inline-block; color: transparent; -webkit-background-clip: text; background-clip: text;
+    background-image: linear-gradient(100deg, #fff 42%, #ffd2bd 50%, #fff 58%); background-size: 300% 100%; background-position: 100% 0; }
+  .end span.o { background-image: linear-gradient(100deg, #fc4c02 42%, #ffd0b8 50%, #fc4c02 58%); }
+  @media (max-width: 700px) { .end { white-space: normal; width: 90vw; } .end span { display: block; } }
+
+  .f-ui { position: absolute; left: clamp(20px, 4vw, 56px); right: clamp(20px, 4vw, 56px); bottom: 26px; display: flex; align-items: center; gap: 16px; }
+  .f-prog { flex: 1; height: 2px; background: rgb(255 255 255 / .15); }
+  .f-prog i { display: block; height: 100%; background: #fc4c02; transform-origin: 0 50%; transform: scaleX(0); }
+  .f-btn { width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid rgb(255 255 255 / .35); background: rgb(255 255 255 / .06); color: #fff; cursor: pointer; transition: background-color .2s; }
+  .f-btn:hover { background: rgb(255 255 255 / .16); }
+  .f-btn:focus-visible { outline: 3px solid #fc4c02; outline-offset: 3px; }
+  .f-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .f-cam > .end { visibility: visible; }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+  import { MotionPathPlugin } from 'gsap/MotionPathPlugin'
+  gsap.registerPlugin(ScrollTrigger, MotionPathPlugin)
+
+  const film = document.querySelector<HTMLElement>('[data-film]')
+  if (film) {
+    const q = gsap.utils.selector(film)
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduce) {
+      gsap.set(q('.end'), { autoAlpha: 1 })
+    } else {
+      const IN = { autoAlpha: 1, filter: 'blur(0px)', scale: 1, z: 0, duration: 0.9, ease: 'expo.out' }
+      const OUT = { autoAlpha: 0, filter: 'blur(14px)', scale: 0.86, duration: 0.55, ease: 'power2.in' }
+      const words = (sel: string) => q(`${sel} .w`)
+      const bg = (c1: string, c2: string, c3: string, at: number) => tl.to(film, { '--c1': c1, '--c2': c2, '--c3': c3, duration: 1.4, ease: 'sine.inOut' }, at)
+
+      const timeEl = q('.w-time')[0] as HTMLElement, total = timeEl.dataset.time!
+      const secsTotal = total.split(':').reduce((a, b) => a * 60 + Number(b), 0)
+      const fmt = (s: number) => `${Math.floor(s / 3600)}:${String(Math.floor((s % 3600) / 60)).padStart(2, '0')}:${String(Math.floor(s % 60)).padStart(2, '0')}`
+      const kmEl = q('[data-km]')[0] as HTMLElement, kmTotal = Number(kmEl.dataset.km)
+      const clock = { s: 0 }, dist = { k: 0 }
+
+      const tl = gsap.timeline({ paused: true, defaults: { overwrite: 'auto' }, onUpdate: () => gsap.set(q('[data-fprog]'), { scaleX: tl.progress() }) })
+
+      // initial states
+      gsap.set(q('.f-cam > *'), { autoAlpha: 0 })
+      gsap.set(q('.w'), { autoAlpha: 0, filter: 'blur(12px)', y: 18 })
+
+      // 1 · "Not every run / needs a finish line." , an orb flies through
+      tl.set(q('.s1, .s2'), { autoAlpha: 1 }, 0)
+        .fromTo(q('.orb'), { autoAlpha: 1, x: '-70vw', y: '10vh', scale: 0.4, filter: 'blur(18px)' }, { x: '60vw', y: '-12vh', scale: 1.1, filter: 'blur(4px)', duration: 2.2, ease: 'power2.inOut' }, 0)
+        .to(words('.s1'), { autoAlpha: 1, filter: 'blur(0px)', y: 0, stagger: 0.12, duration: 0.8, ease: 'expo.out' }, 0.3)
+        .to(q('.s1'), { y: '-0.7em', duration: 0.6, ease: 'power3.inOut' }, 1.5)
+        .fromTo(q('.s2'), { y: '0.7em' }, { y: '0.7em' }, 1.5)
+        .to(words('.s2'), { autoAlpha: 1, filter: 'blur(0px)', y: 0, stagger: 0.1, duration: 0.8, ease: 'expo.out' }, 1.6)
+        .to(q('.s1, .s2'), { ...OUT, scale: 1.15 }, 3.2)
+      bg('#1d4ed8', '#0ea5e9', '#1e1b4b', 0)
+
+      // orb returns and becomes the watch
+        .fromTo(q('.orb'), { x: 0, y: 0, scale: 2.4, filter: 'blur(30px)', autoAlpha: 0 }, { autoAlpha: 1, scale: 1, filter: 'blur(0px)', duration: 0.9, ease: 'expo.out' }, 3.4)
+      tl.set(q('.s3'), { autoAlpha: 1, y: '-34vh' }, 3.6)
+        .to(words('.s3'), { autoAlpha: 1, filter: 'blur(0px)', y: 0, stagger: 0.07, duration: 0.7, ease: 'expo.out' }, 3.7)
+        .to(q('.orb'), { scale: 0.2, autoAlpha: 0, duration: 0.5, ease: 'power3.in' }, 4.4)
+        .fromTo(q('.watch'), { autoAlpha: 0, scale: 0.3, rotate: -30, filter: 'blur(10px)' }, { autoAlpha: 1, scale: 1, rotate: 0, filter: 'blur(0px)', duration: 1, ease: 'back.out(1.6)' }, 4.6)
+        .to(q('.w-start'), { scale: 0.86, duration: 0.12, yoyo: true, repeat: 1, ease: 'power2.inOut' }, 5.5)
+        .to(q('.w-start'), { autoAlpha: 0, y: -20, filter: 'blur(8px)', duration: 0.35 }, 5.8)
+        .to(q('.w-time'), { opacity: 1, duration: 0.3 }, 5.9)
+        .to(q('.w-ring'), { strokeDashoffset: 0, duration: 2, ease: 'power2.inOut' }, 5.9)
+        .to(clock, { s: secsTotal, duration: 2, ease: 'power2.inOut', onUpdate: () => { timeEl.textContent = fmt(clock.s) } }, 5.9)
+      bg('#7c2d12', '#fc4c02', '#1e1b4b', 4.4)
+      // push the camera through the watch
+      tl.to(q('.watch'), { scale: 6, autoAlpha: 0, filter: 'blur(20px)', duration: 0.8, ease: 'power3.in' }, 8.1)
+        .to(q('.s3'), OUT, 8.0)
+
+      // 3 · "Lace up." gear cards fan out in 3D
+      tl.set(q('.s4'), { autoAlpha: 1, y: '-30vh' }, 8.6)
+        .to(words('.s4'), { autoAlpha: 1, filter: 'blur(0px)', y: 0, stagger: 0.1, duration: 0.7, ease: 'expo.out' }, 8.7)
+        .set(q('.cards'), { autoAlpha: 1 }, 8.7)
+        .fromTo(q('.card'), { z: -900, rotateY: 50, rotateX: 15, autoAlpha: 0, filter: 'blur(16px)' },
+          { z: (i) => -Math.abs(i - 1) * 140, x: (i) => (innerWidth < 700 ? 0 : (i - 1) * Math.min(340, innerWidth * 0.3)), y: (i) => (innerWidth < 700 ? (i - 1) * 110 : 20), rotateY: (i) => (innerWidth < 700 ? 0 : (i - 1) * -22), rotateX: (i) => (innerWidth < 700 ? (i - 1) * 10 : 4), autoAlpha: 1, filter: 'blur(0px)', stagger: 0.14, duration: 1.1, ease: 'expo.out' }, 8.9)
+        .to(q('.card'), { rotateY: (i) => (innerWidth < 700 ? 0 : (i - 1) * -10), y: '-=12', duration: 1.4, ease: 'sine.inOut' }, 10)
+        .to(q('.card'), { z: 600, autoAlpha: 0, filter: 'blur(14px)', stagger: 0.06, duration: 0.6, ease: 'power3.in' }, 11.3)
+        .to(q('.s4'), OUT, 11.3)
+      bg('#1e3a8a', '#fc4c02', '#0f172a', 8.6)
+
+      // 4 · "Head out." a route drawn with light, the camera pans along it
+      tl.set(q('.s5'), { autoAlpha: 1, y: '-30vh' }, 11.8)
+        .to(words('.s5'), { autoAlpha: 1, filter: 'blur(0px)', y: 0, stagger: 0.1, duration: 0.7, ease: 'expo.out' }, 11.9)
+        .set(q('.route, .km-big'), { autoAlpha: 1 }, 11.9)
+        .fromTo(q('.route'), { x: '8vw', scale: 1.15 }, { x: '-8vw', scale: 1, duration: 2.6, ease: 'sine.inOut' }, 11.9)
+        .to(q('[data-rpath]'), { strokeDashoffset: 0, duration: 2.4, ease: 'power2.inOut' }, 12)
+        .to(q('[data-rdot]'), { motionPath: { path: q('[data-rpath]')[0], align: q('[data-rpath]')[0], alignOrigin: [0.5, 0.5] }, duration: 2.4, ease: 'power2.inOut' }, 12)
+        .to(dist, { k: kmTotal, duration: 2.4, ease: 'power2.inOut', onUpdate: () => { kmEl.textContent = dist.k.toFixed(2) } }, 12)
+        .to(q('.route, .km-big, .s5'), OUT, 14.7)
+      bg('#0c4a6e', '#f97316', '#020617', 11.8)
+
+      // 5 · "And log it" pill morphs into a check
+      tl.fromTo(q('.pill'), { autoAlpha: 0, scale: 0.6, filter: 'blur(10px)' }, { autoAlpha: 1, scale: 1, filter: 'blur(0px)', duration: 0.7, ease: 'back.out(1.8)' }, 15.1)
+        .to(q('.pill'), { width: 360, duration: 0.5, ease: 'power3.inOut' }, 15.9)
+        .to(q('.pill'), { width: 140, background: '#fc4c02', borderColor: '#fc4c02', boxShadow: '0 0 60px rgb(252 76 2 / .8)', duration: 0.55, ease: 'expo.inOut' }, 16.5)
+        .to(q('.p-txt'), { autoAlpha: 0, filter: 'blur(8px)', duration: 0.25 }, 16.5)
+        .to(q('.p-chk path'), { strokeDashoffset: 0, duration: 0.5, ease: 'power2.out' }, 16.9)
+        .to(q('.pill'), { scale: 1.08, duration: 0.15, yoyo: true, repeat: 1 }, 17.3)
+        .to(q('.pill'), OUT, 17.9)
+      bg('#7c2d12', '#fc4c02', '#1c1917', 15)
+
+      // 6 · kudos pop in around a line of type
+      tl.set(q('.s6'), { autoAlpha: 1 }, 18.2)
+        .to(words('.s6'), { autoAlpha: 1, filter: 'blur(0px)', y: 0, stagger: 0.06, duration: 0.7, ease: 'expo.out' }, 18.3)
+        .set(q('.kudos'), { autoAlpha: 1 }, 18.4)
+        .fromTo(q('.k'), { scale: 0, x: 0, y: 0, autoAlpha: 0 }, {
+          scale: 1, autoAlpha: 1, stagger: 0.12, duration: 0.7, ease: 'back.out(2.2)',
+          x: (i) => [-1, 1, -0.7, 0.8, -0.3, 0.4][i] * Math.min(innerWidth * 0.42, 420),
+          y: (i) => [-1, -0.8, 1, 0.9, -1.4, 1.4][i] * Math.min(innerHeight * 0.2, 150)
+        }, 18.5)
+        .to(q('.k'), { y: '-=14', duration: 1, ease: 'sine.inOut', yoyo: true, repeat: 1, stagger: 0.08 }, 19.3)
+        .to(q('.s6, .kudos'), OUT, 21.2)
+      bg('#1d4ed8', '#22d3ee', '#1e1b4b', 18)
+
+      // 7 · end card with a light sweep
+      tl.fromTo(q('.end'), { autoAlpha: 0, scale: 1.25, filter: 'blur(18px)' }, { autoAlpha: 1, scale: 1, filter: 'blur(0px)', duration: 1.1, ease: 'expo.out' }, 21.6)
+        .fromTo(q('.end span'), { y: 30 }, { y: 0, stagger: 0.1, duration: 0.9, ease: 'expo.out' }, 21.6)
+        .fromTo(q('.end span'), { backgroundPosition: '100% 0' }, { backgroundPosition: '0% 0', duration: 1.6, stagger: 0.15, ease: 'power2.inOut' }, 22.3)
+      bg('#0f172a', '#fc4c02', '#1e1b4b', 21.4)
+      tl.to({}, { duration: 1.2 }, 24)
+
+      // play when it comes into view, pause when it leaves; replay button restarts
+      ScrollTrigger.create({
+        trigger: film, start: 'top 60%', end: 'bottom 30%',
+        onEnter: () => tl.play(), onEnterBack: () => tl.play(),
+        onLeave: () => tl.pause(), onLeaveBack: () => tl.pause()
+      })
+      film.querySelector('[data-freplay]')?.addEventListener('click', () => tl.restart())
+      ;(film as any).__tl = tl
+    }
+  }
+</script>
