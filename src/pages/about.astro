@@ -223,6 +223,7 @@ const nav = [
   :global(.h-gl) { position: absolute; inset: 0; width: 100% !important; height: 100% !important; opacity: 0; transition: opacity .9s ease; }
   :global(.h-gl.on) { opacity: 1; }
   /* corner scrims: top-left behind the intro, bottom-left behind the headline, a warm Strava glow at the bottom right */
+  .h-intro, .h-card, .h-runs, .h-month { filter: opacity(calc(1 - var(--out, 0))); }
   .h-shade { position: absolute; inset: 0; z-index: 2; pointer-events: none; background:
     radial-gradient(ellipse 55% 45% at 0% 0%, rgb(14 14 18 / .62), rgb(14 14 18 / .25) 45%, transparent 75%),
     radial-gradient(ellipse 75% 60% at 0% 100%, rgb(14 14 18 / .72), rgb(14 14 18 / .3) 50%, transparent 80%),
@@ -499,7 +500,9 @@ const nav = [
       .to('.h-photo', { scale: 1.18, ease: 'none' }, 0)
       .to('.sharp', { opacity: 0, ease: 'none' }, 0)
       .to(runWord.chars, { xPercent: (i) => (i - 1.5) * 26, ease: 'none' }, 0)
-      .to('.h-card, .h-runs, .h-intro, .h-month', { y: -60, autoAlpha: 0, ease: 'none', stagger: 0.04 }, 0.35)
+      // fade the hero details through a CSS variable, not opacity/transform: the intro animation owns those,
+      // and sharing them broke the hero when the page was opened scrolled down and then scrolled back up
+      .fromTo('.h-stage', { '--out': 0 }, { '--out': 1, ease: 'none', immediateRender: false }, 0.35)
 
     // ── word rows slide in opposite directions as the section passes ──
     gsap.utils.toArray<HTMLElement>('[data-row]').forEach((row) => {
