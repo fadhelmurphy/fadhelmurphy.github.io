@@ -2,10 +2,8 @@
 import { Image } from 'astro:assets'
 import '@fontsource-variable/archivo/wdth.css'
 import Base from '../layouts/Base.astro'
-import runner from '../assets/about/runner.jpg'
-import runnerBlur from '../assets/about/runner-blur.jpg'
-import trackGrey from '../assets/about/track-grey.jpg'
-import { longRun, recent, month, gear, stream } from '../data/strava'
+import cutout from '../assets/about/runner-cutout.png'
+import { longRun, recent, month, gear, stream, syncedAt } from '../data/strava'
 import mRace from '../assets/about/moments/race.jpg'
 import mNight from '../assets/about/moments/night-road.jpg'
 import mMorning from '../assets/about/moments/morning.jpg'
@@ -15,36 +13,37 @@ import mCity from '../assets/about/moments/city.jpg'
 import mTrack from '../assets/about/moments/track.jpg'
 
 const strava = 'https://strava.app.link/E63xhR6AR7b'
+const sd = new Date(syncedAt)
+const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+const synced = `${sd.getUTCDate()} ${MON[sd.getUTCMonth()]}`
 
-// ── long-run replay chart: heart rate across the distance, 1000×300 box ──
-const W = 1000, H = 300
-const { km, hr, v } = stream
+// heart rate across the long run, drawn into a 1000×260 box
+const W = 1000, H = 260
+const { km } = stream
+// light smoothing so the line reads as a trend, not noise
+const hr = stream.hr.map((_, i, a) => { const w = a.slice(Math.max(0, i - 4), i + 5); return w.reduce((x, y) => x + y, 0) / w.length })
 const has = hr.length > 1
 const kmMax = has ? km[km.length - 1] : 1
 const lo = has ? Math.min(...hr) - 6 : 0, hi = has ? Math.max(...hr) + 4 : 1
-const x = (k: number) => (k / kmMax) * W
-const y = (b: number) => H - ((b - lo) / (hi - lo)) * H
-const line = has ? hr.map((b, i) => `${i ? 'L' : 'M'}${x(km[i]).toFixed(1)} ${y(b).toFixed(1)}`).join(' ') : ''
+const line = has ? hr.map((b, i) => `${i ? 'L' : 'M'}${((km[i] / kmMax) * W).toFixed(1)} ${(H - ((b - lo) / (hi - lo)) * H).toFixed(1)}`).join(' ') : ''
 const area = has ? `${line} L${W} ${H} L0 ${H} Z` : ''
 const ticks = [0, 10, 20, 30, 40].filter((t) => t <= kmMax)
-const spark = has ? hr.map((b, i) => `${i ? 'L' : 'M'}${((i / (hr.length - 1)) * 200).toFixed(1)} ${(40 - ((b - lo) / (hi - lo)) * 40).toFixed(1)}`).join(' ') : ''
 
 const moments = [
-  { src: mRace, alt: 'Fadhel raising three fingers to the camera mid-race, bib M 43954', cap: 'Race day' },
-  { src: mNight, alt: 'A runner seen from behind on a dark road, lit by a headlamp', cap: 'Night road, headlamp on' },
   { src: mMorning, alt: 'Fadhel running past trees on a sunny morning', cap: 'Morning miles' },
-  { src: mFriends, alt: 'Fadhel running with two friends between city towers at night', cap: 'With the crew' },
+  { src: mRace, alt: 'Fadhel raising three fingers to the camera mid-race, bib M 43954', cap: 'Race day' },
   { src: mTrail, alt: 'Fadhel running a gravel trail in sandals with a hydration vest', cap: 'Trail, in sandals' },
+  { src: mFriends, alt: 'Fadhel running with two friends between city towers at night', cap: 'With the crew' },
+  { src: mTrack, alt: 'Fadhel leading a group on a stadium track at night', cap: 'Track night' },
   { src: mCity, alt: 'Fadhel running along a city street at night', cap: 'City laps' },
-  { src: mTrack, alt: 'Fadhel leading a group on a stadium track at night', cap: 'Track night' }
+  { src: mNight, alt: 'A runner seen from behind on a dark road, lit by a headlamp', cap: 'Night road, headlamp on' }
 ]
 
-const rowA = ['Distance', 'Discipline', 'Night laps', 'Heart rate']
-const rowB = ['Long runs', 'Rain', 'Recovery', 'Repeat']
+const statement = 'By day I build data pipelines. Most nights I run, usually long and usually in the dark. On rest days I ride.'
 
 const nav = [
-  { href: '#run', label: 'Run', id: 'run', note: 'The last 30 days', icon: 'M13 4a2 2 0 1 0 0 .01M7 21l3-6 3 2v4M10 15l1-5 4 3 3-1M8 9l3-2', track: true },
-  { href: '#replay', label: 'Long run', id: 'replay', note: 'Replay the longest run', icon: 'M3 12h4l2-5 4 10 2-5h6', track: true },
+  { href: '#run', label: 'Run', id: 'run', note: 'Who, and how much', icon: 'M13 4a2 2 0 1 0 0 .01M7 21l3-6 3 2v4M10 15l1-5 4 3 3-1M8 9l3-2', track: true },
+  { href: '#replay', label: 'Long run', id: 'replay', note: 'The longest run this month', icon: 'M3 12h4l2-5 4 10 2-5h6', track: true },
   { href: '#gear', label: 'Gear', id: 'gear', note: 'Shoes, watch and bike', icon: 'M3 16l6-2 4 2 8 1v2H3zM9 14l1-5 3 1', track: true },
   { href: '#strava', label: 'Strava', id: 'strava', note: 'Follow the activity', icon: 'M15 3l-5 10h4l1-2 3 6h3L15 3zM9 13l-4 8h4l2-4', track: true },
   { href: '/', label: 'Home', id: 'home', note: 'Back to the main page', icon: 'M4 11l8-7 8 7v9H4z' }
@@ -53,515 +52,374 @@ const nav = [
 <Base nav={nav} page="About" theme="sport" title="About | Fadhel Ijlal Falah" description="Fadhel Ijlal Falah off the clock: running and riding, synced from Strava.">
 <main class="ab">
 
-  <!-- 1 · HERO (pin 1 of 2) -->
+  <!-- 1 · HERO: one panel, one word, one runner -->
   <section id="run" class="hero" data-hero>
-    <div class="h-stage">
-      <div class="h-photo" aria-hidden="true" data-gl-src={runner.src}>
-        <Image src={runnerBlur} alt="" widths={[900]} sizes="100vw" loading="eager" fetchpriority="high" class="ph" />
-        <Image src={runner} alt="" widths={[640, 1100]} sizes="100vw" loading="eager" class="ph sharp" />
-        <div class="h-shade"></div>
+    <div class="h-panel">
+      <p class="h-word" data-word aria-hidden="true"><span>Runner</span></p>
+      <div class="h-runner" data-runner>
+        <Image src={cutout} alt="Fadhel mid-stride in a black tee and teal running shoes" widths={[420, 760]} sizes="(min-width: 900px) 34vw, 70vw" loading="eager" fetchpriority="high" class="h-img" />
       </div>
-      <div class="h-grid" aria-hidden="true"><i></i><i></i><i></i></div>
 
-      <div class="h-in">
-        <p class="h-intro" data-fade>I run most nights and ride when the legs need a break. This page pulls from Strava, so the numbers stay current.</p>
-
-        <aside class="h-card" data-fade aria-label="Longest run in the last 30 days">
-          <p class="hc-k">Longest run, last 30 days</p>
-          <p class="hc-v">{longRun.km}<small>km</small></p>
-          {has && <svg viewBox="0 0 200 40" preserveAspectRatio="none" class="hc-spark" aria-hidden="true"><path d={spark} /></svg>}
-          <dl class="hc-s">
-            <div><dt>Pace</dt><dd>{longRun.movingPace}<small>/km</small></dd></div>
-            <div><dt>Moving</dt><dd>{longRun.moving}</dd></div>
-            <div><dt>Energy</dt><dd>{longRun.cal}<small>cal</small></dd></div>
-          </dl>
-        </aside>
-
-        <table class="h-runs" data-fade>
-          <caption>Recent runs</caption>
-          <thead><tr><th scope="col">Date</th><th scope="col">Km</th><th scope="col">Time</th><th scope="col">Pace</th></tr></thead>
-          <tbody>{recent.map((r) => <tr><td>{r.date}</td><td>{r.km}</td><td>{r.time}</td><td>{r.pace}</td></tr>)}</tbody>
-        </table>
-
-        <div class="h-month" data-fade>
-          <p><b>{month.km}</b> km</p>
-          <p>{month.runs} runs in the last 30 days</p>
-        </div>
-
-        <h1 class="h-word" aria-label="Run. Ride. Repeat.">
-          <span class="hw-run" data-split>Run.</span>
-          <span class="hw-sub" data-fade aria-hidden="true"><em>Ride.</em> Repeat.</span>
-        </h1>
+      <div class="h-top" data-in>
+        <h1 class="h-name">Fadhel Ijlal Falah<span>Runner, rider, data engineer</span></h1>
+        <p class="h-sync"><i></i>Strava synced {synced}</p>
       </div>
+
+      <dl class="h-stats" data-in>
+        <div><dt>Last 30 days</dt><dd>{month.km}<small>km</small></dd></div>
+        <div><dt>Runs</dt><dd>{month.runs}</dd></div>
+        <div><dt>Longest</dt><dd>{longRun.km}<small>km</small></dd></div>
+      </dl>
+
+      <a href={strava} target="_blank" rel="noopener" class="pill dark h-cta" data-in>
+        Follow on Strava
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" /></svg>
+      </a>
     </div>
   </section>
 
-  <!-- 2 · scroll-linked word rows (no pin) -->
-  <section class="rows" aria-label="What running gives back" data-shader="contours">
-    <div class="row r1" data-row="-1" aria-hidden="true">{[...rowA, ...rowA].map((w) => <span>{w}<i>/</i></span>)}</div>
-    <div class="row r2" data-row="1" aria-hidden="true">{[...rowB, ...rowB].map((w) => <span>{w}<i>/</i></span>)}</div>
-    <p class="sr-only">{[...rowA, ...rowB].join(', ')}</p>
+  <!-- 2 · STATEMENT: words light up as you scroll -->
+  <section class="statement wrap">
+    <p class="st-k">About</p>
+    <p class="st-text" data-statement>{statement.split(' ').map((w) => <span>{w} </span>)}</p>
   </section>
 
-  <!-- 2b · horizontal photo strip: swipe / shift-scroll / arrows; the page keeps scrolling normally -->
-  <section class="moments" aria-labelledby="mo-title">
-   <div class="mo-stage">
-    <header class="mo-head">
-      <h2 id="mo-title" class="disp mo-title" data-split>Out there</h2>
-      <p class="mo-note">Mostly at night, sometimes in sandals.</p>
-      <div class="mo-nav">
-        <button type="button" class="mo-btn" data-mo-prev aria-label="Previous photos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg></button>
-        <button type="button" class="mo-btn" data-mo-next aria-label="Next photos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg></button>
+  <!-- 3 · NUMBERS -->
+  <section class="numbers wrap" aria-labelledby="n-title">
+    <h2 id="n-title" class="sec-k">The last 30 days</h2>
+    <div class="n-grid">
+      <article class="card n-big" data-card>
+        <p class="c-k">Distance</p>
+        <p class="n-v"><b data-count={month.km}>{month.km}</b><span>km</span></p>
+        <p class="c-note">across {month.runs} runs</p>
+      </article>
+      <article class="card n-long" data-card>
+        <p class="c-k">Longest run</p>
+        <p class="n-v sm"><b>{longRun.km}</b><span>km</span></p>
+        <dl class="n-mini">
+          <div><dt>Pace</dt><dd>{longRun.movingPace}/km</dd></div>
+          <div><dt>Moving</dt><dd>{longRun.moving}</dd></div>
+          <div><dt>Avg HR</dt><dd>{longRun.avgHr}</dd></div>
+        </dl>
+      </article>
+      <article class="card n-list" data-card>
+        <p class="c-k">Recent runs</p>
+        <ul class="runs">
+          {recent.map((r) => (
+            <li data-row><span class="r-d">{r.date}</span><b class="r-km">{r.km} km</b><span class="r-t">{r.time}</span><span class="r-p">{r.pace}/km</span></li>
+          ))}
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- 4 · PHOTOS -->
+  <section class="photos" aria-labelledby="p-title">
+    <header class="p-head wrap">
+      <h2 id="p-title" class="sec-t" data-up>Out there</h2>
+      <p class="p-note">Mostly at night, sometimes in sandals.</p>
+      <div class="p-nav">
+        <button type="button" class="round" data-prev aria-label="Previous photos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg></button>
+        <button type="button" class="round" data-next aria-label="Next photos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg></button>
       </div>
     </header>
-    <div class="mo-strip" data-mo-strip tabindex="0" role="region" aria-label="Running photos, scroll sideways">
-      <ul class="mo-track" data-mo>
-        {moments.map((m, i) => (
-          <li class={`mo-item ${i % 2 ? 'low' : ''}`}>
+    <div class="p-strip" data-strip tabindex="0" role="region" aria-label="Running photos, scroll sideways">
+      <ul class="p-track">
+        {moments.map((m) => (
+          <li class="p-item" data-photo>
             <figure>
-              <div class="mo-frame"><Image src={m.src} alt={m.alt} widths={[360, 640]} sizes="(min-width: 900px) 30vh, 60vw" class="mo-img" /></div>
-              <figcaption><span>{String(i + 1).padStart(2, '0')}</span>{m.cap}</figcaption>
+              <div class="p-frame"><Image src={m.src} alt={m.alt} widths={[360, 640]} sizes="(min-width: 900px) 24vw, 70vw" class="p-img" /></div>
+              <figcaption>{m.cap}</figcaption>
             </figure>
           </li>
         ))}
       </ul>
     </div>
-    <div class="mo-bar" aria-hidden="true"><i data-mo-bar></i></div>
-   </div>
   </section>
 
-  <!-- 3 · LONG-RUN REPLAY (pin 2 of 2): scroll moves a playhead through the real heart-rate and pace data -->
-  <section id="replay" class="replay" data-replay>
-    <div class="r-stage">
-      <header class="r-head">
-        <h2 class="disp r-title">The long run</h2>
-        <p class="r-date">{longRun.date}. Scroll to run it again.</p>
+  <!-- 5 · THE LONG RUN -->
+  <section id="replay" class="long wrap">
+    <article class="card l-card" data-card>
+      <header class="l-head">
+        <div>
+          <p class="c-k">The long run · {longRun.date}</p>
+          <h2 class="sec-t">{longRun.km} km</h2>
+        </div>
+        <p class="l-hr"><b>{longRun.avgHr}</b> bpm average</p>
       </header>
-
-      <div class="r-read" aria-hidden="true">
-        <div class="rd-km"><b data-r="km">0.0</b><span>km</span></div>
-        <dl class="rd-s">
-          <div><dt>Elapsed</dt><dd data-r="t">0:00:00</dd></div>
-          <div><dt>Heart rate</dt><dd><span data-r="hr">–</span> bpm</dd></div>
-          <div><dt>Pace</dt><dd><span data-r="pace">–</span> /km</dd></div>
-        </dl>
-      </div>
-
       {has && (
-        <figure class="r-chart">
+        <figure class="l-chart">
           <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" role="img" aria-label={`Heart rate over ${longRun.km} km, average ${longRun.avgHr} bpm`}>
-            <defs>
-              <linearGradient id="ra" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#fc4c02" stop-opacity=".38" /><stop offset="1" stop-color="#fc4c02" stop-opacity="0" /></linearGradient>
-              <clipPath id="rc"><rect data-r="clip" x="0" y="-10" width="0" height={H + 20} /></clipPath>
-            </defs>
-            {ticks.map((t) => <line x1={x(t)} x2={x(t)} y1="0" y2={H} class="rg" />)}
-            <path d={line} class="rl-ghost" vector-effect="non-scaling-stroke" />
-            <g clip-path="url(#rc)">
-              <path d={area} fill="url(#ra)" />
-              <path d={line} class="rl" vector-effect="non-scaling-stroke" />
-            </g>
+            <defs><linearGradient id="la" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#fc4c02" stop-opacity=".22" /><stop offset="1" stop-color="#fc4c02" stop-opacity="0" /></linearGradient></defs>
+            {ticks.map((t) => <line x1={(t / kmMax) * W} x2={(t / kmMax) * W} y1="0" y2={H} class="l-grid" />)}
+            <path d={area} fill="url(#la)" data-area />
+            <path d={line} class="l-line" pathLength="1" vector-effect="non-scaling-stroke" data-line />
           </svg>
-          <div class="r-head-line" data-r="head" aria-hidden="true"><i></i></div>
-          <div class="r-ticks" aria-hidden="true">{ticks.map((t) => <span style={`left:${(t / kmMax) * 100}%`}>{t} km</span>)}</div>
+          <div class="l-ticks" aria-hidden="true">{ticks.map((t) => <span style={`left:${(t / kmMax) * 100}%`}>{t} km</span>)}</div>
         </figure>
       )}
-
-      <dl class="r-sum">
-        <div><dt>Distance</dt><dd>{longRun.km} km</dd></div>
+      <dl class="l-sum">
         <div><dt>Total time</dt><dd>{longRun.time}</dd></div>
         <div><dt>Moving time</dt><dd>{longRun.moving}</dd></div>
         <div><dt>Avg pace</dt><dd>{longRun.movingPace} /km</dd></div>
-        <div><dt>Avg heart rate</dt><dd>{longRun.avgHr} bpm</dd></div>
         <div><dt>Elevation</dt><dd>{longRun.elev} m</dd></div>
+        <div><dt>Energy</dt><dd>{longRun.cal} cal</dd></div>
       </dl>
+    </article>
+  </section>
+
+  <!-- 6 · GEAR -->
+  <section id="gear" class="gear wrap" aria-labelledby="g-title">
+    <h2 id="g-title" class="sec-t" data-up>Gear I trust</h2>
+    <ul class="g-grid">
+      {gear.map((g, i) => (
+        <li class="card g-card" data-card>
+          <span class="g-n">{String(i + 1).padStart(2, '0')}</span>
+          <p class="c-k">{g.k}</p>
+          <p class="g-name">{g.t}</p>
+          <p class="g-m">{g.m}</p>
+        </li>
+      ))}
+    </ul>
+    <p class="g-note">The kilometres are what Strava has logged on each pair.</p>
+  </section>
+
+  <!-- 7 · CTA -->
+  <section id="strava" class="cta wrap">
+    <div class="cta-panel" data-cta>
+      <p class="cta-t">Step out of comfort.<br /><span>Stay in the fight.</span></p>
+      <a href={strava} target="_blank" rel="noopener" class="pill dark">
+        Follow on Strava
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" /></svg>
+      </a>
     </div>
   </section>
-
-  <!-- 4 · GEAR -->
-  <section id="gear" class="gear">
-    <div class="g-photo" data-shader="photo" data-img={trackGrey.src}><Image src={trackGrey} alt="Fadhel running laps on a stadium track at night" widths={[480, 800]} sizes="(min-width: 900px) 34vw, 100vw" class="g-img" data-par /></div>
-    <div class="g-body">
-      <h2 class="disp g-title" data-split>Gear I trust</h2>
-      <table class="g-table">
-        <caption class="sr-only">Gear and distance logged on Strava</caption>
-        <tbody>
-          {gear.map((g) => (
-            <tr data-gear><th scope="row">{g.k}</th><td>{g.t}</td><td>{g.m}</td></tr>
-          ))}
-        </tbody>
-      </table>
-      <p class="g-note">Kilometres are what Strava has logged on each pair. The Camp SR3D comes out on ride days.</p>
-    </div>
-  </section>
-
-  <!-- 5 · STRAVA -->
-  <section id="strava" class="cta" data-shader="heat">
-    <p class="disp cta-l" data-split>Step out of comfort.</p>
-    <p class="disp cta-l or" data-split>Stay in the fight.</p>
-    <a href={strava} target="_blank" rel="noopener" class="strava">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.4 17.9l-2.1-4.1h-3l5.1 10 5.1-10h-3M10.4 0L3.5 13.8h4.1l2.8-5.4 2.8 5.4h4z" /></svg>
-      Follow on Strava
-    </a>
-  </section>
-
-  <script type="application/json" id="run-stream" set:html={JSON.stringify({ km, hr, v, secs: longRun.secs, kmMax })} />
 </main>
 
 <style>
-  .ab { --ink: #141414; --mute: #5a5955; --bg: #efeeea; --line: rgb(20 20 20 / .14); --or: #fc4c02;
-    --ease: cubic-bezier(.16, 1, .3, 1);
-    background: var(--bg); color: var(--ink); overflow-x: clip; font-family: 'Archivo Variable', 'Poppins', sans-serif; }
-  .disp, .h-word, .row, .rd-km b { font-family: 'Archivo Variable', sans-serif; font-stretch: 125%; font-weight: 800; text-transform: uppercase; letter-spacing: -.035em; line-height: .86; }
+  .ab { --bg: #f2f1ec; --card: #ffffff; --ink: #111214; --mute: #6b6d73; --line: rgb(17 18 20 / .1); --or: #fc4c02; --ease: cubic-bezier(.16, 1, .3, 1); --pad: clamp(16px, 3.4vw, 48px);
+    background: var(--bg); color: var(--ink); overflow-x: clip; font-family: 'Poppins', sans-serif; }
+  .wrap { max-width: 1320px; margin-inline: auto; padding-inline: var(--pad); }
+  .disp, .h-word, .sec-t, .n-v, .cta-t, .g-name { font-family: 'Archivo Variable', sans-serif; }
+
+  /* shared bits */
+  .card { background: var(--card); border-radius: 28px; padding: clamp(22px, 2.4vw, 34px); }
+  .c-k { font-size: 13px; color: var(--mute); }
+  .c-note { margin-top: 8px; font-size: 15px; color: var(--mute); }
+  .sec-k { font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); margin-bottom: 20px; }
+  .sec-t { font-size: clamp(40px, 6vw, 88px); font-weight: 800; font-stretch: 100%; letter-spacing: -.045em; line-height: .95; }
+  .pill { display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 10px 0 24px; border-radius: 99px; font-size: 15px; font-weight: 600; cursor: pointer; transition: transform .3s var(--ease), background-color .2s; }
+  .pill svg { width: 32px; height: 32px; padding: 8px; border-radius: 50%; fill: none; stroke: currentColor; stroke-width: 2; transition: transform .3s var(--ease); }
+  .pill.dark { background: var(--ink); color: #fff; }
+  .pill.dark svg { background: var(--or); color: #fff; }
+  .pill:hover { transform: translateY(-2px); }
+  .pill:hover svg { transform: rotate(45deg); }
+  .pill:focus-visible, .round:focus-visible, .p-strip:focus-visible { outline: 3px solid var(--or); outline-offset: 3px; }
 
   /* ── hero ── */
-  .hero { position: relative; height: 200vh; }
-  .h-stage { position: sticky; top: 0; height: 100svh; overflow: hidden; color: #fff; }
-  .h-photo { position: absolute; inset: 0; will-change: transform; }
-  .ph { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
-  .sharp { --m: radial-gradient(ellipse 16% 34% at 41% 32%, #000 55%, rgb(0 0 0 / .55) 78%, transparent 100%); -webkit-mask-image: var(--m); mask-image: var(--m); }
-  @media (max-width: 900px) { .sharp { --m: radial-gradient(ellipse 34% 20% at 45% 33%, #000 55%, rgb(0 0 0 / .55) 78%, transparent 100%); } }
-  :global(.h-gl) { position: absolute; inset: 0; width: 100% !important; height: 100% !important; opacity: 0; transition: opacity .9s ease; }
-  :global(.h-gl.on) { opacity: 1; }
-  /* corner scrims: top-left behind the intro, bottom-left behind the headline, a warm Strava glow at the bottom right */
-  .h-intro, .h-card, .h-runs, .h-month { filter: opacity(calc(1 - var(--out, 0))); }
-  .h-shade { position: absolute; inset: 0; z-index: 2; pointer-events: none; background:
-    radial-gradient(ellipse 55% 45% at 0% 0%, rgb(14 14 18 / .62), rgb(14 14 18 / .25) 45%, transparent 75%),
-    radial-gradient(ellipse 75% 60% at 0% 100%, rgb(14 14 18 / .72), rgb(14 14 18 / .3) 50%, transparent 80%),
-    radial-gradient(ellipse 50% 45% at 100% 100%, rgb(252 76 2 / .5), rgb(252 76 2 / .16) 45%, transparent 75%),
-    linear-gradient(180deg, transparent 60%, rgb(14 14 18 / .25)); }
-  .h-grid { position: absolute; inset: 0 clamp(20px, 4vw, 56px); display: grid; grid-template-columns: repeat(4, 1fr); pointer-events: none; }
-  .h-grid i { border-left: 1px solid rgb(255 255 255 / .14); }
-  .h-grid i:last-child { border-right: 1px solid rgb(255 255 255 / .14); }
-  .h-in { position: relative; height: 100%; padding: 104px clamp(20px, 4vw, 56px) 0; display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: auto 1fr auto; column-gap: 0; }
-  .h-intro { grid-column: 1 / 2; font-size: 15px; line-height: 1.5; padding-right: 20px; max-width: 30ch; }
-  .h-card { grid-column: 4; grid-row: 1 / 3; align-self: start; justify-self: end; width: 100%; max-width: 300px; padding: 16px 18px; background: rgb(255 255 255 / .14); border: 1px solid rgb(255 255 255 / .35); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
-  .hc-k { font-size: 12px; opacity: .85; }
-  .hc-v { font-size: 40px; font-weight: 750; font-stretch: 110%; letter-spacing: -.03em; line-height: 1.05; margin-top: 2px; }
-  .hc-v small, .hc-s small { font-size: .42em; font-weight: 500; margin-left: 3px; opacity: .85; }
-  .hc-spark { width: 100%; height: 40px; margin: 10px 0; }
-  .hc-spark path { fill: none; stroke: var(--or); stroke-width: 2; vector-effect: non-scaling-stroke; }
-  .hc-s { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgb(255 255 255 / .3); padding-top: 10px; }
-  .hc-s dt { font-size: 11px; opacity: .8; }
-  .hc-s dd { font-size: 15px; font-weight: 650; font-variant-numeric: tabular-nums; }
-  .h-runs { grid-column: 3; grid-row: 2; align-self: start; margin: 24px 20px 0 20px; border-collapse: collapse; font-size: 12.5px; font-variant-numeric: tabular-nums; }
-  .h-runs caption { text-align: left; font-size: 12px; opacity: .8; padding-bottom: 6px; }
-  .h-runs th { text-align: left; font-weight: 500; opacity: .6; padding: 4px 10px 4px 0; border-bottom: 1px solid rgb(255 255 255 / .3); }
-  .h-runs td { padding: 6px 10px 6px 0; border-bottom: 1px solid rgb(255 255 255 / .14); }
-  .h-runs tbody tr:nth-child(n+4) { opacity: .55; }
-  .h-month { grid-column: 4; grid-row: 2; align-self: end; justify-self: end; text-align: right; padding-bottom: 24px; }
-  .h-month b { font-size: 44px; font-weight: 750; font-stretch: 110%; letter-spacing: -.03em; }
-  .h-month p + p { font-size: 13px; opacity: .85; }
-  .h-word { grid-column: 1 / -1; grid-row: 3; margin-left: -.04em; padding-bottom: 2vh; }
-  .hw-run { display: block; font-size: clamp(110px, 27vw, 420px); line-height: .78; white-space: nowrap; }
-  .hw-sub { display: block; font-size: clamp(22px, 3.2vw, 46px); margin: 10px 0 0 .3vw; }
-  .hw-sub em { font-style: normal; color: var(--or); }
+  .hero { padding: 10px; }
+  .h-panel { position: relative; height: calc(100svh - 20px); min-height: 620px; max-height: 1100px; border-radius: 36px; overflow: hidden; isolation: isolate;
+    background: radial-gradient(ellipse 55% 60% at 50% 72%, #ff9a5c 0%, transparent 70%), linear-gradient(170deg, #ff7a33 0%, #fc4c02 55%, #e84300 100%); }
+  .h-word { position: absolute; left: 0; right: 0; top: 50%; translate: 0 -62%; z-index: -1; text-align: center; white-space: nowrap; pointer-events: none;
+    font-size: clamp(120px, 22vw, 400px); font-weight: 900; font-stretch: 100%; letter-spacing: -.06em; line-height: .8; color: #fff4ec; }
+  .h-word span { display: inline-block; }
+  .h-runner { position: absolute; left: 50%; bottom: -2%; height: 90%; translate: -50% 0; will-change: transform; }
+  .h-img { height: 100%; width: auto; filter: drop-shadow(0 40px 40px rgb(80 20 0 / .35)); }
+  .h-top { position: absolute; top: clamp(84px, 11vh, 110px); left: clamp(20px, 3vw, 44px); right: clamp(20px, 3vw, 44px); display: flex; justify-content: space-between; align-items: start; gap: 20px; }
+  .h-name { font-size: clamp(18px, 1.6vw, 24px); font-weight: 600; line-height: 1.2; letter-spacing: -.01em; }
+  .h-name span { display: block; font-size: 14px; font-weight: 400; color: rgb(17 18 20 / .7); margin-top: 4px; }
+  .h-sync { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; padding: 8px 14px; border-radius: 99px; background: rgb(255 255 255 / .28); }
+  .h-sync i { width: 7px; height: 7px; border-radius: 50%; background: var(--ink); animation: blink 2s infinite; }
+  @keyframes blink { 50% { opacity: .25; } }
+  .h-stats { position: absolute; left: clamp(20px, 3vw, 44px); bottom: clamp(20px, 3vw, 40px); display: flex; gap: clamp(20px, 3vw, 48px); }
+  .h-stats dt { font-size: 13px; color: rgb(17 18 20 / .7); }
+  .h-stats dd { font-family: 'Archivo Variable', sans-serif; font-size: clamp(32px, 3.4vw, 56px); font-weight: 800; letter-spacing: -.04em; line-height: 1; margin-top: 4px; font-variant-numeric: tabular-nums; }
+  .h-stats small { font-size: .38em; font-weight: 600; letter-spacing: 0; margin-left: 3px; }
+  .h-cta { position: absolute; right: clamp(20px, 3vw, 44px); bottom: clamp(20px, 3vw, 40px); }
 
-  /* ── rows ── */
-  :global(.sec-gl) { position: absolute; inset: 0; width: 100% !important; height: 100% !important; z-index: -1; }
-  :global(.sc-gl) { opacity: 0; transition: opacity .8s ease; }
-  :global(.sc-gl.on) { opacity: 1; }
-  .g-photo { isolation: isolate; }
-  .g-photo :global(.sec-gl) { z-index: 1; }
-  .rows, .cta { position: relative; isolation: isolate; }
-  .rows { padding: clamp(70px, 12vh, 140px) 0; border-bottom: 1px solid var(--line); overflow: hidden; }
-  .row { display: flex; white-space: nowrap; font-size: clamp(52px, 9vw, 150px); will-change: transform; }
-  .row span { display: inline-flex; align-items: center; }
-  .row i { font-style: normal; color: var(--or); margin: 0 .25em; }
-  .r1 { -webkit-text-stroke: 1.5px var(--ink); color: transparent; }
-  .r1 i { -webkit-text-stroke: 0; }
-  .r2 { margin-top: .08em; }
+  /* ── statement ── */
+  .statement { padding-block: clamp(90px, 18vh, 200px) clamp(70px, 14vh, 160px); }
+  .st-k { font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--or); margin-bottom: 24px; }
+  .st-text { font-family: 'Archivo Variable', sans-serif; font-size: clamp(30px, 4.6vw, 72px); font-weight: 700; letter-spacing: -.035em; line-height: 1.08; max-width: 20ch; }
+  .st-text span { opacity: .14; }
 
-  /* ── moments ── */
-  .moments { padding: clamp(70px, 12vh, 140px) 0 clamp(50px, 8vh, 100px); border-bottom: 1px solid var(--line); }
-  .mo-stage { display: block; }
-  .mo-head { display: flex; align-items: end; gap: 24px; padding: 0 clamp(20px, 4vw, 56px); }
-  .mo-title { font-size: clamp(40px, 6vw, 96px); margin-right: auto; }
-  .mo-note { font-size: 16px; color: var(--mute); padding-bottom: .4em; }
-  .mo-nav { display: flex; gap: 8px; padding-bottom: .2em; }
-  .mo-btn { width: 48px; height: 48px; display: grid; place-items: center; border: 1px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; transition: background-color .2s, color .2s, opacity .2s; }
-  .mo-btn:hover:not(:disabled) { background: var(--ink); color: #fff; }
-  .mo-btn:disabled { opacity: .3; cursor: default; }
-  .mo-btn:focus-visible, .mo-strip:focus-visible { outline: 3px solid var(--or); outline-offset: 3px; }
-  .mo-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; }
-  .mo-strip { margin-top: clamp(24px, 5vh, 50px); overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: clamp(20px, 4vw, 56px); scrollbar-width: none; cursor: grab; }
-  .mo-strip::-webkit-scrollbar { display: none; }
-  .mo-strip.drag { cursor: grabbing; scroll-snap-type: none; }
-  .mo-track { perspective: 1600px; display: flex; gap: clamp(14px, 2vw, 28px); width: max-content; padding: 0 clamp(20px, 4vw, 56px); }
-  .mo-item { width: clamp(240px, 26vw, 400px); flex: none; scroll-snap-align: start; transform-style: preserve-3d; will-change: transform; }
-  .mo-item.low { margin-top: clamp(24px, 6vh, 70px); }
-  .mo-frame { aspect-ratio: 3 / 4; overflow: hidden; background: #d9d8d3; }
-  .mo-img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.12); pointer-events: none; user-select: none; -webkit-user-drag: none; }
-  .mo-item figcaption { display: flex; gap: 12px; align-items: baseline; padding-top: 10px; border-top: 1px solid var(--ink); margin-top: 10px; font-size: 14px; font-weight: 600; }
-  .mo-item figcaption span { color: var(--or); font-variant-numeric: tabular-nums; font-weight: 700; }
-  .mo-bar { margin: clamp(18px, 3vh, 30px) clamp(20px, 4vw, 56px) 0; height: 2px; background: var(--line); }
-  .mo-bar i { display: block; height: 100%; width: 100%; background: var(--or); transform-origin: 0 50%; transform: scaleX(0); transition: transform .15s linear; }
+  /* ── numbers ── */
+  .numbers { padding-bottom: clamp(70px, 12vh, 140px); }
+  .n-grid { display: grid; grid-template-columns: 1.1fr 1fr 1.4fr; gap: 14px; }
+  .n-v { display: flex; align-items: baseline; gap: 8px; margin-top: 14px; font-size: clamp(64px, 7vw, 120px); font-weight: 800; letter-spacing: -.05em; line-height: .9; font-variant-numeric: tabular-nums; }
+  .n-v.sm { font-size: clamp(52px, 5vw, 84px); }
+  .n-v span { font-size: 20px; font-weight: 600; letter-spacing: 0; color: var(--mute); }
+  .n-big { background: var(--ink); color: #fff; display: flex; flex-direction: column; justify-content: space-between; min-height: 340px; }
+  .n-big .c-k, .n-big .c-note, .n-big .n-v span { color: rgb(255 255 255 / .6); }
+  .n-big .n-v b { color: var(--or); }
+  .n-long { display: flex; flex-direction: column; justify-content: space-between; }
+  .n-mini { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--line); }
+  .n-mini dt { font-size: 12px; color: var(--mute); }
+  .n-mini dd { font-size: 16px; font-weight: 600; margin-top: 2px; font-variant-numeric: tabular-nums; }
+  .runs { margin-top: 12px; }
+  .runs li { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; align-items: baseline; gap: 8px; padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 15px; font-variant-numeric: tabular-nums; }
+  .runs li:last-child { border-bottom: 0; }
+  .r-d, .r-p { color: var(--mute); }
+  .r-km { font-weight: 600; }
+  .r-p { text-align: right; }
 
-  /* ── replay ── */
-  .replay { position: relative; height: 320vh; }
-  .r-stage { position: sticky; top: 0; height: 100svh; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto 1fr auto; column-gap: 4vw; max-width: 1360px; margin: 0 auto; padding: 96px clamp(20px, 4vw, 56px) 28px; }
-  .r-head { grid-column: 1; }
-  .r-title { font-size: clamp(40px, 6vw, 96px); }
-  .r-date { margin-top: 14px; font-size: 16px; color: var(--mute); }
-  .r-read { grid-column: 2; grid-row: 1 / 3; justify-self: end; text-align: right; }
-  .rd-km { display: flex; align-items: baseline; justify-content: flex-end; gap: 10px; color: var(--or); }
-  .rd-km b { font-size: clamp(64px, 10vw, 170px); font-variant-numeric: tabular-nums; }
-  .rd-km span { font-size: 18px; font-weight: 600; color: var(--ink); }
-  .rd-s { display: flex; justify-content: flex-end; gap: 28px; margin-top: 10px; font-variant-numeric: tabular-nums; }
-  .rd-s dt { font-size: 12px; color: var(--mute); }
-  .rd-s dd { font-size: 20px; font-weight: 650; }
-  .r-chart { grid-column: 1 / -1; grid-row: 3; position: relative; margin: 28px 0 30px; border-bottom: 1px solid var(--ink); min-height: 160px; }
-  .r-chart svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-  :global(.r-gl) { position: absolute; inset: 0; width: 100% !important; height: 100% !important; }
-  .r-chart:global(.gl-on) { border-bottom: 0; }
-  .r-chart:global(.gl-on) svg, .r-chart:global(.gl-on) .r-head-line, .r-chart:global(.gl-on) .r-ticks { display: none; }
-  .rg { stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke; }
-  .rl-ghost { fill: none; stroke: rgb(20 20 20 / .18); stroke-width: 1.5; }
-  .rl { fill: none; stroke: var(--or); stroke-width: 2.5; stroke-linejoin: round; }
-  .r-head-line { position: absolute; top: -12px; bottom: 0; left: 0; width: 0; border-left: 1.5px solid var(--ink); will-change: transform; }
-  .r-head-line i { position: absolute; left: -6px; top: -6px; width: 11px; height: 11px; background: var(--or); }
-  .r-ticks { position: absolute; left: 0; right: 0; bottom: -24px; height: 20px; font-size: 12px; color: var(--mute); white-space: nowrap; }
-  .r-ticks span { position: absolute; translate: -50% 0; }
-  .r-ticks span:first-child { translate: 0 0; }
-  .r-ticks span:last-child:not(:first-child) { translate: -100% 0; }
-  .r-sum { grid-column: 1 / -1; grid-row: 4; display: grid; grid-template-columns: repeat(6, 1fr); border-top: 1px solid var(--line); }
-  .r-sum div { padding: 14px 16px 0 0; }
-  .r-sum div + div { padding-left: 16px; border-left: 1px solid var(--line); }
-  .r-sum dt { font-size: 12px; color: var(--mute); }
-  .r-sum dd { font-size: clamp(16px, 1.5vw, 22px); font-weight: 650; font-variant-numeric: tabular-nums; margin-top: 2px; }
+  /* ── photos ── */
+  .photos { padding-bottom: clamp(70px, 12vh, 140px); }
+  .p-head { display: flex; align-items: end; gap: 24px; }
+  .p-head .sec-t { margin-right: auto; }
+  .p-note { color: var(--mute); padding-bottom: 8px; }
+  .p-nav { display: flex; gap: 8px; padding-bottom: 4px; }
+  .round { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; background: var(--card); color: var(--ink); cursor: pointer; transition: background-color .2s, color .2s, opacity .2s; }
+  .round:hover:not(:disabled) { background: var(--ink); color: #fff; }
+  .round:disabled { opacity: .35; cursor: default; }
+  .round svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; }
+  .p-strip { margin-top: 32px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--pad); scrollbar-width: none; overscroll-behavior-x: contain; }
+  .p-strip::-webkit-scrollbar { display: none; }
+  .p-track { display: flex; gap: 14px; width: max-content; padding: 0 var(--pad); }
+  .p-item { width: clamp(250px, 24vw, 360px); flex: none; scroll-snap-align: start; }
+  .p-frame { aspect-ratio: 4 / 5; border-radius: 24px; overflow: hidden; background: #ddd; }
+  .p-img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease); }
+  .p-item:hover .p-img { transform: scale(1.06); }
+  .p-item figcaption { margin-top: 12px; font-size: 15px; font-weight: 500; }
+
+  /* ── long run ── */
+  .long { padding-bottom: clamp(70px, 12vh, 140px); }
+  .l-head { display: flex; justify-content: space-between; align-items: end; gap: 20px; }
+  .l-head .sec-t { margin-top: 10px; }
+  .l-hr { font-size: 15px; color: var(--mute); }
+  .l-hr b { font-family: 'Archivo Variable', sans-serif; font-size: 34px; font-weight: 800; color: var(--or); letter-spacing: -.03em; }
+  .l-chart { position: relative; margin-top: 32px; height: clamp(180px, 26vw, 300px); }
+  .l-chart svg { width: 100%; height: calc(100% - 26px); overflow: visible; }
+  .l-grid { stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke; }
+  .l-line { fill: none; stroke: var(--or); stroke-width: 2.5; stroke-linejoin: round; }
+  .l-ticks { position: absolute; left: 0; right: 0; bottom: 0; height: 18px; font-size: 12px; color: var(--mute); }
+  .l-ticks span { position: absolute; translate: -50% 0; }
+  .l-ticks span:first-child { translate: 0 0; }
+  .l-ticks span:last-child:not(:first-child) { translate: -100% 0; }
+  .l-sum { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 28px; }
+  .l-sum div { background: var(--bg); border-radius: 18px; padding: 14px 16px; }
+  .l-sum dt { font-size: 12px; color: var(--mute); }
+  .l-sum dd { font-size: clamp(16px, 1.4vw, 20px); font-weight: 600; margin-top: 4px; font-variant-numeric: tabular-nums; }
 
   /* ── gear ── */
-  .gear { display: grid; grid-template-columns: 1fr 1.6fr; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .g-photo { position: relative; overflow: hidden; will-change: transform; min-height: 520px; border-right: 1px solid var(--line); }
-  .g-img { position: absolute; inset: -8% 0; width: 100%; height: 116%; object-fit: cover; }
-  .g-body { padding: clamp(40px, 7vh, 90px) clamp(20px, 4vw, 56px); }
-  .g-title { font-size: clamp(40px, 6vw, 96px); }
-  .g-table { width: 100%; margin-top: 36px; border-collapse: collapse; border-top: 1px solid var(--ink); }
-  .g-table tr { border-bottom: 1px solid var(--line); }
-  .g-table th { width: 26%; text-align: left; font-size: 13px; font-weight: 500; color: var(--mute); padding: 18px 12px 18px 0; }
-  .g-table td { padding: 18px 0; font-size: clamp(17px, 1.6vw, 22px); font-weight: 650; letter-spacing: -.01em; }
-  .g-table td:last-child { text-align: right; color: var(--or); font-size: 15px; font-variant-numeric: tabular-nums; }
-  .g-note { margin-top: 22px; font-size: 14px; color: var(--mute); max-width: 52ch; line-height: 1.6; }
+  .gear { padding-bottom: clamp(70px, 12vh, 140px); }
+  .g-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-top: 32px; }
+  .g-card { display: flex; flex-direction: column; min-height: 220px; transition: transform .4s var(--ease), box-shadow .4s var(--ease); }
+  .g-card:hover { transform: translateY(-6px); box-shadow: 0 30px 50px -30px rgb(17 18 20 / .3); }
+  .g-n { font-size: 13px; font-weight: 600; color: var(--or); margin-bottom: auto; }
+  .g-card .c-k { margin-top: 28px; }
+  .g-name { font-size: clamp(22px, 1.9vw, 28px); font-weight: 750; letter-spacing: -.03em; line-height: 1.1; margin-top: 6px; }
+  .g-m { align-self: start; margin-top: 16px; font-size: 13px; font-weight: 600; padding: 6px 12px; border-radius: 99px; background: #fff0e8; color: #c23a00; font-variant-numeric: tabular-nums; }
+  .g-note { margin-top: 16px; font-size: 14px; color: var(--mute); }
 
   /* ── cta ── */
-  .cta { padding: clamp(90px, 16vh, 180px) clamp(20px, 4vw, 56px); text-align: center; }
-  .cta-l { font-size: clamp(30px, 5.4vw, 92px); }
-  .cta-l.or { color: var(--or); margin-top: .08em; }
-  .strava { margin-top: 48px; display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 30px; background: var(--or); color: #fff; font-weight: 650; font-size: 16px; cursor: pointer; transition: background-color .2s, transform .2s var(--ease); }
-  .strava:hover { background: #e04300; transform: translateY(-2px); }
-  .cta:global(.has-gl) .cta-l.or { color: #fff; }
-  .cta:global(.has-gl) .strava { background: var(--ink); box-shadow: 0 14px 30px -12px rgb(0 0 0 / .5); }
-  .cta:global(.has-gl) .strava:hover { background: #000; }
-  .cta:global(.has-gl) .strava:focus-visible { outline-color: #fff; }
-  .strava:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
-  .strava svg { width: 18px; height: 18px; fill: currentColor; }
-
-  /* split-text lines need a mask */
-  :global(.ab .sl) { overflow: hidden; padding-bottom: .06em; margin-bottom: -.06em; }
+  .cta { padding-bottom: 10px; }
+  .cta-panel { border-radius: 36px; padding: clamp(60px, 12vh, 140px) clamp(24px, 5vw, 80px); background: linear-gradient(160deg, #ff7a33, #fc4c02 60%, #e84300); display: flex; flex-direction: column; align-items: start; gap: 40px; will-change: transform; }
+  .cta-t { font-size: clamp(44px, 7.4vw, 128px); font-weight: 800; letter-spacing: -.05em; line-height: .92; }
+  .cta-t span { color: #fff4ec; }
 
   @media (max-width: 900px) {
-    .h-in { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto 1fr auto; padding-top: 92px; }
-    .h-grid { grid-template-columns: repeat(2, 1fr); }
-    .h-intro, .h-card, .h-month, .h-word { grid-column: 1; }
-    .h-intro { font-size: 14px; }
-    .h-card { grid-row: 4; justify-self: stretch; width: auto; max-width: none; min-width: 0; margin-bottom: 20px; padding: 14px; }
-    .hc-spark { display: none; }
-    .h-runs { display: none; }
-    .h-month { grid-row: 2; justify-self: start; text-align: left; padding: 14px 0 0; }
-    .h-month b { font-size: 32px; }
-    .h-word { grid-row: 3; align-self: end; }
-    .hw-run { font-size: 31vw; }
-    .hw-sub { font-size: 7vw; margin-bottom: 14px; }
-    .r-stage { grid-template-columns: 1fr; grid-template-rows: auto auto 1fr auto; padding-top: 88px; }
-    .r-read { grid-column: 1; grid-row: 2; justify-self: start; text-align: left; margin-top: 18px; }
-    .rd-km { justify-content: flex-start; }
-    .rd-km b { font-size: 22vw; }
-    .mo-head { flex-direction: column; align-items: start; }
-    .mo-item { width: 70vw; }
-    .mo-nav { display: none; }
-    .rd-s { justify-content: flex-start; gap: 18px; }
-    .rd-s dd { font-size: 16px; }
-    .r-chart { margin: 20px 0 30px; }
-    .r-sum { grid-template-columns: repeat(3, 1fr); }
-    .r-sum > div:nth-child(3n+1) { border-left: 0 !important; padding-left: 0 !important; }
-    .r-sum dd { font-size: 15px; }
-    .gear { grid-template-columns: 1fr; }
-    .g-photo { min-height: 60vw; border-right: 0; border-bottom: 1px solid var(--line); }
-    .g-table th { width: auto; display: block; padding: 14px 0 0; }
-    .g-table td { display: inline-block; padding: 4px 0 14px; }
-    .g-table td:last-child { float: right; padding-top: 6px; }
+    .h-panel { min-height: 560px; border-radius: 28px; }
+    .h-word { font-size: 24.5vw; top: 44%; }
+    .h-runner { height: 72%; bottom: 74px; }
+    .h-top { flex-direction: column; gap: 12px; }
+    .h-stats { left: 12px; right: 12px; bottom: 12px; justify-content: space-between; gap: 8px; padding: 12px 16px; border-radius: 20px; background: rgb(255 255 255 / .9); }
+    .h-stats dd { font-size: 26px; }
+    .h-cta { display: none; }
+    .n-grid { grid-template-columns: 1fr; }
+    .n-big { min-height: 0; gap: 30px; }
+    .runs li { grid-template-columns: 1fr 1fr 1fr; }
+    .r-t { display: none; }
+    .p-head { flex-direction: column; align-items: start; gap: 8px; }
+    .p-nav { display: none; }
+    .p-item { width: 72vw; }
+    .l-head { flex-direction: column; align-items: start; }
+    .l-sum { grid-template-columns: repeat(2, 1fr); }
+    .cta-panel { border-radius: 28px; }
+    .g-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .g-card { min-height: 0; padding: 18px; border-radius: 22px; }
+    .g-card .c-k { margin-top: 18px; }
+    .g-name { font-size: 18px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .st-text span { opacity: 1; }
+    .h-sync i { animation: none; }
   }
 </style>
 
 <script>
   import { gsap } from 'gsap'
   import { ScrollTrigger } from 'gsap/ScrollTrigger'
-  import { SplitText } from 'gsap/SplitText'
-  import { mountHeroGL } from '../scripts/about-hero-gl'
-  import { mountRun3D } from '../scripts/run3d'
-  import { mountSectionShaders } from '../scripts/shaders-com'
-  gsap.registerPlugin(ScrollTrigger, SplitText)
-
-  const data = JSON.parse(document.getElementById('run-stream')!.textContent || '{}') as { km: number[]; hr: number[]; v: number[]; secs: number; kmMax: number }
+  gsap.registerPlugin(ScrollTrigger)
   const $ = <T extends Element = HTMLElement>(s: string) => document.querySelector<T>(s)
-  const R = (k: string) => $(`[data-r="${k}"]`)
-  const fmt = (s: number) => `${Math.floor(s / 3600)}:${String(Math.floor((s % 3600) / 60)).padStart(2, '0')}:${String(Math.floor(s % 60)).padStart(2, '0')}`
-  const pace = (ms: number) => { if (!ms || ms < 0.5) return '–'; const p = 1000 / ms; return `${Math.floor(p / 60)}:${String(Math.round(p % 60)).padStart(2, '0')}` }
+  const $$ = <T extends Element = HTMLElement>(s: string) => [...document.querySelectorAll<T>(s)]
 
-  // cumulative moving time at each sample from distance / speed, scaled to the real total
-  const cum: number[] = []
-  data.km.reduce((acc, k, i) => { const dk = i ? k - data.km[i - 1] : k; const s = (dk * 1000) / Math.max(0.8, data.v[i] || 2.5); cum.push(acc + s); return acc + s }, 0)
-  const scale = cum.length ? data.secs / cum[cum.length - 1] : 1
-
-  function timeAt (k: number) {
-    const K = data.km
-    if (!K.length) return 0
-    let j = K.findIndex((x) => x >= k)
-    if (j < 0) j = K.length - 1
-    const k0 = j ? K[j - 1] : 0, c0 = j ? cum[j - 1] : 0
-    const u = Math.min(1, Math.max(0, (k - k0) / Math.max(1e-6, K[j] - k0)))
-    return (c0 + (cum[j] - c0) * u) * scale
-  }
-
-  const reduceM = matchMedia('(prefers-reduced-motion: reduce)').matches
-  const photo = $('[data-gl-src]')
-  const heroGL = photo ? mountHeroGL(photo, photo.dataset.glSrc!, reduceM) : null
-  const chartEl = $('.r-chart')
-  mountSectionShaders(reduceM)
-  const run3d = chartEl ? mountRun3D(chartEl, data, reduceM) : null
-
-  // replay readout for a position t (0..1) along the run
-  function replay (t: number) {
-    run3d?.set(t)
-    const n = data.hr.length
-    if (!n) return
-    const f = t * (n - 1), i = Math.min(n - 1, Math.round(f))
-    const k = t * data.kmMax
-    R('km')!.textContent = k.toFixed(1)
-    R('t')!.textContent = fmt(timeAt(k))
-    R('hr')!.textContent = t > 0 ? String(data.hr[i]) : '–'
-    // smooth pace over ±3 samples so the number doesn't flicker
-    const win = data.v.slice(Math.max(0, i - 3), i + 4)
-    R('pace')!.textContent = t > 0 ? pace(win.reduce((a, b) => a + b, 0) / win.length) : '–'
-    R('clip')?.setAttribute('width', String(t * 1000))
-    const head = R('head')
-    if (head) head.style.transform = `translateX(${(head.parentElement!.clientWidth * t).toFixed(1)}px)`
-  }
-
-  // ── "Out there" strip: native horizontal scroll + arrow buttons + mouse drag + progress bar ──
-  const strip = $('[data-mo-strip]')
+  // photo strip: arrows + drag with a mouse (touch scrolls natively)
+  const strip = $('[data-strip]')
   if (strip) {
-    const bar = $('[data-mo-bar]'), prev = $<HTMLButtonElement>('[data-mo-prev]'), next = $<HTMLButtonElement>('[data-mo-next]')
-    const imgs = [...strip.querySelectorAll<HTMLElement>('.mo-img')]
-    const items = [...strip.querySelectorAll<HTMLElement>('.mo-item')]
-    const sync = () => {
-      const max = strip.scrollWidth - strip.clientWidth, p = max > 0 ? strip.scrollLeft / max : 0
-      if (bar) bar.style.transform = `scaleX(${p.toFixed(3)})`
-      if (prev) prev.disabled = strip.scrollLeft < 4
-      if (next) next.disabled = strip.scrollLeft > max - 4
-      // each photo pans a little inside its frame as it travels across the screen
-      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        const vw = innerWidth
-        imgs.forEach((im) => { const r = im.parentElement!.getBoundingClientRect(); const c = (r.left + r.width / 2) / vw - 0.5; im.style.transform = `scale(1.12) translateX(${(-c * 8).toFixed(2)}%)` })
-        // 3D: cards swing toward the centre of the screen and sink back as they move away from it
-        items.forEach((it) => { const r = it.getBoundingClientRect(); const c = Math.max(-1.1, Math.min(1.1, (r.left + r.width / 2) / vw - 0.5)); it.style.transform = `rotateY(${(-c * 24).toFixed(2)}deg) translateZ(${(-Math.abs(c) * 110).toFixed(1)}px)` })
-      }
-    }
-    const step = () => (strip.querySelector('.mo-item') as HTMLElement).offsetWidth + 24
+    const prev = $<HTMLButtonElement>('[data-prev]'), next = $<HTMLButtonElement>('[data-next]')
+    const sync = () => { const max = strip.scrollWidth - strip.clientWidth; if (prev) prev.disabled = strip.scrollLeft < 4; if (next) next.disabled = strip.scrollLeft > max - 4 }
+    const step = () => ($('.p-item') as HTMLElement).offsetWidth + 14
     prev?.addEventListener('click', () => strip.scrollBy({ left: -step(), behavior: 'smooth' }))
     next?.addEventListener('click', () => strip.scrollBy({ left: step(), behavior: 'smooth' }))
-    strip.addEventListener('scroll', () => requestAnimationFrame(sync), { passive: true })
-    addEventListener('resize', sync)
-    // drag with a mouse (touch already scrolls natively)
+    strip.addEventListener('scroll', sync, { passive: true })
     let down = false, sx = 0, sl = 0, moved = false
-    strip.addEventListener('pointerdown', (e) => { if (e.pointerType !== 'mouse') return; down = true; moved = false; sx = e.clientX; sl = strip.scrollLeft; strip.setPointerCapture(e.pointerId) })
-    strip.addEventListener('pointermove', (e) => { if (!down) return; const dx = e.clientX - sx; if (Math.abs(dx) > 3) { moved = true; strip.classList.add('drag') } strip.scrollLeft = sl - dx })
-    const up = () => { if (!down) return; down = false; strip.classList.remove('drag') }
-    strip.addEventListener('pointerup', up); strip.addEventListener('pointercancel', up)
+    strip.addEventListener('pointerdown', (e) => { if (e.pointerType !== 'mouse') return; down = true; moved = false; sx = e.clientX; sl = strip.scrollLeft; strip.style.scrollSnapType = 'none' })
+    addEventListener('pointermove', (e) => { if (!down) return; const dx = e.clientX - sx; if (Math.abs(dx) > 3) moved = true; strip.scrollLeft = sl - dx })
+    addEventListener('pointerup', () => { if (!down) return; down = false; strip.style.scrollSnapType = '' })
     strip.addEventListener('click', (e) => { if (moved) { e.preventDefault(); e.stopPropagation() } }, true)
     sync()
   }
 
   const mm = gsap.matchMedia()
-
-  mm.add('(prefers-reduced-motion: reduce)', () => { replay(1) })
-
   mm.add('(prefers-reduced-motion: no-preference)', () => {
-    // ── hero intro: "RUN." rises letter by letter once the loader is gone ──
-    const runWord = new SplitText('.hw-run', { type: 'chars', charsClass: 'hc' })
-    gsap.set('.hw-run', { overflow: 'hidden' })
-    gsap.set(runWord.chars, { yPercent: 105, rotateX: -85, transformPerspective: 900, transformOrigin: '50% 100% -60px' })
-    gsap.set('[data-fade]', { autoAlpha: 0, y: 14 })
-    const intro = () => {
-      gsap.timeline({ defaults: { ease: 'expo.out' } })
-        .to(runWord.chars, { yPercent: 0, rotateX: 0, duration: 1.4, stagger: 0.07, onComplete: () => gsap.set('.hw-run', { overflow: 'visible' }) })
-        .to('[data-fade]', { autoAlpha: 1, y: 0, duration: 0.8, stagger: 0.08 }, 0.35)
-    }
+    // ── hero intro: the word rises, the runner steps up into it, details follow ──
+    gsap.set('[data-word] span', { yPercent: 40, autoAlpha: 0 })
+    gsap.set('[data-runner]', { yPercent: 14, autoAlpha: 0 })
+    gsap.set('[data-in]', { y: 16, autoAlpha: 0 })
+    const intro = () => gsap.timeline({ defaults: { ease: 'expo.out' } })
+      .to('[data-word] span', { yPercent: 0, autoAlpha: 1, duration: 1.4 }, 0)
+      .to('[data-runner]', { yPercent: 0, autoAlpha: 1, duration: 1.6 }, 0.15)
+      .to('[data-in]', { y: 0, autoAlpha: 1, duration: 1, stagger: 0.08 }, 0.5)
     ;(window as any).__booted ? intro() : document.addEventListener('boot:done', intro, { once: true })
 
-    // ── hero scroll (pinned by CSS sticky): photo zooms, the sharp ghost melts, letters spread ──
-    gsap.timeline({ scrollTrigger: { trigger: '[data-hero]', start: 'top top', end: 'bottom bottom', scrub: 1, onUpdate: (self) => heroGL?.progress(self.progress) } })
-      .to('.h-photo', { scale: 1.18, ease: 'none' }, 0)
-      .to('.sharp', { opacity: 0, ease: 'none' }, 0)
-      .to(runWord.chars, { xPercent: (i) => (i - 1.5) * 26, rotateY: (i) => (i - 1.5) * -16, z: (i) => -Math.abs(i - 1.5) * 90, ease: 'none' }, 0)
-      .to('.h-runs', { rotateY: 16, z: -80, transformPerspective: 1000, ease: 'none' }, 0)
-      // fade the hero details through a CSS variable, not opacity/transform: the intro animation owns those,
-      // and sharing them broke the hero when the page was opened scrolled down and then scrolled back up
-      .fromTo('.h-stage', { '--out': 0 }, { '--out': 1, ease: 'none', immediateRender: false }, 0.35)
+    // hero scroll: the word slides sideways behind the runner, the runner drifts up — the one depth effect
+    gsap.timeline({ scrollTrigger: { trigger: '[data-hero]', start: 'top top', end: 'bottom top', scrub: true } })
+      .to('[data-word]', { xPercent: -18, ease: 'none' }, 0)
+      .to('[data-runner]', { y: -60, scale: 1.04, ease: 'none' }, 0)
 
-    // ── word rows slide in opposite directions as the section passes ──
-    gsap.utils.toArray<HTMLElement>('[data-row]').forEach((row) => {
-      const dir = Number(row.dataset.row)
-      gsap.fromTo(row, { xPercent: dir < 0 ? 0 : -50 }, { xPercent: dir < 0 ? -50 : 0, ease: 'none', scrollTrigger: { trigger: '.rows', start: 'top bottom', end: 'bottom top', scrub: 1 } })
-    })
-
-    gsap.fromTo('[data-row]', { rotateX: 32, transformPerspective: 900, transformOrigin: '50% 50%' }, { rotateX: -32, ease: 'none', scrollTrigger: { trigger: '.rows', start: 'top bottom', end: 'bottom top', scrub: 1 } })
-
-    // ── long-run replay: the chart lies flat and stands up as the section arrives ──
-    gsap.fromTo('.r-chart', { rotateX: 42, z: -160, transformPerspective: 1400, transformOrigin: '50% 100%' }, { rotateX: 0, z: 0, ease: 'none', scrollTrigger: { trigger: '[data-replay]', start: 'top bottom', end: 'top top', scrub: 1 } })
-
-    // ── long-run replay (pinned by CSS sticky) ──
-    const st = { t: 0 }
-    gsap.to(st, { t: 1, ease: 'none', onUpdate: () => replay(st.t), scrollTrigger: { trigger: '[data-replay]', start: 'top top', end: 'bottom bottom', scrub: 1 } })
-    gsap.from('.r-title', { yPercent: 40, autoAlpha: 0, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: '[data-replay]', start: 'top 70%' } })
-    gsap.from('.r-sum > div', { y: 16, autoAlpha: 0, duration: 0.6, stagger: 0.06, ease: 'power2.out', scrollTrigger: { trigger: '[data-replay]', start: 'top 40%' } })
-    replay(0)
-
-    // ── gear: subtle photo parallax + row stagger ──
-    gsap.to('[data-par]', { yPercent: -8, ease: 'none', scrollTrigger: { trigger: '.gear', start: 'top bottom', end: 'bottom top', scrub: true } })
-    gsap.from('[data-gear]', { y: 18, rotateX: -75, transformPerspective: 800, transformOrigin: '50% 0%', autoAlpha: 0, duration: 0.8, stagger: 0.08, ease: 'power3.out', scrollTrigger: { trigger: '.g-table', start: 'top 85%' } })
-
-    // ── headings that split into masked lines ──
-    gsap.utils.toArray<HTMLElement>('.g-title, .cta-l, .mo-title').forEach((el) => {
-      const s = new SplitText(el, { type: 'lines', linesClass: 'sl', mask: 'lines' })
-      gsap.from(s.lines, { yPercent: 105, rotateX: -70, transformPerspective: 900, transformOrigin: '50% 100%', duration: 1.2, stagger: 0.1, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 85%' } })
-    })
-
+    // pointer: runner and word shift at different depths
     if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
-      const tilt = (sel: string, d: number) => {
-        const el = document.querySelector<HTMLElement>(sel)
-        if (!el) return null
-        gsap.set(el, { transformPerspective: 1000 })
-        return { x: gsap.quickTo(el, 'x', { duration: 0.9, ease: 'power3' }), rx: gsap.quickTo(el, 'rotationX', { duration: 0.9, ease: 'power3' }), ry: gsap.quickTo(el, 'rotationY', { duration: 0.9, ease: 'power3' }), d }
-      }
-      const layers = [tilt('.h-card', 1), tilt('.h-month', 0.6)].filter(Boolean) as NonNullable<ReturnType<typeof tilt>>[]
-      const hero = $('[data-hero]')!
-      hero.addEventListener('pointermove', (e) => {
-        const nx = e.clientX / innerWidth - 0.5, ny = e.clientY / innerHeight - 0.5
-        layers.forEach((l) => { l.x(-nx * 18 * l.d); l.ry(nx * 16 * l.d); l.rx(-ny * 12 * l.d) })
-      })
-      hero.addEventListener('pointerleave', () => layers.forEach((l) => { l.x(0); l.rx(0); l.ry(0) }))
-
-      const gp = $('.g-photo')
-      if (gp) {
-        gsap.set(gp, { transformPerspective: 1200 })
-        const rx = gsap.quickTo(gp, 'rotationX', { duration: 0.6, ease: 'power3' }), ry = gsap.quickTo(gp, 'rotationY', { duration: 0.6, ease: 'power3' })
-        gp.addEventListener('pointermove', (e) => { const r = gp.getBoundingClientRect(); ry(((e.clientX - r.left) / r.width - 0.5) * 10); rx(-((e.clientY - r.top) / r.height - 0.5) * 8) })
-        gp.addEventListener('pointerleave', () => { rx(0); ry(0) })
-      }
+      const rx = gsap.quickTo('[data-runner]', 'x', { duration: 1, ease: 'power3' })
+      const wx = gsap.quickTo('[data-word] span', 'x', { duration: 1.2, ease: 'power3' })
+      $('[data-hero]')!.addEventListener('pointermove', (e) => { const n = e.clientX / innerWidth - 0.5; rx(n * 24); wx(-n * 50) })
     }
 
+    // statement: words light up one by one as it scrolls through
+    gsap.to('[data-statement] span', { opacity: 1, stagger: 0.1, ease: 'none', scrollTrigger: { trigger: '[data-statement]', start: 'top 80%', end: 'bottom 45%', scrub: true } })
+
+    // cards and titles rise in
+    $$('[data-up]').forEach((el) => gsap.from(el, { y: 50, autoAlpha: 0, duration: 1.1, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 88%' } }))
+    ScrollTrigger.batch('[data-card]', { start: 'top 90%', once: true, onEnter: (els) => gsap.from(els, { y: 60, autoAlpha: 0, duration: 1.1, stagger: 0.08, ease: 'expo.out' }) })
+    gsap.from('[data-row]', { x: 20, autoAlpha: 0, duration: 0.6, stagger: 0.05, ease: 'power2.out', scrollTrigger: { trigger: '.runs', start: 'top 85%' } })
+    gsap.from('[data-photo]', { x: 120, autoAlpha: 0, duration: 1.2, stagger: 0.06, ease: 'expo.out', scrollTrigger: { trigger: '[data-strip]', start: 'top 85%' } })
+
+    // 30-day total counts up
+    const cnt = $('[data-count]')
+    if (cnt) { const end = parseFloat(cnt.dataset.count!), o = { v: 0 }; gsap.to(o, { v: end, duration: 1.6, ease: 'power3.out', onUpdate: () => { cnt.textContent = o.v.toFixed(1) }, scrollTrigger: { trigger: cnt, start: 'top 85%' } }) }
+
+    // heart-rate line draws itself across the run
+    if ($('[data-line]')) {
+      gsap.set('[data-line]', { strokeDasharray: 1, strokeDashoffset: 1 })
+      gsap.timeline({ scrollTrigger: { trigger: '.l-chart', start: 'top 80%', end: 'bottom 50%', scrub: 1 } })
+        .to('[data-line]', { strokeDashoffset: 0, ease: 'none' }, 0)
+        .from('[data-area]', { autoAlpha: 0, ease: 'none' }, 0.3)
+    }
+
+    // CTA panel grows to full size as it arrives
+    gsap.from('[data-cta]', { scale: 0.9, borderRadius: 64, ease: 'none', scrollTrigger: { trigger: '[data-cta]', start: 'top bottom', end: 'top 40%', scrub: true } })
+
     addEventListener('load', () => ScrollTrigger.refresh(), { once: true })
-    document.fonts?.ready.then(() => ScrollTrigger.refresh())
   })
 </script>
 </Base>
