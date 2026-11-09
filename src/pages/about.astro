@@ -32,13 +32,13 @@ const ticks = [0, 10, 20, 30, 40].filter((t) => t <= kmMax)
 const spark = has ? stream.hr.map((b, i) => `${i ? 'L' : 'M'}${((i / (stream.hr.length - 1)) * 200).toFixed(1)} ${(40 - ((b - lo) / (hi - lo)) * 40).toFixed(1)}`).join(' ') : ''
 
 const moments = [
-  { src: mMorning, alt: 'Fadhel running past trees on a sunny morning', cap: 'Morning miles' },
   { src: mRace, alt: 'Fadhel raising three fingers to the camera mid-race, bib M 43954', cap: 'Race day' },
-  { src: mTrail, alt: 'Fadhel running a gravel trail in sandals with a hydration vest', cap: 'Trail, in sandals' },
+  { src: mNight, alt: 'A runner seen from behind on a dark road, lit by a headlamp', cap: 'Night road, headlamp on' },
+  { src: mMorning, alt: 'Fadhel running past trees on a sunny morning', cap: 'Morning miles' },
   { src: mFriends, alt: 'Fadhel running with two friends between city towers at night', cap: 'With the crew' },
-  { src: mTrack, alt: 'Fadhel leading a group on a stadium track at night', cap: 'Track night' },
+  { src: mTrail, alt: 'Fadhel running a gravel trail in sandals with a hydration vest', cap: 'Trail, in sandals' },
   { src: mCity, alt: 'Fadhel running along a city street at night', cap: 'City laps' },
-  { src: mNight, alt: 'A runner seen from behind on a dark road, lit by a headlamp', cap: 'Night road, headlamp on' }
+  { src: mTrack, alt: 'Fadhel leading a group on a stadium track at night', cap: 'Track night' }
 ]
 
 const statement = 'By day I build data pipelines. Most nights I run, usually long and usually in the dark. On rest days I ride.'
@@ -132,22 +132,31 @@ const nav = [
     </div>
   </section>
 
-  <!-- 4 · PHOTOS: editorial grid, mixed sizes -->
-  <section class="photos wrap" aria-labelledby="p-title">
-    <header class="p-head">
-      <h2 id="p-title" class="sec-t" data-up>Out there</h2>
-      <p class="p-note">Mostly at night, sometimes in sandals.</p>
+  <!-- 2b · horizontal photo strip: swipe / shift-scroll / arrows; the page keeps scrolling normally -->
+  <section class="moments" aria-labelledby="mo-title">
+   <div class="mo-stage">
+    <header class="mo-head">
+      <h2 id="mo-title" class="disp mo-title" data-split>Out there</h2>
+      <p class="mo-note">Mostly at night, sometimes in sandals.</p>
+      <div class="mo-nav">
+        <button type="button" class="mo-btn" data-mo-prev aria-label="Previous photos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg></button>
+        <button type="button" class="mo-btn" data-mo-next aria-label="Next photos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg></button>
+      </div>
     </header>
-    <ul class="p-grid">
-      {moments.map((m, i) => (
-        <li class={`p-item p${i + 1}`} data-photo data-speed={[0, 0.12, -0.06, 0.1, -0.1, 0.06, -0.08][i]}>
-          <figure>
-            <div class="p-frame"><Image src={m.src} alt={m.alt} widths={[480, 900]} sizes="(min-width: 900px) 50vw, 100vw" class="p-img" /></div>
-            <figcaption><span>{String(i + 1).padStart(2, '0')}</span>{m.cap}</figcaption>
-          </figure>
-        </li>
-      ))}
-    </ul>
+    <div class="mo-strip" data-mo-strip tabindex="0" role="region" aria-label="Running photos, scroll sideways">
+      <ul class="mo-track" data-mo>
+        {moments.map((m, i) => (
+          <li class={`mo-item ${i % 2 ? 'low' : ''}`}>
+            <figure>
+              <div class="mo-frame"><Image src={m.src} alt={m.alt} widths={[360, 640]} sizes="(min-width: 900px) 30vh, 60vw" class="mo-img" /></div>
+              <figcaption><span>{String(i + 1).padStart(2, '0')}</span>{m.cap}</figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div class="mo-bar" aria-hidden="true"><i data-mo-bar></i></div>
+   </div>
   </section>
 
   <!-- 5 · THE LONG RUN: scroll-driven flyover (stylised route, not GPS) -->
@@ -297,23 +306,32 @@ const nav = [
   .r-km { font-weight: 600; }
   .r-p { text-align: right; }
 
-  /* ── photos: editorial grid ── */
-  .photos { padding-bottom: clamp(80px, 14vh, 160px); }
-  .p-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: clamp(30px, 6vh, 70px); }
-  .p-note { color: var(--mute); padding-bottom: 8px; }
-  .p-grid { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: clamp(12px, 1.6vw, 24px); row-gap: clamp(40px, 8vh, 90px); align-items: start; }
-  .p-item { will-change: transform; }
-  .p-frame { overflow: hidden; border-radius: 20px; background: #ddd; }
-  .p-img { width: 100%; height: 100%; object-fit: cover; display: block; transform-origin: 50% 50%; }
-  .p-item figcaption { display: flex; gap: 10px; margin-top: 12px; font-size: 14px; font-weight: 500; }
-  .p-item figcaption span { color: var(--or); font-variant-numeric: tabular-nums; }
-  .p1 { grid-column: 1 / 8; } .p1 .p-frame { aspect-ratio: 5 / 4; }
-  .p2 { grid-column: 9 / 13; margin-top: 16vh; } .p2 .p-frame { aspect-ratio: 3 / 4; }
-  .p3 { grid-column: 2 / 6; } .p3 .p-frame { aspect-ratio: 3 / 4; }
-  .p4 { grid-column: 7 / 13; margin-top: 12vh; } .p4 .p-frame { aspect-ratio: 4 / 3; }
-  .p5 { grid-column: 1 / 5; margin-top: 6vh; } .p5 .p-frame { aspect-ratio: 4 / 5; }
-  .p6 { grid-column: 6 / 11; margin-top: 20vh; } .p6 .p-frame { aspect-ratio: 4 / 5; }
-  .p7 { grid-column: 3 / 10; } .p7 .p-frame { aspect-ratio: 16 / 9; }
+  /* ── moments (live version) ── */
+  .mo-title { font-family: 'Archivo Variable', sans-serif; font-stretch: 125%; font-weight: 800; text-transform: uppercase; letter-spacing: -.035em; line-height: .86; }
+  /* ── moments ── */
+  .moments { padding: clamp(70px, 12vh, 140px) 0 clamp(50px, 8vh, 100px); border-bottom: 1px solid var(--line); }
+  .mo-stage { display: block; }
+  .mo-head { display: flex; align-items: end; gap: 24px; padding: 0 clamp(20px, 4vw, 56px); }
+  .mo-title { font-size: clamp(40px, 6vw, 96px); margin-right: auto; }
+  .mo-note { font-size: 16px; color: var(--mute); padding-bottom: .4em; }
+  .mo-nav { display: flex; gap: 8px; padding-bottom: .2em; }
+  .mo-btn { width: 48px; height: 48px; display: grid; place-items: center; border: 1px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; transition: background-color .2s, color .2s, opacity .2s; }
+  .mo-btn:hover:not(:disabled) { background: var(--ink); color: #fff; }
+  .mo-btn:disabled { opacity: .3; cursor: default; }
+  .mo-btn:focus-visible, .mo-strip:focus-visible { outline: 3px solid var(--or); outline-offset: 3px; }
+  .mo-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; }
+  .mo-strip { margin-top: clamp(24px, 5vh, 50px); overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: clamp(20px, 4vw, 56px); scrollbar-width: none; cursor: grab; }
+  .mo-strip::-webkit-scrollbar { display: none; }
+  .mo-strip.drag { cursor: grabbing; scroll-snap-type: none; }
+  .mo-track { display: flex; gap: clamp(14px, 2vw, 28px); width: max-content; padding: 0 clamp(20px, 4vw, 56px); }
+  .mo-item { width: clamp(240px, 26vw, 400px); flex: none; scroll-snap-align: start; }
+  .mo-item.low { margin-top: clamp(24px, 6vh, 70px); }
+  .mo-frame { aspect-ratio: 3 / 4; overflow: hidden; background: #d9d8d3; }
+  .mo-img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.12); pointer-events: none; user-select: none; -webkit-user-drag: none; }
+  .mo-item figcaption { display: flex; gap: 12px; align-items: baseline; padding-top: 10px; border-top: 1px solid var(--ink); margin-top: 10px; font-size: 14px; font-weight: 600; }
+  .mo-item figcaption span { color: var(--or); font-variant-numeric: tabular-nums; font-weight: 700; }
+  .mo-bar { margin: clamp(18px, 3vh, 30px) clamp(20px, 4vw, 56px) 0; height: 2px; background: var(--line); }
+  .mo-bar i { display: block; height: 100%; width: 100%; background: var(--or); transform-origin: 0 50%; transform: scaleX(0); transition: transform .15s linear; }
 
   /* ── long run flyover ── */
   .fly { position: relative; height: 420vh; }
@@ -372,10 +390,9 @@ const nav = [
     .n-big { min-height: 0; gap: 30px; }
     .runs li { grid-template-columns: 1fr 1fr 1fr; }
     .r-t { display: none; }
-    .p-head { flex-direction: column; align-items: start; gap: 8px; }
-    .p-grid { grid-template-columns: repeat(6, 1fr); row-gap: 36px; }
-    .p1 { grid-column: 1 / 7; } .p2 { grid-column: 3 / 7; margin-top: 0; } .p3 { grid-column: 1 / 5; }
-    .p4 { grid-column: 2 / 7; margin-top: 0; } .p5 { grid-column: 1 / 4; margin-top: 0; } .p6 { grid-column: 4 / 7; margin-top: 18vh; } .p7 { grid-column: 1 / 7; }
+    .mo-head { flex-direction: column; align-items: start; }
+    .mo-item { width: 70vw; }
+    .mo-nav { display: none; }
     .fl-panel { border-radius: 28px; }
     .fl-stats { padding: 0 8px; }
     .l-sum { grid-template-columns: repeat(2, 1fr); }
@@ -400,6 +417,38 @@ const nav = [
   gsap.registerPlugin(ScrollTrigger, SplitText)
   const $ = <T extends Element = HTMLElement>(s: string) => document.querySelector<T>(s)
   const $$ = <T extends Element = HTMLElement>(s: string) => [...document.querySelectorAll<T>(s)]
+
+  // ── "Out there" strip: native horizontal scroll + arrow buttons + mouse drag + progress bar ──
+  const strip = $('[data-mo-strip]')
+  if (strip) {
+    const bar = $('[data-mo-bar]'), prev = $<HTMLButtonElement>('[data-mo-prev]'), next = $<HTMLButtonElement>('[data-mo-next]')
+    const imgs = [...strip.querySelectorAll<HTMLElement>('.mo-img')]
+    const sync = () => {
+      const max = strip.scrollWidth - strip.clientWidth, p = max > 0 ? strip.scrollLeft / max : 0
+      if (bar) bar.style.transform = `scaleX(${p.toFixed(3)})`
+      if (prev) prev.disabled = strip.scrollLeft < 4
+      if (next) next.disabled = strip.scrollLeft > max - 4
+      // each photo pans a little inside its frame as it travels across the screen
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const vw = innerWidth
+        imgs.forEach((im) => { const r = im.parentElement!.getBoundingClientRect(); const c = (r.left + r.width / 2) / vw - 0.5; im.style.transform = `scale(1.12) translateX(${(-c * 8).toFixed(2)}%)` })
+      }
+    }
+    const step = () => (strip.querySelector('.mo-item') as HTMLElement).offsetWidth + 24
+    prev?.addEventListener('click', () => strip.scrollBy({ left: -step(), behavior: 'smooth' }))
+    next?.addEventListener('click', () => strip.scrollBy({ left: step(), behavior: 'smooth' }))
+    strip.addEventListener('scroll', () => requestAnimationFrame(sync), { passive: true })
+    addEventListener('resize', sync)
+    // drag with a mouse (touch already scrolls natively)
+    let down = false, sx = 0, sl = 0, moved = false
+    strip.addEventListener('pointerdown', (e) => { if (e.pointerType !== 'mouse') return; down = true; moved = false; sx = e.clientX; sl = strip.scrollLeft; strip.setPointerCapture(e.pointerId) })
+    strip.addEventListener('pointermove', (e) => { if (!down) return; const dx = e.clientX - sx; if (Math.abs(dx) > 3) { moved = true; strip.classList.add('drag') } strip.scrollLeft = sl - dx })
+    const up = () => { if (!down) return; down = false; strip.classList.remove('drag') }
+    strip.addEventListener('pointerup', up); strip.addEventListener('pointercancel', up)
+    strip.addEventListener('click', (e) => { if (moved) { e.preventDefault(); e.stopPropagation() } }, true)
+    sync()
+  }
+
 
   const reduceM = matchMedia('(prefers-reduced-motion: reduce)').matches
   const photo = $('[data-gl-src]')
@@ -453,16 +502,9 @@ const nav = [
     $$('[data-up]').forEach((el) => gsap.from(el, { y: 50, autoAlpha: 0, duration: 1.1, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 88%' } }))
     ScrollTrigger.batch('[data-card]', { start: 'top 90%', once: true, onEnter: (els) => gsap.from(els, { y: 60, autoAlpha: 0, duration: 1.1, stagger: 0.08, ease: 'expo.out' }) })
     gsap.from('[data-row]', { x: 20, autoAlpha: 0, duration: 0.6, stagger: 0.05, ease: 'power2.out', scrollTrigger: { trigger: '.runs', start: 'top 85%' } })
-    // photos: each frame wipes open from the bottom while the image settles, then drifts at its own speed
-    $$('[data-photo]').forEach((el) => {
-      const frame = el.querySelector('.p-frame')!, img = el.querySelector('.p-img')!
-      gsap.timeline({ scrollTrigger: { trigger: el, start: 'top 90%' } })
-        .from(frame, { clipPath: 'inset(100% 0% 0% 0% round 20px)', duration: 1.3, ease: 'expo.inOut' }, 0)
-        .from(img, { scale: 1.35, duration: 1.8, ease: 'expo.out' }, 0.1)
-        .from(el.querySelector('figcaption'), { y: 12, autoAlpha: 0, duration: 0.8, ease: 'power2.out' }, 0.7)
-      const sp = parseFloat(el.dataset.speed || '0')
-      if (sp) gsap.to(el, { yPercent: -sp * 100, ease: 'none', scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true } })
-    })
+    // photo strip drifts in from the right, title lines rise
+    gsap.from('[data-mo] .mo-item', { x: 160, autoAlpha: 0, duration: 1.2, stagger: 0.07, ease: 'expo.out', scrollTrigger: { trigger: '.mo-strip', start: 'top 85%' } })
+    gsap.from('.mo-title', { yPercent: 60, autoAlpha: 0, duration: 1.1, ease: 'expo.out', scrollTrigger: { trigger: '.mo-title', start: 'top 88%' } })
 
     // 30-day total counts up
     const cnt = $('[data-count]')
