@@ -132,59 +132,50 @@ const nav = [
     </div>
   </section>
 
-  <!-- 4 · PHOTOS -->
-  <section class="photos" aria-labelledby="p-title">
-    <header class="p-head wrap">
+  <!-- 4 · PHOTOS: editorial grid, mixed sizes -->
+  <section class="photos wrap" aria-labelledby="p-title">
+    <header class="p-head">
       <h2 id="p-title" class="sec-t" data-up>Out there</h2>
       <p class="p-note">Mostly at night, sometimes in sandals.</p>
-      <div class="p-nav">
-        <button type="button" class="round" data-prev aria-label="Previous photos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg></button>
-        <button type="button" class="round" data-next aria-label="Next photos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg></button>
-      </div>
     </header>
-    <div class="p-strip" data-strip tabindex="0" role="region" aria-label="Running photos, scroll sideways">
-      <ul class="p-track">
-        {moments.map((m) => (
-          <li class="p-item" data-photo>
-            <figure>
-              <div class="p-frame"><Image src={m.src} alt={m.alt} widths={[360, 640]} sizes="(min-width: 900px) 24vw, 70vw" class="p-img" /></div>
-              <figcaption>{m.cap}</figcaption>
-            </figure>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul class="p-grid">
+      {moments.map((m, i) => (
+        <li class={`p-item p${i + 1}`} data-photo data-speed={[0, 0.12, -0.06, 0.1, -0.1, 0.06, -0.08][i]}>
+          <figure>
+            <div class="p-frame"><Image src={m.src} alt={m.alt} widths={[480, 900]} sizes="(min-width: 900px) 50vw, 100vw" class="p-img" /></div>
+            <figcaption><span>{String(i + 1).padStart(2, '0')}</span>{m.cap}</figcaption>
+          </figure>
+        </li>
+      ))}
+    </ul>
   </section>
 
-  <!-- 5 · THE LONG RUN -->
-  <section id="replay" class="long wrap">
-    <article class="card l-card" data-card>
-      <header class="l-head">
-        <div>
-          <p class="c-k">The long run · {longRun.date}</p>
-          <h2 class="sec-t">{longRun.km} km</h2>
-        </div>
-        <p class="l-hr"><b>{longRun.avgHr}</b> bpm average</p>
-      </header>
-      {has && (
-        <figure class="l-chart">
-          <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" role="img" aria-label={`Heart rate over ${longRun.km} km, average ${longRun.avgHr} bpm`}>
-            <defs><linearGradient id="la" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#fc4c02" stop-opacity=".22" /><stop offset="1" stop-color="#fc4c02" stop-opacity="0" /></linearGradient></defs>
-            {ticks.map((t) => <line x1={(t / kmMax) * W} x2={(t / kmMax) * W} y1="0" y2={H} class="l-grid" />)}
-            <path d={area} fill="url(#la)" data-area />
-            <path d={line} class="l-line" pathLength="1" vector-effect="non-scaling-stroke" data-line />
-          </svg>
-          <div class="l-ticks" aria-hidden="true">{ticks.map((t) => <span style={`left:${(t / kmMax) * 100}%`}>{t} km</span>)}</div>
-        </figure>
-      )}
-      <dl class="l-sum">
-        <div><dt>Total time</dt><dd>{longRun.time}</dd></div>
-        <div><dt>Moving time</dt><dd>{longRun.moving}</dd></div>
-        <div><dt>Avg pace</dt><dd>{longRun.movingPace} /km</dd></div>
-        <div><dt>Elevation</dt><dd>{longRun.elev} m</dd></div>
-        <div><dt>Energy</dt><dd>{longRun.cal} cal</dd></div>
-      </dl>
-    </article>
+  <!-- 5 · THE LONG RUN: scroll-driven flyover (stylised route, not GPS) -->
+  <section id="replay" class="fly" data-fly>
+    <div class="fl-stage">
+      <div class="fl-panel" data-fly-host>
+        <header class="fl-hud">
+          <p class="fl-k">The long run</p>
+          <p class="fl-date">{longRun.date}</p>
+          <dl class="fl-stats" aria-hidden="true">
+            <div><dt>Pace</dt><dd><b data-f="pace">–</b><small>/km</small></dd></div>
+            <div><dt>Heart rate</dt><dd><b data-f="hr">–</b><small>bpm</small></dd></div>
+            <div><dt>Distance</dt><dd><b data-f="km">0.0</b><small>km</small></dd></div>
+          </dl>
+        </header>
+        <p class="fl-note">Route drawn for illustration · numbers from Strava</p>
+      </div>
+    </div>
+  </section>
+  <section class="wrap fl-after" aria-label="Long run summary">
+    <dl class="l-sum">
+      <div><dt>Distance</dt><dd>{longRun.km} km</dd></div>
+      <div><dt>Total time</dt><dd>{longRun.time}</dd></div>
+      <div><dt>Moving time</dt><dd>{longRun.moving}</dd></div>
+      <div><dt>Avg pace</dt><dd>{longRun.movingPace} /km</dd></div>
+      <div><dt>Avg heart rate</dt><dd>{longRun.avgHr} bpm</dd></div>
+      <div><dt>Energy</dt><dd>{longRun.cal} cal</dd></div>
+    </dl>
   </section>
 
   <!-- 6 · GEAR -->
@@ -213,6 +204,7 @@ const nav = [
       </a>
     </div>
   </section>
+  <script type="application/json" id="run-stream" set:html={JSON.stringify({ km: stream.km, hr: stream.hr, v: stream.v, kmMax })} />
 </main>
 
 <style>
@@ -305,41 +297,44 @@ const nav = [
   .r-km { font-weight: 600; }
   .r-p { text-align: right; }
 
-  /* ── photos ── */
-  .photos { padding-bottom: clamp(70px, 12vh, 140px); }
-  .p-head { display: flex; align-items: end; gap: 24px; }
-  .p-head .sec-t { margin-right: auto; }
+  /* ── photos: editorial grid ── */
+  .photos { padding-bottom: clamp(80px, 14vh, 160px); }
+  .p-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: clamp(30px, 6vh, 70px); }
   .p-note { color: var(--mute); padding-bottom: 8px; }
-  .p-nav { display: flex; gap: 8px; padding-bottom: 4px; }
-  .round { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; background: var(--card); color: var(--ink); cursor: pointer; transition: background-color .2s, color .2s, opacity .2s; }
-  .round:hover:not(:disabled) { background: var(--ink); color: #fff; }
-  .round:disabled { opacity: .35; cursor: default; }
-  .round svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; }
-  .p-strip { margin-top: 32px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--pad); scrollbar-width: none; overscroll-behavior-x: contain; }
-  .p-strip::-webkit-scrollbar { display: none; }
-  .p-track { display: flex; gap: 14px; width: max-content; padding: 0 var(--pad); }
-  .p-item { width: clamp(250px, 24vw, 360px); flex: none; scroll-snap-align: start; }
-  .p-frame { aspect-ratio: 4 / 5; border-radius: 24px; overflow: hidden; background: #ddd; }
-  .p-img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease); }
-  .p-item:hover .p-img { transform: scale(1.06); }
-  .p-item figcaption { margin-top: 12px; font-size: 15px; font-weight: 500; }
+  .p-grid { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: clamp(12px, 1.6vw, 24px); row-gap: clamp(40px, 8vh, 90px); align-items: start; }
+  .p-item { will-change: transform; }
+  .p-frame { overflow: hidden; border-radius: 20px; background: #ddd; }
+  .p-img { width: 100%; height: 100%; object-fit: cover; display: block; transform-origin: 50% 50%; }
+  .p-item figcaption { display: flex; gap: 10px; margin-top: 12px; font-size: 14px; font-weight: 500; }
+  .p-item figcaption span { color: var(--or); font-variant-numeric: tabular-nums; }
+  .p1 { grid-column: 1 / 8; } .p1 .p-frame { aspect-ratio: 5 / 4; }
+  .p2 { grid-column: 9 / 13; margin-top: 16vh; } .p2 .p-frame { aspect-ratio: 3 / 4; }
+  .p3 { grid-column: 2 / 6; } .p3 .p-frame { aspect-ratio: 3 / 4; }
+  .p4 { grid-column: 7 / 13; margin-top: 12vh; } .p4 .p-frame { aspect-ratio: 4 / 3; }
+  .p5 { grid-column: 1 / 5; margin-top: 6vh; } .p5 .p-frame { aspect-ratio: 4 / 5; }
+  .p6 { grid-column: 6 / 11; margin-top: 20vh; } .p6 .p-frame { aspect-ratio: 4 / 5; }
+  .p7 { grid-column: 3 / 10; } .p7 .p-frame { aspect-ratio: 16 / 9; }
 
-  /* ── long run ── */
-  .long { padding-bottom: clamp(70px, 12vh, 140px); }
-  .l-head { display: flex; justify-content: space-between; align-items: end; gap: 20px; }
-  .l-head .sec-t { margin-top: 10px; }
-  .l-hr { font-size: 15px; color: var(--mute); }
-  .l-hr b { font-family: 'Archivo Variable', sans-serif; font-size: 34px; font-weight: 800; color: var(--or); letter-spacing: -.03em; }
-  .l-chart { position: relative; margin-top: 32px; height: clamp(180px, 26vw, 300px); }
-  .l-chart svg { width: 100%; height: calc(100% - 26px); overflow: visible; }
-  .l-grid { stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke; }
-  .l-line { fill: none; stroke: var(--or); stroke-width: 2.5; stroke-linejoin: round; }
-  .l-ticks { position: absolute; left: 0; right: 0; bottom: 0; height: 18px; font-size: 12px; color: var(--mute); }
-  .l-ticks span { position: absolute; translate: -50% 0; }
-  .l-ticks span:first-child { translate: 0 0; }
-  .l-ticks span:last-child:not(:first-child) { translate: -100% 0; }
-  .l-sum { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 28px; }
-  .l-sum div { background: var(--bg); border-radius: 18px; padding: 14px 16px; }
+  /* ── long run flyover ── */
+  .fly { position: relative; height: 420vh; }
+  .fl-stage { position: sticky; top: 0; height: 100svh; padding: 10px; }
+  .fl-panel { position: relative; height: 100%; border-radius: 36px; overflow: hidden; color: #fff;
+    background: linear-gradient(180deg, #1c2c48 0%, #3d5778 28%, #8ea3b8 46%, #b9c2c6 56%, #8b8f7f 70%, #4c5442 100%); }
+  .fl-panel::after { content: ''; position: absolute; inset: 0 0 auto; height: 46%; z-index: 1; pointer-events: none; background: linear-gradient(180deg, rgb(16 24 40 / .55), rgb(16 24 40 / .18) 60%, transparent); }
+  :global(.route-gl) { position: absolute; inset: 0; width: 100% !important; height: 100% !important; opacity: 0; transition: opacity 1s ease; }
+  :global(.route-gl.on) { opacity: 1; }
+  .fl-hud { position: absolute; top: clamp(70px, 10vh, 100px); left: 0; right: 0; text-align: center; z-index: 2; text-shadow: 0 2px 16px rgb(0 0 0 / .35); }
+  .fl-k { font-family: 'Archivo Variable', sans-serif; font-size: clamp(22px, 2.4vw, 34px); font-weight: 800; letter-spacing: -.02em; text-transform: uppercase; }
+  .fl-date { font-size: 13px; opacity: .85; margin-top: 2px; }
+  .fl-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 640px; margin: 18px auto 0; padding: 0 20px; }
+  .fl-stats dt { font-size: 12px; opacity: .8; }
+  .fl-stats dd { margin-top: 2px; }
+  .fl-stats b { font-family: 'Archivo Variable', sans-serif; font-size: clamp(34px, 4.4vw, 64px); font-weight: 800; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+  .fl-stats small { display: block; font-size: 12px; opacity: .8; }
+  .fl-note { position: absolute; right: 20px; bottom: 16px; z-index: 2; font-size: 11px; opacity: .7; }
+  .fl-after { padding-block: 20px clamp(70px, 12vh, 140px); }
+  .l-sum { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+  .l-sum div { background: var(--card); border-radius: 18px; padding: 14px 16px; }
   .l-sum dt { font-size: 12px; color: var(--mute); }
   .l-sum dd { font-size: clamp(16px, 1.4vw, 20px); font-weight: 600; margin-top: 4px; font-variant-numeric: tabular-nums; }
 
@@ -378,9 +373,11 @@ const nav = [
     .runs li { grid-template-columns: 1fr 1fr 1fr; }
     .r-t { display: none; }
     .p-head { flex-direction: column; align-items: start; gap: 8px; }
-    .p-nav { display: none; }
-    .p-item { width: 72vw; }
-    .l-head { flex-direction: column; align-items: start; }
+    .p-grid { grid-template-columns: repeat(6, 1fr); row-gap: 36px; }
+    .p1 { grid-column: 1 / 7; } .p2 { grid-column: 3 / 7; margin-top: 0; } .p3 { grid-column: 1 / 5; }
+    .p4 { grid-column: 2 / 7; margin-top: 0; } .p5 { grid-column: 1 / 4; margin-top: 0; } .p6 { grid-column: 4 / 7; margin-top: 18vh; } .p7 { grid-column: 1 / 7; }
+    .fl-panel { border-radius: 28px; }
+    .fl-stats { padding: 0 8px; }
     .l-sum { grid-template-columns: repeat(2, 1fr); }
     .cta-panel { border-radius: 28px; }
     .g-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -399,30 +396,32 @@ const nav = [
   import { ScrollTrigger } from 'gsap/ScrollTrigger'
   import { SplitText } from 'gsap/SplitText'
   import { mountHeroGL } from '../scripts/about-hero-gl'
+  import { mountRoute } from '../scripts/about-route'
   gsap.registerPlugin(ScrollTrigger, SplitText)
   const $ = <T extends Element = HTMLElement>(s: string) => document.querySelector<T>(s)
   const $$ = <T extends Element = HTMLElement>(s: string) => [...document.querySelectorAll<T>(s)]
 
-  // photo strip: arrows + drag with a mouse (touch scrolls natively)
-  const strip = $('[data-strip]')
-  if (strip) {
-    const prev = $<HTMLButtonElement>('[data-prev]'), next = $<HTMLButtonElement>('[data-next]')
-    const sync = () => { const max = strip.scrollWidth - strip.clientWidth; if (prev) prev.disabled = strip.scrollLeft < 4; if (next) next.disabled = strip.scrollLeft > max - 4 }
-    const step = () => ($('.p-item') as HTMLElement).offsetWidth + 14
-    prev?.addEventListener('click', () => strip.scrollBy({ left: -step(), behavior: 'smooth' }))
-    next?.addEventListener('click', () => strip.scrollBy({ left: step(), behavior: 'smooth' }))
-    strip.addEventListener('scroll', sync, { passive: true })
-    let down = false, sx = 0, sl = 0, moved = false
-    strip.addEventListener('pointerdown', (e) => { if (e.pointerType !== 'mouse') return; down = true; moved = false; sx = e.clientX; sl = strip.scrollLeft; strip.style.scrollSnapType = 'none' })
-    addEventListener('pointermove', (e) => { if (!down) return; const dx = e.clientX - sx; if (Math.abs(dx) > 3) moved = true; strip.scrollLeft = sl - dx })
-    addEventListener('pointerup', () => { if (!down) return; down = false; strip.style.scrollSnapType = '' })
-    strip.addEventListener('click', (e) => { if (moved) { e.preventDefault(); e.stopPropagation() } }, true)
-    sync()
-  }
-
   const reduceM = matchMedia('(prefers-reduced-motion: reduce)').matches
   const photo = $('[data-gl-src]')
   const heroGL = photo ? mountHeroGL(photo, photo.dataset.glSrc!, reduceM) : null
+
+  // ── long-run flyover: route + live readout driven by the same 0..1 ──
+  const data = JSON.parse(document.getElementById('run-stream')!.textContent || '{}') as { km: number[]; hr: number[]; v: number[]; kmMax: number }
+  const flyHost = $('[data-fly-host]')
+  const route = flyHost ? mountRoute(flyHost, reduceM) : null
+  const F = (k: string) => $(`[data-f="${k}"]`)!
+  const paceOf = (ms: number) => { if (!ms || ms < 0.5) return '–'; const s = 1000 / ms; return `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, '0')}` }
+  function fly (t: number) {
+    route?.set(t)
+    const n = data.hr?.length || 0
+    if (!n) return
+    const i = Math.min(n - 1, Math.round(t * (n - 1)))
+    const w = data.v.slice(Math.max(0, i - 3), i + 4)
+    F('km').textContent = (t * data.kmMax).toFixed(1)
+    F('hr').textContent = t > 0.003 ? String(data.hr[i]) : '–'
+    F('pace').textContent = t > 0.003 ? paceOf(w.reduce((a, b) => a + b, 0) / w.length) : '–'
+  }
+  fly(reduceM ? 1 : 0)
 
   const mm = gsap.matchMedia()
   mm.add('(prefers-reduced-motion: no-preference)', () => {
@@ -454,19 +453,24 @@ const nav = [
     $$('[data-up]').forEach((el) => gsap.from(el, { y: 50, autoAlpha: 0, duration: 1.1, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 88%' } }))
     ScrollTrigger.batch('[data-card]', { start: 'top 90%', once: true, onEnter: (els) => gsap.from(els, { y: 60, autoAlpha: 0, duration: 1.1, stagger: 0.08, ease: 'expo.out' }) })
     gsap.from('[data-row]', { x: 20, autoAlpha: 0, duration: 0.6, stagger: 0.05, ease: 'power2.out', scrollTrigger: { trigger: '.runs', start: 'top 85%' } })
-    gsap.from('[data-photo]', { x: 120, autoAlpha: 0, duration: 1.2, stagger: 0.06, ease: 'expo.out', scrollTrigger: { trigger: '[data-strip]', start: 'top 85%' } })
+    // photos: each frame wipes open from the bottom while the image settles, then drifts at its own speed
+    $$('[data-photo]').forEach((el) => {
+      const frame = el.querySelector('.p-frame')!, img = el.querySelector('.p-img')!
+      gsap.timeline({ scrollTrigger: { trigger: el, start: 'top 90%' } })
+        .from(frame, { clipPath: 'inset(100% 0% 0% 0% round 20px)', duration: 1.3, ease: 'expo.inOut' }, 0)
+        .from(img, { scale: 1.35, duration: 1.8, ease: 'expo.out' }, 0.1)
+        .from(el.querySelector('figcaption'), { y: 12, autoAlpha: 0, duration: 0.8, ease: 'power2.out' }, 0.7)
+      const sp = parseFloat(el.dataset.speed || '0')
+      if (sp) gsap.to(el, { yPercent: -sp * 100, ease: 'none', scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true } })
+    })
 
     // 30-day total counts up
     const cnt = $('[data-count]')
     if (cnt) { const end = parseFloat(cnt.dataset.count!), o = { v: 0 }; gsap.to(o, { v: end, duration: 1.6, ease: 'power3.out', onUpdate: () => { cnt.textContent = o.v.toFixed(1) }, scrollTrigger: { trigger: cnt, start: 'top 85%' } }) }
 
-    // heart-rate line draws itself across the run
-    if ($('[data-line]')) {
-      gsap.set('[data-line]', { strokeDasharray: 1, strokeDashoffset: 1 })
-      gsap.timeline({ scrollTrigger: { trigger: '.l-chart', start: 'top 80%', end: 'bottom 50%', scrub: 1 } })
-        .to('[data-line]', { strokeDashoffset: 0, ease: 'none' }, 0)
-        .from('[data-area]', { autoAlpha: 0, ease: 'none' }, 0.3)
-    }
+    // flyover follows the pinned section
+    const st = { t: 0 }
+    gsap.to(st, { t: 1, ease: 'none', onUpdate: () => fly(st.t), scrollTrigger: { trigger: '[data-fly]', start: 'top top', end: 'bottom bottom', scrub: 0.6 } })
 
     // CTA panel grows to full size as it arrives
     gsap.from('[data-cta]', { scale: 0.9, borderRadius: 64, ease: 'none', scrollTrigger: { trigger: '[data-cta]', start: 'top bottom', end: 'top 40%', scrub: true } })
