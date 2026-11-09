@@ -2,7 +2,8 @@
 import { Image } from 'astro:assets'
 import '@fontsource-variable/archivo/wdth.css'
 import Base from '../layouts/Base.astro'
-import cutout from '../assets/about/runner-cutout.png'
+import runner from '../assets/about/runner.jpg'
+import runnerBlur from '../assets/about/runner-blur.jpg'
 import { longRun, recent, month, gear, stream, syncedAt } from '../data/strava'
 import mRace from '../assets/about/moments/race.jpg'
 import mNight from '../assets/about/moments/night-road.jpg'
@@ -28,6 +29,7 @@ const lo = has ? Math.min(...hr) - 6 : 0, hi = has ? Math.max(...hr) + 4 : 1
 const line = has ? hr.map((b, i) => `${i ? 'L' : 'M'}${((km[i] / kmMax) * W).toFixed(1)} ${(H - ((b - lo) / (hi - lo)) * H).toFixed(1)}`).join(' ') : ''
 const area = has ? `${line} L${W} ${H} L0 ${H} Z` : ''
 const ticks = [0, 10, 20, 30, 40].filter((t) => t <= kmMax)
+const spark = has ? stream.hr.map((b, i) => `${i ? 'L' : 'M'}${((i / (stream.hr.length - 1)) * 200).toFixed(1)} ${(40 - ((b - lo) / (hi - lo)) * 40).toFixed(1)}`).join(' ') : ''
 
 const moments = [
   { src: mMorning, alt: 'Fadhel running past trees on a sunny morning', cap: 'Morning miles' },
@@ -52,29 +54,46 @@ const nav = [
 <Base nav={nav} page="About" theme="sport" title="About | Fadhel Ijlal Falah" description="Fadhel Ijlal Falah off the clock: running and riding, synced from Strava.">
 <main class="ab">
 
-  <!-- 1 · HERO: one panel, one word, one runner -->
+  <!-- 1 · HERO (pin 1 of 2) -->
   <section id="run" class="hero" data-hero>
-    <div class="h-panel">
-      <p class="h-word" data-word aria-hidden="true"><span>Runner</span></p>
-      <div class="h-runner" data-runner>
-        <Image src={cutout} alt="Fadhel mid-stride in a black tee and teal running shoes" widths={[420, 760]} sizes="(min-width: 900px) 34vw, 70vw" loading="eager" fetchpriority="high" class="h-img" />
+    <div class="h-stage">
+      <div class="h-photo" aria-hidden="true" data-gl-src={runner.src}>
+        <Image src={runnerBlur} alt="" widths={[900]} sizes="100vw" loading="eager" fetchpriority="high" class="ph" />
+        <Image src={runner} alt="" widths={[640, 1100]} sizes="100vw" loading="eager" class="ph sharp" />
+        <div class="h-shade"></div>
       </div>
+      <div class="h-grid" aria-hidden="true"><i></i><i></i><i></i></div>
 
-      <div class="h-top" data-in>
-        <h1 class="h-name">Fadhel Ijlal Falah<span>Runner, rider, data engineer</span></h1>
-        <p class="h-sync"><i></i>Strava synced {synced}</p>
+      <div class="h-in">
+        <p class="h-intro" data-fade>I run most nights and ride when the legs need a break. This page pulls from Strava, so the numbers stay current.</p>
+
+        <aside class="h-card" data-fade aria-label="Longest run in the last 30 days">
+          <p class="hc-k">Longest run, last 30 days</p>
+          <p class="hc-v">{longRun.km}<small>km</small></p>
+          {has && <svg viewBox="0 0 200 40" preserveAspectRatio="none" class="hc-spark" aria-hidden="true"><path d={spark} /></svg>}
+          <dl class="hc-s">
+            <div><dt>Pace</dt><dd>{longRun.movingPace}<small>/km</small></dd></div>
+            <div><dt>Moving</dt><dd>{longRun.moving}</dd></div>
+            <div><dt>Energy</dt><dd>{longRun.cal}<small>cal</small></dd></div>
+          </dl>
+        </aside>
+
+        <table class="h-runs" data-fade>
+          <caption>Recent runs</caption>
+          <thead><tr><th scope="col">Date</th><th scope="col">Km</th><th scope="col">Time</th><th scope="col">Pace</th></tr></thead>
+          <tbody>{recent.map((r) => <tr><td>{r.date}</td><td>{r.km}</td><td>{r.time}</td><td>{r.pace}</td></tr>)}</tbody>
+        </table>
+
+        <div class="h-month" data-fade>
+          <p><b>{month.km}</b> km</p>
+          <p>{month.runs} runs in the last 30 days</p>
+        </div>
+
+        <h1 class="h-word" aria-label="Run. Ride. Repeat.">
+          <span class="hw-run" data-split>Run.</span>
+          <span class="hw-sub" data-fade aria-hidden="true"><em>Ride.</em> Repeat.</span>
+        </h1>
       </div>
-
-      <dl class="h-stats" data-in>
-        <div><dt>Last 30 days</dt><dd>{month.km}<small>km</small></dd></div>
-        <div><dt>Runs</dt><dd>{month.runs}</dd></div>
-        <div><dt>Longest</dt><dd>{longRun.km}<small>km</small></dd></div>
-      </dl>
-
-      <a href={strava} target="_blank" rel="noopener" class="pill dark h-cta" data-in>
-        Follow on Strava
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" /></svg>
-      </a>
     </div>
   </section>
 
@@ -216,26 +235,49 @@ const nav = [
   .pill:hover svg { transform: rotate(45deg); }
   .pill:focus-visible, .round:focus-visible, .p-strip:focus-visible { outline: 3px solid var(--or); outline-offset: 3px; }
 
-  /* ── hero ── */
-  .hero { padding: 10px; }
-  .h-panel { position: relative; height: calc(100svh - 20px); min-height: 620px; max-height: 1100px; border-radius: 36px; overflow: hidden; isolation: isolate;
-    background: radial-gradient(ellipse 55% 60% at 50% 72%, #ff9a5c 0%, transparent 70%), linear-gradient(170deg, #ff7a33 0%, #fc4c02 55%, #e84300 100%); }
-  .h-word { position: absolute; left: 0; right: 0; top: 50%; translate: 0 -62%; z-index: -1; text-align: center; white-space: nowrap; pointer-events: none;
-    font-size: clamp(120px, 22vw, 400px); font-weight: 900; font-stretch: 100%; letter-spacing: -.06em; line-height: .8; color: #fff4ec; }
-  .h-word span { display: inline-block; }
-  .h-runner { position: absolute; left: 50%; bottom: -2%; height: 90%; translate: -50% 0; will-change: transform; }
-  .h-img { height: 100%; width: auto; filter: drop-shadow(0 40px 40px rgb(80 20 0 / .35)); }
-  .h-top { position: absolute; top: clamp(84px, 11vh, 110px); left: clamp(20px, 3vw, 44px); right: clamp(20px, 3vw, 44px); display: flex; justify-content: space-between; align-items: start; gap: 20px; }
-  .h-name { font-size: clamp(18px, 1.6vw, 24px); font-weight: 600; line-height: 1.2; letter-spacing: -.01em; }
-  .h-name span { display: block; font-size: 14px; font-weight: 400; color: rgb(17 18 20 / .7); margin-top: 4px; }
-  .h-sync { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; padding: 8px 14px; border-radius: 99px; background: rgb(255 255 255 / .28); }
-  .h-sync i { width: 7px; height: 7px; border-radius: 50%; background: var(--ink); animation: blink 2s infinite; }
-  @keyframes blink { 50% { opacity: .25; } }
-  .h-stats { position: absolute; left: clamp(20px, 3vw, 44px); bottom: clamp(20px, 3vw, 40px); display: flex; gap: clamp(20px, 3vw, 48px); }
-  .h-stats dt { font-size: 13px; color: rgb(17 18 20 / .7); }
-  .h-stats dd { font-family: 'Archivo Variable', sans-serif; font-size: clamp(32px, 3.4vw, 56px); font-weight: 800; letter-spacing: -.04em; line-height: 1; margin-top: 4px; font-variant-numeric: tabular-nums; }
-  .h-stats small { font-size: .38em; font-weight: 600; letter-spacing: 0; margin-left: 3px; }
-  .h-cta { position: absolute; right: clamp(20px, 3vw, 44px); bottom: clamp(20px, 3vw, 40px); }
+  /* ── hero (live version) ── */
+  .h-word { font-family: 'Archivo Variable', sans-serif; font-stretch: 125%; font-weight: 800; text-transform: uppercase; letter-spacing: -.035em; line-height: .86; }
+  .hero { position: relative; height: 200vh; }
+  .h-stage { position: sticky; top: 0; height: 100svh; overflow: hidden; color: #fff; }
+  .h-photo { position: absolute; inset: 0; will-change: transform; }
+  .ph { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+  .sharp { --m: radial-gradient(ellipse 16% 34% at 41% 32%, #000 55%, rgb(0 0 0 / .55) 78%, transparent 100%); -webkit-mask-image: var(--m); mask-image: var(--m); }
+  @media (max-width: 900px) { .sharp { --m: radial-gradient(ellipse 34% 20% at 45% 33%, #000 55%, rgb(0 0 0 / .55) 78%, transparent 100%); } }
+  :global(.h-gl) { position: absolute; inset: 0; width: 100% !important; height: 100% !important; opacity: 0; transition: opacity .9s ease; }
+  :global(.h-gl.on) { opacity: 1; }
+  /* corner scrims: top-left behind the intro, bottom-left behind the headline, a warm Strava glow at the bottom right */
+  .h-intro, .h-card, .h-runs, .h-month { filter: opacity(calc(1 - var(--out, 0))); }
+  .h-shade { position: absolute; inset: 0; z-index: 2; pointer-events: none; background:
+    radial-gradient(ellipse 55% 45% at 0% 0%, rgb(14 14 18 / .62), rgb(14 14 18 / .25) 45%, transparent 75%),
+    radial-gradient(ellipse 75% 60% at 0% 100%, rgb(14 14 18 / .72), rgb(14 14 18 / .3) 50%, transparent 80%),
+    radial-gradient(ellipse 50% 45% at 100% 100%, rgb(252 76 2 / .5), rgb(252 76 2 / .16) 45%, transparent 75%),
+    linear-gradient(180deg, transparent 60%, rgb(14 14 18 / .25)); }
+  .h-grid { position: absolute; inset: 0 clamp(20px, 4vw, 56px); display: grid; grid-template-columns: repeat(4, 1fr); pointer-events: none; }
+  .h-grid i { border-left: 1px solid rgb(255 255 255 / .14); }
+  .h-grid i:last-child { border-right: 1px solid rgb(255 255 255 / .14); }
+  .h-in { position: relative; height: 100%; padding: 104px clamp(20px, 4vw, 56px) 0; display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: auto 1fr auto; column-gap: 0; }
+  .h-intro { grid-column: 1 / 2; font-size: 15px; line-height: 1.5; padding-right: 20px; max-width: 30ch; }
+  .h-card { grid-column: 4; grid-row: 1 / 3; align-self: start; justify-self: end; width: 100%; max-width: 300px; padding: 16px 18px; background: rgb(255 255 255 / .14); border: 1px solid rgb(255 255 255 / .35); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+  .hc-k { font-size: 12px; opacity: .85; }
+  .hc-v { font-size: 40px; font-weight: 750; font-stretch: 110%; letter-spacing: -.03em; line-height: 1.05; margin-top: 2px; }
+  .hc-v small, .hc-s small { font-size: .42em; font-weight: 500; margin-left: 3px; opacity: .85; }
+  .hc-spark { width: 100%; height: 40px; margin: 10px 0; }
+  .hc-spark path { fill: none; stroke: var(--or); stroke-width: 2; vector-effect: non-scaling-stroke; }
+  .hc-s { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgb(255 255 255 / .3); padding-top: 10px; }
+  .hc-s dt { font-size: 11px; opacity: .8; }
+  .hc-s dd { font-size: 15px; font-weight: 650; font-variant-numeric: tabular-nums; }
+  .h-runs { grid-column: 3; grid-row: 2; align-self: start; margin: 24px 20px 0 20px; border-collapse: collapse; font-size: 12.5px; font-variant-numeric: tabular-nums; }
+  .h-runs caption { text-align: left; font-size: 12px; opacity: .8; padding-bottom: 6px; }
+  .h-runs th { text-align: left; font-weight: 500; opacity: .6; padding: 4px 10px 4px 0; border-bottom: 1px solid rgb(255 255 255 / .3); }
+  .h-runs td { padding: 6px 10px 6px 0; border-bottom: 1px solid rgb(255 255 255 / .14); }
+  .h-runs tbody tr:nth-child(n+4) { opacity: .55; }
+  .h-month { grid-column: 4; grid-row: 2; align-self: end; justify-self: end; text-align: right; padding-bottom: 24px; }
+  .h-month b { font-size: 44px; font-weight: 750; font-stretch: 110%; letter-spacing: -.03em; }
+  .h-month p + p { font-size: 13px; opacity: .85; }
+  .h-word { grid-column: 1 / -1; grid-row: 3; margin-left: -.04em; padding-bottom: 2vh; }
+  .hw-run { display: block; font-size: clamp(110px, 27vw, 420px); line-height: .78; white-space: nowrap; }
+  .hw-sub { display: block; font-size: clamp(22px, 3.2vw, 46px); margin: 10px 0 0 .3vw; }
+  .hw-sub em { font-style: normal; color: var(--or); }
 
   /* ── statement ── */
   .statement { padding-block: clamp(90px, 18vh, 200px) clamp(70px, 14vh, 160px); }
@@ -319,13 +361,18 @@ const nav = [
   .cta-t span { color: #fff4ec; }
 
   @media (max-width: 900px) {
-    .h-panel { min-height: 560px; border-radius: 28px; }
-    .h-word { font-size: 24.5vw; top: 44%; }
-    .h-runner { height: 72%; bottom: 74px; }
-    .h-top { flex-direction: column; gap: 12px; }
-    .h-stats { left: 12px; right: 12px; bottom: 12px; justify-content: space-between; gap: 8px; padding: 12px 16px; border-radius: 20px; background: rgb(255 255 255 / .9); }
-    .h-stats dd { font-size: 26px; }
-    .h-cta { display: none; }
+    .h-in { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto 1fr auto; padding-top: 92px; }
+    .h-grid { grid-template-columns: repeat(2, 1fr); }
+    .h-intro, .h-card, .h-month, .h-word { grid-column: 1; }
+    .h-intro { font-size: 14px; }
+    .h-card { grid-row: 4; justify-self: stretch; width: auto; max-width: none; min-width: 0; margin-bottom: 20px; padding: 14px; }
+    .hc-spark { display: none; }
+    .h-runs { display: none; }
+    .h-month { grid-row: 2; justify-self: start; text-align: left; padding: 14px 0 0; }
+    .h-month b { font-size: 32px; }
+    .h-word { grid-row: 3; align-self: end; }
+    .hw-run { font-size: 31vw; }
+    .hw-sub { font-size: 7vw; margin-bottom: 14px; }
     .n-grid { grid-template-columns: 1fr; }
     .n-big { min-height: 0; gap: 30px; }
     .runs li { grid-template-columns: 1fr 1fr 1fr; }
@@ -350,7 +397,9 @@ const nav = [
 <script>
   import { gsap } from 'gsap'
   import { ScrollTrigger } from 'gsap/ScrollTrigger'
-  gsap.registerPlugin(ScrollTrigger)
+  import { SplitText } from 'gsap/SplitText'
+  import { mountHeroGL } from '../scripts/about-hero-gl'
+  gsap.registerPlugin(ScrollTrigger, SplitText)
   const $ = <T extends Element = HTMLElement>(s: string) => document.querySelector<T>(s)
   const $$ = <T extends Element = HTMLElement>(s: string) => [...document.querySelectorAll<T>(s)]
 
@@ -371,29 +420,32 @@ const nav = [
     sync()
   }
 
+  const reduceM = matchMedia('(prefers-reduced-motion: reduce)').matches
+  const photo = $('[data-gl-src]')
+  const heroGL = photo ? mountHeroGL(photo, photo.dataset.glSrc!, reduceM) : null
+
   const mm = gsap.matchMedia()
   mm.add('(prefers-reduced-motion: no-preference)', () => {
-    // ── hero intro: the word rises, the runner steps up into it, details follow ──
-    gsap.set('[data-word] span', { yPercent: 40, autoAlpha: 0 })
-    gsap.set('[data-runner]', { yPercent: 14, autoAlpha: 0 })
-    gsap.set('[data-in]', { y: 16, autoAlpha: 0 })
-    const intro = () => gsap.timeline({ defaults: { ease: 'expo.out' } })
-      .to('[data-word] span', { yPercent: 0, autoAlpha: 1, duration: 1.4 }, 0)
-      .to('[data-runner]', { yPercent: 0, autoAlpha: 1, duration: 1.6 }, 0.15)
-      .to('[data-in]', { y: 0, autoAlpha: 1, duration: 1, stagger: 0.08 }, 0.5)
+    // ── hero intro: "RUN." rises letter by letter once the loader is gone ──
+    const runWord = new SplitText('.hw-run', { type: 'chars', charsClass: 'hc' })
+    gsap.set('.hw-run', { overflow: 'hidden' })
+    gsap.set(runWord.chars, { yPercent: 105 })
+    gsap.set('[data-fade]', { autoAlpha: 0, y: 14 })
+    const intro = () => {
+      gsap.timeline({ defaults: { ease: 'expo.out' } })
+        .to(runWord.chars, { yPercent: 0, duration: 1.3, stagger: 0.06, onComplete: () => gsap.set('.hw-run', { overflow: 'visible' }) })
+        .to('[data-fade]', { autoAlpha: 1, y: 0, duration: 0.8, stagger: 0.08 }, 0.35)
+    }
     ;(window as any).__booted ? intro() : document.addEventListener('boot:done', intro, { once: true })
 
-    // hero scroll: the word slides sideways behind the runner, the runner drifts up — the one depth effect
-    gsap.timeline({ scrollTrigger: { trigger: '[data-hero]', start: 'top top', end: 'bottom top', scrub: true } })
-      .to('[data-word]', { xPercent: -18, ease: 'none' }, 0)
-      .to('[data-runner]', { y: -60, scale: 1.04, ease: 'none' }, 0)
-
-    // pointer: runner and word shift at different depths
-    if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
-      const rx = gsap.quickTo('[data-runner]', 'x', { duration: 1, ease: 'power3' })
-      const wx = gsap.quickTo('[data-word] span', 'x', { duration: 1.2, ease: 'power3' })
-      $('[data-hero]')!.addEventListener('pointermove', (e) => { const n = e.clientX / innerWidth - 0.5; rx(n * 24); wx(-n * 50) })
-    }
+    // ── hero scroll (pinned by CSS sticky): photo zooms, the sharp ghost melts, letters spread ──
+    gsap.timeline({ scrollTrigger: { trigger: '[data-hero]', start: 'top top', end: 'bottom bottom', scrub: 1, onUpdate: (self) => heroGL?.progress(self.progress) } })
+      .to('.h-photo', { scale: 1.18, ease: 'none' }, 0)
+      .to('.sharp', { opacity: 0, ease: 'none' }, 0)
+      .to(runWord.chars, { xPercent: (i) => (i - 1.5) * 26, ease: 'none' }, 0)
+      // fade the hero details through a CSS variable, not opacity/transform: the intro animation owns those,
+      // and sharing them broke the hero when the page was opened scrolled down and then scrolled back up
+      .fromTo('.h-stage', { '--out': 0 }, { '--out': 1, ease: 'none', immediateRender: false }, 0.35)
 
     // statement: words light up one by one as it scrolls through
     gsap.to('[data-statement] span', { opacity: 1, stagger: 0.1, ease: 'none', scrollTrigger: { trigger: '[data-statement]', start: 'top 80%', end: 'bottom 45%', scrub: true } })
