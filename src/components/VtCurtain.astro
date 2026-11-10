@@ -12,7 +12,7 @@ const threads = Array.from({ length: N }, (_, i) => {
   return { d: 'M' + xs.map((x) => `${x} ${(cy(x) + k * band(x) * twist(x)).toFixed(1)}`).join('L'), o: (0.35 + 0.65 * (1 - Math.abs(k) * 2)).toFixed(2) }
 })
 const themes = {
-  about: { fill: ['#e8380d', '#fc4c02', '#ff9a3c'], stops: ['#ff6a1a', '#ffb347', '#ff4d6d', '#ffd08a', '#fc4c02'] },
+  about: { fill: ['#fc4c02', '#ff8a3d'], stops: ['#e84402', '#fc4c02', '#ff7a1a', '#ffa25c', '#ffc38a'] },
   home: { fill: ['#3b82f6', '#14b8a6'], stops: ['#2563eb', '#0ea5e9', '#22d3ee', '#14b8a6', '#10b981'] }
 }
 const wave = (id: string, t: { fill: string[]; stops: string[] }) => `<svg viewBox="0 0 ${VW} ${VH}" preserveAspectRatio="none" aria-hidden="true">
@@ -23,7 +23,7 @@ const wave = (id: string, t: { fill: string[]; stops: string[] }) => `<svg viewB
 const html = (id: 'about' | 'home') => {
   const w = wave(id, themes[id])
   const body = `linear-gradient(90deg,${themes[id].fill.join(',')})`
-  return `<div class="vt-curtain" data-to="${id}"><div class="vt-c-inner"><div class="vt-c-wave">${w}</div><div class="vt-c-body" style="background:${body}"></div><div class="vt-c-wave vt-c-flip">${w}</div></div></div>`
+  return `<div class="vt-curtain" data-to="${id}"><div class="vt-c-inner"><div class="vt-c-wave">${w}</div><div class="vt-c-body" style="background:${body};background-size:116% 100%;background-position:50% 0"></div><div class="vt-c-wave vt-c-flip">${w}</div></div></div>`
 }
 ---
 <template id="vt-curtain-about" set:html={html('about')} />

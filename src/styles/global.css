@@ -20,7 +20,7 @@ html:active-view-transition-type(to-about, to-home)::view-transition-new(root) {
 @keyframes vt-new { 0%, 49.99% { opacity: 0; transform: translateY(5%); } 50% { opacity: 1; } 100% { opacity: 1; transform: none; } }
 .vt-curtain { position: fixed; inset: 0; z-index: 2147483647; overflow: hidden; pointer-events: none; view-transition-name: curtain; }
 .vt-c-inner { --w: clamp(120px, 24vh, 280px); position: absolute; left: 0; right: 0; top: 0; height: calc(100vh + var(--w) * 2); display: flex; flex-direction: column; animation: vt-wave 1.15s cubic-bezier(.65,0,.35,1) both; }
-.vt-c-wave { height: var(--w); flex: none; margin: -1px 0; }
+.vt-c-wave { height: var(--w); flex: none; margin: -2px 0; position: relative; z-index: 1; }
 .vt-c-wave svg { display: block; width: 116%; height: 100%; margin-left: -8%; animation: vt-sway 1.15s ease-in-out both; }
 .vt-c-flip { transform: scale(-1, -1); }
 .vt-c-body { flex: 1; }
