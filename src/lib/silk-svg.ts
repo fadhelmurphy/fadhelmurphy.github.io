@@ -2,8 +2,8 @@
 export const VW = 1440, VH = 280
 const N = 34, step = 24
 export const cy = (x: number) => VH * 0.5 + Math.sin((x / VW) * Math.PI * 2 + 0.6) * VH * 0.16 + Math.sin((x / VW) * Math.PI * 0.9) * VH * 0.08
-const band = (x: number) => VH * (0.14 + 0.26 * Math.pow(Math.max(0, Math.sin(Math.PI * Math.min(1, Math.max(0, x / VW)))), 1.2))
-const twist = (x: number) => 0.55 + 0.45 * Math.sin((x / VW) * Math.PI * 2.4 + 1.1)
+export const band = (x: number) => VH * (0.14 + 0.26 * Math.pow(Math.max(0, Math.sin(Math.PI * Math.min(1, Math.max(0, x / VW)))), 1.2))
+export const twist = (x: number) => 0.55 + 0.45 * Math.sin((x / VW) * Math.PI * 2.4 + 1.1)
 
 // wavy edge: area above the ribbon's centre line
 export function edgePath () {
