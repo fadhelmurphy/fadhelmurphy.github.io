@@ -148,19 +148,31 @@ const { links = homeLinks, page = 'Menu', theme } = Astro.props
   @keyframes swap { 0% { opacity: 0; transform: translateY(8px); filter: blur(4px); } 100% { opacity: 1; transform: none; filter: none; } }
   @media (prefers-reduced-motion: reduce) { .island-inner, .island-item { transition: none !important; } }
 
-  /* sport theme (About): the default light glass pill, with Strava orange instead of blue/green */
-  #island[data-theme='sport'] { background: linear-gradient(120deg, rgb(252 76 2 / .45), rgb(255 255 255 / .9) 45%, rgb(255 160 101 / .5)); box-shadow: 0 10px 30px -14px rgb(252 76 2 / .3); }
+  /* sport theme (About): the site's pill as clear glass like the hero's longest-run card, Strava orange accents.
+     data-tone (set by the About page) says what's behind it: 'dark' (photo, map, CTA) → white type, 'light' → ink type */
+  #island[data-theme='sport'] { padding: 0; background: none; box-shadow: 0 30px 60px -30px rgb(8 8 16 / .5); }
+  #island[data-theme='sport'] .island-inner { border-radius: 26px; border: 1px solid rgb(255 255 255 / .38);
+    background: linear-gradient(150deg, rgb(255 255 255 / .26), rgb(255 255 255 / .08));
+    backdrop-filter: blur(18px) saturate(150%); -webkit-backdrop-filter: blur(18px) saturate(150%); transition-property: width, height, border-radius, background, border-color; }
+  #island[data-theme='sport'].open .island-inner { border-radius: 28px; background: linear-gradient(150deg, rgb(40 40 47 / .97), rgb(24 24 30 / .96)); backdrop-filter: blur(28px) saturate(150%); -webkit-backdrop-filter: blur(28px) saturate(150%); }
+  #island[data-theme='sport'] .text-navy { color: #fff; transition: color .3s ease; }
+  #island[data-theme='sport'] .text-slate-500 { color: rgb(255 255 255 / .7); }
+  #island[data-theme='sport'] .text-slate-400 { color: rgb(255 255 255 / .55); }
+  #island[data-theme='sport'] #island-toggle, #island[data-theme='sport'] .island-top { background: rgb(255 255 255 / .14); }
+  #island[data-theme='sport'] #island-toggle:hover, #island[data-theme='sport'] .island-top:hover,
+  #island[data-theme='sport'] .island-link:hover, #island[data-theme='sport'] .island-sub:hover { background: rgb(255 255 255 / .1); }
+  #island[data-theme='sport'] .island-ringsvg circle:first-child { stroke: rgb(255 255 255 / .25); }
   #island[data-theme='sport'] #ring stop { stop-color: #fc4c02; }
   #island[data-theme='sport'] #ring stop + stop { stop-color: #ffa065; }
   #island[data-theme='sport'] .island-check circle { fill: #fc4c02; }
-  #island[data-theme='sport'] .island-ic { background: #fff1e9; color: #fc4c02; }
+  #island[data-theme='sport'] .island-ic { background: rgb(255 255 255 / .12); color: #ff8a4c; }
   #island[data-theme='sport'] .island-link.active .island-ic { background: #fc4c02; color: #fff; }
   #island[data-theme='sport'] .island-cta { background: linear-gradient(110deg, #fc4c02, #ff7a33 50%, #ffa065); }
-  /* same pill as the rest of the site, but see-through frosted glass */
-  #island[data-theme='sport'] .island-inner { background: rgb(255 255 255 / .38); backdrop-filter: blur(22px) saturate(180%); -webkit-backdrop-filter: blur(22px) saturate(180%); }
-  #island[data-theme='sport'].open .island-inner { background: rgb(255 255 255 / .72); }
-  #island[data-theme='sport'] #island-toggle { background: rgb(255 255 255 / .35); }
-  #island[data-theme='sport'] #island-toggle:hover { background: rgb(255 255 255 / .55); }
+  /* over the light parts of the page: same glass, a touch whiter, ink type */
+  #island[data-theme='sport'][data-tone='light']:not(.open) .island-inner { background: linear-gradient(150deg, rgb(255 255 255 / .62), rgb(255 255 255 / .34)); border-color: rgb(255 255 255 / .8); }
+  #island[data-theme='sport'][data-tone='light']:not(.open) .text-navy { color: #16171b; }
+  #island[data-theme='sport'][data-tone='light']:not(.open) #island-toggle { background: rgb(0 0 0 / .05); }
+  #island[data-theme='sport'][data-tone='light']:not(.open) .island-ringsvg circle:first-child { stroke: rgb(0 0 0 / .1); }
 </style>
 
 <script>
