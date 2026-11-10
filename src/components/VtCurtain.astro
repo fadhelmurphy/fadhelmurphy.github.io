@@ -23,7 +23,7 @@ const wave = (id: string, t: { fill: string[]; stops: string[] }) => `<svg viewB
 const html = (id: 'about' | 'home') => {
   const w = wave(id, themes[id])
   const body = `linear-gradient(90deg,${themes[id].fill.join(',')})`
-  return `<div class="vt-curtain" data-to="${id}"><div class="vt-c-inner"><div class="vt-c-wave">${w}</div><div class="vt-c-body" style="background:${body};background-size:116% 100%;background-position:50% 0"></div><div class="vt-c-wave vt-c-flip">${w}</div></div></div>`
+  return `<div class="vt-curtain" data-to="${id}"><div class="vt-c-inner"><div class="vt-c-wave">${w}</div><div class="vt-c-body" style="background:${body}"></div><div class="vt-c-wave vt-c-flip">${w}</div></div></div>`
 }
 ---
 <template id="vt-curtain-about" set:html={html('about')} />
