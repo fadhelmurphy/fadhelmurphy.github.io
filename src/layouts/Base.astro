@@ -36,6 +36,12 @@ const canonical = new URL(Astro.url.pathname, Astro.site)
 window.__skipBoot=s||i;if(window.__skipBoot)document.documentElement.classList.add('booted')
 // a prerendered page waits until it is actually shown before its intro plays
 window.__bootDone=function(){function d(){window.__booted=true;document.dispatchEvent(new Event('boot:done'))}document.prerendering?document.addEventListener('prerenderingchange',d,{once:true}):d()}})()</script>
+    <!-- pick the page transition by destination; the curtain exists only while the transition runs -->
+    <script is:inline>addEventListener('pagereveal',function(e){var vt=e.viewTransition;if(!vt||!vt.types)return
+var about=location.pathname.indexOf('/about')===0,home=location.pathname==='/';if(!about&&!home)return
+vt.types.add(about?'to-about':'to-home')
+var c=document.createElement('div');c.className='vt-curtain';c.style.background=about?'#fc4c02':'linear-gradient(135deg,#60a5fa,#14b8a6)'
+document.documentElement.appendChild(c);vt.finished.finally(function(){c.remove()})})</script>
     <!-- instant page switches: Chromium prerenders the next page (About right away, other links on hover), so clicking just swaps it in -->
     <script is:inline type="speculationrules" set:html={JSON.stringify({ prerender: [
       ...(Astro.url.pathname.startsWith('/about') ? [] : [{ source: 'list', urls: ['/about/'], eagerness: 'immediate' }]),

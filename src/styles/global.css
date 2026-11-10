@@ -8,9 +8,18 @@
 
 :root { color-scheme: only light; }
 
-/* page-to-page crossfade instead of a blank flash (Chrome, Edge, Safari 18.2+) */
+/* page-to-page transition (Chrome, Edge, Safari 18.2+): a colour curtain sweeps up and the next page opens behind it.
+   Home → About uses the Strava orange, back to Home the site's blue; anything else is a short crossfade. */
 @view-transition { navigation: auto; }
 ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .35s; }
+html:active-view-transition-type(to-about, to-home)::view-transition-old(root) { animation: vt-sink .9s cubic-bezier(.76,0,.24,1) both; }
+html:active-view-transition-type(to-about, to-home)::view-transition-new(root) { animation: vt-open .9s cubic-bezier(.76,0,.24,1) both; }
+html:active-view-transition-type(to-about, to-home)::view-transition-new(curtain) { animation: vt-sweep .9s cubic-bezier(.76,0,.24,1) both; }
+::view-transition-group(curtain) { z-index: 2; }
+@keyframes vt-sink { to { transform: translateY(-12%) scale(.96); filter: brightness(.85); } }
+@keyframes vt-open { 0%, 30% { clip-path: inset(100% 0 0 0); } 100% { clip-path: inset(0); } }
+@keyframes vt-sweep { 0% { transform: translateY(100%); } 45% { transform: translateY(0); } 100% { transform: translateY(-100%); } }
+.vt-curtain { position: fixed; inset: 0; z-index: 2147483647; pointer-events: none; view-transition-name: curtain; }
 @media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }
 
 /* tokens carried over from the live site */
