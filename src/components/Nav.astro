@@ -114,7 +114,7 @@ const { links = homeLinks, page = 'Menu', theme } = Astro.props
     background: linear-gradient(120deg, rgb(37 99 235 / .45), rgb(255 255 255 / .9) 40%, rgb(16 185 129 / .45));
     box-shadow: 0 10px 30px -14px rgb(37 99 235 / .35);
     transition: border-radius .6s var(--spring, cubic-bezier(.32,.72,0,1)); }
-  .island-inner { border-radius: 25px; background: rgb(255 255 255 / .82); backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%); overflow: hidden; will-change: width, height;
+  .island-inner { border-radius: 25px; background: rgb(255 255 255 / .82); backdrop-filter: blur(24px) saturate(180%); overflow: hidden; will-change: width, height;
     transition: width .62s var(--spring, cubic-bezier(.32,.72,0,1)), height .62s var(--spring, cubic-bezier(.32,.72,0,1)), border-radius .62s var(--spring, cubic-bezier(.32,.72,0,1)), background .3s ease; }
   #island-row { width: 100%; }
   #island.open .island-inner { background: rgb(255 255 255 / 1); border-radius: 28px; }
@@ -153,8 +153,17 @@ const { links = homeLinks, page = 'Menu', theme } = Astro.props
   #island[data-theme='sport'] { padding: 0; background: none; box-shadow: 0 30px 60px -30px rgb(8 8 16 / .5); }
   #island[data-theme='sport'] .island-inner { border-radius: 26px; border: 1px solid rgb(255 255 255 / .38);
     background: linear-gradient(150deg, rgb(255 255 255 / .26), rgb(255 255 255 / .08));
-    backdrop-filter: blur(18px) saturate(150%); -webkit-backdrop-filter: blur(18px) saturate(150%); transition-property: width, height, border-radius, background, border-color; }
-  #island[data-theme='sport'].open .island-inner { border-radius: 28px; background: linear-gradient(150deg, rgb(40 40 47 / .97), rgb(24 24 30 / .96)); backdrop-filter: blur(28px) saturate(150%); -webkit-backdrop-filter: blur(28px) saturate(150%); }
+    backdrop-filter: blur(18px) saturate(150%); transition-property: width, height, border-radius, background, border-color; }
+  #island[data-theme='sport'].open .island-inner { border-radius: 28px; border-color: rgb(255 255 255 / .9); background: linear-gradient(150deg, rgb(255 255 255 / .9), rgb(255 255 255 / .8)); backdrop-filter: blur(28px) saturate(170%); }
+  /* expanded: frosted white like a light glass card, ink type */
+  #island[data-theme='sport'].open .text-navy { color: #16171b; }
+  #island[data-theme='sport'].open .text-slate-500 { color: #6f727c; }
+  #island[data-theme='sport'].open .text-slate-400 { color: #9a9ca3; }
+  #island[data-theme='sport'].open #island-toggle, #island[data-theme='sport'].open .island-top { background: rgb(0 0 0 / .05); }
+  #island[data-theme='sport'].open .island-link:hover, #island[data-theme='sport'].open .island-sub:hover, #island[data-theme='sport'].open #island-toggle:hover { background: rgb(0 0 0 / .04); }
+  #island[data-theme='sport'].open .island-ic { background: #fff1e9; color: #fc4c02; }
+  #island[data-theme='sport'].open .island-link.active .island-ic { background: #fc4c02; color: #fff; }
+  #island[data-theme='sport'].open .island-ringsvg circle:first-child { stroke: rgb(0 0 0 / .1); }
   #island[data-theme='sport'] .text-navy { color: #fff; transition: color .3s ease; }
   #island[data-theme='sport'] .text-slate-500 { color: rgb(255 255 255 / .7); }
   #island[data-theme='sport'] .text-slate-400 { color: rgb(255 255 255 / .55); }

@@ -56,7 +56,7 @@ const lines = [
   /* light glass badges */
   .live-hero :global(.chip-full), .live-hero :global(.chip-free) {
     color: #2e3e6a; border: 1px solid rgb(255 255 255 / .75);
-    backdrop-filter: blur(14px) saturate(160%); -webkit-backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%); backdrop-filter: blur(14px) saturate(160%);
     box-shadow: none !important;
   }
   .live-hero :global(.chip-full) { background: linear-gradient(135deg, rgb(110 231 183 / .35), rgb(255 255 255 / .35)); }
@@ -66,7 +66,7 @@ const lines = [
   .live-hero :global(.chip-full)::before { background: #10b981; }
   .live-hero :global(.chip-free)::before { background: #3b82f6; }
   .hero-fade { height: 16%; background: linear-gradient(to bottom, rgb(255 255 255 / 0), rgb(255 255 255 / .5) 55%, #fff);
-    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
     -webkit-mask-image: linear-gradient(to bottom, transparent, #000 60%); mask-image: linear-gradient(to bottom, transparent, #000 60%); }
   @media (min-width: 768px) { .hero-fade { height: 14%; } }
   .stack-card { container-type: inline-size; }
