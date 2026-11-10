@@ -525,11 +525,12 @@ const nav = [
   .rd-card .mo-img { position: absolute; inset: 0; z-index: -1; }
   .rd-card::after { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: linear-gradient(180deg, rgb(0 0 0 / .22), transparent 22%, transparent 42%, rgb(10 10 12 / .55) 70%, rgb(10 10 12 / .78)); }
   /* progressive blur over the lower part of the photo, like the case cards on rondesignlab.com */
-  .rd-blur { position: absolute; inset: auto 0 0; height: 62%; z-index: 0; pointer-events: none; backdrop-filter: blur(26px) saturate(1.2); -webkit-backdrop-filter: blur(26px) saturate(1.2);
-    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 42%); mask-image: linear-gradient(180deg, transparent 0%, #000 42%); }
+  .rd-blur { position: absolute; inset: auto 0 0; height: 50%; z-index: 0; pointer-events: none; background: rgb(28 28 32 / .28);
+    backdrop-filter: blur(64px) saturate(1.3);
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, rgb(0 0 0 / .75) 14%, #000 26%); mask-image: linear-gradient(180deg, transparent 0%, rgb(0 0 0 / .75) 14%, #000 26%); }
   .rd-body { position: absolute; z-index: 1; inset: auto 0 0; padding: 0 clamp(24px, 4vw, 34px) clamp(26px, 4vw, 34px); color: #fff; }
   .rd-chips { position: absolute; z-index: 1; top: 18px; right: 18px; display: flex; gap: 8px; }
-  .rd-chip, .rd .mo-btn { background: rgb(60 60 64 / .42); border: 1px solid rgb(255 255 255 / .12); color: #fff; backdrop-filter: blur(18px) saturate(1.4); -webkit-backdrop-filter: blur(18px) saturate(1.4); }
+  .rd-chip, .rd .mo-btn { background: rgb(60 60 64 / .42); border: 1px solid rgb(255 255 255 / .12); color: #fff; backdrop-filter: blur(18px) saturate(1.4); }
   .rd-chip { padding: 10px 16px; border-radius: 999px; font-size: 16px; font-weight: 500; line-height: 1; white-space: nowrap; }
   .rd-t { margin: 0; color: #fff; font: 400 clamp(38px, 10vw, 52px)/1.02 'Urbanist Variable', var(--sans); letter-spacing: -.025em; }
   .rd .mo-btn svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
@@ -539,7 +540,7 @@ const nav = [
   .rd .mo-btn:disabled { opacity: .35; }
   .rd-desc { margin: 14px 0 0; max-width: 420px; font-size: clamp(17px, 4.6vw, 20px); line-height: 1.5; font-weight: 300; color: rgb(255 255 255 / .78); letter-spacing: -.005em; }
   .rd .rd-desc b { color: #fff; font-weight: 700; }
-  .rd-pill { display: inline-flex; align-items: center; gap: 12px; margin-top: 20px; padding: 13px 22px; border-radius: 999px; font-size: 17px; font-weight: 500; color: #fff; background: rgb(255 255 255 / .16); border: 1px solid rgb(255 255 255 / .18); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+  .rd-pill { display: inline-flex; align-items: center; gap: 12px; margin-top: 20px; padding: 13px 22px; border-radius: 999px; font-size: 17px; font-weight: 500; color: #fff; background: rgb(255 255 255 / .16); border: 1px solid rgb(255 255 255 / .18); backdrop-filter: blur(12px); }
   .rd-n { font-size: 13px; font-weight: 600; color: rgb(255 255 255 / .6); font-variant-numeric: tabular-nums; }
   .rd .mo-bar { width: min(200px, 50vw); margin: clamp(30px, 5vh, 50px) auto 0; height: 3px; border-radius: 99px; overflow: hidden; background: #e4e4e7; }
   .rd .mo-bar i { background: #111; }
