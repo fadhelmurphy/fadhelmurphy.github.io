@@ -97,41 +97,6 @@ const nav = [
     </div>
   </section>
 
-  <!-- 2 · STATEMENT: words light up as you scroll -->
-  <section class="statement wrap">
-    <p class="st-k">About</p>
-    <p class="st-text" data-statement>{statement.split(' ').map((w) => <span>{w} </span>)}</p>
-  </section>
-
-  <!-- 3 · NUMBERS -->
-  <section class="numbers wrap" aria-labelledby="n-title">
-    <h2 id="n-title" class="sec-k">The last 30 days</h2>
-    <div class="n-grid">
-      <article class="card n-big" data-card>
-        <p class="c-k">Distance</p>
-        <p class="n-v"><b data-count={month.km}>{month.km}</b><span>km</span></p>
-        <p class="c-note">across {month.runs} runs</p>
-      </article>
-      <article class="card n-long" data-card>
-        <p class="c-k">Longest run</p>
-        <p class="n-v sm"><b>{longRun.km}</b><span>km</span></p>
-        <dl class="n-mini">
-          <div><dt>Pace</dt><dd>{longRun.movingPace}/km</dd></div>
-          <div><dt>Moving</dt><dd>{longRun.moving}</dd></div>
-          <div><dt>Avg HR</dt><dd>{longRun.avgHr}</dd></div>
-        </dl>
-      </article>
-      <article class="card n-list" data-card>
-        <p class="c-k">Recent runs</p>
-        <ul class="runs">
-          {recent.map((r) => (
-            <li data-row><span class="r-d">{r.date}</span><b class="r-km">{r.km} km</b><span class="r-t">{r.time}</span><span class="r-p">{r.pace}/km</span></li>
-          ))}
-        </ul>
-      </article>
-    </div>
-  </section>
-
   <!-- 2b · horizontal photo strip: swipe / shift-scroll / arrows; the page keeps scrolling normally -->
   <section class="moments" aria-labelledby="mo-title">
    <div class="mo-stage">
@@ -178,12 +143,9 @@ const nav = [
   </section>
   <section class="wrap fl-after" aria-label="Long run summary">
     <dl class="l-sum">
-      <div><dt>Distance</dt><dd>{longRun.km} km</dd></div>
       <div><dt>Total time</dt><dd>{longRun.time}</dd></div>
-      <div><dt>Moving time</dt><dd>{longRun.moving}</dd></div>
-      <div><dt>Avg pace</dt><dd>{longRun.movingPace} /km</dd></div>
       <div><dt>Avg heart rate</dt><dd>{longRun.avgHr} bpm</dd></div>
-      <div><dt>Energy</dt><dd>{longRun.cal} cal</dd></div>
+      <div><dt>Elevation</dt><dd>{longRun.elev} m</dd></div>
     </dl>
   </section>
 
@@ -286,26 +248,6 @@ const nav = [
   .st-text { font-family: 'Archivo Variable', sans-serif; font-size: clamp(30px, 4.6vw, 72px); font-weight: 700; letter-spacing: -.035em; line-height: 1.08; max-width: 20ch; }
   .st-text span { opacity: .14; }
 
-  /* ── numbers ── */
-  .numbers { padding-bottom: clamp(70px, 12vh, 140px); }
-  .n-grid { display: grid; grid-template-columns: 1.1fr 1fr 1.4fr; gap: 14px; }
-  .n-v { display: flex; align-items: baseline; gap: 8px; margin-top: 14px; font-size: clamp(64px, 7vw, 120px); font-weight: 800; letter-spacing: -.05em; line-height: .9; font-variant-numeric: tabular-nums; }
-  .n-v.sm { font-size: clamp(52px, 5vw, 84px); }
-  .n-v span { font-size: 20px; font-weight: 600; letter-spacing: 0; color: var(--mute); }
-  .n-big { background: var(--ink); color: #fff; display: flex; flex-direction: column; justify-content: space-between; min-height: 340px; }
-  .n-big .c-k, .n-big .c-note, .n-big .n-v span { color: rgb(255 255 255 / .6); }
-  .n-big .n-v b { color: var(--or); }
-  .n-long { display: flex; flex-direction: column; justify-content: space-between; }
-  .n-mini { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--line); }
-  .n-mini dt { font-size: 12px; color: var(--mute); }
-  .n-mini dd { font-size: 16px; font-weight: 600; margin-top: 2px; font-variant-numeric: tabular-nums; }
-  .runs { margin-top: 12px; }
-  .runs li { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; align-items: baseline; gap: 8px; padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 15px; font-variant-numeric: tabular-nums; }
-  .runs li:last-child { border-bottom: 0; }
-  .r-d, .r-p { color: var(--mute); }
-  .r-km { font-weight: 600; }
-  .r-p { text-align: right; }
-
   /* ── moments (live version) ── */
   .mo-title { font-family: 'Archivo Variable', sans-serif; font-stretch: 125%; font-weight: 800; text-transform: uppercase; letter-spacing: -.035em; line-height: .86; }
   /* ── moments ── */
@@ -351,7 +293,7 @@ const nav = [
   .fl-stats small { display: block; font-size: 12px; opacity: .8; }
   .fl-note { position: absolute; right: 20px; bottom: 16px; z-index: 2; font-size: 11px; opacity: .7; }
   .fl-after { padding-block: 20px clamp(70px, 12vh, 140px); }
-  .l-sum { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+  .l-sum { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
   .l-sum div { background: var(--card); border-radius: 0; padding: 14px 16px; }
   .l-sum dt { font-size: 12px; color: var(--mute); }
   .l-sum dd { font-size: clamp(16px, 1.4vw, 20px); font-weight: 600; margin-top: 4px; font-variant-numeric: tabular-nums; }
@@ -386,15 +328,11 @@ const nav = [
     .h-word { grid-row: 3; align-self: end; }
     .hw-run { font-size: 31vw; }
     .hw-sub { font-size: 7vw; margin-bottom: 14px; }
-    .n-grid { grid-template-columns: 1fr; }
-    .n-big { min-height: 0; gap: 30px; }
-    .runs li { grid-template-columns: 1fr 1fr 1fr; }
-    .r-t { display: none; }
     .mo-head { flex-direction: column; align-items: start; }
     .mo-item { width: 70vw; }
     .mo-nav { display: none; }
     .fl-stats { padding: 0 8px; }
-    .l-sum { grid-template-columns: repeat(2, 1fr); }
+    .l-sum { grid-template-columns: repeat(3, 1fr); }
     .g-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
     .g-card { min-height: 0; padding: 18px; border-radius: 0; }
     .g-card .c-k { margin-top: 18px; }
@@ -494,19 +432,13 @@ const nav = [
       .fromTo('.h-stage', { '--out': 0 }, { '--out': 1, ease: 'none', immediateRender: false }, 0.35)
 
     // statement: words light up one by one as it scrolls through
-    gsap.to('[data-statement] span', { opacity: 1, stagger: 0.1, ease: 'none', scrollTrigger: { trigger: '[data-statement]', start: 'top 80%', end: 'bottom 45%', scrub: true } })
 
     // cards and titles rise in
     $$('[data-up]').forEach((el) => gsap.from(el, { y: 50, autoAlpha: 0, duration: 1.1, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 88%' } }))
     ScrollTrigger.batch('[data-card]', { start: 'top 90%', once: true, onEnter: (els) => gsap.from(els, { y: 60, autoAlpha: 0, duration: 1.1, stagger: 0.08, ease: 'expo.out' }) })
-    gsap.from('[data-row]', { x: 20, autoAlpha: 0, duration: 0.6, stagger: 0.05, ease: 'power2.out', scrollTrigger: { trigger: '.runs', start: 'top 85%' } })
     // photo strip drifts in from the right, title lines rise
     gsap.from('[data-mo] .mo-item', { x: 160, autoAlpha: 0, duration: 1.2, stagger: 0.07, ease: 'expo.out', scrollTrigger: { trigger: '.mo-strip', start: 'top 85%' } })
     gsap.from('.mo-title', { yPercent: 60, autoAlpha: 0, duration: 1.1, ease: 'expo.out', scrollTrigger: { trigger: '.mo-title', start: 'top 88%' } })
-
-    // 30-day total counts up
-    const cnt = $('[data-count]')
-    if (cnt) { const end = parseFloat(cnt.dataset.count!), o = { v: 0 }; gsap.to(o, { v: end, duration: 1.6, ease: 'power3.out', onUpdate: () => { cnt.textContent = o.v.toFixed(1) }, scrollTrigger: { trigger: cnt, start: 'top 85%' } }) }
 
     // flyover follows the pinned section
     const st = { t: 0 }
