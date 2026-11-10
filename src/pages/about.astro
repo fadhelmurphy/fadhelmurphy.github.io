@@ -450,10 +450,10 @@ const nav = [
   .gear { padding: clamp(60px, 10vh, 120px) 10px 10px; }
   .b-card { border-radius: var(--r); padding: clamp(32px, 5.4vw, 80px); }
   .g-wrap { background: linear-gradient(180deg, #eceef8 0%, #eceef8 45%, #f6e4dc 100%); }
-  .b-head { max-width: 660px; }
+  .b-head { max-width: 680px; margin-inline: auto; text-align: center; }
   .b-t { font-size: clamp(44px, 5.6vw, 84px); font-weight: 700; letter-spacing: -.055em; line-height: 1; }
   .b-sub { margin-top: 18px; font-size: clamp(18px, 1.7vw, 25px); line-height: 1.35; color: var(--mute); }
-  .g-list { margin-top: clamp(34px, 6vh, 64px); display: grid; gap: 10px; max-width: 780px; }
+  .g-list { margin: clamp(34px, 6vh, 64px) auto 0; display: grid; gap: 10px; max-width: 780px; }
   .g-row { display: grid; grid-template-columns: 1.2fr 1fr auto; align-items: center; gap: 20px; padding: 16px 22px; border-radius: 22px; background: rgb(255 255 255 / .82); border: 1px solid #fff; box-shadow: 0 12px 30px -26px rgb(30 30 70 / .5); }
   .g-kind { font-size: 13px; color: var(--mute); }
   .g-name { font-size: 18px; font-weight: 600; letter-spacing: -.02em; margin-top: 2px; }
@@ -565,10 +565,12 @@ const nav = [
   const island = document.getElementById('island')
   if (island) {
     const dark = $$('[data-hero], [data-fly], .cta-panel')
+    const lightCards = $$('.fl-card')
     const tone = () => {
       const y = 40
-      const over = dark.some((el) => { const r = el.getBoundingClientRect(); return r.top <= y && r.bottom >= y })
-      island.dataset.tone = over ? 'dark' : 'light'
+      const hit = (el: Element) => { const r = el.getBoundingClientRect(); return r.top <= y && r.bottom >= y }
+      // white cards sitting on the dark sections count as light
+      island.dataset.tone = dark.some(hit) && !lightCards.some(hit) ? 'dark' : 'light'
     }
     addEventListener('scroll', tone, { passive: true }); addEventListener('resize', tone); tone()
   }
