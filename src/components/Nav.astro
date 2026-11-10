@@ -156,24 +156,11 @@ const { links = homeLinks, page = 'Menu', theme } = Astro.props
   #island[data-theme='sport'] .island-ic { background: #fff1e9; color: #fc4c02; }
   #island[data-theme='sport'] .island-link.active .island-ic { background: #fc4c02; color: #fff; }
   #island[data-theme='sport'] .island-cta { background: linear-gradient(110deg, #fc4c02, #ff7a33 50%, #ffa065); }
-  /* full-width frosted bar like bevel.health: name on the left, current section + menu lines on the right */
-  #island[data-theme='sport'] { width: 100%; max-width: 1400px; margin-inline: auto; padding: 0; background: none; box-shadow: none; border-radius: 26px; }
-  #island[data-theme='sport'] .island-inner { width: 100% !important; border-radius: 26px; background: rgb(255 255 255 / .62); border: 1px solid rgb(255 255 255 / .7);
-    box-shadow: 0 12px 40px -18px rgb(20 20 40 / .35); backdrop-filter: blur(26px) saturate(180%); -webkit-backdrop-filter: blur(26px) saturate(180%); }
-  #island[data-theme='sport'].open .island-inner { background: rgb(255 255 255 / .92); border-radius: 26px; }
-  #island[data-theme='sport'] #island-row { padding: 6px 8px 6px 6px; }
-  #island[data-theme='sport'] #island-row > a > span:first-child { box-shadow: none; background: transparent; }
-  #island[data-theme='sport'] #island-row > a > span:last-child { font-size: 22px; font-weight: 600; letter-spacing: -.035em; color: #16171b; }
-  #island[data-theme='sport'] #island-toggle { background: transparent; padding-left: 14px; }
-  #island[data-theme='sport'] #island-toggle:hover { background: rgb(0 0 0 / .04); }
-  #island[data-theme='sport'] #island-label { color: #6f727c; text-align: right; }
-  #island[data-theme='sport'] .island-prog > * { display: none; }
-  #island[data-theme='sport'] .island-prog { width: 28px; height: 28px; color: #16171b;
-    background: linear-gradient(currentColor, currentColor) 2px 8px / 24px 2px no-repeat,
-                linear-gradient(currentColor, currentColor) 12px 13px / 14px 2px no-repeat,
-                linear-gradient(currentColor, currentColor) 2px 18px / 24px 2px no-repeat; transition: background-size .3s ease; }
-  #island[data-theme='sport'] #island-toggle:hover .island-prog { background-size: 24px 2px, 24px 2px, 24px 2px; background-position: 2px 8px, 2px 13px, 2px 18px; }
-  #island[data-theme='sport'] .island-menu { width: 100%; display: flex; justify-content: flex-end; }
+  /* same pill as the rest of the site, but see-through frosted glass */
+  #island[data-theme='sport'] .island-inner { background: rgb(255 255 255 / .38); backdrop-filter: blur(22px) saturate(180%); -webkit-backdrop-filter: blur(22px) saturate(180%); }
+  #island[data-theme='sport'].open .island-inner { background: rgb(255 255 255 / .72); }
+  #island[data-theme='sport'] #island-toggle { background: rgb(255 255 255 / .35); }
+  #island[data-theme='sport'] #island-toggle:hover { background: rgb(255 255 255 / .55); }
 </style>
 
 <script>
