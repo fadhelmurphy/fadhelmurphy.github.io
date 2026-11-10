@@ -576,10 +576,13 @@ const nav = [
     ;(window as any).__booted ? intro() : document.addEventListener('boot:done', intro, { once: true })
 
     // ── hero scroll (pinned by CSS sticky): photo zooms, the sharp ghost melts, letters spread ──
-    gsap.timeline({ scrollTrigger: { trigger: '[data-hero]', start: 'top top', end: 'bottom bottom', scrub: 1, onUpdate: (self) => heroGL?.progress(self.progress) } })
+    gsap.timeline({ defaults: { duration: 1 }, scrollTrigger: { trigger: '[data-hero]', start: 'top top', end: 'bottom bottom', scrub: 1, onUpdate: (self) => heroGL?.progress(self.progress) } })
       .to('.h-photo', { scale: 1.18, ease: 'none' }, 0)
       .to('.sharp', { opacity: 0, ease: 'none' }, 0)
-      .to(runWord.chars, { xPercent: (i) => (i - 1.5) * 26, ease: 'none' }, 0)
+      // RUN. runs off: letters dash to the right, lean forward, blur and fade, the full stop leading the pack
+      // (fade via the filter's opacity(), not the opacity property: the intro owns opacity/transform on these)
+      .fromTo(runWord.chars, { filter: 'blur(0px) opacity(1)' }, { xPercent: (i) => 70 + i * 35, skewX: -14, filter: 'blur(22px) opacity(0)', ease: 'power2.in', stagger: { each: 0.12, from: 'end' } }, 0)
+      .fromTo('.hw-sub', { filter: 'blur(0px) opacity(1)' }, { xPercent: 30, filter: 'blur(12px) opacity(0)', ease: 'power2.in', duration: 0.8 }, 0.1)
       // fade the hero details through a CSS variable, not opacity/transform: the intro animation owns those,
       // and sharing them broke the hero when the page was opened scrolled down and then scrolled back up
       .fromTo('.h-stage', { '--out': 0 }, { '--out': 1, ease: 'none', immediateRender: false }, 0.35)
