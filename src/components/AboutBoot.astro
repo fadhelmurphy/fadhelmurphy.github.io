@@ -1,6 +1,6 @@
 ---
 // About page loader: a percentage counts up while a marker runs the lane, then an orange panel wipes the screen away.
-// Shown once per session for this page; skipped under reduced motion.
+// Shown once per session, only when About is the landing page (skipped when coming from another page of the site); skipped under reduced motion.
 import { syncedAt } from '../data/strava'
 const d = new Date(syncedAt)
 const synced = `${d.getUTCDate()} ${['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][d.getUTCMonth()]}`
@@ -52,7 +52,7 @@ const ticks = [0, 25, 50, 75, 100]
 (function () {
   var root = document.getElementById('aboot'), seen = false
   try { seen = !!sessionStorage.getItem('booted-about') } catch (e) {}
-  if (!root || seen || matchMedia('(prefers-reduced-motion: reduce)').matches) { root && root.remove(); window.__booted = true; return }
+  if (!root || seen || window.__skipBoot || matchMedia('(prefers-reduced-motion: reduce)').matches) { root && root.remove(); window.__bootDone ? window.__bootDone() : (window.__booted = true); return }
   document.documentElement.style.overflow = 'hidden'
   var km = document.getElementById('ab-km'), st = document.getElementById('ab-status')
   var steps = ['Pulling runs from Strava', 'Lacing up', 'Warming up', 'Go']

@@ -43,7 +43,7 @@ html.booted #boot{display:none}
 (function(){
   var root=document.getElementById('boot'); var seen=false;
   try{seen=!!sessionStorage.getItem('booted')}catch(e){}
-  if(!root||seen||matchMedia('(prefers-reduced-motion: reduce)').matches){root&&root.remove();window.__booted=true;return}
+  if(!root||seen||window.__skipBoot||matchMedia('(prefers-reduced-motion: reduce)').matches){root&&root.remove();window.__bootDone?window.__bootDone():window.__booted=true;return}
   document.documentElement.style.overflow='hidden';
   var fin=false;function finish(){if(fin)return;fin=true;root.remove();document.documentElement.style.overflow='';window.__booted=true;document.dispatchEvent(new Event('boot:done'))}
   setTimeout(function(){root.classList.add('out');setTimeout(finish,750)},6000);

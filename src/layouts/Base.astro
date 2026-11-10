@@ -31,7 +31,17 @@ const canonical = new URL(Astro.url.pathname, Astro.site)
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta name="twitter:card" content="summary_large_image" />
-    <script is:inline>try{sessionStorage.getItem('booted')&&document.documentElement.classList.add('booted')}catch(e){}</script>
+    <!-- loaders only on the first landing: skip them once the session has booted or when arriving from another page of this site -->
+    <script is:inline>(function(){var s=false,i=false;try{s=!!sessionStorage.getItem('booted')}catch(e){}try{i=!!document.referrer&&new URL(document.referrer).origin===location.origin}catch(e){}
+window.__skipBoot=s||i;if(window.__skipBoot)document.documentElement.classList.add('booted')
+// a prerendered page waits until it is actually shown before its intro plays
+window.__bootDone=function(){function d(){window.__booted=true;document.dispatchEvent(new Event('boot:done'))}document.prerendering?document.addEventListener('prerenderingchange',d,{once:true}):d()}})()</script>
+    <!-- instant page switches: Chromium prerenders the next page (About right away, other links on hover), so clicking just swaps it in -->
+    <script is:inline type="speculationrules" set:html={JSON.stringify({ prerender: [
+      ...(Astro.url.pathname.startsWith('/about') ? [] : [{ source: 'list', urls: ['/about/'], eagerness: 'immediate' }]),
+      { where: { and: [{ href_matches: '/*' }, { not: { href_matches: '/about/' } }] }, eagerness: 'moderate' }
+    ] })} />
+    <noscript><style>#aboot{display:none}</style></noscript>
     <noscript><style>#boot{display:none}[data-reveal]{opacity:1!important;transform:none!important}</style></noscript>
   </head>
   <body>

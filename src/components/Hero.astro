@@ -80,7 +80,7 @@ const lines = [
   import { mountRibbon } from '../scripts/hero-ribbon'
   const go = () => document.body.classList.add('go')
   ;(window as any).__booted ? go() : document.addEventListener('boot:done', go, { once: true })
-  setTimeout(go, 4000)
+  if (!document.prerendering) setTimeout(go, 4000)
   const c = document.getElementById('ribbon') as HTMLCanvasElement | null
   const root = document.getElementById('hero')
   if (c && root) document.fonts.ready.then(() => mountRibbon(c, root)).catch(() => {})

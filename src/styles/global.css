@@ -8,6 +8,11 @@
 
 :root { color-scheme: only light; }
 
+/* page-to-page crossfade instead of a blank flash (Chrome, Edge, Safari 18.2+) */
+@view-transition { navigation: auto; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: .35s; }
+@media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }
+
 /* tokens carried over from the live site */
 @theme {
   --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;

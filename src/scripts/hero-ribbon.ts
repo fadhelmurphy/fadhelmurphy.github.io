@@ -93,6 +93,6 @@ export function mountRibbon (canvas: HTMLCanvasElement, root: HTMLElement) {
   let introAt = -1
   const go = () => { if (introAt >= 0) return; introAt = performance.now(); send({ type: 'intro', ago: 0, still: reduce }) }
   ;(window as any).__booted ? go() : document.addEventListener('boot:done', go, { once: true })
-  setTimeout(go, 4000)
+  if (!document.prerendering) setTimeout(go, 4000)
   play()
 }
