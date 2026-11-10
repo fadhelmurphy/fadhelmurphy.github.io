@@ -508,10 +508,10 @@ const nav = [
   .rd { --cw: min(88vw, 480px); --ch: min(calc(var(--cw) * 1.72), 82svh); --ink2: #111; padding: clamp(60px, 10vh, 120px) 0 clamp(50px, 8vh, 100px); background: #f7f7f8; font-family: var(--sans); border-bottom: 0; }
   .rd-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .rd-head { padding: 0 16px; display: flex; justify-content: center; }
-  .rd-hpill { display: flex; align-items: center; gap: 16px; max-width: 780px; padding: 10px 26px 10px 10px; border-radius: 999px; background: #fff; box-shadow: 0 20px 50px -30px rgb(20 20 40 / .25); }
-  .rd-av { width: 64px; height: 64px; flex: none; border-radius: 50%; overflow: hidden; background: #c9d6ff; }
+  .rd-hpill { display: flex; align-items: center; gap: 10px; max-width: 560px; padding: 6px 18px 6px 6px; border-radius: 999px; background: #fff; box-shadow: 0 20px 50px -30px rgb(20 20 40 / .25); }
+  .rd-av { width: 42px; height: 42px; flex: none; border-radius: 50%; overflow: hidden; background: #c9d6ff; }
   .rd-av img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; }
-  .rd-htext { margin: 0; font-size: clamp(19px, 2.2vw, 26px); line-height: 1.25; font-weight: 300; color: #3a3a3c; letter-spacing: -.01em; }
+  .rd-htext { margin: 0; font-size: clamp(14px, 1.5vw, 18px); line-height: 1.25; font-weight: 300; color: #3a3a3c; letter-spacing: -.01em; }
   .rd-htext b, .rd-desc b { font-weight: 700; color: var(--ink2); }
   .rd-wrap { position: relative; margin-top: clamp(36px, 7vh, 70px); }
   .rd .mo-strip { margin: 0; scroll-snap-type: x mandatory; scroll-padding-inline: 0; }
@@ -542,7 +542,7 @@ const nav = [
   .rd .mo-bar { width: min(200px, 50vw); margin: clamp(30px, 5vh, 50px) auto 0; height: 3px; border-radius: 99px; overflow: hidden; background: #e4e4e7; }
   .rd .mo-bar i { background: #111; }
   .rd .mo-btn:focus-visible, .rd .mo-strip:focus-visible { outline: 3px solid #111; outline-offset: 3px; }
-  @media (max-width: 520px) { .rd-hpill { padding-right: 18px; gap: 12px; } .rd-av { width: 54px; height: 54px; } .rd .mo-btn { width: 56px; height: 56px; } .rd-arrows { top: calc(var(--ch) * .3 - 28px); right: calc((100vw - var(--cw)) / 2 + 8px); } .rd-chip { font-size: 14px; padding: 9px 13px; } }
+  @media (max-width: 520px) { .rd .mo-btn { width: 56px; height: 56px; } .rd-arrows { top: calc(var(--ch) * .3 - 28px); right: calc((100vw - var(--cw)) / 2 + 8px); } .rd-chip { font-size: 14px; padding: 9px 13px; } }
 </style>
 
 <script>
