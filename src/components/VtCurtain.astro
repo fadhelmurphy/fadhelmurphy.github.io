@@ -12,17 +12,17 @@ const threads = Array.from({ length: N }, (_, i) => {
   return { d: 'M' + xs.map((x) => `${x} ${(cy(x) + k * band(x) * twist(x)).toFixed(1)}`).join('L'), o: (0.35 + 0.65 * (1 - Math.abs(k) * 2)).toFixed(2) }
 })
 const themes = {
-  about: { panel: '#fc4c02', stops: ['#ff9a3c', '#ffb347', '#fc4c02', '#ff7a1a', '#ffd08a'] },
-  home: { panel: 'url(#vt-p-home)', stops: ['#2563eb', '#0ea5e9', '#22d3ee', '#14b8a6', '#10b981'] }
+  about: { fill: ['#e8380d', '#fc4c02', '#ff9a3c'], stops: ['#ff6a1a', '#ffb347', '#ff4d6d', '#ffd08a', '#fc4c02'] },
+  home: { fill: ['#3b82f6', '#14b8a6'], stops: ['#2563eb', '#0ea5e9', '#22d3ee', '#14b8a6', '#10b981'] }
 }
-const wave = (id: string, t: typeof themes.about) => `<svg viewBox="0 0 ${VW} ${VH}" preserveAspectRatio="none" aria-hidden="true">
+const wave = (id: string, t: { fill: string[]; stops: string[] }) => `<svg viewBox="0 0 ${VW} ${VH}" preserveAspectRatio="none" aria-hidden="true">
 <defs><linearGradient id="vt-g-${id}" x1="0" x2="1">${t.stops.map((c, i) => `<stop offset="${i / (t.stops.length - 1)}" stop-color="${c}"/>`).join('')}</linearGradient>
-<linearGradient id="vt-p-${id}" x1="0" x2="1"><stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#14b8a6"/></linearGradient></defs>
-<path d="${fill}" fill="${t.panel}"/>
+<linearGradient id="vt-p-${id}" x1="0" x2="1">${t.fill.map((c, i) => `<stop offset="${i / (t.fill.length - 1)}" stop-color="${c}"/>`).join('')}</linearGradient></defs>
+<path d="${fill}" fill="url(#vt-p-${id})"/>
 <g stroke="url(#vt-g-${id})" fill="none" stroke-linecap="round">${threads.map((h) => `<path d="${h.d}" stroke-width="1.6" opacity="${h.o}" vector-effect="non-scaling-stroke"/>`).join('')}</g></svg>`
 const html = (id: 'about' | 'home') => {
   const w = wave(id, themes[id])
-  const body = id === 'about' ? '#fc4c02' : 'linear-gradient(90deg,#3b82f6,#14b8a6)'
+  const body = `linear-gradient(90deg,${themes[id].fill.join(',')})`
   return `<div class="vt-curtain" data-to="${id}"><div class="vt-c-inner"><div class="vt-c-wave">${w}</div><div class="vt-c-body" style="background:${body}"></div><div class="vt-c-wave vt-c-flip">${w}</div></div></div>`
 }
 ---
