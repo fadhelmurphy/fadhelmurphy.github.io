@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets'
 import '@fontsource-variable/archivo/wdth.css'
+import '@fontsource-variable/inter'
 import Base from '../layouts/Base.astro'
 import runner from '../assets/about/runner.jpg'
 import runnerBlur from '../assets/about/runner-blur.jpg'
@@ -42,6 +43,8 @@ const moments = [
 ]
 
 const statement = 'By day I build data pipelines. Most nights I run, usually long and usually in the dark. On rest days I ride.'
+
+const gearMax = Math.max(...gear.map((g) => parseFloat(g.m) || 0), 1)
 
 const nav = [
   { href: '#run', label: 'Run', id: 'run', note: 'Who, and how much', icon: 'M13 4a2 2 0 1 0 0 .01M7 21l3-6 3 2v4M10 15l1-5 4 3 3-1M8 9l3-2', track: true },
@@ -137,38 +140,46 @@ const nav = [
             <div><dt>Distance</dt><dd><b data-f="km">0.0</b><small>km</small></dd></div>
           </dl>
         </header>
+        <div class="fl-card" aria-label="Long run summary">
+          <p class="fl-card-k">Whole run</p>
+          <dl class="l-sum">
+            <div><dt>Total time</dt><dd>{longRun.time}</dd></div>
+            <div><dt>Avg heart rate</dt><dd>{longRun.avgHr}<small> bpm</small></dd></div>
+            <div><dt>Elevation</dt><dd>{longRun.elev}<small> m</small></dd></div>
+          </dl>
+        </div>
         <p class="fl-note">Route drawn for illustration · numbers from Strava</p>
       </div>
     </div>
   </section>
-  <section class="wrap fl-after" aria-label="Long run summary">
-    <dl class="l-sum">
-      <div><dt>Total time</dt><dd>{longRun.time}</dd></div>
-      <div><dt>Avg heart rate</dt><dd>{longRun.avgHr} bpm</dd></div>
-      <div><dt>Elevation</dt><dd>{longRun.elev} m</dd></div>
-    </dl>
-  </section>
 
   <!-- 6 · GEAR -->
-  <section id="gear" class="gear wrap" aria-labelledby="g-title">
-    <h2 id="g-title" class="sec-t" data-up>Gear I trust</h2>
-    <ul class="g-grid">
-      {gear.map((g, i) => (
-        <li class="card g-card" data-card>
-          <span class="g-n">{String(i + 1).padStart(2, '0')}</span>
-          <p class="c-k">{g.k}</p>
-          <p class="g-name">{g.t}</p>
-          <p class="g-m">{g.m}</p>
-        </li>
-      ))}
-    </ul>
-    <p class="g-note">The kilometres are what Strava has logged on each pair.</p>
+  <section id="gear" class="gear" aria-labelledby="g-title">
+    <div class="b-card g-wrap" data-card>
+      <header class="b-head">
+        <h2 id="g-title" class="b-t">Gear I trust</h2>
+        <p class="b-sub">What's on my feet, wrist and wheels. Kilometres are what Strava has logged on each pair.</p>
+      </header>
+      <ul class="g-list">
+        {gear.map((g) => {
+          const km = parseFloat(g.m)
+          return (
+            <li class="g-row" data-row>
+              <div class="g-txt"><p class="g-kind">{g.k}</p><p class="g-name">{g.t}</p></div>
+              {km ? <div class="g-bar" aria-hidden="true"><i style={`--w:${(km / gearMax) * 100}%`}></i></div> : <span class="g-tag">{g.m}</span>}
+              {km ? <p class="g-km">{g.m}</p> : null}
+            </li>
+          )
+        })}
+      </ul>
+    </div>
   </section>
 
   <!-- 7 · CTA -->
   <section id="strava" class="cta wrap">
     <div class="cta-panel" data-cta>
-      <p class="cta-t">Step out of comfort.<br /><span>Stay in the fight.</span></p>
+      <p class="cta-t"><span>Step out of comfort.</span><br />Stay in the fight.</p>
+      <p class="cta-sub">Every run and ride lands on Strava first.</p>
       <a href={strava} target="_blank" rel="noopener" class="pill dark">
         Follow on Strava
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" /></svg>
@@ -338,56 +349,104 @@ const nav = [
     .g-card .c-k { margin-top: 18px; }
     .g-name { font-size: 18px; }
   }
-  /* ── soft theme (Bevel-inspired): same orange tone, gradients + rounded everywhere, gentler type ── */
-  .ab { --bg: #f6f1ec; --r: 32px;
-    background:
-      radial-gradient(ellipse 70% 40% at 10% 0%, #ffe2cf 0%, transparent 60%),
-      radial-gradient(ellipse 60% 40% at 100% 35%, #e9ecfb 0%, transparent 60%),
-      radial-gradient(ellipse 70% 40% at 0% 75%, #ffe7da 0%, transparent 60%),
-      radial-gradient(ellipse 60% 35% at 100% 100%, #ffd9c2 0%, transparent 60%),
-      #f6f1ec; }
+  /* ── Bevel-style theme: near-white page, big rounded cards with soft gradients, neutral sans, floating white cards ── */
+  .ab { --bg: #f6f6f7; --ink: #16171b; --mute: #6f727c; --r: 40px; --sans: 'Inter Variable', system-ui, -apple-system, sans-serif; background: var(--bg); font-family: var(--sans); }
+  .ab :is(.h-word, .mo-title, .sec-t, .b-t, .cta-t, .fl-k, .hc-v, .h-month b, .fl-stats b, .g-name, .l-sum dd) { font-family: var(--sans); font-stretch: 100%; text-transform: none; }
+
+  /* hero: the photo sits in a rounded card, details float on white cards */
   .hero { padding: 10px 10px 0; }
   .h-stage { top: 10px; height: calc(100svh - 20px); border-radius: var(--r); isolation: isolate; }
   .h-grid { display: none; }
   .h-shade { background:
-    linear-gradient(180deg, rgb(18 18 28 / .45) 0%, transparent 30%),
-    radial-gradient(ellipse 80% 60% at 0% 100%, rgb(18 18 28 / .7), transparent 75%),
-    radial-gradient(ellipse 70% 60% at 100% 100%, rgb(252 76 2 / .62), rgb(255 138 76 / .25) 45%, transparent 80%),
-    radial-gradient(ellipse 50% 40% at 100% 0%, rgb(255 154 98 / .25), transparent 70%); }
-  .h-card { border-radius: 24px; background: linear-gradient(150deg, rgb(255 255 255 / .24), rgb(255 255 255 / .08)); }
-  .h-runs { border-collapse: separate; border-spacing: 0; padding: 12px 16px 6px; border-radius: 22px; background: linear-gradient(150deg, rgb(255 255 255 / .16), rgb(255 255 255 / .05)); border: 1px solid rgb(255 255 255 / .22); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
-  .h-runs tr:last-child td { border-bottom: 0; }
-  .h-word { font-stretch: 100%; text-transform: none; letter-spacing: -.06em; }
-  .hw-run { line-height: .82; }
-  .hw-sub { letter-spacing: -.03em; }
+    linear-gradient(180deg, rgb(16 16 22 / .38) 0%, transparent 32%),
+    radial-gradient(ellipse 80% 60% at 0% 100%, rgb(16 16 22 / .68), transparent 75%),
+    radial-gradient(ellipse 70% 55% at 100% 100%, rgb(252 76 2 / .5), rgb(255 140 80 / .18) 50%, transparent 80%); }
+  .h-intro { font-size: 16px; line-height: 1.45; }
+  .h-word { font-weight: 700; letter-spacing: -.065em; }
+  .hw-run { line-height: .86; }
+  .hw-sub { font-weight: 600; letter-spacing: -.035em; }
+  .h-card, .h-runs { background: #fff; color: var(--ink); border: 0; border-radius: 28px; box-shadow: 0 30px 60px -28px rgb(8 8 16 / .55); backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .h-card { padding: 18px 20px; }
+  .h-card .hc-k, .hc-s dt, .hc-v small, .hc-s small { color: var(--mute); opacity: 1; }
+  .hc-v { font-weight: 700; letter-spacing: -.045em; }
+  .hc-s { border-top-color: rgb(0 0 0 / .07); }
+  .h-runs { border-collapse: separate; border-spacing: 0; padding: 12px 18px 8px; }
+  .h-runs caption { color: #fff; opacity: .9; font-weight: 500; }
+  .h-runs th { color: var(--mute); opacity: 1; border-bottom-color: rgb(0 0 0 / .08); }
+  .h-runs td { border-bottom-color: rgb(0 0 0 / .05); }
+  .h-runs tbody tr:last-child td { border-bottom: 0; }
+  .h-month b { font-weight: 700; letter-spacing: -.045em; }
 
-  .mo-title { font-stretch: 100%; text-transform: none; letter-spacing: -.05em; line-height: .95; }
-  .mo-btn { border: 0; border-radius: 50%; background: #fff; box-shadow: 0 10px 24px -14px rgb(40 30 20 / .45); }
-  .mo-frame { border-radius: 24px; }
-  .mo-item figcaption { border-top: 0; padding-top: 0; margin-top: 12px; }
-  .mo-bar { border-radius: 99px; overflow: hidden; }
+  /* out there: tall pill photos, staggered, centred heading */
+  .moments { padding: clamp(80px, 14vh, 150px) 0 clamp(50px, 9vh, 100px); border-bottom: 0; }
+  .mo-head { flex-direction: column; align-items: center; text-align: center; gap: 12px; }
+  .mo-title { margin-right: 0; font-size: clamp(44px, 6vw, 92px); font-weight: 700; letter-spacing: -.055em; line-height: 1; }
+  .mo-note { font-size: clamp(18px, 1.7vw, 24px); color: var(--mute); padding: 0; }
+  .mo-nav { margin-top: 10px; padding: 0; }
+  .mo-btn { border: 0; border-radius: 50%; background: #fff; box-shadow: 0 12px 26px -16px rgb(20 20 40 / .45); }
+  .mo-strip { margin-top: clamp(30px, 6vh, 60px); }
+  .mo-item { width: clamp(190px, 17vw, 270px); }
+  .mo-item.low { margin-top: clamp(70px, 16vh, 180px); }
+  .mo-frame { aspect-ratio: 1 / 2.5; border-radius: 72px; }
+  .mo-item figcaption { justify-content: center; border-top: 0; padding-top: 0; margin-top: 14px; font-weight: 500; color: var(--mute); }
+  .mo-bar { width: min(220px, 50vw); margin: clamp(26px, 4vh, 40px) auto 0; border-radius: 99px; overflow: hidden; }
 
+  /* long run: rounded panel, left-aligned title, a white summary card floating on the map */
   .fl-stage { padding: 10px; }
   .fl-panel { border-radius: var(--r); }
-  .fl-k { text-transform: none; letter-spacing: -.03em; }
-  .l-sum div { border-radius: 20px; background: rgb(255 255 255 / .72); border: 1px solid rgb(255 255 255 / .9); }
+  .fl-panel::after { height: 60%; background: radial-gradient(ellipse 70% 80% at 0% 0%, rgb(12 16 28 / .7), rgb(12 16 28 / .25) 55%, transparent 80%); }
+  .fl-hud { left: clamp(28px, 4.4vw, 72px); right: auto; top: clamp(84px, 13vh, 130px); text-align: left; text-shadow: none; }
+  .fl-k { font-size: clamp(42px, 5.6vw, 84px); font-weight: 700; letter-spacing: -.055em; line-height: 1; }
+  .fl-date { font-size: clamp(16px, 1.5vw, 21px); opacity: .7; margin-top: 10px; }
+  .fl-stats { margin: 30px 0 0; padding: 0; gap: 34px; max-width: none; display: flex; }
+  .fl-stats b { font-size: clamp(32px, 3.6vw, 54px); font-weight: 700; letter-spacing: -.045em; }
+  .fl-stats small { display: inline; margin-left: 4px; font-size: 14px; }
+  .fl-card { position: absolute; z-index: 2; right: clamp(16px, 3vw, 44px); bottom: clamp(40px, 7vh, 70px); width: min(440px, calc(100% - 32px)); padding: 18px 22px; border-radius: 28px; background: #fff; color: var(--ink); box-shadow: 0 30px 60px -26px rgb(0 0 0 / .55); }
+  .fl-card-k { font-size: 14px; font-weight: 600; color: var(--mute); }
+  .l-sum { grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 8px; }
+  .l-sum div { background: none; border: 0; border-radius: 0; padding: 0; }
+  .l-sum dd { font-size: clamp(20px, 1.8vw, 26px); font-weight: 700; letter-spacing: -.035em; }
+  .l-sum small { font-size: .6em; font-weight: 500; color: var(--mute); }
 
-  .sec-t { letter-spacing: -.05em; }
-  .g-card { border-radius: 26px; background: linear-gradient(160deg, #ffffff 0%, #fff4ec 100%); border: 1px solid rgb(255 255 255 / .9); box-shadow: 0 20px 40px -32px rgb(80 40 10 / .35); }
-  .g-m { border-radius: 99px; background: linear-gradient(135deg, #ffe4d4, #ffd0b8); }
+  /* gear: a lavender → peach card with bar rows */
+  .gear { padding: clamp(60px, 10vh, 120px) 10px 10px; }
+  .b-card { border-radius: var(--r); padding: clamp(32px, 5.4vw, 80px); }
+  .g-wrap { background: linear-gradient(180deg, #eceef8 0%, #eceef8 45%, #f6e4dc 100%); }
+  .b-head { max-width: 660px; }
+  .b-t { font-size: clamp(44px, 5.6vw, 84px); font-weight: 700; letter-spacing: -.055em; line-height: 1; }
+  .b-sub { margin-top: 18px; font-size: clamp(18px, 1.7vw, 25px); line-height: 1.35; color: var(--mute); }
+  .g-list { margin-top: clamp(34px, 6vh, 64px); display: grid; gap: 10px; max-width: 780px; }
+  .g-row { display: grid; grid-template-columns: 1.2fr 1fr auto; align-items: center; gap: 20px; padding: 16px 22px; border-radius: 22px; background: rgb(255 255 255 / .82); border: 1px solid #fff; box-shadow: 0 12px 30px -26px rgb(30 30 70 / .5); }
+  .g-kind { font-size: 13px; color: var(--mute); }
+  .g-name { font-size: 18px; font-weight: 600; letter-spacing: -.02em; margin-top: 2px; }
+  .g-bar { height: 8px; border-radius: 99px; background: rgb(0 0 0 / .06); overflow: hidden; }
+  .g-bar i { display: block; height: 100%; width: var(--w); border-radius: 99px; background: linear-gradient(90deg, #ffb48a, #fc4c02); transform-origin: 0 50%; }
+  .g-km { min-width: 68px; text-align: right; font-size: 16px; font-weight: 600; color: var(--or); font-variant-numeric: tabular-nums; }
+  .g-tag { grid-column: 2 / 4; justify-self: end; font-size: 13px; font-weight: 600; padding: 7px 14px; border-radius: 99px; background: var(--ink); color: #fff; }
 
-  .cta-panel { border-radius: var(--r); background:
-    radial-gradient(ellipse 60% 70% at 85% 10%, rgb(255 190 150 / .7), transparent 60%),
-    radial-gradient(ellipse 60% 70% at 0% 100%, rgb(200 50 0 / .55), transparent 65%),
-    linear-gradient(135deg, #ff8a4c, #fc4c02 55%, #e84300); }
+  /* cta: dark card warming to orange at the bottom, centred */
+  .cta.wrap { max-width: none; padding: 10px; }
+  .cta-panel { min-height: 82svh; justify-content: center; align-items: center; text-align: center; gap: 22px; border-radius: var(--r); color: #fff;
+    background: radial-gradient(ellipse 85% 55% at 50% 112%, rgb(252 76 2 / .8), rgb(252 76 2 / .2) 55%, transparent 80%), linear-gradient(180deg, #1b1c20 0%, #1d1d21 50%, #33221a 100%); }
+  .cta-t { font-size: clamp(44px, 7vw, 112px); font-weight: 700; letter-spacing: -.055em; line-height: 1; }
+  .cta-t span { color: rgb(255 255 255 / .42); }
+  .cta-sub { font-size: clamp(17px, 1.6vw, 22px); color: rgb(255 255 255 / .62); }
   .pill { border-radius: 99px; }
-  .pill svg { border-radius: 50%; }
+  .pill.dark { background: #fff; color: var(--ink); }
+  .pill.dark svg { border-radius: 50%; background: var(--or); color: #fff; }
 
   @media (max-width: 900px) {
-    .ab { --r: 24px; }
-    .h-runs { padding: 10px 12px 4px; }
+    .ab { --r: 28px; }
+    .mo-item { width: 44vw; }
+    .mo-frame { border-radius: 56px; }
+    .fl-hud { top: 84px; left: 22px; right: 22px; }
+    .fl-stats { gap: 20px; }
+    .fl-card { left: 12px; right: 12px; width: auto; bottom: 30px; padding: 14px 16px; border-radius: 22px; }
+    .g-row { grid-template-columns: 1fr auto; gap: 10px 14px; padding: 14px 16px; }
+    .g-bar { grid-column: 1 / -1; grid-row: 2; }
+    .g-km { grid-column: 2; grid-row: 1; }
+    .g-tag { grid-column: 2; }
   }
-
   @media (prefers-reduced-motion: reduce) {
     .st-text span { opacity: 1; }
     .h-sync i { animation: none; }
@@ -489,6 +548,7 @@ const nav = [
     // photo strip drifts in from the right, title lines rise
     gsap.from('[data-mo] .mo-item', { x: 160, autoAlpha: 0, duration: 1.2, stagger: 0.07, ease: 'expo.out', scrollTrigger: { trigger: '.mo-strip', start: 'top 85%' } })
     gsap.from('.mo-title', { yPercent: 60, autoAlpha: 0, duration: 1.1, ease: 'expo.out', scrollTrigger: { trigger: '.mo-title', start: 'top 88%' } })
+    gsap.from('.g-bar i', { scaleX: 0, duration: 1.4, stagger: 0.08, ease: 'expo.out', scrollTrigger: { trigger: '.g-list', start: 'top 80%' } })
 
     // flyover follows the pinned section
     const st = { t: 0 }
