@@ -12,6 +12,10 @@
    and the next page is swapped in behind it. Orange when going to About, blue→teal back to Home; elsewhere a short crossfade. */
 @view-transition { navigation: auto; }
 ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .35s; }
+/* Samsung Internet / Android: the old and new page snapshots can come from different viewport sizes (toolbar shown vs hidden),
+   and the default size morph between them squashes the page. Pin the root box to the new viewport and crop instead of stretching. */
+::view-transition-group(root) { animation: none; }
+::view-transition-old(root), ::view-transition-new(root) { width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
 html:active-view-transition-type(to-about, to-home)::view-transition-old(root) { animation: vt-old 1.15s cubic-bezier(.65,0,.35,1) both; }
 html:active-view-transition-type(to-about, to-home)::view-transition-new(root) { animation: vt-new 1.15s cubic-bezier(.65,0,.35,1) both; }
 ::view-transition-group(curtain) { z-index: 2; animation: none; }
